@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="01. SceneMode">
+      <UniqueIdentifier>{746f7763-90c4-44a0-aa83-1bbe49ccd3c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object">
+      <UniqueIdentifier>{2622ae43-c7ab-4d4b-9e43-609878e95984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. UI">
+      <UniqueIdentifier>{a35e2dd1-c35c-4fe2-af7f-cf8de6ad37dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\01. Player">
+      <UniqueIdentifier>{a956bbd9-605f-4681-821a-5ac8db553946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster">
+      <UniqueIdentifier>{5418fe6b-8e0b-414a-866e-4d10978d51ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\03. TileMap">
+      <UniqueIdentifier>{bfa289fa-2189-41d3-baab-1ca9fc121342}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. SceneMode\LoadThread">
+      <UniqueIdentifier>{e14096cc-09d4-4936-abda-ace6d6e615db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\01. Player\Skill">
+      <UniqueIdentifier>{d951eb82-260c-4308-9a76-dda6eae414cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. SceneMode\LoadScene">
+      <UniqueIdentifier>{38950b54-744c-4174-b79f-ad2a8462a4ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\04. NPC">
+      <UniqueIdentifier>{bce685c3-fa95-4771-b8f8-557f7fe85ee5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\01. ShadowDualBlade">
+      <UniqueIdentifier>{4227ad6e-0c0d-453a-b6cc-53e22f473493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\02. Tauromacis">
+      <UniqueIdentifier>{8f083d8a-9960-4be7-b292-f2db8990b69d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\03. Taurospear">
+      <UniqueIdentifier>{b1335096-8562-4631-9030-a2e2e7a90db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\04. Jr_Balrog">
+      <UniqueIdentifier>{ee6f75f5-1e57-40db-b5e1-4fa67b5f37b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\05. Crimson Balrog">
+      <UniqueIdentifier>{97f58ad6-9b4c-4cde-8de5-aa5384c46c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog">
+      <UniqueIdentifier>{7ff92d1e-9057-4ec6-b863-ed4f98b4f1db}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientFlag.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientInfo.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\TestWidget.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\MainScene.h">
+      <Filter>01. SceneMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TestScene.h">
+      <Filter>01. SceneMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\ObjectManager.h">
+      <Filter>02. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TestMonster.h">
+      <Filter>02. Object\02. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MonsterManager.h">
+      <Filter>02. Object\02. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\PlayerManager.h">
+      <Filter>02. Object\01. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Player2D.h">
+      <Filter>02. Object\01. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\PlayerAnimation2D.h">
+      <Filter>02. Object\01. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TileMap.h">
+      <Filter>02. Object\03. TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\StartScene.h">
+      <Filter>01. SceneMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\StartWidget.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\LoadingThread.h">
+      <Filter>01. SceneMode\LoadThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\PhantomBlow.h">
+      <Filter>02. Object\01. Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BladeFury.h">
+      <Filter>02. Object\01. Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\PlayerStatus.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Potal.h">
+      <Filter>02. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Seolhuiuibang.h">
+      <Filter>01. SceneMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\LoadingScene.h">
+      <Filter>01. SceneMode\LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SeolhuiuiThread.h">
+      <Filter>01. SceneMode\LoadThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\LoadingSeolhuiui.h">
+      <Filter>01. SceneMode\LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\NPCManager.h">
+      <Filter>02. Object\04. NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Seolhuiui.h">
+      <Filter>02. Object\04. NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\TalkWidget.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TalkManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\Fade.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\EntranceToTemple.h">
+      <Filter>01. SceneMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\LoadingEToTemple.h">
+      <Filter>01. SceneMode\LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\EToTempleThread.h">
+      <Filter>01. SceneMode\LoadThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\AnotherDoor.h">
+      <Filter>01. SceneMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\AnotherDoorThread.h">
+      <Filter>01. SceneMode\LoadThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\LoadingAnotherDoor.h">
+      <Filter>01. SceneMode\LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\DamageWidget.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\DamageFont.h">
+      <Filter>02. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\SkillManager.h">
+      <Filter>02. Object\01. Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Tauromacis.h">
+      <Filter>02. Object\02. Monster\02. Tauromacis</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Taurospear.h">
+      <Filter>02. Object\02. Monster\03. Taurospear</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\ShadowDualBlade.h">
+      <Filter>02. Object\02. Monster\01. ShadowDualBlade</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TauromacisHitEffect.h">
+      <Filter>02. Object\02. Monster\02. Tauromacis</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Jr_Balrog.h">
+      <Filter>02. Object\02. Monster\04. Jr_Balrog</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CrimsonBalrog.h">
+      <Filter>02. Object\02. Monster\05. Crimson Balrog</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Balrog.h">
+      <Filter>02. Object\02. Monster\06. Balrog</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client2D.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ClientManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\MainScene.cpp">
+      <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TestScene.cpp">
+      <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\ObjectManager.cpp">
+      <Filter>02. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TestMonster.cpp">
+      <Filter>02. Object\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MonsterManager.cpp">
+      <Filter>02. Object\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Player2D.cpp">
+      <Filter>02. Object\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\PlayerAnimation2D.cpp">
+      <Filter>02. Object\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\PlayerManager.cpp">
+      <Filter>02. Object\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\TestWidget.cpp">
+      <Filter>03. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TileMap.cpp">
+      <Filter>02. Object\03. TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\StartScene.cpp">
+      <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\StartWidget.cpp">
+      <Filter>03. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\LoadingThread.cpp">
+      <Filter>01. SceneMode\LoadThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\PhantomBlow.cpp">
+      <Filter>02. Object\01. Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BladeFury.cpp">
+      <Filter>02. Object\01. Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\PlayerStatus.cpp">
+      <Filter>03. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Potal.cpp">
+      <Filter>02. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Seolhuiuibang.cpp">
+      <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\LoadingScene.cpp">
+      <Filter>01. SceneMode\LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SeolhuiuiThread.cpp">
+      <Filter>01. SceneMode\LoadThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\LoadingSeolhuiui.cpp">
+      <Filter>01. SceneMode\LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\NPCManager.cpp">
+      <Filter>02. Object\04. NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Seolhuiui.cpp">
+      <Filter>02. Object\04. NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\TalkWidget.cpp">
+      <Filter>03. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TalkManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\Fade.cpp">
+      <Filter>03. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\EntranceToTemple.cpp">
+      <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\LoadingEToTemple.cpp">
+      <Filter>01. SceneMode\LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\EToTempleThread.cpp">
+      <Filter>01. SceneMode\LoadThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\AnotherDoor.cpp">
+      <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\AnotherDoorThread.cpp">
+      <Filter>01. SceneMode\LoadThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\LoadingAnotherDoor.cpp">
+      <Filter>01. SceneMode\LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\DamageFont.cpp">
+      <Filter>02. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\DamageWidget.cpp">
+      <Filter>03. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\SkillManager.cpp">
+      <Filter>02. Object\01. Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Tauromacis.cpp">
+      <Filter>02. Object\02. Monster\02. Tauromacis</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Taurospear.cpp">
+      <Filter>02. Object\02. Monster\03. Taurospear</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\ShadowDualBlade.cpp">
+      <Filter>02. Object\02. Monster\01. ShadowDualBlade</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TauromacisHitEffect.cpp">
+      <Filter>02. Object\02. Monster\02. Tauromacis</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Jr_Balrog.cpp">
+      <Filter>02. Object\02. Monster\04. Jr_Balrog</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CrimsonBalrog.cpp">
+      <Filter>02. Object\02. Monster\05. Crimson Balrog</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Balrog.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs />
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>D:\C++_Client\MapleStory_DX11\GameEngine\BIn\Collider.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>D:\C++_Client\MapleStory_DX11\GameEngine\BIn\ColorMesh.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>D:\C++_Client\MapleStory_DX11\GameEngine\BIn\Mesh2D.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>D:\C++_Client\MapleStory_DX11\GameEngine\BIn\TileMap.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>D:\C++_Client\MapleStory_DX11\GameEngine\BIn\Widget.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>D:\C++_Client\MapleStory_DX11\GameEngine\BIn\Particle.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>
