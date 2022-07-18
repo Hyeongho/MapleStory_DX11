@@ -1,22 +1,4 @@
-﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see D:\C++_Client\MapleStory_DX11\GameEngine\BIn\Collider.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see D:\C++_Client\MapleStory_DX11\GameEngine\BIn\ColorMesh.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see D:\C++_Client\MapleStory_DX11\GameEngine\BIn\Mesh2D.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see D:\C++_Client\MapleStory_DX11\GameEngine\BIn\Particle.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see D:\C++_Client\MapleStory_DX11\GameEngine\BIn\TileMap.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see D:\C++_Client\MapleStory_DX11\GameEngine\BIn\Widget.cso
-  AnimationSequence2DData.cpp
+﻿  AnimationSequence2DData.cpp
   AnimationSequence2DInstance.cpp
   Collision.cpp
   CollisionManager.cpp

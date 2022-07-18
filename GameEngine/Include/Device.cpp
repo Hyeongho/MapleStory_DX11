@@ -61,7 +61,7 @@ bool CDevice::Init(HWND hWnd, unsigned int Width, unsigned int Height, bool Wind
 		return false;
 	}
 
-	int	 SampleCount = 4;
+	int SampleCount = 4;
 
 	UINT Check = 0;
 	m_Device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &Check);
@@ -71,7 +71,7 @@ bool CDevice::Init(HWND hWnd, unsigned int Width, unsigned int Height, bool Wind
 		SampleCount = 1;
 	}
 
-	DXGI_SWAP_CHAIN_DESC	SwapDesc = {};
+	DXGI_SWAP_CHAIN_DESC SwapDesc = {};
 
 	SwapDesc.BufferDesc.Width = Width;
 	SwapDesc.BufferDesc.Height = Height;

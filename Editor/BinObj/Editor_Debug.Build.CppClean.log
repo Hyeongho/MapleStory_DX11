@@ -1,7 +1,4 @@
 d:\c++_client\maplestory_dx11\editor\binobj\vc142.pdb
-d:\c++_client\maplestory_dx11\editor\binobj\vc142.idb
-d:\c++_client\maplestory_dx11\editor\binobj\main.obj
-d:\c++_client\maplestory_dx11\editor\binobj\editormanager.obj
 d:\c++_client\maplestory_dx11\editor\binobj\tilemapwindow.obj
 d:\c++_client\maplestory_dx11\editor\binobj\spritewindow.obj
 d:\c++_client\maplestory_dx11\editor\binobj\objecthierarchy.obj
@@ -14,8 +11,11 @@ d:\c++_client\maplestory_dx11\editor\binobj\spriteeditobject.obj
 d:\c++_client\maplestory_dx11\editor\binobj\player2d.obj
 d:\c++_client\maplestory_dx11\editor\binobj\dragobject.obj
 d:\c++_client\maplestory_dx11\editor\binobj\cameraobject.obj
-d:\c++_client\maplestory_dx11\editor\binobj\editor_debug.ilk
+d:\c++_client\maplestory_dx11\editor\binobj\main.obj
+d:\c++_client\maplestory_dx11\editor\binobj\editormanager.obj
+d:\c++_client\maplestory_dx11\editor\binobj\vc142.idb
 d:\c++_client\maplestory_dx11\editor\bin\editor_debug.exe
+d:\c++_client\maplestory_dx11\editor\binobj\editor_debug.ilk
 d:\c++_client\maplestory_dx11\editor\bin\editor_debug.pdb
 d:\c++_client\maplestory_dx11\editor\binobj\editor.res
 d:\c++_client\maplestory_dx11\editor\binobj\editor.ipdb
