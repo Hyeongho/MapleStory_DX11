@@ -20,8 +20,9 @@ bool CEngine::m_Loop = true;
 CEngine::CEngine() : m_ClearColor{}, m_Timer(nullptr), m_Start(false), m_Play(true), m_Space(Engine_Space::Space2D), m_MouseState(Mouse_State::Normal), 
 	m_GlobalCBuffer(nullptr), m_GlobalAccTime(0.f)
 {
+	//_CrtDumpMemoryLeaks();
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(1933);
+	_CrtSetBreakAlloc(472012);
 
 	/*m_ClearColor[0] = 1.f;
 	m_ClearColor[1] = 1.f;

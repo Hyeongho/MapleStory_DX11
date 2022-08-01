@@ -19,6 +19,7 @@ CPotal::CPotal(const CPotal& obj) : CGameObject(obj)
 
 CPotal::~CPotal()
 {
+	
 }
 
 void CPotal::Start()
@@ -41,6 +42,8 @@ bool CPotal::Init()
 	m_Sprite->AddChild(m_Body);
 
 	m_Sprite->SetTransparency(true);
+
+	m_Sprite->SetLayerName("Potal");
 
 	m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();
 
@@ -101,7 +104,7 @@ void CPotal::CollisionCallbackBegin(const CollisionResult& result)
 }
 
 void CPotal::CollisionCallbackEnd(const CollisionResult& result)
-{
+{	
 	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Player)
 	{
 		CPlayerManager::GetInst()->SetTagPotal(false);

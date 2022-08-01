@@ -107,8 +107,8 @@ bool CRenderManager::Init()
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
-	Layer->Name = "ColliderPixel";
-	Layer->LayerPriority = 2;
+	Layer->Name = "Monster";
+	Layer->LayerPriority = 1;
 
 	m_RenderLayerList.push_back(Layer);
 
@@ -119,20 +119,38 @@ bool CRenderManager::Init()
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
-	Layer->Name = "Particle";
+	Layer->Name = "Player";
 	Layer->LayerPriority = 3;
 
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
-	Layer->Name = "Effect";
+	Layer->Name = "ColliderPixel";
 	Layer->LayerPriority = 4;
 
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
-	Layer->Name = "ScreenWidgetComponent";
+	Layer->Name = "Potal";
 	Layer->LayerPriority = 5;
+
+	m_RenderLayerList.push_back(Layer);
+
+	Layer = new RenderLayer;
+	Layer->Name = "Particle";
+	Layer->LayerPriority = 6;
+
+	m_RenderLayerList.push_back(Layer);
+
+	Layer = new RenderLayer;
+	Layer->Name = "Effect";
+	Layer->LayerPriority = 7;
+
+	m_RenderLayerList.push_back(Layer);
+
+	Layer = new RenderLayer;
+	Layer->Name = "ScreenWidgetComponent";
+	Layer->LayerPriority = 8;
 
 	m_RenderLayerList.push_back(Layer);
 

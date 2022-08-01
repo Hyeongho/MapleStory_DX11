@@ -73,11 +73,6 @@ bool CShadowDualBlade::Init()
 	m_Anim->AddAnimation(TEXT("Monster/Shadow Dual Blade/Attack.sqc"), ANIMATION_PATH, "Attack", true);
 	m_Anim->AddAnimation(TEXT("Monster/Shadow Dual Blade/Die.sqc"), ANIMATION_PATH, "Die", false);
 
-	/*m_Anim->AddAnimation(TEXT("Monster/Tauromacis/TauromacisIdle.sqc"), ANIMATION_PATH, "Idle", true);
-	m_Anim->AddAnimation(TEXT("Monster/Tauromacis/TauromacisMove.sqc"), ANIMATION_PATH, "Walk", true);
-	m_Anim->AddAnimation(TEXT("Monster/Tauromacis/TauromacisAttack.sqc"), ANIMATION_PATH, "Attack", true);
-	m_Anim->AddAnimation(TEXT("Monster/Tauromacis/TauromacisDie.sqc"), ANIMATION_PATH, "Die", false);*/
-
 	m_Anim->AddNotify<CShadowDualBlade>("Attack", "Attack", 6, this, &CShadowDualBlade::AnimationFinish);
 	m_Anim->AddNotify<CShadowDualBlade>("Die", "Die", 14, this, &CShadowDualBlade::AnimationFinish);
 

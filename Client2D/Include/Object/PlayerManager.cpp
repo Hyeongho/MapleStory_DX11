@@ -13,7 +13,10 @@ CPlayerManager::CPlayerManager() : m_Gender(Gender::None), m_TagPotal(false), m_
 
 CPlayerManager::~CPlayerManager()
 {
-	
+	if (m_TagPotal)
+	{
+		m_TagPotal = false;
+	}
 }
 
 bool CPlayerManager::Init()

@@ -59,6 +59,7 @@ bool CPlayer2D::Init()
 	SetRootComponent(m_Sprite);
 
 	m_Sprite->SetTransparency(true);
+	m_Sprite->SetLayerName("Player");
 
 	//m_Sprite->CreateAnimationInstance<CPlayerAnimation2D>();
 

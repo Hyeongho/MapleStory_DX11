@@ -24,12 +24,12 @@ CClientManager::CClientManager() : m_Data(nullptr)
 
 CClientManager::~CClientManager()
 {
+	CEngine::DestroyInst();
+
 	SAFE_DELETE(m_Data)
 
 	CPlayerManager::DestroyInst();
 	CTalkManager::DestroyInst();
-
-	CEngine::DestroyInst();
 }
 
 bool CClientManager::Init(HINSTANCE hInst)
