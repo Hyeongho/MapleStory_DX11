@@ -131,7 +131,7 @@ bool CPlayer2D::Init()
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("MoveLeft", KeyState_Up, this, &CPlayer2D::Stop);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("MoveRight", KeyState_Up, this, &CPlayer2D::Stop);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("MoveUp", KeyState_Down, this, &CPlayer2D::MoveUp);
-	CInput::GetInst()->SetKeyCallback<CPlayer2D>("Jump", KeyState_Push, this, &CPlayer2D::Jump);
+	//CInput::GetInst()->SetKeyCallback<CPlayer2D>("Jump", KeyState_Push, this, &CPlayer2D::Jump);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("SwingD1", KeyState_Down, this, &CPlayer2D::SwingD1);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("SwingD2", KeyState_Down, this, &CPlayer2D::SwingD2);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("StabD1", KeyState_Down, this, &CPlayer2D::StabD1);
@@ -157,6 +157,11 @@ bool CPlayer2D::Init()
 void CPlayer2D::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
+
+	if (CInput::GetInst()->GetAltDown())
+	{
+		Jump(DeltaTime);
+	}
 
 	m_PlayerStatus->SetHPPercent((float)m_CharacterInfo.HP / m_CharacterInfo.MaxHP);
 	m_PlayerStatus->SetMPPercent((float)m_CharacterInfo.MP / m_CharacterInfo.MaxMP);

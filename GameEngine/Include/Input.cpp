@@ -361,7 +361,7 @@ void CInput::UpdateKeyState()
 	{
 		unsigned char Key = m_vecAddKey[i];
 
-		bool	KeyPush = false;
+		bool KeyPush = false;
 
 		switch (m_InputType)
 		{
@@ -478,8 +478,8 @@ void CInput::UpdateKeyInfo(float DeltaTime)
 
 void CInput::ClearCallback()
 {
-	auto	iter = m_mapKeyInfo.begin();
-	auto	iterEnd = m_mapKeyInfo.end();
+	auto iter = m_mapKeyInfo.begin();
+	auto iterEnd = m_mapKeyInfo.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
