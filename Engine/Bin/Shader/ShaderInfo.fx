@@ -1,4 +1,3 @@
-
 struct PSOutput_Single
 {
 	float4 Color : SV_TARGET;

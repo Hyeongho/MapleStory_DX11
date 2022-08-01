@@ -1,10 +1,6 @@
 ﻿  ClientManager.cpp
-  main.cpp
-  Balrog.cpp
   BladeFury.cpp
-  CrimsonBalrog.cpp
   DamageFont.cpp
-  Jr_Balrog.cpp
   MonsterManager.cpp
   NPCManager.cpp
   ObjectManager.cpp
@@ -15,34 +11,28 @@
   Potal.cpp
   Seolhuiui.cpp
   ShadowDualBlade.cpp
-  SkillManager.cpp
   Tauromacis.cpp
   TauromacisHitEffect.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
   Taurospear.cpp
   TestMonster.cpp
   TileMap.cpp
   AnotherDoor.cpp
   AnotherDoorThread.cpp
-  EntranceToTemple.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
   EToTempleThread.cpp
+  EntranceToTemple.cpp
   LoadingAnotherDoor.cpp
   LoadingEToTemple.cpp
   LoadingScene.cpp
   LoadingSeolhuiui.cpp
   LoadingThread.cpp
   MainScene.cpp
-  Seolhuiuibang.cpp
   SeolhuiuiThread.cpp
+  Seolhuiuibang.cpp
   StartScene.cpp
   TestScene.cpp
-  TalkManager.cpp
-  DamageWidget.cpp
   Fade.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
-  PlayerStatus.cpp
   StartWidget.cpp
   TalkWidget.cpp
   TestWidget.cpp

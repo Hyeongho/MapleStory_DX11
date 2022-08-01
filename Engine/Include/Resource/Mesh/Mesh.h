@@ -27,7 +27,6 @@ public:
 	virtual void RenderInstancing(ID3D11Buffer* InstancingBuffer, unsigned int InstanceSize, int Count);
 
 protected:
-	bool CreateBuffer(Buffer_Type Type, void* Data, int Size, int Count,
-		D3D11_USAGE Usage, ID3D11Buffer** Buffer);
+	bool CreateBuffer(Buffer_Type Type, void* Data, int Size, int Count, D3D11_USAGE Usage, ID3D11Buffer** Buffer);
 };
 

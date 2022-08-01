@@ -12,8 +12,8 @@ protected:
 
 private:
 	ID3D11InputLayout* m_InputLayout;
-	std::vector<D3D11_INPUT_ELEMENT_DESC>   m_vecInputDesc;
-	unsigned int        m_InputSize;
+	std::vector<D3D11_INPUT_ELEMENT_DESC> m_vecInputDesc;
+	unsigned int m_InputSize;
 
 private:
 	ID3D11VertexShader* m_VS;
