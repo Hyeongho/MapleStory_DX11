@@ -84,9 +84,6 @@
     <ClInclude Include="Scene\TestScene.h">
       <Filter>01. SceneMode</Filter>
     </ClInclude>
-    <ClInclude Include="Object\ObjectManager.h">
-      <Filter>02. Object</Filter>
-    </ClInclude>
     <ClInclude Include="Object\TestMonster.h">
       <Filter>02. Object\02. Monster</Filter>
     </ClInclude>
@@ -201,6 +198,9 @@
     <ClInclude Include="Object\Balrog.h">
       <Filter>02. Object\02. Monster\06. Balrog</Filter>
     </ClInclude>
+    <ClInclude Include="Object\ObjectManager.h">
+      <Filter>02. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client2D.rc">
@@ -238,9 +238,6 @@
       <Filter>02. Object\01. Player</Filter>
     </ClCompile>
     <ClCompile Include="Object\PlayerAnimation2D.cpp">
-      <Filter>02. Object\01. Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\PlayerManager.cpp">
       <Filter>02. Object\01. Player</Filter>
     </ClCompile>
     <ClCompile Include="Widget\TestWidget.cpp">
@@ -318,9 +315,6 @@
     <ClCompile Include="Object\DamageFont.cpp">
       <Filter>02. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Widget\DamageWidget.cpp">
-      <Filter>03. UI</Filter>
-    </ClCompile>
     <ClCompile Include="Object\SkillManager.cpp">
       <Filter>02. Object\01. Player\Skill</Filter>
     </ClCompile>
@@ -344,6 +338,12 @@
     </ClCompile>
     <ClCompile Include="Object\Balrog.cpp">
       <Filter>02. Object\02. Monster\06. Balrog</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\PlayerManager.cpp">
+      <Filter>02. Object\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\DamageWidget.cpp">
+      <Filter>03. UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

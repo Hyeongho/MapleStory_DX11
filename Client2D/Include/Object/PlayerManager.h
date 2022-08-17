@@ -66,6 +66,9 @@ public:
 public:
 	void SceneChange();
 
+public:
+	void PostUpdate(float DeltaTime);
+
 	DECLARE_SINGLE(CPlayerManager)
 };
 

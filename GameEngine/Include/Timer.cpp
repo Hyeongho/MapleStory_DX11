@@ -23,7 +23,7 @@ float CTimer::Update()
 	m_Time = Time;
 
 	m_FPSTime += m_DeltaTime;
-	++m_Tick;
+	m_Tick++;
 
 	if (m_Tick == 60)
 	{

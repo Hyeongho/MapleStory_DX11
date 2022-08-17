@@ -67,17 +67,17 @@ bool CEntranceToTemple::Init()
 		m_LoadingFunction(false, 0.6f);
 	}
 
-	/*CTauromacis* Tauromacis = m_Scene->CreateGameObject<CTauromacis>("Tauromacis");
+	CTauromacis* Tauromacis = m_Scene->CreateGameObject<CTauromacis>("Tauromacis");
 
 	Tauromacis->SetWorldPos(600.f, 250.f, 1.f);
 
-	Tauromacis->SetRange(2144.f, 750.f, 0.f);*/
+	Tauromacis->SetRange(2144.f, 750.f, 0.f);
 
-	CTaurospear* Taurospear = m_Scene->CreateGameObject<CTaurospear>("Taurospear");
+	/*CTaurospear* Taurospear = m_Scene->CreateGameObject<CTaurospear>("Taurospear");
 
 	Taurospear->SetWorldPos(600.f, 250.f, 1.f);
 
-	Taurospear->SetRange(2144.f, 750.f, 0.f);
+	Taurospear->SetRange(2144.f, 750.f, 0.f);*/
 
 	if (m_LoadingFunction)
 	{

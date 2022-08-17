@@ -33,3 +33,7 @@ void CPlayerManager::SceneChange()
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
 }
 
+void CPlayerManager::PostUpdate(float DeltaTime)
+{
+	CGameObject::PostUpdate(DeltaTime);
+}

@@ -120,7 +120,7 @@ public:
 
 			if (!m_RootComponent)
 			{
-				m_RootComponent = Component;
+				m_RootComponent = (class CSceneComponent*)Component;
 			}
 		}
 

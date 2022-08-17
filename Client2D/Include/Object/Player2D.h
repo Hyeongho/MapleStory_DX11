@@ -5,6 +5,7 @@
 #include "Component/ColliderBox2D.h"
 #include "Component/CameraComponent.h"
 #include "Component/WidgetComponent.h"
+#include "Component/RigidBody.h"
 #include "../Widget/PlayerStatus.h"
 #include "Data/Data.h"
 #include "../ClientInfo.h"
@@ -23,6 +24,7 @@ protected:
 
 private:
     CSharedPtr<CSpriteComponent> m_Sprite;
+    CSharedPtr<CRigidBody> m_RigidBody;
     CSharedPtr<CColliderBox2D> m_Body;
     CSharedPtr<CColliderBox2D> m_Bottom;
     CSharedPtr<CCameraComponent> m_Camera;
@@ -73,7 +75,9 @@ private:
     void SwingD2(float DeltaTime);
     void StabD1(float DeltaTime);
     void PhantomBlow(float DeltaTime);
+    void JumpPhantomBlow(float DeltaTime);
     void BladeFury(float DeltaTime);
+    void JumpBladeFury(float DeltaTime);
 
 private:
     void CollisionCallback(const CollisionResult& result);

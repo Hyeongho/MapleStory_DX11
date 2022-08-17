@@ -42,6 +42,7 @@ void CObjectManager::Start()
 	CGameObject::Start();
 
 	m_FallStartY = GetWorldPos().y;
+	m_FallStartX = GetWorldPos().x;
 }
 
 bool CObjectManager::Init()
@@ -99,6 +100,8 @@ void CObjectManager::Update(float DeltaTime)
 		}
 
 		Pos.y = m_FallStartY + (Velocity - 0.5f * GRAVITY * m_FallTime * m_FallTime);
+
+		//Pos.x = m_FallStartX - (Velocity + 0.5f * GRAVITY * m_FallTime * m_FallTime);
 
 		if (Player->GetPlayerState() == EPlayer_State::Walk)
 		{

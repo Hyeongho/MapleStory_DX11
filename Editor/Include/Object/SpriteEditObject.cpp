@@ -22,7 +22,7 @@ bool CSpriteEditObject::Init()
 
 	SetRootComponent(m_Sprite);
 
-	//m_Sprite->SetRelativeScale(100.f, 100.f, 1.f);
+	//m_Sprite->SetRelativeScale(1000000.f, 1000000.f, 1.f);
 	//m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
 
 	m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();

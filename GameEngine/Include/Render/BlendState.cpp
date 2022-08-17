@@ -35,7 +35,7 @@ bool CBlendState::CreateState(bool AlphaToCoverageEnable, bool IndependentBlendE
 		return false;
 	}
 
-	D3D11_BLEND_DESC	Desc = {};
+	D3D11_BLEND_DESC Desc = {};
 
 	Desc.AlphaToCoverageEnable = AlphaToCoverageEnable;
 	Desc.IndependentBlendEnable = IndependentBlendEnable;

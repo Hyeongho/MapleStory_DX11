@@ -232,6 +232,9 @@
     <Filter Include="05. Component\02. ObjectComponent\02. NavAgent">
       <UniqueIdentifier>{d02b119d-0e7c-41ff-9f50-352798fb92ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05. Component\02. ObjectComponent\03. RigidBody">
+      <UniqueIdentifier>{c2086ad7-5788-4e74-a34a-182065a05683}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -626,6 +629,9 @@
     </ClCompile>
     <ClCompile Include="Render\RenderManager.cpp">
       <Filter>06. Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\RigidBody.cpp">
+      <Filter>05. Component\02. ObjectComponent\03. RigidBody</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1105,6 +1111,9 @@
     </ClInclude>
     <ClInclude Include="Component\EffectComponent.h">
       <Filter>05. Component\01. SceneComponent\01. MeshComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\RigidBody.h">
+      <Filter>05. Component\02. ObjectComponent\03. RigidBody</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -102,7 +102,7 @@ bool CPhantomBlow::Init()
 		m_Sprite2->SetRelativePos(80.f, 5.f, 11.f);
 
 		m_Body->SetRelativePos(m_Sprite1->GetRelativePos());
-		m_Body->SetExtent(-154.f, -77.5f);
+		m_Body->SetExtent(154.f, 77.5f);
 		m_Body->SetOffset(154.f, -77.5f, 0.f);
 	}
 
@@ -134,11 +134,6 @@ void CPhantomBlow::OnCollisionBegin(const CollisionResult& result)
 	m_obj = (CMonsterManager*)result.Dest->GetGameObject();
 
 	int Frame = m_Anim1->GetFrame();
-
-	/*if (Frame != 1)
-	{
-		return;
-	}*/
 
 	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Monster)
 	{

@@ -108,25 +108,25 @@ bool CRenderManager::Init()
 
 	Layer = new RenderLayer;
 	Layer->Name = "Monster";
-	Layer->LayerPriority = 1;
+	Layer->LayerPriority = 3;
 
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
 	Layer->Name = "Default";
-	Layer->LayerPriority = 2;
-
-	m_RenderLayerList.push_back(Layer);
-
-	Layer = new RenderLayer;
-	Layer->Name = "Player";
 	Layer->LayerPriority = 3;
 
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
 	Layer->Name = "ColliderPixel";
-	Layer->LayerPriority = 4;
+	Layer->LayerPriority = 3;
+
+	m_RenderLayerList.push_back(Layer);
+
+	Layer = new RenderLayer;
+	Layer->Name = "Player";
+	Layer->LayerPriority = 3;
 
 	m_RenderLayerList.push_back(Layer);
 

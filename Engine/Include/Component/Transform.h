@@ -77,7 +77,7 @@ public:
 	void InheritWorldRotation(bool Current);
 	void InheritParentRotationWorldPos(bool Current);
 
-private:	// Relative
+private: // Relative
 	Vector3	m_RelativeScale;
 	Vector3	m_RelativeRot;
 	Vector3	m_RelativePos;

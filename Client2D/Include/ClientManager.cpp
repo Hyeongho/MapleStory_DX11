@@ -61,15 +61,25 @@ bool CClientManager::Init(HINSTANCE hInst)
 	CInput::GetInst()->CreateKey("MoveLeft", VK_LEFT);
 	CInput::GetInst()->CreateKey("MoveRight", VK_RIGHT);
 	CInput::GetInst()->CreateKey("MoveUp", VK_UP);
-	//CInput::GetInst()->CreateKey("Jump", 'C'); // AltÅ° ¸ØÃã ÇØ°á µÇ¸é Alt·Î º¯°æ 
+	//CInput::GetInst()->CreateKey("Jump", 'A'); // AltÅ° ¸ØÃã ÇØ°á µÇ¸é Alt·Î º¯°æ 
+	CInput::GetInst()->CreateKey("Jump", VK_LMENU); // AltÅ° ¸ØÃã ÇØ°á µÇ¸é Alt·Î º¯°æ 
 	CInput::GetInst()->SetAltKey("Jump", true); // AltÅ° ¸ØÃã ÇØ°á µÇ¸é Alt·Î º¯°æ 
+
 	CInput::GetInst()->CreateKey("PhantomBlow", VK_LCONTROL);
+	CInput::GetInst()->SetCtrlKey("PhantomBlow", true);
+	CInput::GetInst()->CreateKey("JumpPhantomBlow", VK_LCONTROL);
+	CInput::GetInst()->SetCtrlKey("JumpPhantomBlow", true);
+	CInput::GetInst()->SetAltKey("JumpPhantomBlow", true);
+
 	CInput::GetInst()->CreateKey("BladeFury", 'C');
+	CInput::GetInst()->CreateKey("JumpBladeFury", 'C');
+	CInput::GetInst()->SetAltKey("JumpBladeFury", true);
 	//CInput::GetInst()->CreateKey("Attack", VK_SPACE);
 	//CInput::GetInst()->CreateKey("Attack1", VK_LBUTTON);
 
 	CResourceManager::GetInst()->CreateSoundChannelGroup("BGM");
 	CResourceManager::GetInst()->CreateSoundChannelGroup("Skill");
+	CResourceManager::GetInst()->CreateSoundChannelGroup("Player");
 	CResourceManager::GetInst()->CreateSoundChannelGroup("Effect");
 	CResourceManager::GetInst()->CreateSoundChannelGroup("UI");
 	CResourceManager::GetInst()->SetVolume(70);
@@ -245,7 +255,11 @@ void CClientManager::LoadSound()
 	CResourceManager::GetInst()->LoadSound("BGM", true, "secretFlower", "secretFlower.mp3");
 	CResourceManager::GetInst()->LoadSound("BGM", true, "EvilEyes", "EvilEyes.mp3");
 
+	// Player
+	CResourceManager::GetInst()->LoadSound("Player", false, "Jump", "Jump.mp3");
+
 	// Effect
+	
 
 	// UI
 }

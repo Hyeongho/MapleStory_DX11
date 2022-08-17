@@ -23,7 +23,7 @@ CPlayer2D::CPlayer2D() : m_Flip(true)
 CPlayer2D::CPlayer2D(const CPlayer2D& obj) : CObjectManager(obj)
 {
 	m_Sprite = (CSpriteComponent*)FindComponent("PlayerSprite");
-
+	m_RigidBody = (CRigidBody*)FindComponent("PlayerRigidBody");
 	m_Body = (CColliderBox2D*)FindComponent("Body");
 	m_Bottom = (CColliderBox2D*)FindComponent("Bottom");
 	m_Muzzle = (CColliderBox2D*)FindComponent("Muzzle");
@@ -57,6 +57,11 @@ bool CPlayer2D::Init()
 	m_Muzzle->SetLayerName("Particle");
 
 	SetRootComponent(m_Sprite);
+	//m_Sprite->AddChild(m_RigidBody);
+	m_Sprite->AddChild(m_Camera);
+	m_Sprite->AddChild(m_Body);
+	m_Sprite->AddChild(m_Muzzle);
+	m_Sprite->AddChild(m_Bottom);
 
 	m_Sprite->SetTransparency(true);
 	m_Sprite->SetLayerName("Player");
@@ -72,14 +77,11 @@ bool CPlayer2D::Init()
 	m_Body->SetCollisionProfile("Player");
 	m_Bottom->SetCollisionProfile("PlayerBottom");
 
-	m_Sprite->AddChild(m_Camera);
-	m_Sprite->AddChild(m_Body);
-	m_Sprite->AddChild(m_Muzzle);
-	m_Sprite->AddChild(m_Bottom);
-
 	m_Sprite->SetRelativeScale(250.f, 250.f, 1.f);
 	//m_Sprite->SetRelativePos(100.f, 600.f, 0.f);
 	m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
+
+	m_RigidBody = CreateComponent<CRigidBody>("PlayerRigidBody");
 
 	if (CPlayerManager::GetInst()->GetGender() == Gender::Male)
 	{
@@ -131,12 +133,14 @@ bool CPlayer2D::Init()
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("MoveLeft", KeyState_Up, this, &CPlayer2D::Stop);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("MoveRight", KeyState_Up, this, &CPlayer2D::Stop);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("MoveUp", KeyState_Down, this, &CPlayer2D::MoveUp);
-	//CInput::GetInst()->SetKeyCallback<CPlayer2D>("Jump", KeyState_Push, this, &CPlayer2D::Jump);
+	CInput::GetInst()->SetKeyCallback<CPlayer2D>("Jump", KeyState_Push, this, &CPlayer2D::Jump);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("SwingD1", KeyState_Down, this, &CPlayer2D::SwingD1);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("SwingD2", KeyState_Down, this, &CPlayer2D::SwingD2);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("StabD1", KeyState_Down, this, &CPlayer2D::StabD1);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("PhantomBlow", KeyState_Down, this, &CPlayer2D::PhantomBlow);
+	CInput::GetInst()->SetKeyCallback<CPlayer2D>("JumpPhantomBlow", KeyState_Down, this, &CPlayer2D::JumpPhantomBlow);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("BladeFury", KeyState_Down, this, &CPlayer2D::BladeFury);
+	CInput::GetInst()->SetKeyCallback<CPlayer2D>("JumpBladeFury", KeyState_Down, this, &CPlayer2D::JumpBladeFury);
 
 	m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::Begin, this, &CPlayer2D::CollisionCallback);
 
@@ -157,11 +161,6 @@ bool CPlayer2D::Init()
 void CPlayer2D::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
-
-	if (CInput::GetInst()->GetAltDown())
-	{
-		Jump(DeltaTime);
-	}
 
 	m_PlayerStatus->SetHPPercent((float)m_CharacterInfo.HP / m_CharacterInfo.MaxHP);
 	m_PlayerStatus->SetMPPercent((float)m_CharacterInfo.MP / m_CharacterInfo.MaxMP);
@@ -227,9 +226,20 @@ void CPlayer2D::PostUpdate(float DeltaTime)
 		break;
 
 	case EPlayer_State::Walk:
-		if (!m_IsMove && m_IsGround)
+		if (m_IsGround)
 		{
-			m_State = EPlayer_State::Idle;
+			if (!m_IsMove)
+			{
+				m_State = EPlayer_State::Idle;
+			}
+
+			else
+			{
+				if (Anim->CheckCurrentAnimation("Jump"))
+				{
+					m_State = EPlayer_State::Idle;
+				}
+			}
 		}
 
 		break;
@@ -319,6 +329,9 @@ void CPlayer2D::MoveRight(float DeltaTime)
 
 	m_IsMove = true;
 
+	//m_Sprite->AddForce(Vector3(100.f, 0.f, 0.f));
+	//m_RigidBody->AddForce(Vector3(100.f, 0.f, 0.f));
+
 	m_Sprite->AddRelativePos(m_Sprite->GetWorldAxis(AXIS_X) * 300.f * DeltaTime);
 }
 
@@ -368,6 +381,8 @@ void CPlayer2D::Jump(float DeltaTime)
 
 	Anim->ChangeAnimation("Jump");
 
+	CResourceManager::GetInst()->SoundPlay("Jump");
+
 	CObjectManager::Jump(Anim->GetAnimFlip());
 }
 
@@ -384,6 +399,38 @@ void CPlayer2D::StabD1(float DeltaTime)
 }
 
 void CPlayer2D::PhantomBlow(float DeltaTime)
+{
+	if (CInput::GetInst()->GetAltDown())
+	{
+		return;
+	}
+
+	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
+	{
+		return;
+	}
+
+	if (m_State == EPlayer_State::PhantomBlow || m_State == EPlayer_State::BladeFury)
+	{
+		return;
+	}
+
+	CPlayerManager::GetInst()->SetPlayerAttack(Player_Attack::Attack_Start);
+
+	m_State = EPlayer_State::PhantomBlow;
+
+	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
+
+	Anim->ChangeAnimation("PhantomBlow");
+
+	CPhantomBlow* PhantomBlow = m_Scene->CreateGameObject<CPhantomBlow>("PhantomBlowEffect");
+
+	CResourceManager::GetInst()->SoundPlay("PhantomBlow");
+
+	PhantomBlow->SetWorldPos(m_Muzzle->GetWorldPos());
+}
+
+void CPlayer2D::JumpPhantomBlow(float DeltaTime)
 {
 	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
 	{
@@ -412,6 +459,11 @@ void CPlayer2D::PhantomBlow(float DeltaTime)
 
 void CPlayer2D::BladeFury(float DeltaTime)
 {
+	if (CInput::GetInst()->GetAltDown())
+	{
+		return;
+	}
+
 	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
 	{
 		return;
@@ -435,8 +487,33 @@ void CPlayer2D::BladeFury(float DeltaTime)
 	CResourceManager::GetInst()->SoundPlay("BladeFury");
 
 	BladeFury->SetWorldPos(m_Muzzle->GetWorldPos());
+}
 
-	return;
+void CPlayer2D::JumpBladeFury(float DeltaTime)
+{
+	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
+	{
+		return;
+	}
+
+	if (m_State == EPlayer_State::BladeFury || m_State == EPlayer_State::PhantomBlow)
+	{
+		return;
+	}
+
+	CPlayerManager::GetInst()->SetPlayerAttack(Player_Attack::Attack_Start);
+
+	m_State = EPlayer_State::BladeFury;
+
+	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
+
+	Anim->ChangeAnimation("BladeFury");
+
+	CBladeFury* BladeFury = m_Scene->CreateGameObject<CBladeFury>("BladeFury");
+
+	CResourceManager::GetInst()->SoundPlay("BladeFury");
+
+	BladeFury->SetWorldPos(m_Muzzle->GetWorldPos());
 }
 
 void CPlayer2D::CollisionCallback(const CollisionResult& result)

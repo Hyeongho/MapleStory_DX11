@@ -23,6 +23,7 @@
 #include <locale.h>
 #include <WinUser.h>
 #include <array>
+#include <thread>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxguid.lib")

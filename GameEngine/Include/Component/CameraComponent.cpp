@@ -32,7 +32,8 @@ void CCameraComponent::CreateProjectionMatrix()
 	switch (m_CameraType)
 	{
 	case Camera_Type::Camera2D:
-		m_matProj = XMMatrixOrthographicOffCenterLH(0.f, (float)m_RS.Width, 0.f, (float)m_RS.Height, 0.f, 1000.f);
+		m_matProj = XMMatrixOrthographicOffCenterLH(0.f, (float)m_RS.Width, 0.f, (float)m_RS.Height, 0.f, m_Distance);
+		//m_matProj = XMMatrixOrthographicOffCenterLH(0.f, 1366.f, 0.f, 768.f, 0.f, 1000.f);
 		break;
 	case Camera_Type::Camera3D:
 		m_matProj = XMMatrixPerspectiveFovLH(DegreeToRadian(m_ViewAngle), m_RS.Width / (float)m_RS.Height, 0.1f, m_Distance);

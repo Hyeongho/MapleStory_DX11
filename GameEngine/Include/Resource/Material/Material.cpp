@@ -290,7 +290,7 @@ void CMaterial::Reset()
 		m_TextureInfo[i].Texture->ResetShader(m_TextureInfo[i].Register, m_TextureInfo[i].ShaderType, 0);
 	}
 
-	for (int i = 0; i < (int)RenderState_Type::Max; ++i)
+	for (int i = 0; i < (int)RenderState_Type::Max; i++)
 	{
 		if (m_RenderStateArray[i])
 		{
@@ -316,7 +316,7 @@ void CMaterial::Save(FILE* File)
 	fwrite(&m_BaseColor, sizeof(Vector4), 1, File);
 	fwrite(&m_Opacity, sizeof(float), 1, File);
 
-	for (int i = 0; i < (int)RenderState_Type::Max; ++i)
+	for (int i = 0; i < (int)RenderState_Type::Max; i++)
 	{
 		bool StateEnable = false;
 
@@ -342,7 +342,7 @@ void CMaterial::Save(FILE* File)
 
 	fwrite(&TextureCount, sizeof(int), 1, File);
 
-	for (int i = 0; i < TextureCount; ++i)
+	for (int i = 0; i < TextureCount; i++)
 	{
 		int	Length = (int)m_TextureInfo[i].Name.length();
 
@@ -359,7 +359,7 @@ void CMaterial::Save(FILE* File)
 
 void CMaterial::Load(FILE* File)
 {
-	char	ShaderName[256] = {};
+	char ShaderName[256] = {};
 
 	int	Length = 0;
 
@@ -371,15 +371,15 @@ void CMaterial::Load(FILE* File)
 	fread(&m_BaseColor, sizeof(Vector4), 1, File);
 	fread(&m_Opacity, sizeof(float), 1, File);
 
-	for (int i = 0; i < (int)RenderState_Type::Max; ++i)
+	for (int i = 0; i < (int)RenderState_Type::Max; i++)
 	{
-		bool	StateEnable = false;
+		bool StateEnable = false;
 
 		fread(&StateEnable, sizeof(bool), 1, File);
 
 		if (StateEnable)
 		{
-			char	StateName[256] = {};
+			char StateName[256] = {};
 			Length = 0;
 
 			fread(&Length, sizeof(int), 1, File);
@@ -393,7 +393,7 @@ void CMaterial::Load(FILE* File)
 
 	fread(&TextureCount, sizeof(int), 1, File);
 
-	for (int i = 0; i < TextureCount; ++i)
+	for (int i = 0; i < TextureCount; i++)
 	{
 		m_TextureInfo.push_back(MaterialTextureInfo());
 
@@ -415,15 +415,15 @@ void CMaterial::Load(FILE* File)
 		char TexName[256] = {};
 		fread(TexName, sizeof(char), TexNameLength, File);
 
-		Image_Type	ImageType;
+		Image_Type ImageType;
 		fread(&ImageType, sizeof(Image_Type), 1, File);
 
 		int	InfoCount = 0;
 
 		fread(&InfoCount, sizeof(int), 1, File);
 
-		std::vector<std::wstring>	vecFullPath;
-		std::vector<std::wstring>	vecFileName;
+		std::vector<std::wstring> vecFullPath;
+		std::vector<std::wstring> vecFileName;
 		std::string	PathName;
 
 		for (int i = 0; i < InfoCount; i++)

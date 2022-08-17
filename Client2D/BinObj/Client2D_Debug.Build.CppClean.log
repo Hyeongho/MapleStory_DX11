@@ -8,7 +8,6 @@ d:\c++_client\maplestory_dx11\client2d\binobj\seolhuiui.obj
 d:\c++_client\maplestory_dx11\client2d\binobj\potal.obj
 d:\c++_client\maplestory_dx11\client2d\binobj\playermanager.obj
 d:\c++_client\maplestory_dx11\client2d\binobj\playeranimation2d.obj
-d:\c++_client\maplestory_dx11\client2d\binobj\player2d.obj
 d:\c++_client\maplestory_dx11\client2d\binobj\phantomblow.obj
 d:\c++_client\maplestory_dx11\client2d\binobj\objectmanager.obj
 d:\c++_client\maplestory_dx11\client2d\binobj\npcmanager.obj
@@ -44,12 +43,11 @@ d:\c++_client\maplestory_dx11\client2d\binobj\testwidget.obj
 d:\c++_client\maplestory_dx11\client2d\binobj\talkwidget.obj
 d:\c++_client\maplestory_dx11\client2d\binobj\startwidget.obj
 d:\c++_client\maplestory_dx11\client2d\binobj\playerstatus.obj
-d:\c++_client\maplestory_dx11\client2d\bin\client2d_debug.exe
+d:\c++_client\maplestory_dx11\client2d\binobj\player2d.obj
 d:\c++_client\maplestory_dx11\client2d\binobj\client2d_debug.ilk
+d:\c++_client\maplestory_dx11\client2d\bin\client2d_debug.exe
 d:\c++_client\maplestory_dx11\client2d\bin\client2d_debug.pdb
 d:\c++_client\maplestory_dx11\client2d\binobj\client2d.res
-d:\c++_client\maplestory_dx11\client2d\binobj\client2d.ipdb
-d:\c++_client\maplestory_dx11\client2d\binobj\client2d.iobj
 d:\c++_client\maplestory_dx11\client2d\binobj\../bin/client2d_debug.pdb
 d:\c++_client\maplestory_dx11\client2d\binobj\client2d.tlog\cl.command.1.tlog
 d:\c++_client\maplestory_dx11\client2d\binobj\client2d.tlog\cl.read.1.tlog

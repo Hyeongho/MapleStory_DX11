@@ -355,12 +355,16 @@ LRESULT CEngine::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_SYSKEYDOWN:
+	case WM_SYSKEYUP:
 		switch (wParam)
 		{
+		case VK_LMENU:
 		case VK_MENU:
-			break;
+		case VK_RMENU:
+		case 'C':
+		case 'c':
+			return NULL;
 		}
-		break;
 
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
