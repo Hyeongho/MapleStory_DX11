@@ -10,7 +10,7 @@ class CRigidBody :
 
 private:
 	CRigidBody();
-	CRigidBody(const CRigidBody& transform);
+	CRigidBody(const CRigidBody& com);
 	virtual ~CRigidBody();
 
 private:
@@ -60,9 +60,19 @@ public:
 		m_Velocity = Velocity;
 	}
 
-	void SetVelocity(float MaxSpeed)
+	void AddVelocity(Vector3 Velocity)
+	{
+		m_Velocity += Velocity;
+	}
+
+	void SetMaxSpeed(float MaxSpeed)
 	{
 		m_MaxSpeed = MaxSpeed;
+	}
+
+	void SetFricCoeffp(float FricCoeffp)
+	{
+		m_FricCoeffp = FricCoeffp;
 	}
 
 private:

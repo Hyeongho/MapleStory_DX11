@@ -1,27 +1,2 @@
-﻿  ClientManager.cpp
-  BladeFury.cpp
-  MonsterManager.cpp
-  ObjectManager.cpp
-  PhantomBlow.cpp
-  Player2D.cpp
-  PlayerAnimation2D.cpp
-  PlayerManager.cpp
-  Potal.cpp
-  Tauromacis.cpp
-  Taurospear.cpp
-  AnotherDoor.cpp
-  EntranceToTemple.cpp
-  LoadingAnotherDoor.cpp
-  LoadingEToTemple.cpp
-  LoadingScene.cpp
-  LoadingSeolhuiui.cpp
-  MainScene.cpp
-  Seolhuiuibang.cpp
-  StartScene.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
-  TestScene.cpp
-  StartWidget.cpp
-  TalkWidget.cpp
-  코드를 생성하고 있습니다...
+﻿  Player2D.cpp
   Client2D.vcxproj -> D:\C++_Client\MapleStory_DX11\Client2D\Bin\Client2D_Debug.exe

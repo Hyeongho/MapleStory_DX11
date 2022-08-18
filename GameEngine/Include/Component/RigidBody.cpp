@@ -6,11 +6,11 @@
 #include "SceneComponent.h"
 #include "../GameObject/GameObject.h"
 
-CRigidBody::CRigidBody() : m_Mass(1.f), m_FricCoeffp(0.f), m_MaxSpeed(100.f)
+CRigidBody::CRigidBody() : m_Mass(1.f), m_FricCoeffp(100.f), m_MaxSpeed(100.f)
 {
 }
 
-CRigidBody::CRigidBody(const CRigidBody& RigidBody)
+CRigidBody::CRigidBody(const CRigidBody& com) : CObjectComponent(com)
 {
 }
 
@@ -53,12 +53,31 @@ void CRigidBody::PostUpdate(float DeltaTime)
 		m_Accel = m_Force * Accel;
 
 		m_Velocity += m_Accel * DeltaTime;
+	}
 
-		if (m_Velocity.Length() > m_MaxSpeed)
+	if (m_Velocity.Length() != 0.f)
+	{
+		Vector3 FricDir = m_Velocity * -1.f;
+
+		FricDir.Normalize();
+
+		Vector3 FricCoeffp = FricDir * m_FricCoeffp * DeltaTime;
+
+		if (FricCoeffp.Length() > m_Velocity.Length())
 		{
-			m_Velocity.Normalize();
-			m_Velocity *= m_MaxSpeed;
+			m_Velocity = Vector3(0.f, 0.f, 0.f);
 		}
+
+		else
+		{
+			m_Velocity += FricCoeffp;
+		}
+	}
+
+	if (m_Velocity.Length() > m_MaxSpeed)
+	{
+		m_Velocity.Normalize();
+		m_Velocity *= m_MaxSpeed;
 	}
 
 	Move(DeltaTime);

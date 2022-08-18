@@ -144,6 +144,9 @@ bool CPlayer2D::Init()
 
 	m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::Begin, this, &CPlayer2D::CollisionCallback);
 
+	m_RigidBody->SetMaxSpeed(300.f);
+	m_RigidBody->SetFricCoeffp(800.f);
+
 	m_IsGround = false;
 
 	SetGravityAccel(15.f);
@@ -330,9 +333,9 @@ void CPlayer2D::MoveRight(float DeltaTime)
 	m_IsMove = true;
 
 	//m_Sprite->AddForce(Vector3(100.f, 0.f, 0.f));
-	//m_RigidBody->AddForce(Vector3(100.f, 0.f, 0.f));
+	m_RigidBody->AddForce(Vector3(3000.f, 0.f, 0.f));
 
-	m_Sprite->AddRelativePos(m_Sprite->GetWorldAxis(AXIS_X) * 300.f * DeltaTime);
+	//m_Sprite->AddRelativePos(m_Sprite->GetWorldAxis(AXIS_X) * 300.f * DeltaTime);
 }
 
 void CPlayer2D::MoveUp(float DeltaTime)
