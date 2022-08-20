@@ -181,6 +181,7 @@
     <ClInclude Include="Component\ColliderPixel.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\EffectComponent.h" />
+    <ClInclude Include="Component\Gravity.h" />
     <ClInclude Include="Component\NavAgent.h" />
     <ClInclude Include="Component\ObjectComponent.h" />
     <ClInclude Include="Component\PaperBurnComponent.h" />
@@ -358,6 +359,7 @@
     <ClCompile Include="Component\ColliderPixel.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\EffectComponent.cpp" />
+    <ClCompile Include="Component\Gravity.cpp" />
     <ClCompile Include="Component\NavAgent.cpp" />
     <ClCompile Include="Component\ObjectComponent.cpp" />
     <ClCompile Include="Component\PaperBurnComponent.cpp" />

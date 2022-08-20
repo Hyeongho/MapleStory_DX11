@@ -6,8 +6,9 @@
 #include "SceneComponent.h"
 #include "../GameObject/GameObject.h"
 
-CRigidBody::CRigidBody() : m_Mass(1.f), m_FricCoeffp(100.f), m_MaxSpeed(100.f)
+CRigidBody::CRigidBody() : m_Mass(1.f), m_FricCoeffp(100.f), m_MaxSpeed(100.f), m_Velocity(Vector3(0.f, 0.f, 0.f))
 {
+	SetTypeID<CRigidBody>();
 }
 
 CRigidBody::CRigidBody(const CRigidBody& com) : CObjectComponent(com)
@@ -51,9 +52,11 @@ void CRigidBody::PostUpdate(float DeltaTime)
 		float Accel = Force / m_Mass;
 
 		m_Accel = m_Force * Accel;
-
-		m_Velocity += m_Accel * DeltaTime;
 	}
+
+	m_Accel += m_AccelAlpha;
+
+	m_Velocity += m_Accel * DeltaTime;
 
 	if (m_Velocity.Length() != 0.f)
 	{
@@ -83,6 +86,8 @@ void CRigidBody::PostUpdate(float DeltaTime)
 	Move(DeltaTime);
 
 	m_Force = Vector3(0.f, 0.f, 0.f);
+
+	m_AccelAlpha = Vector3(0.f, 0.f, 0.f);
 }
 
 void CRigidBody::PrevRender()

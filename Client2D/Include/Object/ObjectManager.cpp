@@ -59,57 +59,57 @@ void CObjectManager::Update(float DeltaTime)
 {
 	CGameObject::Update(DeltaTime);
 
-	// 중력을 적용한다.
-	if (!m_IsGround && m_PhysicsSimulate)
-	{
-		// 떨어지는 시간을 누적시켜준다.
-		m_FallTime += DeltaTime * m_GravityAccel;
+	//// 중력을 적용한다.
+	//if (!m_IsGround && m_PhysicsSimulate)
+	//{
+	//	// 떨어지는 시간을 누적시켜준다.
+	//	m_FallTime += DeltaTime * m_GravityAccel;
 
-		// 9.8 m/s^2
-		// t초 후 y값
-		// V: 속도	A: 가속도	G: 중력
-		// y = V * A - 0.5f * G * T * T
-		// 0 = -0.5GA^2 VA - y
-		// (*b +- 루트(b^2 - 4ac)) / 2a
-		float Velocity = 0.f;
+	//	// 9.8 m/s^2
+	//	// t초 후 y값
+	//	// V: 속도	A: 가속도	G: 중력
+	//	// y = V * A - 0.5f * G * T * T
+	//	// 0 = -0.5GA^2 VA - y
+	//	// (*b +- 루트(b^2 - 4ac)) / 2a
+	//	float Velocity = 0.f;
 
-		CPlayer2D* Player = (CPlayer2D*)m_Scene->GetPlayerObject();
+	//	CPlayer2D* Player = (CPlayer2D*)m_Scene->GetPlayerObject();
 
-		Vector3 Pos = GetWorldPos();
-		Vector3 Pivot = GetPivot();
-		Vector3 Scale = GetWorldScale();
+	//	Vector3 Pos = GetWorldPos();
+	//	Vector3 Pivot = GetPivot();
+	//	Vector3 Scale = GetWorldScale();
 
-		if (!Player)
-		{
-			return;
-		}
+	//	if (!Player)
+	//	{
+	//		return;
+	//	}
 
-		if (m_Jump)
-		{
-			Velocity = m_JumpVelocity * m_FallTime;
+	//	if (m_Jump)
+	//	{
+	//		Velocity = m_JumpVelocity * m_FallTime;
 
-			if (Player->GetPlayerState() == EPlayer_State::Walk)
-			{
-				m_FallStartX = Pos.x;
-			}
+	//		if (Player->GetPlayerState() == EPlayer_State::Walk)
+	//		{
+	//			m_FallStartX = Pos.x;
+	//		}
 
-			else
-			{
-				m_FallStartX = 0.f;
-			}
-		}
+	//		else
+	//		{
+	//			m_FallStartX = 0.f;
+	//		}
+	//	}
 
-		Pos.y = m_FallStartY + (Velocity - 0.5f * GRAVITY * m_FallTime * m_FallTime);
+	//	Pos.y = m_FallStartY + (Velocity - 0.5f * GRAVITY * m_FallTime * m_FallTime);
 
-		//Pos.x = m_FallStartX - (Velocity + 0.5f * GRAVITY * m_FallTime * m_FallTime);
+	//	//Pos.x = m_FallStartX - (Velocity + 0.5f * GRAVITY * m_FallTime * m_FallTime);
 
-		if (Player->GetPlayerState() == EPlayer_State::Walk)
-		{
-			Pos.x += 300.f * DeltaTime * m_Dir;
-		}
+	//	if (Player->GetPlayerState() == EPlayer_State::Walk)
+	//	{
+	//		Pos.x += 300.f * DeltaTime * m_Dir;
+	//	}
 
-		SetWorldPos(Pos);
-	}
+	//	SetWorldPos(Pos);
+	//}
 }
 
 void CObjectManager::PostUpdate(float DeltaTime)

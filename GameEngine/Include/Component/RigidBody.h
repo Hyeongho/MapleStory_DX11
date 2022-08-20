@@ -19,6 +19,7 @@ private:
 private:
 	Vector3 m_Force; // 크기, 방향
 	Vector3 m_Accel; // 가속도
+	Vector3 m_AccelAlpha; // 추가 가속도
 	Vector3 m_Velocity; // 속도
 
 	float m_Mass; // 질량
@@ -65,6 +66,11 @@ public:
 		m_Velocity += Velocity;
 	}
 
+	Vector3 GetVelocity() const
+	{
+		return m_Velocity;
+	}
+
 	void SetMaxSpeed(float MaxSpeed)
 	{
 		m_MaxSpeed = MaxSpeed;
@@ -73,6 +79,16 @@ public:
 	void SetFricCoeffp(float FricCoeffp)
 	{
 		m_FricCoeffp = FricCoeffp;
+	}
+
+	void SetAccelAlpha(Vector3 AccelAlpha)
+	{
+		m_AccelAlpha = AccelAlpha;
+	}
+
+	void AddAccelAlpha(Vector3 AccelAlpha)
+	{
+		m_AccelAlpha += AccelAlpha;
 	}
 
 private:

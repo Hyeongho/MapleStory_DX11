@@ -6,6 +6,7 @@
 #include "Component/CameraComponent.h"
 #include "Component/WidgetComponent.h"
 #include "Component/RigidBody.h"
+#include "Component/Gravity.h"
 #include "../Widget/PlayerStatus.h"
 #include "Data/Data.h"
 #include "../ClientInfo.h"
@@ -25,6 +26,7 @@ protected:
 private:
     CSharedPtr<CSpriteComponent> m_Sprite;
     CSharedPtr<CRigidBody> m_RigidBody;
+    CSharedPtr<CGravity> m_Gravity;
     CSharedPtr<CColliderBox2D> m_Body;
     CSharedPtr<CColliderBox2D> m_Bottom;
     CSharedPtr<CCameraComponent> m_Camera;

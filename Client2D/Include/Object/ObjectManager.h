@@ -4,7 +4,7 @@
 #include "../ClientInfo.h"
 
 class CObjectManager :
-    public CGameObject
+	public CGameObject
 {
 	friend class CScene;
 

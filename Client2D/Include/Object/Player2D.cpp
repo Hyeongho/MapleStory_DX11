@@ -23,11 +23,14 @@ CPlayer2D::CPlayer2D() : m_Flip(true)
 CPlayer2D::CPlayer2D(const CPlayer2D& obj) : CObjectManager(obj)
 {
 	m_Sprite = (CSpriteComponent*)FindComponent("PlayerSprite");
-	m_RigidBody = (CRigidBody*)FindComponent("PlayerRigidBody");
+
 	m_Body = (CColliderBox2D*)FindComponent("Body");
 	m_Bottom = (CColliderBox2D*)FindComponent("Bottom");
 	m_Muzzle = (CColliderBox2D*)FindComponent("Muzzle");
 	m_Camera = (CCameraComponent*)FindComponent("Camera");
+
+	m_Gravity = (CGravity*)FindComponent("PlayerGravity");
+	m_RigidBody = (CRigidBody*)FindComponent("PlayerRigidBody");
 
 	m_Opacity = obj.m_Opacity;
 }
@@ -81,6 +84,7 @@ bool CPlayer2D::Init()
 	//m_Sprite->SetRelativePos(100.f, 600.f, 0.f);
 	m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
 
+	m_Gravity = CreateComponent<CGravity>("PlayerGravity");
 	m_RigidBody = CreateComponent<CRigidBody>("PlayerRigidBody");
 
 	if (CPlayerManager::GetInst()->GetGender() == Gender::Male)
@@ -144,10 +148,10 @@ bool CPlayer2D::Init()
 
 	m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::Begin, this, &CPlayer2D::CollisionCallback);
 
-	m_RigidBody->SetMaxSpeed(300.f);
-	m_RigidBody->SetFricCoeffp(800.f);
+	m_Gravity->SetGround(false);
 
-	m_IsGround = false;
+	m_RigidBody->SetMaxSpeed(300.f);
+	m_RigidBody->SetFricCoeffp(900.f);
 
 	SetGravityAccel(15.f);
 	SetPhysicsSimulate(true);
@@ -300,7 +304,10 @@ void CPlayer2D::MoveLeft(float DeltaTime)
 
 	m_IsMove = true;
 
-	m_Sprite->AddRelativePos(m_Sprite->GetWorldAxis(AXIS_X) * -300.f * DeltaTime);
+	m_RigidBody->SetVelocity(Vector3(-300.f, 0.f, 0.f));
+	m_RigidBody->AddForce(Vector3(-300.f, 0.f, 0.f));
+
+	//m_Sprite->AddRelativePos(m_Sprite->GetWorldAxis(AXIS_X) * -300.f * DeltaTime);
 }
 
 void CPlayer2D::MoveRight(float DeltaTime)
@@ -333,7 +340,8 @@ void CPlayer2D::MoveRight(float DeltaTime)
 	m_IsMove = true;
 
 	//m_Sprite->AddForce(Vector3(100.f, 0.f, 0.f));
-	m_RigidBody->AddForce(Vector3(3000.f, 0.f, 0.f));
+	m_RigidBody->SetVelocity(Vector3(300.f, 0.f, 0.f));
+	m_RigidBody->AddForce(Vector3(300.f, 0.f, 0.f));
 
 	//m_Sprite->AddRelativePos(m_Sprite->GetWorldAxis(AXIS_X) * 300.f * DeltaTime);
 }
@@ -525,7 +533,8 @@ void CPlayer2D::CollisionCallback(const CollisionResult& result)
 
 	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Floor)
 	{
-		m_IsGround = true;
+		m_Gravity->SetGround(true);
+		m_RigidBody->SetVelocity(Vector3(0.f, 0.f, 0.f));
 		m_Jump = false;
 	}
 }
