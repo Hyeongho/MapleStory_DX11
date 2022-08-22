@@ -226,15 +226,20 @@ void CPlayer2D::PostUpdate(float DeltaTime)
 	switch (m_State)
 	{
 	case EPlayer_State::Idle:
-		if (!Anim->CheckCurrentAnimation("Idle") && m_IsGround)
+		if (!Anim->CheckCurrentAnimation("Idle") && m_Gravity->GetGround())
 		{
 			Anim->ChangeAnimation("Idle");
+		}
+
+		if (!Anim->CheckCurrentAnimation("Jump") && !m_Gravity->GetGround())
+		{
+			Anim->ChangeAnimation("Jump");
 		}
 
 		break;
 
 	case EPlayer_State::Walk:
-		if (m_IsGround)
+		if (m_Gravity->GetGround())
 		{
 			if (!m_IsMove)
 			{
@@ -247,6 +252,14 @@ void CPlayer2D::PostUpdate(float DeltaTime)
 				{
 					m_State = EPlayer_State::Idle;
 				}
+			}
+		}
+
+		else
+		{
+			if (!Anim->CheckCurrentAnimation("Jump"))
+			{
+				Anim->ChangeAnimation("Jump");
 			}
 		}
 
@@ -398,7 +411,7 @@ void CPlayer2D::Jump(float DeltaTime)
 
 	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
 
-	Anim->ChangeAnimation("Jump");
+	//Anim->ChangeAnimation("Jump");
 
 	CResourceManager::GetInst()->SoundPlay("Jump");
 
@@ -406,8 +419,7 @@ void CPlayer2D::Jump(float DeltaTime)
 	m_RigidBody->AddVelocity(Vector3(0.f, 3000.f, 0.f));
 
 	m_Gravity->SetGround(false);
-
-	//CObjectManager::Jump(Anim->GetAnimFlip());
+	//m_Jump = true;
 }
 
 void CPlayer2D::SwingD1(float DeltaTime)
@@ -550,36 +562,6 @@ void CPlayer2D::CollisionCallback(const CollisionResult& result)
 
 		m_Gravity->SetGround(true);
 		m_Jump = false;
-
-		/*Vector3 Pos = m_Sprite->GetRelativePos();
-
-		m_Sprite->SetRelativePos(Pos);
-
-		sprintf_s(buffer, sizeof(buffer), "x: %f, y: %f, z: %f\n", m_Sprite->GetRelativePos().x, m_Sprite->GetRelativePos().y, m_Sprite->GetRelativePos().z);
-
-		OutputDebugStringA(buffer);
-
-		Vector3 Scale = m_Body->GetWorldScale();
-		CColliderBox2D* Floor = (CColliderBox2D*)result.Dest;
-
-		Vector3 FloorPos = result.Dest->GetOffset();
-		Vector3 FloorScale = Floor->GetWorldScale();
-
-		float Len = abs(Pos.y - FloorPos.y);
-		float Value = (Scale.y / 2.f - FloorScale.y / 2.f) + Len;
-
-		Pos.y = FloorPos.y;
-		Pos.y -= (Scale.y / 2.f) - Len;
-
-		sprintf_s(buffer, sizeof(buffer), "Value: %f\n", Value);
-
-		OutputDebugStringA(buffer);
-
-		m_Sprite->SetRelativePos(Pos);
-
-		sprintf_s(buffer, sizeof(buffer), "x: %f, y: %f, z: %f\n", m_Sprite->GetRelativePos().x, m_Sprite->GetRelativePos().y, m_Sprite->GetRelativePos().z);
-
-		OutputDebugStringA(buffer);*/
 	}
 }
 
