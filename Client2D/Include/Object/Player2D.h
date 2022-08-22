@@ -83,6 +83,7 @@ private:
 
 private:
     void CollisionCallback(const CollisionResult& result);
+    void CollisionExit(const CollisionResult& result);
 
 private:
     void AnimationFinish();

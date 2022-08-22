@@ -63,7 +63,7 @@ public:
         return m_Max;
     }
 
-    CollisionResult GetCollisionResult()    const
+    CollisionResult GetCollisionResult() const
     {
         return m_Result;
     }

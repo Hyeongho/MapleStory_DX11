@@ -25,6 +25,26 @@ void CGravity::SetUpdateComponent(CSceneComponent* UpdateComponent)
 	m_UpdateComponent = UpdateComponent;
 }
 
+void CGravity::SetGround(bool Ground)
+{
+	m_Ground = Ground;
+
+	CRigidBody* RigidBody = m_Object->FindComponentFromType<CRigidBody>();
+
+	if (!RigidBody)
+	{
+		return;
+	}
+
+	if (m_Ground)
+	{
+		Vector3 Velocity = RigidBody->GetVelocity();
+		RigidBody->SetVelocity(Vector3(Velocity.x, 0.f, Velocity.z));
+		RigidBody->SetForce(Vector3(Velocity.x, 0.f, Velocity.z));
+		RigidBody->SetAccelAlpha(Vector3(Velocity.x, 0.f, Velocity.z));
+	}
+}
+
 void CGravity::Start()
 {
 	if (!m_UpdateComponent)
@@ -59,8 +79,9 @@ void CGravity::PostUpdate(float DeltaTime)
 
 	else
 	{
-		RigidBody->SetAccelAlpha(Vector3(0.f, -10.f, 0.f));
+		RigidBody->SetAccelAlpha(Vector3(0.f, -3000.f, 0.f));
 	}
+	
 }
 
 void CGravity::PrevRender()

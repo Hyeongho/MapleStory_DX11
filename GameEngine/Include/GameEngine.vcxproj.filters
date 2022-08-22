@@ -633,11 +633,11 @@
     <ClCompile Include="Render\RenderManager.cpp">
       <Filter>06. Render</Filter>
     </ClCompile>
-    <ClCompile Include="Component\RigidBody.cpp">
-      <Filter>05. Component\02. ObjectComponent\03. RigidBody</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Gravity.cpp">
       <Filter>05. Component\02. ObjectComponent\04. Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\RigidBody.cpp">
+      <Filter>05. Component\02. ObjectComponent\03. RigidBody</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

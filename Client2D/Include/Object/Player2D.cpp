@@ -102,7 +102,7 @@ bool CPlayer2D::Init()
 		m_Body->SetExtent(35.5f, 35.f);
 		m_Body->SetOffset(0.f, 0.f, 0.f);
 
-		m_Bottom->SetExtent(5.f, 1.f);
+		m_Bottom->SetExtent(5.f, 2.f);
 		m_Bottom->SetOffset(-5.f, -35.f, 0.f);
 
 		m_Muzzle->SetRelativePos(0.f, 0.f, 10.f);
@@ -123,7 +123,7 @@ bool CPlayer2D::Init()
 		m_Body->SetExtent(35.5f, 35.f);
 		m_Body->SetOffset(0.f, 0.f, 0.f);
 
-		m_Bottom->SetExtent(5.f, 1.f);
+		m_Bottom->SetExtent(5.f, 2.f);
 		m_Bottom->SetOffset(-5.f, -35.f, 0.f);
 
 		m_Muzzle->SetRelativePos(0.f, 0.f, 10.f);
@@ -147,10 +147,11 @@ bool CPlayer2D::Init()
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("JumpBladeFury", KeyState_Down, this, &CPlayer2D::JumpBladeFury);
 
 	m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::Begin, this, &CPlayer2D::CollisionCallback);
+	//m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::End, this, &CPlayer2D::CollisionExit);
 
 	m_Gravity->SetGround(false);
 
-	m_RigidBody->SetMaxSpeed(300.f);
+	m_RigidBody->SetMaxVelocity(Vector3(300.f, 600.f, 0.f));
 	m_RigidBody->SetFricCoeffp(900.f);
 
 	SetGravityAccel(15.f);
@@ -304,8 +305,10 @@ void CPlayer2D::MoveLeft(float DeltaTime)
 
 	m_IsMove = true;
 
-	m_RigidBody->SetVelocity(Vector3(-300.f, 0.f, 0.f));
-	m_RigidBody->AddForce(Vector3(-300.f, 0.f, 0.f));
+	m_RigidBody->AddVelocity(Vector3(-300.f, 0.f, 0.f));
+
+	/*m_RigidBody->SetVelocity(Vector3(-300.f, 0.f, 0.f));
+	m_RigidBody->AddForce(Vector3(-300.f, 0.f, 0.f));*/
 
 	//m_Sprite->AddRelativePos(m_Sprite->GetWorldAxis(AXIS_X) * -300.f * DeltaTime);
 }
@@ -340,8 +343,8 @@ void CPlayer2D::MoveRight(float DeltaTime)
 	m_IsMove = true;
 
 	//m_Sprite->AddForce(Vector3(100.f, 0.f, 0.f));
-	m_RigidBody->SetVelocity(Vector3(300.f, 0.f, 0.f));
-	m_RigidBody->AddForce(Vector3(300.f, 0.f, 0.f));
+	m_RigidBody->AddVelocity(Vector3(300.f, 0.f, 0.f));
+	//m_RigidBody->AddForce(Vector3(300.f, 0.f, 0.f));
 
 	//m_Sprite->AddRelativePos(m_Sprite->GetWorldAxis(AXIS_X) * 300.f * DeltaTime);
 }
@@ -388,13 +391,23 @@ void CPlayer2D::Jump(float DeltaTime)
 		return;
 	}
 
+	if (!m_Gravity->GetGround())
+	{
+		return;
+	}
+
 	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
 
 	Anim->ChangeAnimation("Jump");
 
 	CResourceManager::GetInst()->SoundPlay("Jump");
 
-	CObjectManager::Jump(Anim->GetAnimFlip());
+	//m_RigidBody->SetVelocity(Vector3(0.f, 300.f, 0.f));
+	m_RigidBody->AddVelocity(Vector3(0.f, 3000.f, 0.f));
+
+	m_Gravity->SetGround(false);
+
+	//CObjectManager::Jump(Anim->GetAnimFlip());
 }
 
 void CPlayer2D::SwingD1(float DeltaTime)
@@ -533,8 +546,50 @@ void CPlayer2D::CollisionCallback(const CollisionResult& result)
 
 	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Floor)
 	{
+		char buffer[256] = {};
+
 		m_Gravity->SetGround(true);
-		m_RigidBody->SetVelocity(Vector3(0.f, 0.f, 0.f));
+		m_Jump = false;
+
+		/*Vector3 Pos = m_Sprite->GetRelativePos();
+
+		m_Sprite->SetRelativePos(Pos);
+
+		sprintf_s(buffer, sizeof(buffer), "x: %f, y: %f, z: %f\n", m_Sprite->GetRelativePos().x, m_Sprite->GetRelativePos().y, m_Sprite->GetRelativePos().z);
+
+		OutputDebugStringA(buffer);
+
+		Vector3 Scale = m_Body->GetWorldScale();
+		CColliderBox2D* Floor = (CColliderBox2D*)result.Dest;
+
+		Vector3 FloorPos = result.Dest->GetOffset();
+		Vector3 FloorScale = Floor->GetWorldScale();
+
+		float Len = abs(Pos.y - FloorPos.y);
+		float Value = (Scale.y / 2.f - FloorScale.y / 2.f) + Len;
+
+		Pos.y = FloorPos.y;
+		Pos.y -= (Scale.y / 2.f) - Len;
+
+		sprintf_s(buffer, sizeof(buffer), "Value: %f\n", Value);
+
+		OutputDebugStringA(buffer);
+
+		m_Sprite->SetRelativePos(Pos);
+
+		sprintf_s(buffer, sizeof(buffer), "x: %f, y: %f, z: %f\n", m_Sprite->GetRelativePos().x, m_Sprite->GetRelativePos().y, m_Sprite->GetRelativePos().z);
+
+		OutputDebugStringA(buffer);*/
+	}
+}
+
+void CPlayer2D::CollisionExit(const CollisionResult& result)
+{
+	result.Src->GetCollisionProfile();
+
+	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Floor)
+	{
+		m_Gravity->SetGround(false);
 		m_Jump = false;
 	}
 }

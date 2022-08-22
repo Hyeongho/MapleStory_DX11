@@ -23,9 +23,11 @@ public:
 	void SetUpdateComponent(class CSceneComponent* UpdateComponent);
 
 public:
-	void SetGround(bool Ground)
+	void SetGround(bool Ground);
+
+	bool GetGround() const
 	{
-		m_Ground = Ground;
+		return m_Ground;
 	}
 
 public:

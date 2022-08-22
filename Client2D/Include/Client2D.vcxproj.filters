@@ -219,9 +219,6 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\MainScene.cpp">
-      <Filter>01. SceneMode</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\TestScene.cpp">
       <Filter>01. SceneMode</Filter>
     </ClCompile>
@@ -344,6 +341,9 @@
     </ClCompile>
     <ClCompile Include="Widget\DamageWidget.cpp">
       <Filter>03. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\MainScene.cpp">
+      <Filter>01. SceneMode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
