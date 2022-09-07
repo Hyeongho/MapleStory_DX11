@@ -31,7 +31,7 @@ bool CSound::LoadSound(FMOD::System* System, FMOD::ChannelGroup* Group, bool Loo
 
 	strcat_s(FullPath, FileName);
 
-	FMOD_MODE	Mode = FMOD_DEFAULT;
+	FMOD_MODE Mode = FMOD_DEFAULT;
 
 	if (m_Loop)
 	{

@@ -47,7 +47,7 @@ bool CInput::CreateKey(const std::string& Name, unsigned char Key)
 
 	Info->Name = Name;
 
-	unsigned char	ConvertkeyValue = ConvertKey(Key);
+	unsigned char ConvertkeyValue = ConvertKey(Key);
 
 	Info->State.Key = ConvertkeyValue;
 

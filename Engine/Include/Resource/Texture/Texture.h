@@ -39,6 +39,7 @@ protected:
 	class CScene* m_Scene;
 	std::vector<TextureResourceInfo*> m_vecTextureInfo;
 	Image_Type	m_ImageType;
+	ID3D11ShaderResourceView* m_ArraySRV;
 
 public:
 	ID3D11ShaderResourceView* GetResource(int Index = 0) const
@@ -46,7 +47,7 @@ public:
 		return m_vecTextureInfo[Index]->SRV;
 	}
 
-	Image_Type GetImageType()	const
+	Image_Type GetImageType() const
 	{
 		return m_ImageType;
 	}
@@ -61,19 +62,26 @@ public:
 		return m_vecTextureInfo[Index]->Height;
 	}
 
-	size_t GetImageCount()	const
+	size_t GetImageCount() const
 	{
 		return m_vecTextureInfo.size();
+	}
+
+	ScratchImage* GetTexture(int Index) const
+	{
+		return m_vecTextureInfo[Index]->Image;
 	}
 
 public:
 	bool LoadTexture(const std::string& Name, const TCHAR* FileName, const std::string& PathName = TEXTURE_PATH);
 	bool LoadTextureFullPath(const std::string& Name, const TCHAR* FullPath);
 	bool LoadTexture(const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName = TEXTURE_PATH);
+	bool LoadTexture(const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName = TEXTURE_PATH);
 	bool LoadTextureFullPath(const std::string& Name, const std::vector<TCHAR*>& vecFullPath);
 
 private:
 	bool CreateResource(int Index);
+	bool CreateResourceArray();
 
 public:
 	void SetShader(int Register, int ShaderType, int Index);

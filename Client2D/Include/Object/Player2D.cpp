@@ -151,8 +151,8 @@ bool CPlayer2D::Init()
 
 	m_Gravity->SetGround(false);
 
-	m_RigidBody->SetMaxVelocity(Vector3(300.f, 600.f, 0.f));
-	m_RigidBody->SetFricCoeffp(900.f);
+	m_RigidBody->SetMaxVelocity(Vector3(200.f, 1000.f, 0.f));
+	m_RigidBody->SetFricCoeffp(Vector3(1500.f, 200.f, 0.f));
 
 	SetGravityAccel(15.f);
 	SetPhysicsSimulate(true);
@@ -189,6 +189,8 @@ void CPlayer2D::Update(float DeltaTime)
 	{
 		Pos.x = m_EndRange.x - Info.Length.x;
 	}
+
+	//m_RigidBody->AddForce(Vector3(0.f, -500.f, 0.f));
 
 	SetRelativePos(Pos);
 
@@ -318,7 +320,7 @@ void CPlayer2D::MoveLeft(float DeltaTime)
 
 	m_IsMove = true;
 
-	m_RigidBody->AddVelocity(Vector3(-300.f, 0.f, 0.f));
+	m_RigidBody->AddVelocity(Vector3(-200.f, 0.f, 0.f));
 
 	/*m_RigidBody->SetVelocity(Vector3(-300.f, 0.f, 0.f));
 	m_RigidBody->AddForce(Vector3(-300.f, 0.f, 0.f));*/
@@ -356,7 +358,7 @@ void CPlayer2D::MoveRight(float DeltaTime)
 	m_IsMove = true;
 
 	//m_Sprite->AddForce(Vector3(100.f, 0.f, 0.f));
-	m_RigidBody->AddVelocity(Vector3(300.f, 0.f, 0.f));
+	m_RigidBody->AddVelocity(Vector3(200.f, 0.f, 0.f));
 	//m_RigidBody->AddForce(Vector3(300.f, 0.f, 0.f));
 
 	//m_Sprite->AddRelativePos(m_Sprite->GetWorldAxis(AXIS_X) * 300.f * DeltaTime);
@@ -415,8 +417,9 @@ void CPlayer2D::Jump(float DeltaTime)
 
 	CResourceManager::GetInst()->SoundPlay("Jump");
 
-	//m_RigidBody->SetVelocity(Vector3(0.f, 300.f, 0.f));
-	m_RigidBody->AddVelocity(Vector3(0.f, 3000.f, 0.f));
+	//m_RigidBody->SetVelocity(Vector3(0.f, 400.f, 0.f));
+	m_RigidBody->AddVelocity(Vector3(0.f, 800.f, 0.f));
+	//m_RigidBody->AddForce(Vector3(0.f, 1600.f, 0.f));
 
 	m_Gravity->SetGround(false);
 	//m_Jump = true;

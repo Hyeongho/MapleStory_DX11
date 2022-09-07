@@ -41,8 +41,7 @@ public:
 	}
 
 public:
-	void SetTexture(const std::string& Name, const TCHAR* FileName,
-		const std::string& PathName = TEXTURE_PATH);
+	void SetTexture(const std::string& Name, const TCHAR* FileName, const std::string& PathName = TEXTURE_PATH);
 	void SetTexture(const std::string& Name);
 	void SetTextureFullPath(const std::string& Name, const TCHAR* FullPath);
 	void SetTexture(class CTexture* Texture);

@@ -2,12 +2,14 @@
 #include "../../PathManager.h"
 #include "../../Device.h"
 
-CTexture::CTexture() : m_Scene(nullptr), m_ImageType(Image_Type::Atlas)
+CTexture::CTexture() : m_Scene(nullptr), m_ImageType(Image_Type::Atlas), m_ArraySRV(nullptr)
 {
 }
 
 CTexture::~CTexture()
 {
+	SAFE_RELEASE(m_ArraySRV);
+
 	size_t Size = m_vecTextureInfo.size();
 
 	for (size_t i = 0; i < Size; i++)
@@ -296,6 +298,113 @@ bool CTexture::LoadTexture(const std::string& Name, const std::vector<TCHAR*>& v
 		}
 	}
 
+	//CreateResourceArray();
+
+	return true;
+}
+
+bool CTexture::LoadTexture(const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName)
+{
+	m_ImageType = Image_Type::Frame;
+
+	SetName(Name);
+
+	const PathInfo* Path = CPathManager::GetInst()->FindPath(PathName);
+
+	std::vector<std::wstring> vecFullPath;
+
+	size_t Size = vecFileName.size();
+
+	vecFullPath.resize(Size);
+
+	for (size_t i = 0; i < Size; i++)
+	{
+		TextureResourceInfo* Info = new TextureResourceInfo;
+
+		TCHAR* FullPath = new TCHAR[MAX_PATH];
+		memset(FullPath, 0, sizeof(TCHAR) * MAX_PATH);
+
+		if (Path)
+		{
+			lstrcpy(FullPath, Path->Path);
+		}
+
+		lstrcat(FullPath, vecFileName[i].c_str());
+
+		Info->FullPath = FullPath;
+
+		Info->FileName = new TCHAR[MAX_PATH];
+		memset(Info->FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		lstrcpy(Info->FileName, vecFileName[i].c_str());
+
+		Info->PathName = new char[MAX_PATH];
+		memset(Info->PathName, 0, sizeof(char) * MAX_PATH);
+
+		strcpy_s(Info->PathName, PathName.length() + 1, PathName.c_str());
+
+		char Ext[_MAX_EXT] = {};
+		char FullPathMultibyte[MAX_PATH] = {};
+
+#ifdef UNICODE
+
+		int	ConvertLength = WideCharToMultiByte(CP_ACP, 0, FullPath, -1, nullptr, 0, nullptr, nullptr);
+		WideCharToMultiByte(CP_ACP, 0, FullPath, -1, FullPathMultibyte, ConvertLength, nullptr, nullptr);
+
+#else
+
+		strcpy_s(FullPathMultibyte, FullPath);
+
+#endif // UNICODE
+
+		_splitpath_s(FullPathMultibyte, nullptr, 0, nullptr, 0, nullptr, 0, Ext, _MAX_EXT);
+
+		_strupr_s(Ext);
+
+		ScratchImage* Image = new ScratchImage;
+
+		if (strcmp(Ext, ".DDS") == 0)
+		{
+			if (FAILED(LoadFromDDSFile(FullPath, DDS_FLAGS_NONE, nullptr, *Image)))
+			{
+				SAFE_DELETE(Info);
+				SAFE_DELETE(Image);
+				return false;
+			}
+		}
+
+		else if (strcmp(Ext, ".TGA") == 0)
+		{
+			if (FAILED(LoadFromTGAFile(FullPath, nullptr, *Image)))
+			{
+				SAFE_DELETE(Info);
+				SAFE_DELETE(Image);
+				return false;
+			}
+		}
+
+		else
+		{
+			if (FAILED(LoadFromWICFile(FullPath, WIC_FLAGS_NONE, nullptr, *Image)))
+			{
+				SAFE_DELETE(Info);
+				SAFE_DELETE(Image);
+				return false;
+			}
+		}
+
+		Info->Image = Image;
+
+		m_vecTextureInfo.push_back(Info);
+
+		if (!CreateResource((int)i))
+		{
+			return false;
+		}
+	}
+
+	//CreateResourceArray();
+
 	return true;
 }
 
@@ -405,21 +514,82 @@ bool CTexture::LoadTextureFullPath(const std::string& Name, const std::vector<TC
 		}
 	}
 
+	//CreateResourceArray();
+
 	return true;
 }
 
 bool CTexture::CreateResource(int Index)
 {
-	TextureResourceInfo* Info = m_vecTextureInfo[Index];
-
-	if (FAILED(CreateShaderResourceView(CDevice::GetInst()->GetDevice(), Info->Image->GetImages(),
-		Info->Image->GetImageCount(), Info->Image->GetMetadata(), &Info->SRV)))
+	if (FAILED(DirectX::CreateShaderResourceView(CDevice::GetInst()->GetDevice(), 
+		m_vecTextureInfo[Index]->Image->GetImages(), 
+		m_vecTextureInfo[Index]->Image->GetImageCount(),
+		m_vecTextureInfo[Index]->Image->GetMetadata(), 
+		&m_vecTextureInfo[Index]->SRV)))
 	{
 		return false;
 	}
 
-	Info->Width = (unsigned int)Info->Image->GetImages()[0].width;
-	Info->Height = (unsigned int)Info->Image->GetImages()[0].height;
+	m_vecTextureInfo[Index]->Width = (unsigned int)m_vecTextureInfo[Index]->Image->GetImages()[0].width;
+	m_vecTextureInfo[Index]->Height = (unsigned int)m_vecTextureInfo[Index]->Image->GetImages()[0].height;
+
+	return true;
+}
+
+bool CTexture::CreateResourceArray()
+{
+	ScratchImage* ArrayImage = new ScratchImage;
+
+	size_t	MipLevel = m_vecTextureInfo[0]->Image->GetMetadata().mipLevels;
+	size_t	Count = m_vecTextureInfo.size();
+
+	if (FAILED(ArrayImage->Initialize2D(m_vecTextureInfo[0]->Image->GetMetadata().format, m_vecTextureInfo[0]->Image->GetMetadata().width,
+		m_vecTextureInfo[0]->Image->GetMetadata().height, Count, MipLevel)))
+	{
+		return false;
+	}
+
+	for (size_t i = 0; i < Count; i++)
+	{
+		const Image* Images = m_vecTextureInfo[i]->Image->GetImages();
+
+		MipLevel = m_vecTextureInfo[i]->Image->GetMetadata().mipLevels;
+
+		for (size_t j = 0; j < MipLevel; j++)
+		{
+			const Image* Src = &ArrayImage->GetImages()[i * MipLevel + j];
+			const Image* Dest = &Images[j];
+
+			memcpy(Src->pixels, Dest->pixels, Src->slicePitch);
+		}
+	}
+
+	ID3D11Texture2D* Tex = nullptr;
+
+	if (FAILED(DirectX::CreateTextureEx(CDevice::GetInst()->GetDevice(), ArrayImage->GetImages(), ArrayImage->GetImageCount(), ArrayImage->GetMetadata(),
+		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0, false, (ID3D11Resource**)&Tex)))
+	{
+		return false;
+	}
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC	Desc = {};
+	Desc.Format = m_vecTextureInfo[0]->Image->GetMetadata().format;
+	Desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2DARRAY;
+	Desc.Texture2DArray.MostDetailedMip = 0;
+	Desc.Texture2DArray.MipLevels = (UINT)m_vecTextureInfo[0]->Image->GetMetadata().mipLevels;
+	Desc.Texture2DArray.FirstArraySlice = 0;
+	Desc.Texture2DArray.ArraySize = Count;
+
+
+	if (FAILED(CDevice::GetInst()->GetDevice()->CreateShaderResourceView(Tex, &Desc, &m_ArraySRV)))
+	{
+		return false;
+	}
+
+	SAFE_DELETE(ArrayImage);
+
+	SAFE_RELEASE(Tex);
+
 
 	return true;
 }
@@ -461,6 +631,35 @@ void CTexture::SetShader(int Register, int ShaderType, int Index)
 
 	else
 	{
+		if (ShaderType & (int)Buffer_Shader_Type::Vertex)
+		{
+			CDevice::GetInst()->GetContext()->VSSetShaderResources(Register, 1, &m_ArraySRV);
+		}
+
+		if (ShaderType & (int)Buffer_Shader_Type::Pixel)
+		{
+			CDevice::GetInst()->GetContext()->PSSetShaderResources(Register, 1, &m_ArraySRV);
+		}
+
+		if (ShaderType & (int)Buffer_Shader_Type::Domain)
+		{
+			CDevice::GetInst()->GetContext()->DSSetShaderResources(Register, 1, &m_ArraySRV);
+		}
+
+		if (ShaderType & (int)Buffer_Shader_Type::Hull)
+		{
+			CDevice::GetInst()->GetContext()->HSSetShaderResources(Register, 1, &m_ArraySRV);
+		}
+
+		if (ShaderType & (int)Buffer_Shader_Type::Geometry)
+		{
+			CDevice::GetInst()->GetContext()->GSSetShaderResources(Register, 1, &m_ArraySRV);
+		}
+
+		if (ShaderType & (int)Buffer_Shader_Type::Compute)
+		{
+			CDevice::GetInst()->GetContext()->CSSetShaderResources(Register, 1, &m_ArraySRV);
+		}
 	}
 }
 
@@ -468,41 +667,34 @@ void CTexture::ResetShader(int Register, int ShaderType, int Index)
 {
 	ID3D11ShaderResourceView* SRV = nullptr;
 
-	if (m_ImageType != Image_Type::Array)
+	if (ShaderType & (int)Buffer_Shader_Type::Vertex)
 	{
-		if (ShaderType & (int)Buffer_Shader_Type::Vertex)
-		{
-			CDevice::GetInst()->GetContext()->VSSetShaderResources(Register, 1, &SRV);
-		}
-
-		if (ShaderType & (int)Buffer_Shader_Type::Pixel)
-		{
-			CDevice::GetInst()->GetContext()->PSSetShaderResources(Register, 1, &SRV);
-		}
-
-		if (ShaderType & (int)Buffer_Shader_Type::Domain)
-		{
-			CDevice::GetInst()->GetContext()->DSSetShaderResources(Register, 1, &SRV);
-		}
-
-		if (ShaderType & (int)Buffer_Shader_Type::Hull)
-		{
-			CDevice::GetInst()->GetContext()->HSSetShaderResources(Register, 1, &SRV);
-		}
-
-		if (ShaderType & (int)Buffer_Shader_Type::Geometry)
-		{
-			CDevice::GetInst()->GetContext()->GSSetShaderResources(Register, 1, &SRV);
-		}
-
-		if (ShaderType & (int)Buffer_Shader_Type::Compute)
-		{
-			CDevice::GetInst()->GetContext()->CSSetShaderResources(Register, 1, &SRV);
-		}
+		CDevice::GetInst()->GetContext()->VSSetShaderResources(Register, 1, &SRV);
 	}
 
-	else
+	if (ShaderType & (int)Buffer_Shader_Type::Pixel)
 	{
+		CDevice::GetInst()->GetContext()->PSSetShaderResources(Register, 1, &SRV);
+	}
+
+	if (ShaderType & (int)Buffer_Shader_Type::Domain)
+	{
+		CDevice::GetInst()->GetContext()->DSSetShaderResources(Register, 1, &SRV);
+	}
+
+	if (ShaderType & (int)Buffer_Shader_Type::Hull)
+	{
+		CDevice::GetInst()->GetContext()->HSSetShaderResources(Register, 1, &SRV);
+	}
+
+	if (ShaderType & (int)Buffer_Shader_Type::Geometry)
+	{
+		CDevice::GetInst()->GetContext()->GSSetShaderResources(Register, 1, &SRV);
+	}
+
+	if (ShaderType & (int)Buffer_Shader_Type::Compute)
+	{
+		CDevice::GetInst()->GetContext()->CSSetShaderResources(Register, 1, &SRV);
 	}
 }
 

@@ -212,6 +212,23 @@ bool CSceneResource::LoadTexture(const std::string& Name, const std::vector<TCHA
 	return true;
 }
 
+bool CSceneResource::LoadTexture(const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName)
+{
+	if (FindTexture(Name))
+	{
+		return true;
+	}
+
+	if (!CResourceManager::GetInst()->LoadTexture(Name, vecFileName, PathName))
+	{
+		return false;
+	}
+
+	m_mapTexture.insert(std::make_pair(Name, CResourceManager::GetInst()->FindTexture(Name)));
+
+	return true;
+}
+
 bool CSceneResource::LoadTextureFullPath(const std::string& Name, const std::vector<TCHAR*>& vecFullPath)
 {
 	if (FindTexture(Name))
@@ -275,6 +292,44 @@ bool CSceneResource::CreateAnimationSequence2D(const std::string& Name, CTexture
 	}
 
 	if (!CResourceManager::GetInst()->CreateAnimationSequence2D(Name, Texture))
+	{
+		return false;
+	}
+
+	m_mapSequence2D.insert(std::make_pair(Name, CResourceManager::GetInst()->FindAnimationSequence2D(Name)));
+
+	return true;
+}
+
+bool CSceneResource::CreateAnimationSequence2D(const std::string& Name, const std::string& TextureName, const std::vector<TCHAR*>& vecFilName, const std::string& PathName)
+{
+	if (FindAnimationSequence2D(Name))
+	{
+		return true;
+	}
+
+	LoadTexture(TextureName, vecFilName, PathName);
+
+	if (!CResourceManager::GetInst()->CreateAnimationSequence2D(Name, TextureName, vecFilName))
+	{
+		return false;
+	}
+
+	m_mapSequence2D.insert(std::make_pair(Name, CResourceManager::GetInst()->FindAnimationSequence2D(Name)));
+
+	return true;
+}
+
+bool CSceneResource::CreateAnimationSequence2D(const std::string& Name, const std::string& TextureName, const std::vector<std::wstring>& vecFilName, const std::string& PathName)
+{
+	if (FindAnimationSequence2D(Name))
+	{
+		return true;
+	}
+
+	LoadTexture(TextureName, vecFilName, PathName);
+
+	if (!CResourceManager::GetInst()->CreateAnimationSequence2D(Name, TextureName, vecFilName))
 	{
 		return false;
 	}
@@ -379,8 +434,7 @@ bool CSceneResource::LoadSequence2D(const char* FileName, const std::string& Pat
 	return true;
 }
 
-bool CSceneResource::LoadSequence2D(std::string& resultName, const char* FileName,
-	const std::string& PathName)
+bool CSceneResource::LoadSequence2D(std::string& resultName, const char* FileName, const std::string& PathName)
 {
 	if (!CResourceManager::GetInst()->LoadSequence2D(resultName, FileName, PathName, m_Scene))
 	{

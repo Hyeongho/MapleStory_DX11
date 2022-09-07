@@ -172,6 +172,27 @@ void CMaterial::AddTexture(int Register, int ShaderType, const std::string& Name
 
 void CMaterial::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, CTexture* Texture)
 {
+	/*if (Texture->GetImageType() == Image_Type::Atlas)
+	{
+		m_TextureInfo[Index].Register = Register;
+		m_TextureInfo[Index].Name = Name;
+		m_TextureInfo[Index].Texture = Texture;
+		m_TextureInfo[Index].ShaderType = ShaderType;
+	}
+
+	else if (Texture->GetImageType() == Image_Type::Frame)
+	{
+		if (Texture->GetImageCount() != m_TextureInfo.size())
+		{
+			m_TextureInfo.resize(Texture->GetImageCount());
+		}
+
+		m_TextureInfo[Index].Register = Register;
+		m_TextureInfo[Index].Name = Name;
+		m_TextureInfo[Index].Texture = CResourceManager::GetInst()->FindTexture(Name);
+		m_TextureInfo[Index].ShaderType = ShaderType;
+	}*/
+
 	m_TextureInfo[Index].Register = Register;
 	m_TextureInfo[Index].Name = Name;
 	m_TextureInfo[Index].Texture = Texture;
@@ -230,6 +251,59 @@ void CMaterial::SetTexture(int Index, int Register, int ShaderType, const std::s
 	m_TextureInfo[Index].Name = Name;
 	m_TextureInfo[Index].Texture = CResourceManager::GetInst()->FindTexture(Name);
 	m_TextureInfo[Index].ShaderType = ShaderType;*/
+
+	CTexture* Texture = nullptr;
+
+	if (Texture->GetImageType() == Image_Type::Atlas)
+	{
+		m_TextureInfo[Index].Register = Register;
+		m_TextureInfo[Index].Name = Name;
+		m_TextureInfo[Index].Texture = Texture;
+		m_TextureInfo[Index].ShaderType = ShaderType;
+	}
+
+	else if (Texture->GetImageType() == Image_Type::Frame)
+	{
+		if (Texture->GetImageCount() != m_TextureInfo.size())
+		{
+			m_TextureInfo.resize(Texture->GetImageCount());
+		}
+
+		m_TextureInfo[Index].Register = Register;
+		m_TextureInfo[Index].Name = Name;
+		m_TextureInfo[Index].Texture = CResourceManager::GetInst()->FindTexture(Name);
+		m_TextureInfo[Index].ShaderType = ShaderType;
+	}
+}
+
+void CMaterial::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName)
+{
+	CTexture* Texture = nullptr;
+
+	if (!m_Scene)
+	{
+		if (!CResourceManager::GetInst()->LoadTexture(Name, vecFileName, PathName))
+		{
+			return;
+		}
+
+		Texture = CResourceManager::GetInst()->FindTexture(Name);
+	}
+
+	else
+	{
+		if (!m_Scene->GetResource()->LoadTexture(Name, vecFileName, PathName))
+		{
+			return;
+		}
+
+		Texture = m_Scene->GetResource()->FindTexture(Name);
+	}
+
+	m_TextureInfo[Index].Register = Register;
+	m_TextureInfo[Index].Name = Name;
+	m_TextureInfo[Index].Texture = CResourceManager::GetInst()->FindTexture(Name);
+	m_TextureInfo[Index].ShaderType = ShaderType;
 }
 
 void CMaterial::SetPaperBurn(bool Enable)
@@ -269,7 +343,10 @@ void CMaterial::Render()
 
 	for (size_t i = 0; i < Size; i++)
 	{
-		m_TextureInfo[i].Texture->SetShader(m_TextureInfo[i].Register, m_TextureInfo[i].ShaderType, 0);
+		if (m_TextureInfo[i].Texture->GetImageType() == Image_Type::Atlas)
+		{
+			m_TextureInfo[i].Texture->SetShader(m_TextureInfo[i].Register, m_TextureInfo[i].ShaderType, (int)i);
+		}
 	}
 
 	auto iter = m_RenderCallback.begin();

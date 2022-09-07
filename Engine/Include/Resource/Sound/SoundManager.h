@@ -21,8 +21,7 @@ public:
 	void Update();
 
 public:
-	bool LoadSound(const std::string& ChannelGroupName, bool Loop, const std::string& Name, const char* FileName,
-		const std::string& PathName = SOUND_PATH);
+	bool LoadSound(const std::string& ChannelGroupName, bool Loop, const std::string& Name, const char* FileName, const std::string& PathName = SOUND_PATH);
 	bool CreateSoundChannelGroup(const std::string& Name);
 	bool SetVolume(int Volume);
 	bool SetVolume(const std::string& ChannelGroupName, int Volume);

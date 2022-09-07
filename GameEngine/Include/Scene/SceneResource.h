@@ -86,12 +86,15 @@ public:	// =================== Texture =====================
 	bool LoadTexture(const std::string& Name, const TCHAR* FileName, const std::string& PathName = TEXTURE_PATH);
 	bool LoadTextureFullPath(const std::string& Name, const TCHAR* FullPath);
 	bool LoadTexture(const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName = TEXTURE_PATH);
+	bool LoadTexture(const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName = TEXTURE_PATH);
 	bool LoadTextureFullPath(const std::string& Name, const std::vector<TCHAR*>& vecFullPath);
 	class CTexture* FindTexture(const std::string& Name);
 
 public:	// =================== Sequence2D =====================
 	bool CreateAnimationSequence2D(const std::string& Name, const std::string& TextureName, const TCHAR* FileName, const std::string& PathName = TEXTURE_PATH);
 	bool CreateAnimationSequence2D(const std::string& Name, class CTexture* Texture);
+	bool CreateAnimationSequence2D(const std::string& Name, const std::string& TextureName, const std::vector<TCHAR*>& vecFilName, const std::string& PathName = TEXTURE_PATH);
+	bool CreateAnimationSequence2D(const std::string& Name, const std::string& TextureName, const std::vector<std::wstring>& vecFilName, const std::string& PathName = TEXTURE_PATH);
 	void AddAnimationSequence2DFrame(const std::string& Name, const Vector2& Start, const Vector2& Size);
 	void AddAnimationSequence2DFrame(const std::string& Name, float StartX, float StartY, float Width, float Height);
 	bool SaveSequence2DFullPath(const std::string& Name, const char* FullPath);

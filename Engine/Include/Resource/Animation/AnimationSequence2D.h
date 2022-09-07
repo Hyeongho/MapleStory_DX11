@@ -23,12 +23,12 @@ public:
     }
 
 public:
-    class CTexture* GetTexture()    const
+    class CTexture* GetTexture() const
     {
         return m_Texture;
     }
 
-    const AnimationFrameData& GetFrameData(int Index)   const
+    const AnimationFrameData& GetFrameData(int Index) const
     {
         return m_vecFrameData[Index];
     }
@@ -41,6 +41,8 @@ public:
 public:
     bool Init(class CTexture* Texture);
     bool Init(const std::string& Name, const TCHAR* FileName, const std::string& PathName = TEXTURE_PATH);
+    bool Init(const std::string& Name, const std::vector<TCHAR*>& vecFilName, const std::string& PathName = TEXTURE_PATH);
+    bool Init(const std::string& Name, const std::vector<std::wstring>& vecFilName, const std::string& PathName = TEXTURE_PATH);
     void AddFrame(const Vector2& StartPos, const Vector2& Size);
     void AddFrame(float StartX, float StartY, float Width, float Height);
     void DeleteFrame(int Index);

@@ -40,9 +40,6 @@
     <Filter Include="01. SceneMode\LoadScene">
       <UniqueIdentifier>{38950b54-744c-4174-b79f-ad2a8462a4ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Object\04. NPC">
-      <UniqueIdentifier>{bce685c3-fa95-4771-b8f8-557f7fe85ee5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Object\02. Monster\01. ShadowDualBlade">
       <UniqueIdentifier>{4227ad6e-0c0d-453a-b6cc-53e22f473493}</UniqueIdentifier>
     </Filter>
@@ -60,6 +57,9 @@
     </Filter>
     <Filter Include="02. Object\02. Monster\06. Balrog">
       <UniqueIdentifier>{7ff92d1e-9057-4ec6-b863-ed4f98b4f1db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\03. TileMap\04. NPC">
+      <UniqueIdentifier>{bce685c3-fa95-4771-b8f8-557f7fe85ee5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -136,10 +136,10 @@
       <Filter>01. SceneMode\LoadScene</Filter>
     </ClInclude>
     <ClInclude Include="Object\NPCManager.h">
-      <Filter>02. Object\04. NPC</Filter>
+      <Filter>02. Object\03. TileMap\04. NPC</Filter>
     </ClInclude>
     <ClInclude Include="Object\Seolhuiui.h">
-      <Filter>02. Object\04. NPC</Filter>
+      <Filter>02. Object\03. TileMap\04. NPC</Filter>
     </ClInclude>
     <ClInclude Include="Widget\TalkWidget.h">
       <Filter>03. UI</Filter>
@@ -200,6 +200,12 @@
     </ClInclude>
     <ClInclude Include="Object\ObjectManager.h">
       <Filter>02. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BalrogLeft.h">
+      <Filter>02. Object\02. Monster\06. Balrog</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BalrogRight.h">
+      <Filter>02. Object\02. Monster\06. Balrog</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -277,10 +283,10 @@
       <Filter>01. SceneMode\LoadScene</Filter>
     </ClCompile>
     <ClCompile Include="Object\NPCManager.cpp">
-      <Filter>02. Object\04. NPC</Filter>
+      <Filter>02. Object\03. TileMap\04. NPC</Filter>
     </ClCompile>
     <ClCompile Include="Object\Seolhuiui.cpp">
-      <Filter>02. Object\04. NPC</Filter>
+      <Filter>02. Object\03. TileMap\04. NPC</Filter>
     </ClCompile>
     <ClCompile Include="Widget\TalkWidget.cpp">
       <Filter>03. UI</Filter>
@@ -344,6 +350,12 @@
     </ClCompile>
     <ClCompile Include="Scene\MainScene.cpp">
       <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BalrogLeft.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BalrogRight.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

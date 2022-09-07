@@ -140,6 +140,11 @@ bool CResourceManager::LoadTexture(const std::string& Name, const std::vector<TC
 	return m_TextureManager->LoadTexture(Name, vecFileName, PathName);
 }
 
+bool CResourceManager::LoadTexture(const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName)
+{
+	return m_TextureManager->LoadTexture(Name, vecFileName, PathName);
+}
+
 bool CResourceManager::LoadTextureFullPath(const std::string& Name, const std::vector<TCHAR*>& vecFullPath)
 {
 	return m_TextureManager->LoadTextureFullPath(Name, vecFullPath);
@@ -163,6 +168,16 @@ bool CResourceManager::CreateAnimationSequence2D(const std::string& Name, const 
 bool CResourceManager::CreateAnimationSequence2D(const std::string& Name, CTexture* Texture)
 {
 	return m_AnimationManager->CreateAnimationSequence2D(Name, Texture);
+}
+
+bool CResourceManager::CreateAnimationSequence2D(const std::string& Name, const std::string& TextureName, const std::vector<TCHAR*>& vecFilName, const std::string& PathName)
+{
+	return m_AnimationManager->CreateAnimationSequence2D(Name, TextureName, vecFilName);
+}
+
+bool CResourceManager::CreateAnimationSequence2D(const std::string& Name, const std::string& TextureName, const std::vector<std::wstring>& vecFilName, const std::string& PathName)
+{
+	return m_AnimationManager->CreateAnimationSequence2D(Name, TextureName, vecFilName);
 }
 
 void CResourceManager::AddAnimationSequence2DFrame(const std::string& Name, const Vector2& Start, const Vector2& Size)

@@ -208,7 +208,7 @@ void CSpriteWindow::LoadTextureButton()
 
 		m_Sprite->SetTextureFullPath(ConvertFileName, FilePath);
 
-		m_SpriteObject->GetSpriteComponent()->SetTextureFullPath(0, 0, (int)Buffer_Shader_Type::Pixel, ConvertFileName, FilePath);
+		m_SpriteObject->GetSpriteComponent()->SetTextureFullPath(0, 0, (int)Buffer_Shader_Type::All, ConvertFileName, FilePath);
 		m_SpriteObject->GetSpriteComponent()->SetWorldScale((float)m_SpriteObject->GetSpriteComponent()->GetMaterial()->GetTextureWidth(),
 			(float)m_SpriteObject->GetSpriteComponent()->GetMaterial()->GetTextureHeight(), 1.f);
 	}

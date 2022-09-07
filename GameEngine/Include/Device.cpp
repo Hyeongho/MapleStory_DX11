@@ -161,7 +161,7 @@ bool CDevice::Init(HWND hWnd, unsigned int Width, unsigned int Height, bool Wind
 	m_SwapChain->GetBuffer(0, IID_PPV_ARGS(&BackSurface));
 
 	// 2D용 렌더타겟을 만들어준다.
-	D2D1_RENDER_TARGET_PROPERTIES	props = D2D1::RenderTargetProperties(D2D1_RENDER_TARGET_TYPE_HARDWARE, 
+	D2D1_RENDER_TARGET_PROPERTIES props = D2D1::RenderTargetProperties(D2D1_RENDER_TARGET_TYPE_HARDWARE, 
 		D2D1::PixelFormat(DXGI_FORMAT_UNKNOWN, D2D1_ALPHA_MODE_PREMULTIPLIED));
 
 	if (FAILED(m_2DFactory->CreateDxgiSurfaceRenderTarget(BackSurface, props, &m_2DTarget)))

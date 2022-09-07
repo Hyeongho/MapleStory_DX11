@@ -166,6 +166,8 @@
     <ClInclude Include="ClientInfo.h" />
     <ClInclude Include="ClientManager.h" />
     <ClInclude Include="Object\Balrog.h" />
+    <ClInclude Include="Object\BalrogLeft.h" />
+    <ClInclude Include="Object\BalrogRight.h" />
     <ClInclude Include="Object\BladeFury.h" />
     <ClInclude Include="Object\CrimsonBalrog.h" />
     <ClInclude Include="Object\DamageFont.h" />
@@ -219,6 +221,8 @@
     <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object\Balrog.cpp" />
+    <ClCompile Include="Object\BalrogLeft.cpp" />
+    <ClCompile Include="Object\BalrogRight.cpp" />
     <ClCompile Include="Object\BladeFury.cpp" />
     <ClCompile Include="Object\CrimsonBalrog.cpp" />
     <ClCompile Include="Object\DamageFont.cpp" />

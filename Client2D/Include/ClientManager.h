@@ -55,6 +55,7 @@ public:
 private:
 	void LoadData();
 	void LoadSound();
+	void LoadAnimation();
 
 	DECLARE_SINGLE(CClientManager)
 };

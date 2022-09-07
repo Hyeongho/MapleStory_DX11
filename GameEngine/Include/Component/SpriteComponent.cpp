@@ -109,8 +109,12 @@ void CSpriteComponent::SetTextureFullPath(int Index, int Register, int ShaderTyp
 	m_Material->SetTextureFullPath(Index, Register, ShaderType, Name, FullPath);
 }
 
-void CSpriteComponent::SetTexture(int Index, int Register, int ShaderType, const std::string& Name,
-	const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+void CSpriteComponent::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+{
+	m_Material->SetTexture(Index, Register, ShaderType, Name, vecFileName, PathName);
+}
+
+void CSpriteComponent::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName)
 {
 	m_Material->SetTexture(Index, Register, ShaderType, Name, vecFileName, PathName);
 }
@@ -164,6 +168,31 @@ void CSpriteComponent::Render()
 	{
 		CRenderManager::GetInst()->GetStandard2DCBuffer()->SetAnimation2DEnable(m_Animation->GetAnimationCount() > 0);
 		CRenderManager::GetInst()->GetStandard2DCBuffer()->UpdateCBuffer();
+
+		switch (m_Material->GetTexture()->GetImageType())
+		{
+		case Image_Type::Atlas:
+			break;
+		case Image_Type::Frame:
+		{
+			int Frame = m_Animation->GetFrame();
+
+			size_t size = m_Material->GetTexture()->GetImageCount();
+
+			m_Material->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, Frame);
+
+			/*for (size_t i = 0; i < size; i++)
+			{
+				m_Material->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, (int)i);
+			}*/
+		}
+
+			break;
+		case Image_Type::Array:
+			break;
+		default:
+			break;
+		}
 
 		m_Animation->SetShader();
 	}

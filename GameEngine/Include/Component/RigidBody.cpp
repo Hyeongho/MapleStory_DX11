@@ -7,7 +7,7 @@
 #include "../GameObject/GameObject.h"
 #include "Gravity.h"
 
-CRigidBody::CRigidBody() : m_Mass(1.f), m_FricCoeffp(100.f), m_MaxVelocity(Vector3(100.f, 600.f, 0.f)), m_Velocity(Vector3(0.f, 0.f, 0.f))
+CRigidBody::CRigidBody() : m_Mass(1.f), m_FricCoeffp(Vector3(100.f, 100.f, 100.f)), m_MaxVelocity(Vector3(100.f, 600.f, 0.f)), m_Velocity(Vector3(0.f, 0.f, 0.f))
 {
 	SetTypeID<CRigidBody>();
 }
@@ -74,7 +74,9 @@ void CRigidBody::PostUpdate(float DeltaTime)
 
 		else
 		{
-			m_Velocity += FricCoeffp;
+			m_Velocity.x += FricCoeffp.x;
+			m_Velocity.y += FricCoeffp.y;
+			m_Velocity.z += FricCoeffp.z;
 		}
 	}
 

@@ -48,7 +48,6 @@ public:
 		return m_2DFactory;
 	}
 
-
 	ID3D11Device* GetDevice() const
 	{
 		return m_Device;

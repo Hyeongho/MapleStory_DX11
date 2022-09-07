@@ -67,6 +67,54 @@ bool CAnimationManager::CreateAnimationSequence2D(const std::string& Name, CText
 	return true;
 }
 
+bool CAnimationManager::CreateAnimationSequence2D(const std::string& Name, const std::string& TextureName, const std::vector<TCHAR*>& vecFilName, const std::string& PathName)
+{
+	CAnimationSequence2D* Sequence = FindSequence(Name);
+
+	if (Sequence)
+	{
+		return true;
+	}
+
+	Sequence = new CAnimationSequence2D;
+
+	Sequence->SetName(Name);
+
+	if (!Sequence->Init(TextureName, vecFilName, PathName))
+	{
+		SAFE_DELETE(Sequence);
+		return false;
+	}
+
+	m_mapSequence2D.insert(std::make_pair(Name, Sequence));
+
+	return true;
+}
+
+bool CAnimationManager::CreateAnimationSequence2D(const std::string& Name, const std::string& TextureName, const std::vector<std::wstring>& vecFilName, const std::string& PathName)
+{
+	CAnimationSequence2D* Sequence = FindSequence(Name);
+
+	if (Sequence)
+	{
+		return true;
+	}
+
+	Sequence = new CAnimationSequence2D;
+
+	Sequence->SetName(Name);
+
+	if (!Sequence->Init(TextureName, vecFilName, PathName))
+	{
+		SAFE_DELETE(Sequence);
+		return false;
+	}
+
+	m_mapSequence2D.insert(std::make_pair(Name, Sequence));
+
+	return true;
+}
+
 void CAnimationManager::AddFrame(const std::string& Name, const Vector2& Start, const Vector2& Size)
 {
 	CAnimationSequence2D* Sequence = FindSequence(Name);
@@ -79,8 +127,7 @@ void CAnimationManager::AddFrame(const std::string& Name, const Vector2& Start, 
 	Sequence->AddFrame(Start, Size);
 }
 
-void CAnimationManager::AddFrame(const std::string& Name, float StartX, float StartY,
-	float Width, float Height)
+void CAnimationManager::AddFrame(const std::string& Name, float StartX, float StartY, float Width, float Height)
 {
 	CAnimationSequence2D* Sequence = FindSequence(Name);
 

@@ -13,6 +13,7 @@
 #include "../ClientManager.h"
 #include "../Object/PlayerManager.h"
 #include "../Object/DamageFont.h"
+#include "../Object/Balrog.h"
 
 CMainScene::CMainScene()
 {
@@ -80,6 +81,8 @@ bool CMainScene::Init()
 	{
 		m_LoadingFunction(false, 0.6f);
 	}
+
+	CBalrog* Barlrog = m_Scene->CreateGameObject<CBalrog>("Balrog");
 
 	CShadowDualBlade* ShadowDualBlade1 = m_Scene->CreateGameObject<CShadowDualBlade>("ShadowDualBlade1");
 

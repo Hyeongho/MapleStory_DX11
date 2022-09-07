@@ -85,7 +85,8 @@ bool CClientManager::Init(HINSTANCE hInst)
 	CResourceManager::GetInst()->SetVolume(70);
 
 	LoadSound();
-	LoadData();	
+	LoadData();
+	//LoadAnimation();
 
 	return true;
 }
@@ -262,4 +263,26 @@ void CClientManager::LoadSound()
 	
 
 	// UI
+}
+
+void CClientManager::LoadAnimation()
+{
+	std::vector<std::wstring> vecBalrogBodyFileName;
+
+	for (int i = 1; i <= 12; i++)
+	{
+		TCHAR FileName[256] = {};
+		//TCHAR FullPath[256] = {};
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Body/stand/%d.png"), i);
+
+		vecBalrogBodyFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogBodyIdle", "BalrogBodyIdle", vecBalrogBodyFileName);
+
+	for (int i = 1; i <= 12; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyIdle", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
+	}
 }

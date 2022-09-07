@@ -22,10 +22,10 @@ private:
 	Vector3 m_AccelAlpha; // 추가 가속도
 	Vector3 m_Velocity; // 속도
 	Vector3 m_MaxVelocity; // 최대 속력
+	Vector3 m_FricCoeffp; // 마찰계수
 
 	float m_Mass; // 질량
 	float m_Speed; // 속력
-	float m_FricCoeffp; // 마찰계수
 
 public:
 	void SetUpdateComponent(class CSceneComponent* UpdateComponent);
@@ -76,7 +76,7 @@ public:
 		return m_Velocity;
 	}
 
-	void SetFricCoeffp(float FricCoeffp)
+	void SetFricCoeffp(Vector3 FricCoeffp)
 	{
 		m_FricCoeffp = FricCoeffp;
 	}
