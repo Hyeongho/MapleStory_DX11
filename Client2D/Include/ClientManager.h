@@ -56,6 +56,7 @@ private:
 	void LoadData();
 	void LoadSound();
 	void LoadAnimation();
+	void CreateLayer();
 
 	DECLARE_SINGLE(CClientManager)
 };

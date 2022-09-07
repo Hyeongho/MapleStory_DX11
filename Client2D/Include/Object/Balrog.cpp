@@ -30,18 +30,29 @@ bool CBalrog::Init()
 	InitAnimation();
 
 	m_Sprite = CreateComponent<CSpriteComponent>("BalrogBody");
+	m_LeftMuzzle = CreateComponent<CSceneComponent>("LeftMuzzle");
+	m_RightMuzzle = CreateComponent<CSceneComponent>("RightMuzzle");
 
 	SetRootComponent(m_Sprite);
+
+	m_Sprite->AddChild(m_LeftMuzzle);
+	m_Sprite->AddChild(m_RightMuzzle);
+
+	m_LeftMuzzle->SetPivot(0.5f, 0.5f, 0.5f);
+	m_RightMuzzle->SetPivot(0.5f, 0.5f, 0.5f);
+
+	m_LeftMuzzle->SetWorldPos(-338.f, -170.f, 0.f);
+	m_RightMuzzle->SetWorldPos(220.f, -170.f, 0.f);
 
 	//std::vector<TCHAR*> m_vecFileName;
 	//std::vector<std::wstring> vecBalrogBodyFileName;
 
 	//m_Sprite->GetMaterial()->GetTextureHeight();
 
-	//m_Sprite->SetPivot(0.5f, 0.5f, 0.5f);
+	m_Sprite->SetPivot(0.5f, 0.5f, 0.5f);
 
 	m_Sprite->SetWorldScale(1500.f, 1500.f, 1.f);
-	m_Sprite->SetWorldPos(0.f, 0.f, 0.f);
+	m_Sprite->SetWorldPos(500.f, 500.f, 0.f);
 
 	m_Sprite->SetTransparency(true);
 
@@ -52,6 +63,12 @@ bool CBalrog::Init()
 	m_Anim->AddAnimation("BalrogBodyIdle", "BalrogBodyIdle", true);
 
 	m_Anim->SetCurrentAnimation("BalrogBodyIdle");
+
+	m_BalrogLeft = m_Scene->CreateGameObject<CBalrogLeft>("BalrogLeft");
+	m_BalrogRight = m_Scene->CreateGameObject<CBalrogRight>("BalrogRight");
+
+	m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
+	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());
 
 	return true;
 }

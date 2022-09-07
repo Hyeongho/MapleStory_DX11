@@ -86,6 +86,7 @@ bool CClientManager::Init(HINSTANCE hInst)
 
 	LoadSound();
 	LoadData();
+	CreateLayer();
 	//LoadAnimation();
 
 	return true;
@@ -285,4 +286,9 @@ void CClientManager::LoadAnimation()
 	{
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyIdle", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
 	}
+}
+
+void CClientManager::CreateLayer()
+{
+	CRenderManager::GetInst()->CreateLayer("BalrogHand", 5);
 }

@@ -4,6 +4,8 @@
 #include "Component/SpriteComponent.h"
 #include "Component/ColliderBox2D.h"
 #include "../ClientInfo.h"
+#include "BalrogLeft.h"
+#include "BalrogRight.h"
 
 class CBalrog :
     public CMonsterManager
@@ -20,9 +22,13 @@ private:
 	CSharedPtr<CColliderBox2D> m_Sensor;
 	CSharedPtr<CColliderBox2D> m_AttackRange;
 
-	CSharedPtr<CSceneComponent> m_Muzzle;
+	CSharedPtr<CSceneComponent> m_LeftMuzzle;
+	CSharedPtr<CSceneComponent> m_RightMuzzle;
 
 	CAnimationSequence2DInstance* m_Anim;
+
+	CBalrogLeft* m_BalrogLeft;
+	CBalrogRight* m_BalrogRight;
 
 public:
 	virtual void Start();
