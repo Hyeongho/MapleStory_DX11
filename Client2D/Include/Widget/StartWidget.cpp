@@ -111,11 +111,6 @@ void CStartWidget::MaleClick()
 	Fade->SetVisibility(true);
 
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
-
-	Fade->FadeOut();
-
-	/*CSceneManager::GetInst()->CreateNextScene();
-	CSceneManager::GetInst()->CreateSceneMode<CLoadingScene>(false);*/
 }
 
 void CStartWidget::FemaleClick()
@@ -127,9 +122,4 @@ void CStartWidget::FemaleClick()
 	Fade->SetVisibility(true);
 
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
-
-	//Fade->FadeOut();
-
-	/*CSceneManager::GetInst()->CreateNextScene();
-	CSceneManager::GetInst()->CreateSceneMode<CLoadingScene>(false);*/
 }

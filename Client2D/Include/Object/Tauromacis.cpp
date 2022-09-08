@@ -110,11 +110,21 @@ bool CTauromacis::Init()
 void CTauromacis::Update(float DeltaTime)
 {
 	CMonsterManager::Update(DeltaTime);
+
+	if (CClientManager::GetInst()->GetFade())
+	{
+		return;
+	}
 }
 
 void CTauromacis::PostUpdate(float DeltaTime)
 {
 	CMonsterManager::PostUpdate(DeltaTime);
+
+	if (CClientManager::GetInst()->GetFade())
+	{
+		return;
+	}
 }
 
 CTauromacis* CTauromacis::Clone()

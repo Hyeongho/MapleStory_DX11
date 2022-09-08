@@ -28,6 +28,7 @@ CMainScene::~CMainScene()
 void CMainScene::Start()
 {
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeIn_Start);
+	CClientManager::GetInst()->SetFade(false);
 	CPlayerManager::GetInst()->SetCurrentScene("MainScene");
 }
 
@@ -82,7 +83,7 @@ bool CMainScene::Init()
 		m_LoadingFunction(false, 0.6f);
 	}
 
-	CBalrog* Barlrog = m_Scene->CreateGameObject<CBalrog>("Balrog");
+	//CBalrog* Barlrog = m_Scene->CreateGameObject<CBalrog>("Balrog");
 
 	CShadowDualBlade* ShadowDualBlade1 = m_Scene->CreateGameObject<CShadowDualBlade>("ShadowDualBlade1");
 

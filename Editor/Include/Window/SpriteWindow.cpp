@@ -271,6 +271,7 @@ void CSpriteWindow::AddAnimationButton()
 void CSpriteWindow::AddAnimationFrameButton()
 {
 	int SelectIndex = m_AnimationList->GetSelectIndex();
+
 	if (SelectIndex == -1)
 	{
 		return;
@@ -335,6 +336,7 @@ void CSpriteWindow::SelectAnimationFrame(int Index, const char* Item)
 	}
 
 	int SelectIndex = m_AnimationList->GetSelectIndex();
+
 	if (SelectIndex == -1)
 	{
 		return;
@@ -369,12 +371,14 @@ void CSpriteWindow::SelectAnimationFrame(int Index, const char* Item)
 void CSpriteWindow::DeleteFrameButton()
 {
 	int SelectIndex = m_AnimationFrameList->GetSelectIndex();
+
 	if (SelectIndex == -1)
 	{
 		return;
 	}
 
 	int SelectAnimIndex = m_AnimationList->GetSelectIndex();
+
 	if (SelectAnimIndex == -1)
 	{
 		return;
@@ -418,7 +422,7 @@ void CSpriteWindow::SelectAnimation(int Index, const char* Item)
 
 	if (FrameCount > 0)
 	{
-		AnimationFrameData  Data = m_AnimInstance->GetCurrentAnimation()->GetAnimationSequence()->GetFrameData(Index);
+		AnimationFrameData Data = m_AnimInstance->GetCurrentAnimation()->GetAnimationSequence()->GetFrameData(Index);
 
 		m_SpriteFrame->SetImageStart(Data.Start.x, Data.Start.y);
 
@@ -429,6 +433,7 @@ void CSpriteWindow::SelectAnimation(int Index, const char* Item)
 void CSpriteWindow::SaveSequence()
 {
 	int SelectAnimIndex = m_AnimationList->GetSelectIndex();
+
 	if (SelectAnimIndex == -1)
 	{
 		return;

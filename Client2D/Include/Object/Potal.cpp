@@ -4,6 +4,7 @@
 #include "Animation/AnimationSequence2DInstance.h"
 #include "../Scene/LoadingSeolhuiui.h"
 #include "../Scene/LoadingEToTemple.h"
+#include "../Scene/LoadingAnotherDoor.h"
 #include "../Scene/MainScene.h"
 #include "Scene/SceneManager.h"
 #include "../Widget/Fade.h"
@@ -85,6 +86,12 @@ void CPotal::PostUpdate(float DeltaTime)
 			{
 				CSceneManager::GetInst()->CreateNextScene();
 				CSceneManager::GetInst()->CreateSceneMode<CLoadingSeolhuiui>(false);
+			}
+
+			else if (CurrentScene == "AnotherDoor")
+			{
+				CSceneManager::GetInst()->CreateNextScene();
+				CSceneManager::GetInst()->CreateSceneMode<CLoadingEToTemple>(false);
 			}
 		}	
 	}

@@ -27,6 +27,7 @@ CAnotherDoor::~CAnotherDoor()
 void CAnotherDoor::Start()
 {
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeIn_Start);
+	CClientManager::GetInst()->SetFade(false);
 	CPlayerManager::GetInst()->SetCurrentScene("AnotherDoor");
 }
 
@@ -35,7 +36,6 @@ bool CAnotherDoor::Init()
 	CreateMaterial();
 
 	CreateAnimationSequence();
-
 
 	if (m_LoadingFunction)
 	{
@@ -92,11 +92,11 @@ bool CAnotherDoor::Init()
 
 void CAnotherDoor::PostUpdate(float DeltaTime)
 {
-	if (CClientManager::GetInst()->GetFadeState() == EFade_State::FadeOut_End)
+	/*if (CClientManager::GetInst()->GetFadeState() == EFade_State::FadeOut_End)
 	{
 		CSceneManager::GetInst()->CreateNextScene();
 		CSceneManager::GetInst()->CreateSceneMode<CLoadingEToTemple>(false);
-	}
+	}*/
 }
 
 void CAnotherDoor::CreateMaterial()

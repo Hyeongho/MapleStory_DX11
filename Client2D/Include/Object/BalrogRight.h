@@ -33,5 +33,7 @@ public:
 
 private:
 	void InitAnimation();
+
+	void ChangeAnim(float DeltaTime);
 };
 

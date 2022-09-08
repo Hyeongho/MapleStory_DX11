@@ -107,11 +107,21 @@ bool CShadowDualBlade::Init()
 void CShadowDualBlade::Update(float DeltaTime)
 {
 	CMonsterManager::Update(DeltaTime);
+
+	if (CClientManager::GetInst()->GetFade())
+	{
+		return;
+	}
 }
 
 void CShadowDualBlade::PostUpdate(float DeltaTime)
 {
 	CMonsterManager::PostUpdate(DeltaTime);
+
+	if (CClientManager::GetInst()->GetFade())
+	{
+		return;
+	}
 }
 
 CShadowDualBlade* CShadowDualBlade::Clone()

@@ -91,11 +91,21 @@ bool CTaurospear::Init()
 void CTaurospear::Update(float DeltaTime)
 {
 	CMonsterManager::Update(DeltaTime);
+
+	if (CClientManager::GetInst()->GetFade())
+	{
+		return;
+	}
 }
 
 void CTaurospear::PostUpdate(float DeltaTime)
 {
 	CMonsterManager::PostUpdate(DeltaTime);
+
+	if (CClientManager::GetInst()->GetFade())
+	{
+		return;
+	}
 }
 
 CTaurospear* CTaurospear::Clone()

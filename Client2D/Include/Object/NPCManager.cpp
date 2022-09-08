@@ -58,6 +58,11 @@ void CNPCManager::Update(float DeltaTime)
 {
 	CGameObject::Update(DeltaTime);
 
+	if (CClientManager::GetInst()->GetFade())
+	{
+		return;
+	}
+
 	CTalkWidget* TalkWidget = m_Scene->GetViewport()->FindWidgetWindow<CTalkWidget>("TalkWidget");
 
 	if (m_Click && CInput::GetInst()->GetMouseLButtonClick())
@@ -74,6 +79,11 @@ void CNPCManager::Update(float DeltaTime)
 void CNPCManager::PostUpdate(float DeltaTime)
 {
 	CGameObject::PostUpdate(DeltaTime);
+
+	if (CClientManager::GetInst()->GetFade())
+	{
+		return;
+	}
 }
 
 CNPCManager* CNPCManager::Clone()

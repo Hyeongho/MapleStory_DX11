@@ -77,9 +77,7 @@ private:
     void SwingD2(float DeltaTime);
     void StabD1(float DeltaTime);
     void PhantomBlow(float DeltaTime);
-    void JumpPhantomBlow(float DeltaTime);
     void BladeFury(float DeltaTime);
-    void JumpBladeFury(float DeltaTime);
 
 private:
     void CollisionCallback(const CollisionResult& result);

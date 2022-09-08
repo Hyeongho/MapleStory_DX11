@@ -12,6 +12,7 @@
 #include "Component/CameraComponent.h"
 #include "Device.h"
 #include "../ClientManager.h"
+#include "../Object/PlayerManager.h"
 
 CEntranceToTemple::CEntranceToTemple()
 {
@@ -25,6 +26,8 @@ CEntranceToTemple::~CEntranceToTemple()
 void CEntranceToTemple::Start()
 {
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeIn_Start);
+	CClientManager::GetInst()->SetFade(false);
+	CPlayerManager::GetInst()->SetCurrentScene("EntranceToTemple");
 }
 
 bool CEntranceToTemple::Init()
@@ -32,7 +35,6 @@ bool CEntranceToTemple::Init()
 	CreateMaterial();
 
 	CreateAnimationSequence();
-
 
 	if (m_LoadingFunction)
 	{

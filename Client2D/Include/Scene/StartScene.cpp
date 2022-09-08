@@ -25,7 +25,7 @@ CStartScene::~CStartScene()
 void CStartScene::Start()
 {
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeIn_Start);
-
+	CClientManager::GetInst()->SetFade(false);
 	LoadSound();
 }
 

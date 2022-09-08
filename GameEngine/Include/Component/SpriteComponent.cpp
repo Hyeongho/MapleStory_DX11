@@ -180,11 +180,6 @@ void CSpriteComponent::Render()
 			size_t size = m_Material->GetTexture()->GetImageCount();
 
 			m_Material->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, Frame);
-
-			/*for (size_t i = 0; i < size; i++)
-			{
-				m_Material->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, (int)i);
-			}*/
 		}
 
 			break;

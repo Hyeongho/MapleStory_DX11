@@ -578,7 +578,7 @@ bool CTexture::CreateResourceArray()
 	Desc.Texture2DArray.MostDetailedMip = 0;
 	Desc.Texture2DArray.MipLevels = (UINT)m_vecTextureInfo[0]->Image->GetMetadata().mipLevels;
 	Desc.Texture2DArray.FirstArraySlice = 0;
-	Desc.Texture2DArray.ArraySize = Count;
+	Desc.Texture2DArray.ArraySize = (UINT)Count;
 
 
 	if (FAILED(CDevice::GetInst()->GetDevice()->CreateShaderResourceView(Tex, &Desc, &m_ArraySRV)))

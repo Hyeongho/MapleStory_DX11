@@ -142,9 +142,7 @@ bool CPlayer2D::Init()
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("SwingD2", KeyState_Down, this, &CPlayer2D::SwingD2);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("StabD1", KeyState_Down, this, &CPlayer2D::StabD1);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("PhantomBlow", KeyState_Down, this, &CPlayer2D::PhantomBlow);
-	CInput::GetInst()->SetKeyCallback<CPlayer2D>("JumpPhantomBlow", KeyState_Down, this, &CPlayer2D::JumpPhantomBlow);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("BladeFury", KeyState_Down, this, &CPlayer2D::BladeFury);
-	CInput::GetInst()->SetKeyCallback<CPlayer2D>("JumpBladeFury", KeyState_Down, this, &CPlayer2D::JumpBladeFury);
 
 	m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::Begin, this, &CPlayer2D::CollisionCallback);
 	//m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::End, this, &CPlayer2D::CollisionExit);
@@ -169,6 +167,11 @@ bool CPlayer2D::Init()
 void CPlayer2D::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
+
+	if (CClientManager::GetInst()->GetFade())
+	{
+		return;
+	}
 
 	m_PlayerStatus->SetHPPercent((float)m_CharacterInfo.HP / m_CharacterInfo.MaxHP);
 	m_PlayerStatus->SetMPPercent((float)m_CharacterInfo.MP / m_CharacterInfo.MaxMP);
@@ -222,6 +225,11 @@ void CPlayer2D::Update(float DeltaTime)
 void CPlayer2D::PostUpdate(float DeltaTime)
 {
 	CObjectManager::PostUpdate(DeltaTime);
+
+	if (CClientManager::GetInst()->GetFade())
+	{
+		return;
+	}
 
 	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
 
@@ -469,33 +477,6 @@ void CPlayer2D::PhantomBlow(float DeltaTime)
 	PhantomBlow->SetWorldPos(m_Muzzle->GetWorldPos());
 }
 
-void CPlayer2D::JumpPhantomBlow(float DeltaTime)
-{
-	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
-	{
-		return;
-	}
-
-	if (m_State == EPlayer_State::PhantomBlow || m_State == EPlayer_State::BladeFury)
-	{
-		return;
-	}
-
-	CPlayerManager::GetInst()->SetPlayerAttack(Player_Attack::Attack_Start);
-
-	m_State = EPlayer_State::PhantomBlow;
-
-	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
-
-	Anim->ChangeAnimation("PhantomBlow");
-
-	CPhantomBlow* PhantomBlow = m_Scene->CreateGameObject<CPhantomBlow>("PhantomBlowEffect");
-
-	CResourceManager::GetInst()->SoundPlay("PhantomBlow");
-
-	PhantomBlow->SetWorldPos(m_Muzzle->GetWorldPos());
-}
-
 void CPlayer2D::BladeFury(float DeltaTime)
 {
 	if (CInput::GetInst()->GetAltDown())
@@ -503,33 +484,6 @@ void CPlayer2D::BladeFury(float DeltaTime)
 		return;
 	}
 
-	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
-	{
-		return;
-	}
-
-	if (m_State == EPlayer_State::BladeFury || m_State == EPlayer_State::PhantomBlow)
-	{
-		return;
-	}
-
-	CPlayerManager::GetInst()->SetPlayerAttack(Player_Attack::Attack_Start);
-
-	m_State = EPlayer_State::BladeFury;
-
-	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
-
-	Anim->ChangeAnimation("BladeFury");
-
-	CBladeFury* BladeFury = m_Scene->CreateGameObject<CBladeFury>("BladeFury");
-
-	CResourceManager::GetInst()->SoundPlay("BladeFury");
-
-	BladeFury->SetWorldPos(m_Muzzle->GetWorldPos());
-}
-
-void CPlayer2D::JumpBladeFury(float DeltaTime)
-{
 	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
 	{
 		return;

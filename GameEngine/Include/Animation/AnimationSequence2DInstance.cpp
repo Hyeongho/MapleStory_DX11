@@ -94,21 +94,6 @@ void CAnimationSequence2DInstance::AddAnimation(const std::string& SequenceName,
 			CTexture* Texture = Anim->m_Sequence->GetTexture();
 
 			m_Owner->SetTexture(0, 0, (int)Buffer_Shader_Type::Pixel, Texture->GetName(), Texture);
-
-			/*if (Texture->GetImageType() == Image_Type::Atlas)
-			{
-				m_Owner->SetTexture(0, 0, (int)Buffer_Shader_Type::Pixel, Texture->GetName(), Texture);
-			}
-
-			else if (Texture->GetImageType() == Image_Type::Frame)
-			{
-				size_t size = Texture->GetImageCount();
-
-				for (size_t i = 0; i < size; i++)
-				{
-					m_Owner->SetTexture((int)i, (int)i, (int)Buffer_Shader_Type::Pixel, Texture->GetName(), Texture);
-				}
-			}*/
 		}
 	}
 

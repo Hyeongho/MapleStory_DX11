@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject/GameObject.h"
+#include "../ClientManager.h"
 
 class CNPCManager :
     public CGameObject

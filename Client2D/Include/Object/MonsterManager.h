@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ObjectManager.h"
+#include "../ClientManager.h"
 #include "../ClientInfo.h"
 
 class CMonsterManager :
