@@ -44,32 +44,7 @@ bool CAnimationSequence2D::Init(const std::string& Name, const TCHAR* FileName, 
 	return true;
 }
 
-bool CAnimationSequence2D::Init(const std::string& Name, const std::vector<TCHAR*>& vecFilName, const std::string& PathName)
-{
-	if (m_Scene)
-	{
-		if (!m_Scene->GetResource()->LoadTexture(Name, vecFilName, PathName))
-		{
-			return false;
-		}
-
-		m_Texture = m_Scene->GetResource()->FindTexture(Name);
-	}
-
-	else
-	{
-		if (!CResourceManager::GetInst()->LoadTexture(Name, vecFilName, PathName))
-		{
-			return false;
-		}
-
-		m_Texture = CResourceManager::GetInst()->FindTexture(Name);
-	}
-
-	return true;
-}
-
-bool CAnimationSequence2D::Init(const std::string& Name, const std::vector<std::wstring>& vecFilName, const std::string& PathName)
+bool CAnimationSequence2D::Init(const std::string& Name, const std::vector<const TCHAR*>& vecFilName, const std::string& PathName)
 {
 	if (m_Scene)
 	{

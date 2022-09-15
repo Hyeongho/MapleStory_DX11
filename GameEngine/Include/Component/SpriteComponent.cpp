@@ -89,7 +89,7 @@ void CSpriteComponent::AddTextureFullPath(int Register, int ShaderType, const st
 	m_Material->AddTextureFullPath(Register, ShaderType, Name, FullPath);
 }
 
-void CSpriteComponent::AddTexture(int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+void CSpriteComponent::AddTexture(int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	m_Material->AddTexture(Register, ShaderType, Name, vecFileName, PathName);
 }
@@ -109,14 +109,24 @@ void CSpriteComponent::SetTextureFullPath(int Index, int Register, int ShaderTyp
 	m_Material->SetTextureFullPath(Index, Register, ShaderType, Name, FullPath);
 }
 
-void CSpriteComponent::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+void CSpriteComponent::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	m_Material->SetTexture(Index, Register, ShaderType, Name, vecFileName, PathName);
 }
 
-void CSpriteComponent::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName)
+void CSpriteComponent::SetTextureFrameIndex(int Index)
 {
-	m_Material->SetTexture(Index, Register, ShaderType, Name, vecFileName, PathName);
+	m_Material->SetTextureFrameIndex(0, Index);
+}
+
+CTexture* CSpriteComponent::GetTexture(int Index) const
+{
+	if (!m_Material)
+	{
+		return nullptr;
+	}
+
+	return m_Material->GetTexture(Index);
 }
 
 void CSpriteComponent::Start()
@@ -169,7 +179,7 @@ void CSpriteComponent::Render()
 		CRenderManager::GetInst()->GetStandard2DCBuffer()->SetAnimation2DEnable(m_Animation->GetAnimationCount() > 0);
 		CRenderManager::GetInst()->GetStandard2DCBuffer()->UpdateCBuffer();
 
-		switch (m_Material->GetTexture()->GetImageType())
+		/*switch (m_Material->GetTexture()->GetImageType())
 		{
 		case Image_Type::Atlas:
 			break;
@@ -187,7 +197,7 @@ void CSpriteComponent::Render()
 			break;
 		default:
 			break;
-		}
+		}*/
 
 		m_Animation->SetShader();
 	}

@@ -1,6 +1,8 @@
 #include "Seolhuiui.h"
 #include "Resource/Material/Material.h"
 #include "Animation/AnimationSequence2DInstance.h"
+#include "Scene/SceneManager.h"
+#include "../Scene/LoadingAnotherDoor.h"
 #include "Input.h"
 
 CSeolhuiui::CSeolhuiui()
@@ -74,6 +76,12 @@ void CSeolhuiui::Update(float DeltaTime)
 void CSeolhuiui::PostUpdate(float DeltaTime)
 {
 	CNPCManager::PostUpdate(DeltaTime);
+
+	if (CClientManager::GetInst()->GetFadeState() == EFade_State::FadeOut_End)
+	{
+		CSceneManager::GetInst()->CreateNextScene();
+		CSceneManager::GetInst()->CreateSceneMode<CLoadingAnotherDoor>(false);
+	}
 }
 
 CSeolhuiui* CSeolhuiui::Clone()

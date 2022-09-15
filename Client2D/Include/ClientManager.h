@@ -32,10 +32,7 @@ public:
 	CharacterInfo FindData(const std::string& name);
 
 public:
-	void SetFade(bool Fade)
-	{
-		m_Fade = Fade;
-	}
+	void SetFade(bool Fade);
 
 	void SetFadeState(EFade_State State)
 	{

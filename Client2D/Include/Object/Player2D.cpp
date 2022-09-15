@@ -168,7 +168,7 @@ void CPlayer2D::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
 
-	if (CClientManager::GetInst()->GetFade())
+	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
 	{
 		return;
 	}
@@ -226,7 +226,7 @@ void CPlayer2D::PostUpdate(float DeltaTime)
 {
 	CObjectManager::PostUpdate(DeltaTime);
 
-	if (CClientManager::GetInst()->GetFade())
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}
@@ -301,7 +301,7 @@ CPlayer2D* CPlayer2D::Clone()
 
 void CPlayer2D::MoveLeft(float DeltaTime)
 {
-	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}
@@ -338,7 +338,7 @@ void CPlayer2D::MoveLeft(float DeltaTime)
 
 void CPlayer2D::MoveRight(float DeltaTime)
 {
-	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}
@@ -374,7 +374,7 @@ void CPlayer2D::MoveRight(float DeltaTime)
 
 void CPlayer2D::MoveUp(float DeltaTime)
 {
-	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}
@@ -387,6 +387,7 @@ void CPlayer2D::MoveUp(float DeltaTime)
 		}
 
 		CClientManager::GetInst()->SetFade(true);
+		//CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
 	
 		return;
 	}
@@ -404,7 +405,7 @@ void CPlayer2D::Stop(float DeltaTime)
 
 void CPlayer2D::Jump(float DeltaTime)
 {
-	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}
@@ -447,12 +448,7 @@ void CPlayer2D::StabD1(float DeltaTime)
 
 void CPlayer2D::PhantomBlow(float DeltaTime)
 {
-	if (CInput::GetInst()->GetAltDown())
-	{
-		return;
-	}
-
-	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}
@@ -479,12 +475,7 @@ void CPlayer2D::PhantomBlow(float DeltaTime)
 
 void CPlayer2D::BladeFury(float DeltaTime)
 {
-	if (CInput::GetInst()->GetAltDown())
-	{
-		return;
-	}
-
-	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}

@@ -1,8 +1,4 @@
-﻿  NPCManager.cpp
-  ObjectManager.cpp
-  Player2D.cpp
-  ShadowDualBlade.cpp
-  Tauromacis.cpp
-  Taurospear.cpp
+﻿  Seolhuiui.cpp
+  Seolhuiuibang.cpp
   코드를 생성하고 있습니다...
   Client2D.vcxproj -> D:\C++_Client\MapleStory_DX11\Client2D\Bin\Client2D_Debug.exe

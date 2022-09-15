@@ -186,6 +186,13 @@ CharacterInfo CClientManager::FindData(const std::string& Name)
 	return iter->second;
 }
 
+void CClientManager::SetFade(bool Fade)
+{
+	m_Fade = Fade;
+
+	CInput::GetInst()->SetKeyInput(not Fade);
+}
+
 void CClientManager::LoadData()
 {
 	m_Data = new CData;
@@ -267,24 +274,7 @@ void CClientManager::LoadSound()
 
 void CClientManager::LoadAnimation()
 {
-	std::vector<std::wstring> vecBalrogBodyFileName;
-
-	for (int i = 1; i <= 12; i++)
-	{
-		TCHAR FileName[256] = {};
-		//TCHAR FullPath[256] = {};
-
-		wsprintf(FileName, TEXT("Monster/Balrog/Body/stand/%d.png"), i);
-
-		vecBalrogBodyFileName.push_back(FileName);
-	}
-
-	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogBodyIdle", "BalrogBodyIdle", vecBalrogBodyFileName);
-
-	for (int i = 1; i <= 12; i++)
-	{
-		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyIdle", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
-	}
+	
 }
 
 void CClientManager::CreateLayer()

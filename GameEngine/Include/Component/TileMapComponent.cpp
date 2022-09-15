@@ -203,7 +203,7 @@ void CTileMapComponent::AddBackTextureFullPath(int Register, int ShaderType, con
 	m_BackMaterial->AddTextureFullPath(Register, ShaderType, Name, FullPath);
 }
 
-void CTileMapComponent::AddBackTexture(int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+void CTileMapComponent::AddBackTexture(int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	if (!m_BackMaterial)
 	{
@@ -243,7 +243,7 @@ void CTileMapComponent::SetBackTextureFullPath(int Index, int Register, int Shad
 	m_BackMaterial->SetTextureFullPath(Index, Register, ShaderType, Name, FullPath);
 }
 
-void CTileMapComponent::SetBackTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+void CTileMapComponent::SetBackTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	if (!m_BackMaterial)
 	{

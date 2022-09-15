@@ -102,12 +102,12 @@ public:
     void AddBackTexture(int Register, int ShaderType, const std::string& Name, class CTexture* Texture);
     void AddBackTexture(int Register, int ShaderType, const std::string& Name, const TCHAR* FileName, const std::string& PathName = TEXTURE_PATH);
     void AddBackTextureFullPath(int Register, int ShaderType, const std::string& Name, const TCHAR* FullPath);
-    void AddBackTexture(int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName = TEXTURE_PATH);
+    void AddBackTexture(int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName = TEXTURE_PATH);
 
     void SetBackTexture(int Index, int Register, int ShaderType, const std::string& Name, class CTexture* Texture);
     void SetBackTexture(int Index, int Register, int ShaderType, const std::string& Name, const TCHAR* FileName, const std::string& PathName = TEXTURE_PATH);
     void SetBackTextureFullPath(int Index, int Register, int ShaderType, const std::string& Name, const TCHAR* FullPath);
-    void SetBackTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName = TEXTURE_PATH);
+    void SetBackTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName = TEXTURE_PATH);
 
 public:
     void CreateTile(Tile_Shape Shape, int CountX, int CountY, const Vector3& Size);

@@ -1,20 +1,5 @@
 ﻿  EditorManager.cpp
-  CameraObject.cpp
-  DragObject.cpp
-  SpriteEditObject.cpp
-  DefaultScene.cpp
-  ColliderBox2DWindow.cpp
-  DetailWindow.cpp
-  DragObjWindow.cpp
-  EditorMenu.cpp
-  ObjectHierarchy.cpp
-  SpriteWindow.cpp
   TileMapWindow.cpp
   코드를 생성하고 있습니다...
   Player2D.cpp
-DirectXTex_Debug.lib(BC.obj) : warning LNK4204: 'D:\C++_Client\MapleStory_DX11\Editor\Bin\DirectXTex.pdb'에 참조 모듈에 대한 디버깅 정보가 없습니다. 디버깅 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_Debug.lib(BC4BC5.obj) : warning LNK4204: 'D:\C++_Client\MapleStory_DX11\Editor\Bin\DirectXTex.pdb'에 참조 모듈에 대한 디버깅 정보가 없습니다. 디버깅 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_Debug.lib(BC6HBC7.obj) : warning LNK4204: 'D:\C++_Client\MapleStory_DX11\Editor\Bin\DirectXTex.pdb'에 참조 모듈에 대한 디버깅 정보가 없습니다. 디버깅 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_Debug.lib(DirectXTexConvert.obj) : warning LNK4204: 'D:\C++_Client\MapleStory_DX11\Editor\Bin\DirectXTex.pdb'에 참조 모듈에 대한 디버깅 정보가 없습니다. 디버깅 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_Debug.lib(DirectXTexMipMaps.obj) : warning LNK4204: 'D:\C++_Client\MapleStory_DX11\Editor\Bin\DirectXTex.pdb'에 참조 모듈에 대한 디버깅 정보가 없습니다. 디버깅 정보가 없는 것처럼 개체를 링크합니다.
   Editor.vcxproj -> D:\C++_Client\MapleStory_DX11\Editor\Bin\Editor_Debug.exe

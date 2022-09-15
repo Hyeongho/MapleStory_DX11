@@ -13,7 +13,6 @@
 #include "../ClientManager.h"
 #include "../Object/PlayerManager.h"
 #include "../Scene/LoadingAnotherDoor.h"
-#include "Scene/SceneManager.h"
 
 CSeolhuiuibang::CSeolhuiuibang()
 {
@@ -86,11 +85,11 @@ bool CSeolhuiuibang::Init()
 
 void CSeolhuiuibang::PostUpdate(float DeltaTime)
 {
-	if (CClientManager::GetInst()->GetFadeState() == EFade_State::FadeOut_End)
+	/*if (CClientManager::GetInst()->GetFadeState() == EFade_State::FadeOut_End)
 	{
 		CSceneManager::GetInst()->CreateNextScene();
 		CSceneManager::GetInst()->CreateSceneMode<CLoadingAnotherDoor>(false);
-	}
+	}*/
 }
 
 void CSeolhuiuibang::CreateMaterial()

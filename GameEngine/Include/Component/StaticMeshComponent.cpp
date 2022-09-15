@@ -91,7 +91,7 @@ void CStaticMeshComponent::AddTextureFullPath(int Register, int ShaderType, cons
 	m_Material->AddTextureFullPath(Register, ShaderType, Name, FullPath);
 }
 
-void CStaticMeshComponent::AddTexture(int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+void CStaticMeshComponent::AddTexture(int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	m_Material->AddTexture(Register, ShaderType, Name, vecFileName, PathName);
 }
@@ -111,7 +111,7 @@ void CStaticMeshComponent::SetTextureFullPath(int Index, int Register, int Shade
 	m_Material->SetTextureFullPath(Index, Register, ShaderType, Name, FullPath);
 }
 
-void CStaticMeshComponent::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+void CStaticMeshComponent::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	m_Material->SetTexture(Index, Register, ShaderType, Name, vecFileName, PathName);
 }

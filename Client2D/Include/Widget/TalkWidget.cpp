@@ -3,6 +3,7 @@
 #include "../TalkManager.h"
 #include "../Object/PlayerManager.h"
 #include "../ClientManager.h"
+#include "Fade.h"
 
 CTalkWidget::CTalkWidget()
 {
@@ -160,8 +161,16 @@ void CTalkWidget::OKClick()
 
 	if (CurrentScene == "Seolhuiuibang")
 	{
-		CClientManager::GetInst()->SetFade(true);
-
 		SetVisibility(false);
+
+		//CClientManager::GetInst()->SetFade(true);
+
+		CFade* Fade = (CFade*)GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
+
+		Fade->SetVisibility(true);
+
+		CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
+
+		Destroy();
 	}
 }

@@ -1,7 +1,1 @@
-﻿  DataManager.cpp
-  DefaultScene.cpp
-  DataWindow.cpp
-  DataWindowTable.cpp
-  코드를 생성하고 있습니다...
-D:\C++_Client\MapleStory_DX11\Engine\Include\Engine.h(120): warning C4172: 지역 변수 또는 임시: wText의 주소를 반환하고 있습니다.
-  Data.vcxproj -> D:\C++_Client\MapleStory_DX11\Data\Bin\Data_Debug.exe
+﻿  Data.vcxproj -> D:\C++_Client\MapleStory_DX11\Data\Bin\Data_Debug.exe

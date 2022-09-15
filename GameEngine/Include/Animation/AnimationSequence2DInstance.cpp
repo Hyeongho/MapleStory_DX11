@@ -230,6 +230,7 @@ void CAnimationSequence2DInstance::SetCurrentAnimation(const std::string& Name)
 	if (m_Owner)
 	{
 		m_Owner->SetTexture(0, 0, (int)Buffer_Shader_Type::Pixel, m_CurrentAnimation->m_Sequence->GetTexture()->GetName(), m_CurrentAnimation->m_Sequence->GetTexture());
+		m_Owner->SetTextureFrameIndex(0);
 	}
 }
 
@@ -257,6 +258,7 @@ void CAnimationSequence2DInstance::ChangeAnimation(const std::string& Name)
 	if (m_Owner)
 	{
 		m_Owner->SetTexture(0, 0, (int)Buffer_Shader_Type::Pixel, m_CurrentAnimation->m_Sequence->GetTexture()->GetName(), m_CurrentAnimation->m_Sequence->GetTexture());
+		m_Owner->SetTextureFrameIndex(0);
 	}
 }
 
@@ -390,18 +392,54 @@ void CAnimationSequence2DInstance::SetShader()
 		return;
 	}
 
+	CAnimation2DConstantBuffer* Buffer = CResourceManager::GetInst()->GetAnimation2DCBuffer();
+
+	const AnimationFrameData& FrameData = m_CurrentAnimation->m_Sequence->GetFrameData(m_CurrentAnimation->m_Frame);
+
+	Image_Type Type = m_CurrentAnimation->m_Sequence->GetTexture()->GetImageType();
+
 	Vector2	StartUV, EndUV;
 
-	Vector2	Start = m_CurrentAnimation->m_Sequence->GetFrameData(m_CurrentAnimation->m_Frame).Start;
-	Vector2	FrameSize = m_CurrentAnimation->m_Sequence->GetFrameData(m_CurrentAnimation->m_Frame).Size;
+	if (Type == Image_Type::Atlas)
+	{
+		Vector2	Start = m_CurrentAnimation->m_Sequence->GetFrameData(m_CurrentAnimation->m_Frame).Start;
+		Vector2	FrameSize = m_CurrentAnimation->m_Sequence->GetFrameData(m_CurrentAnimation->m_Frame).Size;
 
-	StartUV = Start / Vector2((float)m_CurrentAnimation->m_Sequence->GetTexture()->GetWidth(), (float)m_CurrentAnimation->m_Sequence->GetTexture()->GetHeight());
+		StartUV = Start / Vector2((float)m_CurrentAnimation->m_Sequence->GetTexture()->GetWidth(), (float)m_CurrentAnimation->m_Sequence->GetTexture()->GetHeight());
 
-	EndUV = (Start + FrameSize) / Vector2((float)m_CurrentAnimation->m_Sequence->GetTexture()->GetWidth(), (float)m_CurrentAnimation->m_Sequence->GetTexture()->GetHeight());
+		EndUV = (Start + FrameSize) / Vector2((float)m_CurrentAnimation->m_Sequence->GetTexture()->GetWidth(), (float)m_CurrentAnimation->m_Sequence->GetTexture()->GetHeight());
+	}
+
+	else if (Type == Image_Type::Frame)
+	{
+		int Frame = m_CurrentAnimation->m_Frame;
+
+		StartUV = Vector2(0.f, 0.f);
+
+		EndUV = Vector2(1.f, 1.f);
+
+		m_CurrentAnimation->m_Sequence->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, Frame);
+
+		if (m_Owner)
+		{
+			m_Owner->SetTexture(0, 0, (int)Buffer_Shader_Type::Pixel, m_CurrentAnimation->m_Sequence->GetTexture()->GetName(), m_CurrentAnimation->m_Sequence->GetTexture());
+			m_Owner->SetTextureFrameIndex(m_CurrentAnimation->m_Frame);
+		}
+
+		else
+		{
+			m_CurrentAnimation->m_Sequence->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, Frame);
+		}
+	}
+
+	/*else
+	{
+		Buffer->SetFrame(m_CurAnimation->m_Frame);
+	}*/
 
 	if (m_CBuffer)
 	{
-		m_CBuffer->SetAnimation2DType(m_CurrentAnimation->m_Sequence->GetTexture()->GetImageType());
+		m_CBuffer->SetAnimation2DType(Type);
 
 		m_CBuffer->SetStartUV(StartUV);
 		m_CBuffer->SetEndUV(EndUV);
@@ -410,56 +448,6 @@ void CAnimationSequence2DInstance::SetShader()
 
 		m_CBuffer->UpdateCBuffer();
 	}
-
-	/*switch (m_CurrentAnimation->m_Sequence->GetTexture()->GetImageType())
-	{
-	case Image_Type::Atlas:
-	{
-		Vector2	Start = m_CurrentAnimation->m_Sequence->GetFrameData(m_CurrentAnimation->m_Frame).Start;
-		Vector2	FrameSize = m_CurrentAnimation->m_Sequence->GetFrameData(m_CurrentAnimation->m_Frame).Size;
-
-		StartUV = Start / Vector2((float)m_CurrentAnimation->m_Sequence->GetTexture()->GetWidth(), (float)m_CurrentAnimation->m_Sequence->GetTexture()->GetHeight());
-
-		EndUV = (Start + FrameSize) / Vector2((float)m_CurrentAnimation->m_Sequence->GetTexture()->GetWidth(), (float)m_CurrentAnimation->m_Sequence->GetTexture()->GetHeight());
-
-		if (m_CBuffer)
-		{
-			m_CBuffer->SetAnimation2DType(m_CurrentAnimation->m_Sequence->GetTexture()->GetImageType());
-
-			m_CBuffer->SetStartUV(StartUV);
-			m_CBuffer->SetEndUV(EndUV);
-
-			m_CBuffer->SetFlip(m_Flip);
-
-			m_CBuffer->UpdateCBuffer();
-		}
-	}
-		break;
-	case Image_Type::Frame:
-	{
-		int Frame = m_CurrentAnimation->m_Frame;
-
-		if (m_CBuffer)
-		{
-			m_CBuffer->SetAnimation2DType(m_CurrentAnimation->m_Sequence->GetTexture()->GetImageType());
-
-			m_CBuffer->SetStartUV(Vector2(0.f, 0.f));
-			m_CBuffer->SetEndUV(Vector2(1.f, 1.f));
-
-			m_CBuffer->SetFlip(m_Flip);
-
-			m_CBuffer->UpdateCBuffer();
-		}
-
-		m_CurrentAnimation->m_Sequence->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, Frame);
-	}
-		break;
-	case Image_Type::Array:
-		break;
-	default:
-		break;
-	}*/
-
 }
 
 void CAnimationSequence2DInstance::ResetShader()

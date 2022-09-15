@@ -68,7 +68,7 @@ bool CNumber::SetTextureFullPath(const std::string& Name, const TCHAR* FullPath)
 	return true;
 }
 
-bool CNumber::SetTexture(const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+bool CNumber::SetTexture(const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	if (m_Owner->GetViewport())
 	{
@@ -92,7 +92,7 @@ bool CNumber::SetTexture(const std::string& Name, const std::vector<TCHAR*>& vec
 	return true;
 }
 
-bool CNumber::SetTextureFullPath(const std::string& Name, const std::vector<TCHAR*>& vecFullPath)
+bool CNumber::SetTextureFullPath(const std::string& Name, const std::vector<const TCHAR*>& vecFullPath)
 {
 	if (m_Owner->GetViewport())
 	{

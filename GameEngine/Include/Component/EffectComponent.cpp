@@ -91,7 +91,7 @@ void CEffectComponent::AddTextureFullPath(int Register, int ShaderType, const st
 	m_Material->AddTextureFullPath(Register, ShaderType, Name, FullPath);
 }
 
-void CEffectComponent::AddTexture(int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+void CEffectComponent::AddTexture(int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	m_Material->AddTexture(Register, ShaderType, Name, vecFileName, PathName);
 }
@@ -111,8 +111,7 @@ void CEffectComponent::SetTextureFullPath(int Index, int Register, int ShaderTyp
 	m_Material->SetTextureFullPath(Index, Register, ShaderType, Name, FullPath);
 }
 
-void CEffectComponent::SetTexture(int Index, int Register, int ShaderType, const std::string& Name,
-	const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+void CEffectComponent::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	m_Material->SetTexture(Index, Register, ShaderType, Name, vecFileName, PathName);
 }

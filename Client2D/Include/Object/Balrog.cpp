@@ -98,7 +98,7 @@ CBalrog* CBalrog::Clone()
 
 void CBalrog::InitAnimation()
 {
-	std::vector<TCHAR*> vecFileName;
+	std::vector<const TCHAR*> vecFileName;
 
 	for (int i = 1; i <= 12; i++)
 	{

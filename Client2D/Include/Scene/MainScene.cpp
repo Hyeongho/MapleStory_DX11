@@ -66,7 +66,7 @@ bool CMainScene::Init()
 
 	SetPlayerObject(Player);
 
-	Player->SetWorldPos(100.f, 400.f, 0.f);
+	Player->SetWorldPos(100.f, 500.f, 0.f);
 
 	//Player->SetRange(2000.f, 800.f, 0.f);
 	Player->SetRange(Vector3(0.f, 0.f, 0.f), Vector3(2000.f, 800.f, 0.f));

@@ -9,7 +9,7 @@
 DEFINITION_SINGLE(CInput)
 
 CInput::CInput() : m_hInst(0), m_hWnd(0), m_Input(nullptr), m_Keyboard(nullptr), m_Mouse(nullptr), m_KeyArray{},
-	m_LButtonClick(false), m_RButtonClick(false), m_CollisionWidget(false)
+	m_LButtonClick(false), m_RButtonClick(false), m_CollisionWidget(false), m_KeyInput(true)
 {
 	m_vecKeyState.resize(256);
 
@@ -197,6 +197,11 @@ void CInput::Update(float DeltaTime)
 	{
 		ReadDirectInputKeyboard();
 		ReadDirectInputMouse();
+	}
+
+	if (!m_KeyInput)
+	{
+		return;
 	}
 
 	// 마우스 입력처리를 한다.

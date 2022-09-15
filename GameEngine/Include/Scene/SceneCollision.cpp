@@ -63,7 +63,7 @@ void CSceneCollision::Collision(float DeltaTime)
 			continue;
 		}
 
-		++iter;
+		iter++;
 	}
 
 	// 충돌체들을 각 자의 영역으로 포함시켜주도록 한다.
@@ -73,7 +73,7 @@ void CSceneCollision::Collision(float DeltaTime)
 	iter = m_ColliderList.begin();
 	iterEnd = m_ColliderList.end();
 
-	for (; iter != iterEnd; ++iter)
+	for (; iter != iterEnd; iter++)
 	{
 		if ((*iter)->GetCurrentSectionCheck())
 		{
@@ -310,8 +310,7 @@ void CSceneCollision::CreateSection()
 			{
 				CCollisionSection* Section = new CCollisionSection;
 
-				Section->Init(x, y, z, z * (m_Section->CountX * m_Section->CountY) + y * m_Section->CountX + x, 
-					m_Section->Min, m_Section->Max, m_Section->SectionSize, m_Section->SectionTotalSize);
+				Section->Init(x, y, z, z * (m_Section->CountX * m_Section->CountY) + y * m_Section->CountX + x, m_Section->Min, m_Section->Max, m_Section->SectionSize, m_Section->SectionTotalSize);
 
 				m_Section->vecSection.push_back(Section);
 			}

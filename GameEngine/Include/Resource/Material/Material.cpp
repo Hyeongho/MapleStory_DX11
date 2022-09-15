@@ -142,8 +142,10 @@ void CMaterial::AddTexture(int Register, int ShaderType, const std::string& Name
 
 void CMaterial::AddTextureFullPath(int Register, int ShaderType, const std::string& Name, const TCHAR* FullPath)
 {
-	/*if (!CResourceManager::GetInst()->LoadTexture(Name, FileName, PathName))
+	if (!CResourceManager::GetInst()->LoadTextureFullPath(Name, FullPath))
+	{
 		return;
+	}
 
 	m_TextureInfo.push_back(MaterialTextureInfo());
 
@@ -152,13 +154,15 @@ void CMaterial::AddTextureFullPath(int Register, int ShaderType, const std::stri
 	m_TextureInfo[Index].Register = Register;
 	m_TextureInfo[Index].Name = Name;
 	m_TextureInfo[Index].Texture = CResourceManager::GetInst()->FindTexture(Name);
-	m_TextureInfo[Index].ShaderType = ShaderType;*/
+	m_TextureInfo[Index].ShaderType = ShaderType;
 }
 
-void CMaterial::AddTexture(int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+void CMaterial::AddTexture(int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
-	/*if (!CResourceManager::GetInst()->LoadTexture(Name, FileName, PathName))
+	if (!CResourceManager::GetInst()->LoadTexture(Name, vecFileName, PathName))
+	{
 		return;
+	}
 
 	m_TextureInfo.push_back(MaterialTextureInfo());
 
@@ -167,32 +171,11 @@ void CMaterial::AddTexture(int Register, int ShaderType, const std::string& Name
 	m_TextureInfo[Index].Register = Register;
 	m_TextureInfo[Index].Name = Name;
 	m_TextureInfo[Index].Texture = CResourceManager::GetInst()->FindTexture(Name);
-	m_TextureInfo[Index].ShaderType = ShaderType;*/
+	m_TextureInfo[Index].ShaderType = ShaderType;
 }
 
 void CMaterial::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, CTexture* Texture)
 {
-	/*if (Texture->GetImageType() == Image_Type::Atlas)
-	{
-		m_TextureInfo[Index].Register = Register;
-		m_TextureInfo[Index].Name = Name;
-		m_TextureInfo[Index].Texture = Texture;
-		m_TextureInfo[Index].ShaderType = ShaderType;
-	}
-
-	else if (Texture->GetImageType() == Image_Type::Frame)
-	{
-		if (Texture->GetImageCount() != m_TextureInfo.size())
-		{
-			m_TextureInfo.resize(Texture->GetImageCount());
-		}
-
-		m_TextureInfo[Index].Register = Register;
-		m_TextureInfo[Index].Name = Name;
-		m_TextureInfo[Index].Texture = CResourceManager::GetInst()->FindTexture(Name);
-		m_TextureInfo[Index].ShaderType = ShaderType;
-	}*/
-
 	m_TextureInfo[Index].Register = Register;
 	m_TextureInfo[Index].Name = Name;
 	m_TextureInfo[Index].Texture = Texture;
@@ -242,41 +225,7 @@ void CMaterial::SetTextureFullPath(int Index, int Register, int ShaderType, cons
 	m_TextureInfo[Index].ShaderType = ShaderType;
 }
 
-void CMaterial::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
-{
-	/*if (!CResourceManager::GetInst()->LoadTexture(Name, FileName, PathName))
-		return;
-
-	m_TextureInfo[Index].Register = Register;
-	m_TextureInfo[Index].Name = Name;
-	m_TextureInfo[Index].Texture = CResourceManager::GetInst()->FindTexture(Name);
-	m_TextureInfo[Index].ShaderType = ShaderType;*/
-
-	CTexture* Texture = nullptr;
-
-	if (Texture->GetImageType() == Image_Type::Atlas)
-	{
-		m_TextureInfo[Index].Register = Register;
-		m_TextureInfo[Index].Name = Name;
-		m_TextureInfo[Index].Texture = Texture;
-		m_TextureInfo[Index].ShaderType = ShaderType;
-	}
-
-	else if (Texture->GetImageType() == Image_Type::Frame)
-	{
-		if (Texture->GetImageCount() != m_TextureInfo.size())
-		{
-			m_TextureInfo.resize(Texture->GetImageCount());
-		}
-
-		m_TextureInfo[Index].Register = Register;
-		m_TextureInfo[Index].Name = Name;
-		m_TextureInfo[Index].Texture = CResourceManager::GetInst()->FindTexture(Name);
-		m_TextureInfo[Index].ShaderType = ShaderType;
-	}
-}
-
-void CMaterial::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName)
+void CMaterial::SetTexture(int Index, int Register, int ShaderType, const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	CTexture* Texture = nullptr;
 
@@ -302,8 +251,13 @@ void CMaterial::SetTexture(int Index, int Register, int ShaderType, const std::s
 
 	m_TextureInfo[Index].Register = Register;
 	m_TextureInfo[Index].Name = Name;
-	m_TextureInfo[Index].Texture = CResourceManager::GetInst()->FindTexture(Name);
+	m_TextureInfo[Index].Texture = Texture;
 	m_TextureInfo[Index].ShaderType = ShaderType;
+}
+
+void CMaterial::SetTextureFrameIndex(int TexIndex, int FrameIndex)
+{
+	m_TextureInfo[TexIndex].Index = FrameIndex;
 }
 
 void CMaterial::SetPaperBurn(bool Enable)
@@ -343,10 +297,7 @@ void CMaterial::Render()
 
 	for (size_t i = 0; i < Size; i++)
 	{
-		if (m_TextureInfo[i].Texture->GetImageType() == Image_Type::Atlas)
-		{
-			m_TextureInfo[i].Texture->SetShader(m_TextureInfo[i].Register, m_TextureInfo[i].ShaderType, (int)i);
-		}
+		m_TextureInfo[i].Texture->SetShader(m_TextureInfo[i].Register, m_TextureInfo[i].ShaderType, m_TextureInfo[i].Index);
 	}
 
 	auto iter = m_RenderCallback.begin();

@@ -17,7 +17,7 @@ protected:
 private:
     CSharedPtr<CNumber> m_Number;
 
-    std::vector<TCHAR*> m_vecFileName;
+    std::vector<const TCHAR*> m_vecFileName;
 
     float m_Opacity;
 

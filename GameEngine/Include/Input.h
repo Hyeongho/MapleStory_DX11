@@ -58,6 +58,8 @@ private:
 	Vector2 m_MouseMove;
 	bool m_CollisionWidget;
 
+	bool m_KeyInput;
+
 public:
 	bool GetMouseLButtonClick()	const
 	{
@@ -114,7 +116,11 @@ private:
 	void UpdateKeyState();
 	void UpdateKeyInfo(float DeltaTime);
 
-
+public:
+	void SetKeyInput(bool Input)
+	{
+		m_KeyInput = Input;
+	}
 
 public:
 	void ClearCallback();

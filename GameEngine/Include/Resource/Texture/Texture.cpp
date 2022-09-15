@@ -202,7 +202,7 @@ bool CTexture::LoadTextureFullPath(const std::string& Name, const TCHAR* FullPat
 	return CreateResource(0);
 }
 
-bool CTexture::LoadTexture(const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+bool CTexture::LoadTexture(const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	m_ImageType = Image_Type::Frame;
 
@@ -303,112 +303,7 @@ bool CTexture::LoadTexture(const std::string& Name, const std::vector<TCHAR*>& v
 	return true;
 }
 
-bool CTexture::LoadTexture(const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName)
-{
-	m_ImageType = Image_Type::Frame;
-
-	SetName(Name);
-
-	const PathInfo* Path = CPathManager::GetInst()->FindPath(PathName);
-
-	std::vector<std::wstring> vecFullPath;
-
-	size_t Size = vecFileName.size();
-
-	vecFullPath.resize(Size);
-
-	for (size_t i = 0; i < Size; i++)
-	{
-		TextureResourceInfo* Info = new TextureResourceInfo;
-
-		TCHAR* FullPath = new TCHAR[MAX_PATH];
-		memset(FullPath, 0, sizeof(TCHAR) * MAX_PATH);
-
-		if (Path)
-		{
-			lstrcpy(FullPath, Path->Path);
-		}
-
-		lstrcat(FullPath, vecFileName[i].c_str());
-
-		Info->FullPath = FullPath;
-
-		Info->FileName = new TCHAR[MAX_PATH];
-		memset(Info->FileName, 0, sizeof(TCHAR) * MAX_PATH);
-
-		lstrcpy(Info->FileName, vecFileName[i].c_str());
-
-		Info->PathName = new char[MAX_PATH];
-		memset(Info->PathName, 0, sizeof(char) * MAX_PATH);
-
-		strcpy_s(Info->PathName, PathName.length() + 1, PathName.c_str());
-
-		char Ext[_MAX_EXT] = {};
-		char FullPathMultibyte[MAX_PATH] = {};
-
-#ifdef UNICODE
-
-		int	ConvertLength = WideCharToMultiByte(CP_ACP, 0, FullPath, -1, nullptr, 0, nullptr, nullptr);
-		WideCharToMultiByte(CP_ACP, 0, FullPath, -1, FullPathMultibyte, ConvertLength, nullptr, nullptr);
-
-#else
-
-		strcpy_s(FullPathMultibyte, FullPath);
-
-#endif // UNICODE
-
-		_splitpath_s(FullPathMultibyte, nullptr, 0, nullptr, 0, nullptr, 0, Ext, _MAX_EXT);
-
-		_strupr_s(Ext);
-
-		ScratchImage* Image = new ScratchImage;
-
-		if (strcmp(Ext, ".DDS") == 0)
-		{
-			if (FAILED(LoadFromDDSFile(FullPath, DDS_FLAGS_NONE, nullptr, *Image)))
-			{
-				SAFE_DELETE(Info);
-				SAFE_DELETE(Image);
-				return false;
-			}
-		}
-
-		else if (strcmp(Ext, ".TGA") == 0)
-		{
-			if (FAILED(LoadFromTGAFile(FullPath, nullptr, *Image)))
-			{
-				SAFE_DELETE(Info);
-				SAFE_DELETE(Image);
-				return false;
-			}
-		}
-
-		else
-		{
-			if (FAILED(LoadFromWICFile(FullPath, WIC_FLAGS_NONE, nullptr, *Image)))
-			{
-				SAFE_DELETE(Info);
-				SAFE_DELETE(Image);
-				return false;
-			}
-		}
-
-		Info->Image = Image;
-
-		m_vecTextureInfo.push_back(Info);
-
-		if (!CreateResource((int)i))
-		{
-			return false;
-		}
-	}
-
-	//CreateResourceArray();
-
-	return true;
-}
-
-bool CTexture::LoadTextureFullPath(const std::string& Name, const std::vector<TCHAR*>& vecFullPath)
+bool CTexture::LoadTextureFullPath(const std::string& Name, const std::vector<const TCHAR*>& vecFullPath)
 {
 	m_ImageType = Image_Type::Frame;
 

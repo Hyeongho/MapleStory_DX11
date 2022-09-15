@@ -99,7 +99,7 @@ bool CTextureManager::LoadTextureFullPath(const std::string& Name, const TCHAR* 
 	return true;
 }
 
-bool CTextureManager::LoadTexture(const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+bool CTextureManager::LoadTexture(const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	CTexture* Texture = FindTexture(Name);
 
@@ -121,29 +121,7 @@ bool CTextureManager::LoadTexture(const std::string& Name, const std::vector<TCH
 	return true;
 }
 
-bool CTextureManager::LoadTexture(const std::string& Name, const std::vector<std::wstring>& vecFileName, const std::string& PathName)
-{
-	CTexture* Texture = FindTexture(Name);
-
-	if (Texture)
-	{
-		return true;
-	}
-
-	Texture = new CTexture;
-
-	if (!Texture->LoadTexture(Name, vecFileName, PathName))
-	{
-		SAFE_RELEASE(Texture);
-		return false;
-	}
-
-	m_mapTexture.insert(std::make_pair(Name, Texture));
-
-	return true;
-}
-
-bool CTextureManager::LoadTextureFullPath(const std::string& Name, const std::vector<TCHAR*>& vecFullPath)
+bool CTextureManager::LoadTextureFullPath(const std::string& Name, const std::vector<const TCHAR*>& vecFullPath)
 {
 	CTexture* Texture = FindTexture(Name);
 

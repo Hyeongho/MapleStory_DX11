@@ -66,7 +66,7 @@ bool CImage::SetTextureFullPath(const std::string& Name,
 	return true;
 }
 
-bool CImage::SetTexture(const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName)
+bool CImage::SetTexture(const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName)
 {
 	if (m_Owner->GetViewport())
 	{
@@ -90,7 +90,7 @@ bool CImage::SetTexture(const std::string& Name, const std::vector<TCHAR*>& vecF
 	return true;
 }
 
-bool CImage::SetTextureFullPath(const std::string& Name, const std::vector<TCHAR*>& vecFullPath)
+bool CImage::SetTextureFullPath(const std::string& Name, const std::vector<const TCHAR*>& vecFullPath)
 {
 	if (m_Owner->GetViewport())
 	{

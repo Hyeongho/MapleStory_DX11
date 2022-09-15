@@ -46,8 +46,8 @@ public:
 
 	bool SetTexture(const std::string& Name, const TCHAR* FileName, const std::string& PathName = TEXTURE_PATH);
 	bool SetTextureFullPath(const std::string& Name, const TCHAR* FullPath);
-	bool SetTexture(const std::string& Name, const std::vector<TCHAR*>& vecFileName, const std::string& PathName = TEXTURE_PATH);
-	bool SetTextureFullPath(const std::string& Name, const std::vector<TCHAR*>& vecFullPath);
+	bool SetTexture(const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName = TEXTURE_PATH);
+	bool SetTextureFullPath(const std::string& Name, const std::vector<const TCHAR*>& vecFullPath);
 	void SetTextureTint(const Vector4& Tint);
 	void SetTextureTint(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 	void AddFrameData(const Vector2& Start, const Vector2& Size);
