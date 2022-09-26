@@ -63,10 +63,10 @@ bool CBalrog::Init()
 
 	m_Anim->AddAnimation("BalrogBodyIdle", "BalrogBodyIdle", true);
 	m_Anim->AddAnimation("BalrogBodyDie", "BalrogBodyDie", false, 5.9f);
-	m_Anim->AddAnimation("BalrogBodyDie", "BalrogBodyAttack1", false, 2.4f);
-	m_Anim->AddAnimation("BalrogBodyDie", "BalrogBodyAttack2", false, 1.6f);
-	m_Anim->AddAnimation("BalrogBodyDie", "BalrogBodyAttack3", false, 1.9f);
-	m_Anim->AddAnimation("BalrogBodyDie", "BalrogBodyAttack4", false, 1.7f);
+	m_Anim->AddAnimation("BalrogBodyAttack1", "BalrogBodyAttack1", false, 2.4f);
+	m_Anim->AddAnimation("BalrogBodyAttack2", "BalrogBodyAttack2", false, 1.6f);
+	m_Anim->AddAnimation("BalrogBodyAttack3", "BalrogBodyAttack3", false, 1.9f);
+	m_Anim->AddAnimation("BalrogBodyAttack4", "BalrogBodyAttack4", false, 1.7f);
 
 	m_Anim->SetCurrentAnimation("BalrogBodyIdle");
 
