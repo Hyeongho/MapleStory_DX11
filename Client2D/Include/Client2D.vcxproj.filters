@@ -207,6 +207,9 @@
     <ClInclude Include="Object\BalrogRight.h">
       <Filter>02. Object\02. Monster\06. Balrog</Filter>
     </ClInclude>
+    <ClInclude Include="ClientSceneManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client2D.rc">
@@ -356,6 +359,9 @@
     </ClCompile>
     <ClCompile Include="Object\BalrogRight.cpp">
       <Filter>02. Object\02. Monster\06. Balrog</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSceneManager.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -28,24 +28,31 @@ void CSeolhuiuibang::Start()
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeIn_Start);
 	CClientManager::GetInst()->SetFade(false);
 	CPlayerManager::GetInst()->SetCurrentScene("Seolhuiuibang");
+
+	CPlayerManager::GetInst()->SetTagPotal(false);
 }
 
 bool CSeolhuiuibang::Init()
 {
+	if (m_LoadingFunction)
+	{
+		m_LoadingFunction(false, 0.f);
+	}
+
 	CreateMaterial();
 
 	CreateAnimationSequence();
 
 	if (m_LoadingFunction)
 	{
-		m_LoadingFunction(false, 0.6f);
+		m_LoadingFunction(false, 0.3f);
 	}
 
 	CreateMap();
 
 	if (m_LoadingFunction)
 	{
-		m_LoadingFunction(false, 0.3f);
+		m_LoadingFunction(false, 0.6f);
 	}
 
 	CPlayer2D* Player = m_Scene->CreateGameObject<CPlayer2D>("Player");
@@ -79,6 +86,11 @@ bool CSeolhuiuibang::Init()
 
 	m_PlayerStatus = m_Scene->GetViewport()->CreateWidgetWindow<CPlayerStatus>("PlayerStatus");
 	m_Fade = m_Scene->GetViewport()->CreateWidgetWindow<CFade>("FadeWidget");
+
+	if (m_LoadingFunction)
+	{
+		m_LoadingFunction(false, 0.9f);
+	}
 
 	return true;
 }

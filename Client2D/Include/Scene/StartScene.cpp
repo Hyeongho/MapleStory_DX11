@@ -50,6 +50,11 @@ bool CStartScene::Init()
 	m_StartWidget = m_Scene->GetViewport()->CreateWidgetWindow<CStartWidget>("StartWidget");
 	m_Fade = m_Scene->GetViewport()->CreateWidgetWindow<CFade>("FadeWidget");
 
+	if (m_LoadingFunction)
+	{
+		m_LoadingFunction(false, 0.9f);
+	}
+
 	return true;
 }
 

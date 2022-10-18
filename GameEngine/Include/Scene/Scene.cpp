@@ -10,28 +10,28 @@ CScene::CScene()
 	m_Collision = new CSceneCollision;
 	m_CameraManager = new CCameraManager;
 	m_Viewport = new CViewport;
-	m_NavManager = new CNavigationManager;
+	//m_NavManager = new CNavigationManager;
 
 	m_Mode->m_Scene = this;
 	m_Resource->m_Scene = this;
 	m_Collision->m_Scene = this;
 	m_CameraManager->m_Scene = this;	
 	m_Viewport->m_Scene = this;
-	m_NavManager->m_Scene = this;
+	//m_NavManager->m_Scene = this;
 
 	m_Start = false;
 
 	m_Collision->Init();
 	m_CameraManager->Init();
 	m_Viewport->Init();
-	m_NavManager->Init();
+	//m_NavManager->Init();
 
 	m_Change = true;
 }
 
 CScene::~CScene()
 {
-	SAFE_DELETE(m_NavManager);
+	//SAFE_DELETE(m_NavManager);
 	SAFE_DELETE(m_Viewport);
 	SAFE_DELETE(m_CameraManager);
 	SAFE_DELETE(m_Collision);

@@ -29,6 +29,8 @@ void CAnotherDoor::Start()
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeIn_Start);
 	CClientManager::GetInst()->SetFade(false);
 	CPlayerManager::GetInst()->SetCurrentScene("AnotherDoor");
+
+	CPlayerManager::GetInst()->SetTagPotal(false);
 }
 
 bool CAnotherDoor::Init()
@@ -86,6 +88,11 @@ bool CAnotherDoor::Init()
 
 	m_PlayerStatus = m_Scene->GetViewport()->CreateWidgetWindow<CPlayerStatus>("PlayerStatus");
 	m_Fade = m_Scene->GetViewport()->CreateWidgetWindow<CFade>("FadeWidget");
+
+	if (m_LoadingFunction)
+	{
+		m_LoadingFunction(false, 0.9f);
+	}
 
 	return true;
 }

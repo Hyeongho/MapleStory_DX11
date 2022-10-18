@@ -92,7 +92,7 @@ void CTaurospear::Update(float DeltaTime)
 {
 	CMonsterManager::Update(DeltaTime);
 
-	if (CClientManager::GetInst()->GetFade())
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}
@@ -102,7 +102,7 @@ void CTaurospear::PostUpdate(float DeltaTime)
 {
 	CMonsterManager::PostUpdate(DeltaTime);
 
-	if (CClientManager::GetInst()->GetFade())
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}
@@ -176,6 +176,13 @@ void CTaurospear::AIAttack(float DeltaTime)
 void CTaurospear::AIDeath(float DeltaTime)
 {
 	CMonsterManager::AIDeath(DeltaTime);
+
+	m_Body->Destroy();
+	m_Sensor->Destroy();
+	m_AttackBody->Destroy();
+	m_AttackRange->Destroy();
+
+	m_Anim->ChangeAnimation("Die");
 }
 
 void CTaurospear::CollisionCallbackBegin(const CollisionResult& result)
@@ -190,10 +197,14 @@ void CTaurospear::CollisionCallbackEnd(const CollisionResult& result)
 void CTaurospear::AttackBegin(const CollisionResult& result)
 {
 	CMonsterManager::AttackBegin(result);
+
+	m_Attack = true;
+	m_Hurt = true;
 }
 
 void CTaurospear::AttackEnd(const CollisionResult& result)
 {
+	m_Attack = false;
 }
 
 void CTaurospear::AnimationFinish()

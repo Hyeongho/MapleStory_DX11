@@ -61,7 +61,6 @@ void CNavigationManager::Start()
 
 bool CNavigationManager::Init()
 {
-
 	return true;
 }
 

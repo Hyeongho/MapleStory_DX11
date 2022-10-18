@@ -67,34 +67,17 @@ bool CPotal::Init()
 
 void CPotal::Update(float DeltaTime)
 {
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
+	{
+		return;
+	}
+
 	CGameObject::Update(DeltaTime);
 }
 
 void CPotal::PostUpdate(float DeltaTime)
 {
 	CGameObject::PostUpdate(DeltaTime);
-
-	CFade* Fade = (CFade*)m_Scene->GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
-
-	if (Fade)
-	{
-		std::string CurrentScene = CPlayerManager::GetInst()->GetCurrnetScene();
-
-		if (CClientManager::GetInst()->GetFadeState() == EFade_State::FadeOut_End)
-		{
-			if (CurrentScene == "MainScene")
-			{
-				CSceneManager::GetInst()->CreateNextScene();
-				CSceneManager::GetInst()->CreateSceneMode<CLoadingSeolhuiui>(false);
-			}
-
-			else if (CurrentScene == "AnotherDoor")
-			{
-				CSceneManager::GetInst()->CreateNextScene();
-				CSceneManager::GetInst()->CreateSceneMode<CLoadingEToTemple>(false);
-			}
-		}	
-	}
 }
 
 CPotal* CPotal::Clone()

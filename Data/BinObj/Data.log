@@ -1,1 +1,6 @@
-﻿  Data.vcxproj -> H:\C++_Client\MapleStory_DX11\Data\Bin\Data_Debug.exe
+﻿  DataManager.cpp
+  DefaultScene.cpp
+  DataWindow.cpp
+  DataWindowTable.cpp
+  코드를 생성하고 있습니다...
+  Data.vcxproj -> D:\C++_Client\MapleStory_DX11\Data\Bin\Data_Debug.exe

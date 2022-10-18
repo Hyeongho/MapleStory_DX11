@@ -33,6 +33,11 @@ bool CMonsterManager::Init()
 
 void CMonsterManager::Update(float DeltaTime)
 {
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
+	{
+		return;
+	}
+
 	CObjectManager::Update(DeltaTime);
 
 	if (m_CharacterInfo.HP <= 0)

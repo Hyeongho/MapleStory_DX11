@@ -45,8 +45,6 @@ void CLoadingScene::Update(float DeltaTime)
 		if (Msg.Complete)
 		{
 			CSceneManager::GetInst()->ChangeNextScene();
-
-			CPlayerManager::GetInst()->SetTagPotal(false);
 		}
 	}
 }

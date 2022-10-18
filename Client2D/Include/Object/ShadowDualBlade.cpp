@@ -108,7 +108,7 @@ void CShadowDualBlade::Update(float DeltaTime)
 {
 	CMonsterManager::Update(DeltaTime);
 
-	if (CClientManager::GetInst()->GetFade())
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}
@@ -118,7 +118,7 @@ void CShadowDualBlade::PostUpdate(float DeltaTime)
 {
 	CMonsterManager::PostUpdate(DeltaTime);
 
-	if (CClientManager::GetInst()->GetFade())
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}

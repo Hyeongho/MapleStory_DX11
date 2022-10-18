@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "resource.h"
 #include "TalkManager.h"
+#include "ClientSceneManager.h"
 #include "Scene/SceneManager.h"
 #include "Scene/StartScene.h"
 #include "Scene/MainScene.h"
@@ -30,6 +31,7 @@ CClientManager::~CClientManager()
 
 	CPlayerManager::DestroyInst();
 	CTalkManager::DestroyInst();
+	CClientSceneManager::DestroyInst();
 }
 
 bool CClientManager::Init(HINSTANCE hInst)
@@ -46,6 +48,11 @@ bool CClientManager::Init(HINSTANCE hInst)
 	}
 
 	if (!CTalkManager::GetInst()->Init())
+	{
+		return false;
+	}
+
+	if (!CClientSceneManager::GetInst()->Init())
 	{
 		return false;
 	}

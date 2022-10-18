@@ -24,6 +24,8 @@ bool CSeolhuiuiThread::Init()
 void CSeolhuiuiThread::Run()
 {
 	// ·Îµù
+	Sleep(1000);
+
 	CSceneManager::GetInst()->CreateNextScene(false);
 	CSeolhuiuibang* Seolhuiuibang = CSceneManager::GetInst()->CreateSceneModeEmpty<CSeolhuiuibang>(false);
 

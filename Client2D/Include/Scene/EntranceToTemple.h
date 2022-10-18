@@ -18,6 +18,8 @@ private:
     CSharedPtr<CFade> m_Fade;
     std::function<void(bool, float)> m_LoadingFunction;
 
+    std::list<CGameObject*> m_MonsterList;
+
 public:
     virtual void Start();
     virtual bool Init();
@@ -28,6 +30,8 @@ private:
     void CreateAnimationSequence();
     void CreateMap();
     void LoadSound();
+
+    void CreatePotal();
 
 public:
     template <typename T>

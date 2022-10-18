@@ -24,6 +24,8 @@ bool CLoadingThread::Init()
 void CLoadingThread::Run()
 {
 	// ·Îµù
+	Sleep(1000);
+
 	CSceneManager::GetInst()->CreateNextScene(false);
 	CMainScene* MainScene = CSceneManager::GetInst()->CreateSceneModeEmpty<CMainScene>(false);
 

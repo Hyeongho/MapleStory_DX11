@@ -3,6 +3,7 @@
 #include "Device.h"
 #include "../ClientManager.h"
 #include "Scene/Scene.h"
+#include "../ClientSceneManager.h"
 
 CFade::CFade() : m_Opacity(1.0f)
 {
@@ -80,6 +81,8 @@ void CFade::PostUpdate(float DeltaTime)
 		{
 			m_Opacity = 1.f;
 			CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_End);
+
+			CClientSceneManager::GetInst()->ChangeScene();
 		}
 
 		m_FadeImage->SetOpacity(m_Opacity);

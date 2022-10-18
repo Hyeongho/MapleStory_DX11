@@ -28,6 +28,8 @@ void CEntranceToTemple::Start()
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeIn_Start);
 	CClientManager::GetInst()->SetFade(false);
 	CPlayerManager::GetInst()->SetCurrentScene("EntranceToTemple");
+
+	CPlayerManager::GetInst()->SetTagPotal(false);
 }
 
 bool CEntranceToTemple::Init()
@@ -75,11 +77,15 @@ bool CEntranceToTemple::Init()
 
 	Tauromacis->SetRange(2144.f, 750.f, 0.f);
 
-	/*CTaurospear* Taurospear = m_Scene->CreateGameObject<CTaurospear>("Taurospear");
+	m_MonsterList.push_back(Tauromacis);
 
-	Taurospear->SetWorldPos(600.f, 250.f, 1.f);
+	CTaurospear* Taurospear = m_Scene->CreateGameObject<CTaurospear>("Taurospear");
 
-	Taurospear->SetRange(2144.f, 750.f, 0.f);*/
+	Taurospear->SetWorldPos(800.f, 250.f, 1.f);
+
+	Taurospear->SetRange(2144.f, 750.f, 0.f);
+
+	m_MonsterList.push_back(Taurospear);
 
 	if (m_LoadingFunction)
 	{
@@ -93,11 +99,33 @@ bool CEntranceToTemple::Init()
 	m_PlayerStatus = m_Scene->GetViewport()->CreateWidgetWindow<CPlayerStatus>("PlayerStatus");
 	m_Fade = m_Scene->GetViewport()->CreateWidgetWindow<CFade>("FadeWidget");
 
+	if (m_LoadingFunction)
+	{
+		m_LoadingFunction(false, 0.9f);
+	}
+
 	return true;
 }
 
 void CEntranceToTemple::PostUpdate(float DeltaTime)
 {
+	auto iter = m_MonsterList.begin();
+	auto iterEnd = m_MonsterList.end();
+
+	for ( ; iter != iterEnd; )
+	{
+		if (!(*iter)->IsActive())
+		{
+			iter = m_MonsterList.erase(iter);
+			iterEnd = m_MonsterList.end();
+			continue;
+		}
+
+		else
+		{
+			iter++;
+		}
+	}
 }
 
 void CEntranceToTemple::CreateMaterial()
@@ -128,5 +156,9 @@ void CEntranceToTemple::CreateMap()
 }
 
 void CEntranceToTemple::LoadSound()
+{
+}
+
+void CEntranceToTemple::CreatePotal()
 {
 }

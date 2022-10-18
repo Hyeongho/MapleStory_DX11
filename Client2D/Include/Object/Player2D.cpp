@@ -168,7 +168,7 @@ void CPlayer2D::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
 
-	if (CClientManager::GetInst()->GetFadeState() != EFade_State::Normal)
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}

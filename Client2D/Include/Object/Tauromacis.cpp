@@ -42,7 +42,7 @@ bool CTauromacis::Init()
 
 	m_Sprite = CreateComponent<CSpriteComponent>("Tauromacis");
 	m_Body = CreateComponent<CColliderBox2D>("Body");
-	m_Sensor = CreateComponent<CColliderBox2D>("Sensor");
+	//m_Sensor = CreateComponent<CColliderBox2D>("Sensor");
 	m_AttackBody = CreateComponent<CColliderBox2D>("AttackBody");
 	m_AttackRange = CreateComponent<CColliderBox2D>("AttackRange");
 	m_Muzzle = CreateComponent<CSceneComponent>("TauromacisMuzzle");
@@ -50,18 +50,18 @@ bool CTauromacis::Init()
 	SetRootComponent(m_Sprite);
 
 	m_Body->SetCollisionProfile("Monster");
-	m_Sensor->SetCollisionProfile("Monster");
+	//m_Sensor->SetCollisionProfile("Monster");
 	m_AttackBody->SetCollisionProfile("MonsterAttack");
 	m_AttackRange->SetCollisionProfile("MonsterAttack");
 
-	m_Sensor->AddCollisionCallback<CTauromacis>(Collision_State::Begin, this, &CMonsterManager::CollisionCallbackBegin);
-	m_Sensor->AddCollisionCallback<CTauromacis>(Collision_State::End, this, &CTauromacis::CollisionCallbackEnd);
+	/*m_Sensor->AddCollisionCallback<CTauromacis>(Collision_State::Begin, this, &CMonsterManager::CollisionCallbackBegin);
+	m_Sensor->AddCollisionCallback<CTauromacis>(Collision_State::End, this, &CTauromacis::CollisionCallbackEnd);*/
 
 	m_AttackBody->AddCollisionCallback<CTauromacis>(Collision_State::Begin, this, &CMonsterManager::AttackBegin);
 	m_AttackBody->AddCollisionCallback<CTauromacis>(Collision_State::End, this, &CTauromacis::AttackEnd);
 
 	m_Sprite->AddChild(m_Body);
-	m_Sprite->AddChild(m_Sensor);
+	//m_Sprite->AddChild(m_Sensor);
 	m_Sprite->AddChild(m_AttackBody);
 	m_Sprite->AddChild(m_AttackRange);
 	m_Sprite->AddChild(m_Muzzle);
@@ -89,7 +89,7 @@ bool CTauromacis::Init()
 
 	m_AttackBody->SetExtent(404.f, 240.f);
 
-	m_Sensor->SetExtent(150.f, 30.5f);
+	//m_Sensor->SetExtent(150.f, 30.5f);
 
 	m_Anim->SetAnimFlip(true);
 
@@ -111,7 +111,7 @@ void CTauromacis::Update(float DeltaTime)
 {
 	CMonsterManager::Update(DeltaTime);
 
-	if (CClientManager::GetInst()->GetFade())
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}
@@ -121,7 +121,7 @@ void CTauromacis::PostUpdate(float DeltaTime)
 {
 	CMonsterManager::PostUpdate(DeltaTime);
 
-	if (CClientManager::GetInst()->GetFade())
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
 	}

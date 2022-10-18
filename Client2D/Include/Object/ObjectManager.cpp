@@ -57,6 +57,11 @@ bool CObjectManager::Init()
 
 void CObjectManager::Update(float DeltaTime)
 {
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
+	{
+		return;
+	}
+
 	CGameObject::Update(DeltaTime);
 }
 

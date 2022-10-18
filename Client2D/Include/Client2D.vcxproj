@@ -165,6 +165,7 @@
     <ClInclude Include="ClientFlag.h" />
     <ClInclude Include="ClientInfo.h" />
     <ClInclude Include="ClientManager.h" />
+    <ClInclude Include="ClientSceneManager.h" />
     <ClInclude Include="Object\Balrog.h" />
     <ClInclude Include="Object\BalrogLeft.h" />
     <ClInclude Include="Object\BalrogRight.h" />
@@ -219,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientManager.cpp" />
+    <ClCompile Include="ClientSceneManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object\Balrog.cpp" />
     <ClCompile Include="Object\BalrogLeft.cpp" />
