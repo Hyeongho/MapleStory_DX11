@@ -379,6 +379,11 @@ void CPlayer2D::MoveUp(float DeltaTime)
 		return;
 	}
 
+	if (m_State == EPlayer_State::PhantomBlow || m_State == EPlayer_State::BladeFury)
+	{
+		return;
+	}
+
 	if (CPlayerManager::GetInst()->GetTagPotal())
 	{
 		if (m_State != EPlayer_State::Idle)
@@ -387,15 +392,23 @@ void CPlayer2D::MoveUp(float DeltaTime)
 		}
 
 		CClientManager::GetInst()->SetFade(true);
-		//CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
-	
+		CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
+
 		return;
 	}
 
-	if (m_State == EPlayer_State::PhantomBlow || m_State == EPlayer_State::BladeFury)
+	/*if (!m_Body->CheckPrevCollisionGameObjectType(typeid(CPortal).hash_code()))
 	{
+		if (m_State != EPlayer_State::Idle)
+		{
+			m_State = EPlayer_State::Idle;
+		}
+
+		CClientManager::GetInst()->SetFade(true);
+		CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
+
 		return;
-	}
+	}*/
 }
 
 void CPlayer2D::Stop(float DeltaTime)

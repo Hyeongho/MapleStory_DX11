@@ -48,3 +48,7 @@ void CLoadingEToTemple::Update(float DeltaTime)
 		}
 	}
 }
+
+void CLoadingEToTemple::SceneChangeComplete()
+{
+}

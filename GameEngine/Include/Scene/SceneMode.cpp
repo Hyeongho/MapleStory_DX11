@@ -3,7 +3,7 @@
 
 CSceneMode::CSceneMode()
 {
-	SetTypeID<CSceneMode>();
+	//SetTypeID<CSceneMode>();
 }
 
 CSceneMode::~CSceneMode()
@@ -29,5 +29,9 @@ void CSceneMode::Update(float DeltaTime)
 }
 
 void CSceneMode::PostUpdate(float DeltaTime)
+{
+}
+
+void CSceneMode::SceneChangeComplete()
 {
 }

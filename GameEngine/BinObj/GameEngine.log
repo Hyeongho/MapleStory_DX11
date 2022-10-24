@@ -2,7 +2,9 @@
   CameraComponent.cpp
   ColliderBox2D.cpp
   ColliderCircle.cpp
+  ColliderComponent.cpp
   ColliderPixel.cpp
+  EffectComponent.cpp
   Gravity.cpp
   NavAgent.cpp
   PaperBurnComponent.cpp
@@ -16,18 +18,17 @@
   WidgetComponent.cpp
   Engine.cpp
   GameObject.cpp
-  Input.cpp
-  RenderManager.cpp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
+  Input.cpp
+  RenderManager.cpp
   AnimationSequence2D.cpp
   Material.cpp
   Particle.cpp
-  NavigationManager.cpp
-  NavigationThread.cpp
   Scene.cpp
   SceneCollision.cpp
   SceneManager.cpp
+  SceneMode.cpp
   SceneResource.cpp
   Button.cpp
   Image.cpp
@@ -54,8 +55,9 @@
   .\GameEngine\Bin\GameEngine_Debug.lib
   .\GameEngine\Bin\GameEngine_Debug.pdb
   3개 파일이 복사되었습니다.
-  .\GameEngine\Include\ThreadQueue.h
-  1개 파일이 복사되었습니다.
+  .\GameEngine\Include\Scene\Scene.h
+  .\GameEngine\Include\Scene\SceneMode.h
+  2개 파일이 복사되었습니다.
   파일을 찾을 수 없습니다-*.inl
   0개 파일이 복사되었습니다.
   0개 파일이 복사되었습니다.

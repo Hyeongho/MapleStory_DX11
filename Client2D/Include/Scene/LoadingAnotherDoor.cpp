@@ -48,3 +48,7 @@ void CLoadingAnotherDoor::Update(float DeltaTime)
 		}
 	}
 }
+
+void CLoadingAnotherDoor::SceneChangeComplete()
+{
+}

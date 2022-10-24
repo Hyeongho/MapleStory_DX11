@@ -40,10 +40,25 @@ void CThread::Pause()
 void CThread::Resume()
 {
 	DWORD Count = 0;
+
 	do
 	{
 		Count = ResumeThread(m_Thread);
 	} while (Count >= 0);
+}
+
+void CThread::Stop()
+{
+	if (m_Thread)
+	{
+		m_Loop = false;
+		Start();
+
+		// 스레드가 종료될때까지 기다린다.
+		WaitForSingleObject(m_Thread, INFINITE);
+		CloseHandle(m_Thread);
+		m_Thread = 0;
+	}
 }
 
 void CThread::WaitStartEvent()
@@ -55,9 +70,14 @@ unsigned int __stdcall CThread::ThreadFunction(void* Arg)
 {
 	CThread* Thread = (CThread*)Arg;
 
-	Thread->WaitStartEvent();
+	WaitForSingleObject(Thread->m_StartEvent, INFINITE);
 
-	Thread->Run();
+	//Sleep(1000);
+
+	do
+	{
+		Thread->Run();
+	} while (Thread->m_Loop);
 
 	return 0;
 }

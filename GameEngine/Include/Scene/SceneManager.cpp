@@ -59,6 +59,8 @@ bool CSceneManager::ChangeScene()
 
 			CRenderManager::GetInst()->SetObjectList(&m_Scene->m_ObjList);
 
+			m_Scene->SceneChangeComplete();
+
 			m_Scene->Start();
 
 			return true;

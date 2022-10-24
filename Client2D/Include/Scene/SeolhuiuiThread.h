@@ -20,7 +20,7 @@ public:
 		return &m_Queue;
 	}
 
-	void AddMessage(bool Complete, float Percent)
+	void AddMessage(bool Complete = 0.f, float Percent = 0.f)
 	{
 		LoadingMessage Msg;
 

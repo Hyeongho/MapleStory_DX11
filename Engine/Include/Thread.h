@@ -32,6 +32,7 @@ public:
 	void Start();
 	void Pause();
 	void Resume();
+	void Stop();
 
 private:
 	void WaitStartEvent();

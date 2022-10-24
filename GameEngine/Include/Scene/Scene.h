@@ -18,6 +18,7 @@ private:
 
 private:
 	CSharedPtr<CSceneMode> m_Mode;
+	//CSceneMode* m_Mode;
 	CSceneResource* m_Resource;
 	CSceneCollision* m_Collision;
 	CCameraManager* m_CameraManager;
@@ -44,6 +45,11 @@ public:
 	Project_Type GetProjectType() const
 	{
 		return m_ProjectType;
+	}
+
+	CSceneMode* GetSceneMode() const
+	{
+		return m_Mode;
 	}
 
 public:
@@ -106,6 +112,7 @@ public:
 	void SaveFullPath(const char* FullPath);
 	void Load(const char* FileName, const std::string& PathName = SCENE_PATH);
 	void LoadFullPath(const char* FullPath);
+	void SceneChangeComplete();
 
 public:
 	template <typename T>
@@ -140,7 +147,7 @@ public:
 		m_Mode = new T;
 
 		m_Mode->m_Scene = this;
-
+		
 		return true;
 	}
 

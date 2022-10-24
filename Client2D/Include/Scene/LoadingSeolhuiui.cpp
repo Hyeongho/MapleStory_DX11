@@ -21,9 +21,9 @@ bool CLoadingSeolhuiui::Init()
 	//m_LoadingWidget = m_Scene->GetViewport()->CreateWidgetWindow<CLoadingWidget>("LoadingWidget");
 
 	// 로딩 스레드 생성
-	m_LoadingThread = CThread::CreateThread<CSeolhuiuiThread>("SeolhuiuiThread");
+	/*m_LoadingThread = CThread::CreateThread<CSeolhuiuiThread>("SeolhuiuiThread");
 
-	m_LoadingThread->Start();
+	m_LoadingThread->Start();*/
 
 	return true;
 }
@@ -47,4 +47,12 @@ void CLoadingSeolhuiui::Update(float DeltaTime)
 			CSceneManager::GetInst()->ChangeNextScene();
 		}
 	}
+}
+
+void CLoadingSeolhuiui::SceneChangeComplete()
+{
+	// 로딩 스레드 생성
+	m_LoadingThread = CThread::CreateThread<CSeolhuiuiThread>("SeolhuiuiThread");
+
+	m_LoadingThread->Start();
 }

@@ -24,14 +24,15 @@ bool CSeolhuiuiThread::Init()
 void CSeolhuiuiThread::Run()
 {
 	// ·Îµù
-	Sleep(1000);
 
 	CSceneManager::GetInst()->CreateNextScene(false);
-	CSeolhuiuibang* Seolhuiuibang = CSceneManager::GetInst()->CreateSceneModeEmpty<CSeolhuiuibang>(false);
+	/*CSeolhuiuibang* Seolhuiuibang = CSceneManager::GetInst()->CreateSceneModeEmpty<CSeolhuiuibang>(false);
 
 	Seolhuiuibang->SetLoadingFunction<CSeolhuiuiThread>(this, &CSeolhuiuiThread::AddMessage);
 
-	Seolhuiuibang->Init();
+	Seolhuiuibang->Init();*/
+
+	CSceneManager::GetInst()->CreateSceneMode<CSeolhuiuibang>(false);
 
 	AddMessage(true, 1.f);
 }

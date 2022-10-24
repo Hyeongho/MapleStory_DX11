@@ -26,7 +26,7 @@ CScene::CScene()
 	m_Viewport->Init();
 	//m_NavManager->Init();
 
-	m_Change = true;
+	m_Change = false;
 }
 
 CScene::~CScene()
@@ -214,9 +214,9 @@ void CScene::SaveFullPath(const char* FullPath)
 		return;
 	}
 
-	size_t SceneModeType = m_Mode->GetTypeID();
+	//size_t SceneModeType = m_Mode->GetTypeID();
 
-	fwrite(&SceneModeType, sizeof(size_t), 1, File);
+	//fwrite(&SceneModeType, sizeof(size_t), 1, File);
 
 	size_t ObjCount = m_ObjList.size();
 
@@ -288,4 +288,9 @@ void CScene::LoadFullPath(const char* FullPath)
 	}
 
 	fclose(File);
+}
+
+void CScene::SceneChangeComplete()
+{
+	m_Mode->SceneChangeComplete();
 }

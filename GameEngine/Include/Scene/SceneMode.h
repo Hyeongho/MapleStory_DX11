@@ -1,11 +1,13 @@
 #pragma once
 
 #include "../Ref.h"
+#include "../GameInfo.h"
 
-class CSceneMode :
+class CSceneMode : 
 	public CRef
 {
 	friend class CScene;
+	friend class CSceneManager;
 
 protected:
 	CSceneMode();
@@ -28,5 +30,6 @@ public:
 	virtual bool Init();
 	virtual void Update(float DeltaTime);
 	virtual void PostUpdate(float DeltaTime);
+	virtual void SceneChangeComplete();
 };
 

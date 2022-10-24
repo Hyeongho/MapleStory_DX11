@@ -36,7 +36,7 @@ public:
 	{
 		CSync sync(&m_Crt);
 
-		int	Tail = (m_Tail + 1) % m_Capacity;
+		int	Tail = (m_Tail + 1) % 200;
 
 		if (Tail == m_Head)
 		{
@@ -59,7 +59,7 @@ public:
 
 		CSync sync(&m_Crt);
 
-		int	Head = (m_Head + 1) % m_Capacity;
+		int	Head = (m_Head + 1) % 200;
 
 		return m_Queue[Head];
 	}
@@ -73,7 +73,7 @@ public:
 
 		CSync sync(&m_Crt);
 
-		m_Head = (m_Head + 1) % m_Capacity;
+		m_Head = (m_Head + 1) % 200;
 
 		m_Size--;
 	}

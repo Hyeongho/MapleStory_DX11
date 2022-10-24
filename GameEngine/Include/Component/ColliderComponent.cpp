@@ -76,7 +76,9 @@ void CColliderComponent::CheckPrevColliderSection()
 			}
 
 			if (Check)
+			{
 				break;
+			}
 		}
 
 		// 서로 겹치는 충돌영역이 없으므로 붙어있다가 떨어지는 것이다.
