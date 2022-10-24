@@ -20,11 +20,6 @@ bool CLoadingEToTemple::Init()
 {
 	//m_LoadingWidget = m_Scene->GetViewport()->CreateWidgetWindow<CLoadingWidget>("LoadingWidget");
 
-	// 로딩 스레드 생성
-	m_LoadingThread = CThread::CreateThread<CEToTempleThread>("EToTempleThread");
-
-	m_LoadingThread->Start();
-
 	return true;
 }
 
@@ -51,4 +46,8 @@ void CLoadingEToTemple::Update(float DeltaTime)
 
 void CLoadingEToTemple::SceneChangeComplete()
 {
+	// 로딩 스레드 생성
+	m_LoadingThread = CThread::CreateThread<CEToTempleThread>("EToTempleThread");
+
+	m_LoadingThread->Start();
 }

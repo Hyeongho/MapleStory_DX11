@@ -20,11 +20,6 @@ bool CLoadingAnotherDoor::Init()
 {
 	//m_LoadingWidget = m_Scene->GetViewport()->CreateWidgetWindow<CLoadingWidget>("LoadingWidget");
 
-	// 로딩 스레드 생성
-	m_LoadingThread = CThread::CreateThread<CAnotherDoorThread>("AnotherDoorThread");
-
-	m_LoadingThread->Start();
-
 	return true;
 }
 
@@ -51,4 +46,8 @@ void CLoadingAnotherDoor::Update(float DeltaTime)
 
 void CLoadingAnotherDoor::SceneChangeComplete()
 {
+	// 로딩 스레드 생성
+	m_LoadingThread = CThread::CreateThread<CAnotherDoorThread>("AnotherDoorThread");
+
+	m_LoadingThread->Start();
 }
