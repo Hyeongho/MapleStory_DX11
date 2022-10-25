@@ -6,11 +6,13 @@ CThread::CThread() : m_Thread(0), m_StartEvent(0), m_Loop(false)
 
 CThread::~CThread()
 {
-	if (m_StartEvent)
+	/*if (m_StartEvent)
 	{
 		CloseHandle(m_StartEvent);
 		m_StartEvent = 0;
-	}
+	}*/
+
+	Stop();
 }
 
 bool CThread::Init()

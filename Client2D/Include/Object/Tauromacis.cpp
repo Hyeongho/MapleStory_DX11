@@ -199,7 +199,7 @@ void CTauromacis::AIDeath(float DeltaTime)
 	CMonsterManager::AIDeath(DeltaTime);
 
 	m_Body->Destroy();
-	m_Sensor->Destroy();
+	//m_Sensor->Destroy();
 	m_AttackBody->Destroy();
 	m_AttackRange->Destroy();
 

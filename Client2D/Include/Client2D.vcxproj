@@ -192,6 +192,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene\AnotherDoor.h" />
     <ClInclude Include="Scene\AnotherDoorThread.h" />
+    <ClInclude Include="Scene\BalogGate.h" />
     <ClInclude Include="Scene\EntranceToTemple.h" />
     <ClInclude Include="Scene\EToTempleThread.h" />
     <ClInclude Include="Scene\LoadingAnotherDoor.h" />
@@ -247,6 +248,7 @@
     <ClCompile Include="Object\TileMap.cpp" />
     <ClCompile Include="Scene\AnotherDoor.cpp" />
     <ClCompile Include="Scene\AnotherDoorThread.cpp" />
+    <ClCompile Include="Scene\BalogGate.cpp" />
     <ClCompile Include="Scene\EntranceToTemple.cpp" />
     <ClCompile Include="Scene\EToTempleThread.cpp" />
     <ClCompile Include="Scene\LoadingAnotherDoor.cpp" />

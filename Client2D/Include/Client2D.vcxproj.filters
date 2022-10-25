@@ -210,6 +210,9 @@
     <ClInclude Include="ClientSceneManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\BalogGate.h">
+      <Filter>01. SceneMode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client2D.rc">
@@ -362,6 +365,9 @@
     </ClCompile>
     <ClCompile Include="ClientSceneManager.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\BalogGate.cpp">
+      <Filter>01. SceneMode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

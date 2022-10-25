@@ -143,7 +143,7 @@ bool CEngine::Init(HINSTANCE hInst, HWND hWnd, unsigned int Width, unsigned int 
 	}
 
 	// 난수 전용 구조화버퍼 생성
-	/*m_RandomBuffer = new CStructuredBuffer;
+	m_RandomBuffer = new CStructuredBuffer;
 
 	m_RandomBuffer->Init("RandomBuffer", sizeof(float), 10000, 10, true);
 
@@ -160,7 +160,7 @@ bool CEngine::Init(HINSTANCE hInst, HWND hWnd, unsigned int Width, unsigned int 
 	m_RandomBuffer->UpdateBuffer(RandNumber, 10000);
 
 
-	m_RandomBuffer->SetShader(90, (int)Buffer_Shader_Type::Compute);*/
+	m_RandomBuffer->SetShader(90, (int)Buffer_Shader_Type::Compute);
 
 	// NoiseTexture
 	/*CResourceManager::GetInst()->LoadTexture("GlobalNoiseTexture", TEXT("noise_01.png"));
