@@ -6,6 +6,7 @@
 #include "Scene/LoadingSeolhuiui.h"
 #include "Scene/LoadingEToTemple.h"
 #include "Scene/LoadingAnotherDoor.h"
+#include "Scene/LoadingBalrogGate.h"
 
 DEFINITION_SINGLE(CClientSceneManager)
 
@@ -48,6 +49,12 @@ void CClientSceneManager::ChangeScene()
 			{
 				CSceneManager::GetInst()->CreateNextScene();
 				CSceneManager::GetInst()->CreateSceneMode<CLoadingEToTemple>(false);
+			}
+
+			else if (CurrentScene == "EntranceToTemple")
+			{
+				CSceneManager::GetInst()->CreateNextScene();
+				CSceneManager::GetInst()->CreateSceneMode<CLoadingBalrogGate>(false);
 			}
 		}
 	}

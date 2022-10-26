@@ -92,6 +92,10 @@ bool CEntranceToTemple::Init()
 		m_LoadingFunction(false, 0.8f);
 	}
 
+	CPotal* Potal = m_Scene->CreateGameObject<CPotal>("Potal");
+
+	Potal->SetRelativePos(2000.f, 190.f, 0.f);
+
 	m_TalkWidget = m_Scene->GetViewport()->CreateWidgetWindow<CTalkWidget>("TalkWidget");
 
 	m_TalkWidget->SetVisibility(false);

@@ -5,12 +5,12 @@
 #include "../Widget/TalkWidget.h"
 #include "../Widget/Fade.h"
 
-class CBalogGate :
+class CBalrogGate :
     public CSceneMode
 {
 public:
-    CBalogGate();
-    ~CBalogGate();
+    CBalrogGate();
+    ~CBalrogGate();
 
 private:
     CSharedPtr<CPlayerStatus> m_PlayerStatus;

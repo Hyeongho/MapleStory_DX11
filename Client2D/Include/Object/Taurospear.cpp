@@ -59,7 +59,7 @@ bool CTaurospear::Init()
 
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearIdle.sqc"), ANIMATION_PATH, "Idle", true);
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearMove.sqc"), ANIMATION_PATH, "Walk", true);
-	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearAttack1.sqc"), ANIMATION_PATH, "Attack1", true, 1.0f, 0.5f);
+	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearAttack1.sqc"), ANIMATION_PATH, "Attack1", true);
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearAttack2.sqc"), ANIMATION_PATH, "Attack2", true, 1.0f, 1.1f);
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearDie.sqc"), ANIMATION_PATH, "Die", false);
 
@@ -180,6 +180,8 @@ void CTaurospear::AIAttack(float DeltaTime)
 	{
 		return;
 	}
+
+	m_Anim->SetAnimFlip(m_Flip);
 
 	int num = (rand() % 2) + 1;
 

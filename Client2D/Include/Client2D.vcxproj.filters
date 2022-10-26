@@ -210,8 +210,14 @@
     <ClInclude Include="ClientSceneManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\BalogGate.h">
+    <ClInclude Include="Scene\BalrogGate.h">
       <Filter>01. SceneMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\BalrogGateThread.h">
+      <Filter>01. SceneMode\LoadThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\LoadingBalrogGate.h">
+      <Filter>01. SceneMode\LoadScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -366,8 +372,14 @@
     <ClCompile Include="ClientSceneManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\BalogGate.cpp">
+    <ClCompile Include="Scene\BalrogGate.cpp">
       <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\BalrogGateThread.cpp">
+      <Filter>01. SceneMode\LoadThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\LoadingBalrogGate.cpp">
+      <Filter>01. SceneMode\LoadScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

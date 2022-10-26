@@ -109,6 +109,11 @@ void CMonsterManager::PostUpdate(float DeltaTime)
 {
 	CObjectManager::PostUpdate(DeltaTime);
 
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
+	{
+		return;
+	}
+
 	switch (m_State)
 	{
 	case EMonster_State::Idle:
