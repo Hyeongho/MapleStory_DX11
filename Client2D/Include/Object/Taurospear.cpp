@@ -60,7 +60,7 @@ bool CTaurospear::Init()
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearIdle.sqc"), ANIMATION_PATH, "Idle", true);
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearMove.sqc"), ANIMATION_PATH, "Walk", true);
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearAttack1.sqc"), ANIMATION_PATH, "Attack1", true);
-	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearAttack2.sqc"), ANIMATION_PATH, "Attack2", true, 1.0f, 1.1f);
+	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearAttack2.sqc"), ANIMATION_PATH, "Attack2", true);
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearDie.sqc"), ANIMATION_PATH, "Die", false);
 
 	m_Anim->SetEndFunction<CTaurospear>("Attack1", this, &CTaurospear::AnimationFinish);

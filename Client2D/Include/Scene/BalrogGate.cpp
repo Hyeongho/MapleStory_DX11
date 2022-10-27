@@ -2,6 +2,7 @@
 #include "Scene/Scene.h"
 #include "../Object/Player2D.h"
 #include "../Object/Potal.h"
+#include "../Object/HongA.h"
 #include "Scene/SceneResource.h"
 #include "../Object/TileMap.h"
 #include "Component/ColliderBox2D.h"
@@ -61,6 +62,10 @@ bool CBalrogGate::Init()
 	Camera->SetTargetPivot(0.5f, 0.5f, 0.f);
 
 	Camera->SetWorldResolution(1980.f, 960.f);
+
+	CHongA* HongA = m_Scene->CreateGameObject<CHongA>("HongA");
+
+	HongA->SetWorldPos(1600.f, 246.f, 0.f);
 
 	m_TalkWidget = m_Scene->GetViewport()->CreateWidgetWindow<CTalkWidget>("TalkWidget");
 

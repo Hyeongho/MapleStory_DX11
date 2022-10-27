@@ -4,7 +4,7 @@
 #include "../Object/TestMonster.h"
 #include "../Object/ShadowDualBlade.h"
 #include "../Object/Potal.h"
-#include "../Object/Seolhuiui.h"
+#include "../Object/SeolHui.h"
 #include "Scene/SceneResource.h"
 #include "../Object/TileMap.h"
 #include "Component/ColliderBox2D.h"

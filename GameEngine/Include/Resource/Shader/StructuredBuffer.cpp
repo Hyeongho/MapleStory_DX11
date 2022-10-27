@@ -42,7 +42,8 @@ CStructuredBuffer::~CStructuredBuffer()
 	SAFE_RELEASE(m_Buffer);
 }
 
-bool CStructuredBuffer::Init(const std::string& Name, unsigned int Size, unsigned int Count, int Register, bool Dynamic, int StructuredBufferShaderType)
+bool CStructuredBuffer::Init(const std::string& Name, unsigned int Size, unsigned int Count, int Register, bool Dynamic, 
+	int StructuredBufferShaderType)
 {
 	SAFE_RELEASE(m_SRV);
 	SAFE_RELEASE(m_UAV);
@@ -92,7 +93,7 @@ bool CStructuredBuffer::Init(const std::string& Name, unsigned int Size, unsigne
 
 	if (!m_Dynamic)
 	{
-		D3D11_UNORDERED_ACCESS_VIEW_DESC	UAVDesc = {};
+		D3D11_UNORDERED_ACCESS_VIEW_DESC UAVDesc = {};
 
 		UAVDesc.Format = DXGI_FORMAT_UNKNOWN;
 		UAVDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
@@ -116,7 +117,7 @@ void CStructuredBuffer::UpdateBuffer(void* Data, int Count)
 		return;
 	}
 
-	D3D11_MAPPED_SUBRESOURCE	Map = {};
+	D3D11_MAPPED_SUBRESOURCE Map = {};
 
 	CDevice::GetInst()->GetContext()->Map(m_Buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &Map);
 
@@ -167,7 +168,7 @@ void CStructuredBuffer::SetShader()
 
 	else
 	{
-		unsigned int	Count = -1;
+		unsigned int Count = -1;
 		CDevice::GetInst()->GetContext()->CSSetUnorderedAccessViews(m_Register, 1, &m_UAV, &Count);
 	}
 }

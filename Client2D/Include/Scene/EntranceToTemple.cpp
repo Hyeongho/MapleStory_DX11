@@ -5,7 +5,7 @@
 #include "../Object/Tauromacis.h"
 #include "../Object/Taurospear.h"
 #include "../Object/Potal.h"
-#include "../Object/Seolhuiui.h"
+#include "../Object/SeolHui.h"
 #include "Scene/SceneResource.h"
 #include "../Object/TileMap.h"
 #include "Component/ColliderBox2D.h"

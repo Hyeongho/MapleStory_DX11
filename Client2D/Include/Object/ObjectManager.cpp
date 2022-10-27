@@ -8,7 +8,6 @@
 #include "../Widget/Fade.h"
 #include "../ClientManager.h"
 #include "PlayerManager.h"
-#include "../Scene/LoadingSeolhuiui.h"
 
 CObjectManager::CObjectManager() : m_CharacterInfo{}, m_PhysicsSimulate(false), m_GravityAccel(10.f), m_IsGround(true), m_FallTime(0.f),
 	m_Jump(false), m_FallStartY(0.f), m_JumpVelocity(0.f), m_FloorCheck(false), m_SideWallCheck(false), m_Dir(1.0f)

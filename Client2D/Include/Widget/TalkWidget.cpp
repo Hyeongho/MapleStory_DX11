@@ -129,6 +129,11 @@ void CTalkWidget::SetTalk(int ID, const TCHAR* Name)
 
 	m_vecTalk = CTalkManager::GetInst()->FindTalk(ID);
 
+	if (m_vecTalk[0] == L"")
+	{
+		return;
+	}
+
 	if (m_vecTalk.empty())
 	{
 		return;
@@ -159,7 +164,7 @@ void CTalkWidget::OKClick()
 {
 	std::string CurrentScene = CPlayerManager::GetInst()->GetCurrnetScene();
 
-	if (CurrentScene == "Seolhuiuibang")
+	if (CurrentScene == "SeolHuibang")
 	{
 		SetVisibility(false);
 
@@ -172,5 +177,10 @@ void CTalkWidget::OKClick()
 		CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
 
 		Destroy();
+	}
+
+	else
+	{
+		return;
 	}
 }

@@ -172,6 +172,7 @@
     <ClInclude Include="Object\BladeFury.h" />
     <ClInclude Include="Object\CrimsonBalrog.h" />
     <ClInclude Include="Object\DamageFont.h" />
+    <ClInclude Include="Object\HongA.h" />
     <ClInclude Include="Object\Jr_Balrog.h" />
     <ClInclude Include="Object\MonsterManager.h" />
     <ClInclude Include="Object\NPCManager.h" />
@@ -181,7 +182,7 @@
     <ClInclude Include="Object\PlayerAnimation2D.h" />
     <ClInclude Include="Object\PlayerManager.h" />
     <ClInclude Include="Object\Potal.h" />
-    <ClInclude Include="Object\Seolhuiui.h" />
+    <ClInclude Include="Object\SeolHui.h" />
     <ClInclude Include="Object\ShadowDualBlade.h" />
     <ClInclude Include="Object\SkillManager.h" />
     <ClInclude Include="Object\Tauromacis.h" />
@@ -200,11 +201,11 @@
     <ClInclude Include="Scene\LoadingBalrogGate.h" />
     <ClInclude Include="Scene\LoadingEToTemple.h" />
     <ClInclude Include="Scene\LoadingScene.h" />
-    <ClInclude Include="Scene\LoadingSeolhuiui.h" />
+    <ClInclude Include="Scene\LoadingSeolHui.h" />
     <ClInclude Include="Scene\LoadingThread.h" />
     <ClInclude Include="Scene\MainScene.h" />
-    <ClInclude Include="Scene\Seolhuiuibang.h" />
-    <ClInclude Include="Scene\SeolhuiuiThread.h" />
+    <ClInclude Include="Scene\SeolHuibang.h" />
+    <ClInclude Include="Scene\SeolHuiThread.h" />
     <ClInclude Include="Scene\StartScene.h" />
     <ClInclude Include="Scene\TestScene.h" />
     <ClInclude Include="TalkManager.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="Object\BladeFury.cpp" />
     <ClCompile Include="Object\CrimsonBalrog.cpp" />
     <ClCompile Include="Object\DamageFont.cpp" />
+    <ClCompile Include="Object\HongA.cpp" />
     <ClCompile Include="Object\Jr_Balrog.cpp" />
     <ClCompile Include="Object\MonsterManager.cpp" />
     <ClCompile Include="Object\NPCManager.cpp" />
@@ -240,7 +242,7 @@
     <ClCompile Include="Object\PlayerAnimation2D.cpp" />
     <ClCompile Include="Object\PlayerManager.cpp" />
     <ClCompile Include="Object\Potal.cpp" />
-    <ClCompile Include="Object\Seolhuiui.cpp" />
+    <ClCompile Include="Object\SeolHui.cpp" />
     <ClCompile Include="Object\ShadowDualBlade.cpp" />
     <ClCompile Include="Object\SkillManager.cpp" />
     <ClCompile Include="Object\Tauromacis.cpp" />
@@ -258,11 +260,11 @@
     <ClCompile Include="Scene\LoadingBalrogGate.cpp" />
     <ClCompile Include="Scene\LoadingEToTemple.cpp" />
     <ClCompile Include="Scene\LoadingScene.cpp" />
-    <ClCompile Include="Scene\LoadingSeolhuiui.cpp" />
+    <ClCompile Include="Scene\LoadingSeolHui.cpp" />
     <ClCompile Include="Scene\LoadingThread.cpp" />
     <ClCompile Include="Scene\MainScene.cpp" />
-    <ClCompile Include="Scene\Seolhuiuibang.cpp" />
-    <ClCompile Include="Scene\SeolhuiuiThread.cpp" />
+    <ClCompile Include="Scene\SeolHuibang.cpp" />
+    <ClCompile Include="Scene\SeolHuiThread.cpp" />
     <ClCompile Include="Scene\StartScene.cpp" />
     <ClCompile Include="Scene\TestScene.cpp" />
     <ClCompile Include="TalkManager.cpp" />

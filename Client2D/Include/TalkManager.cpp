@@ -29,9 +29,9 @@ std::vector<const TCHAR*> CTalkManager::FindTalk(int ID)
 
 	if (iter == m_mapTalk.end())
 	{
-		iter->second.clear();
+		//iter->second.clear();
 
-		return iter->second;
+		return {L""};
 	}
 
 	return iter->second;

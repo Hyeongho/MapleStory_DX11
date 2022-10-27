@@ -361,8 +361,6 @@ LRESULT CEngine::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case VK_LMENU:
 		case VK_MENU:
 		case VK_RMENU:
-		case 'C':
-		case 'c':
 			return NULL;
 		}
 

@@ -3,7 +3,7 @@
 #include "Scene/SceneManager.h"
 #include "Widget/Fade.h"
 #include "ClientManager.h"
-#include "Scene/LoadingSeolhuiui.h"
+#include "Scene/LoadingSeolHui.h"
 #include "Scene/LoadingEToTemple.h"
 #include "Scene/LoadingAnotherDoor.h"
 #include "Scene/LoadingBalrogGate.h"
@@ -42,7 +42,7 @@ void CClientSceneManager::ChangeScene()
 			if (CurrentScene == "MainScene")
 			{
 				CSceneManager::GetInst()->CreateNextScene();
-				CSceneManager::GetInst()->CreateSceneMode<CLoadingSeolhuiui>(false);
+				CSceneManager::GetInst()->CreateSceneMode<CLoadingSeolHui>(false);
 			}
 
 			else if (CurrentScene == "AnotherDoor")

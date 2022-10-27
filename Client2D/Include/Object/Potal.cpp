@@ -2,9 +2,7 @@
 #include "Resource/Material/Material.h"
 #include "PlayerManager.h"
 #include "Animation/AnimationSequence2DInstance.h"
-#include "../Scene/LoadingSeolhuiui.h"
-#include "../Scene/LoadingEToTemple.h"
-#include "../Scene/LoadingAnotherDoor.h"
+
 #include "../Scene/MainScene.h"
 #include "Scene/SceneManager.h"
 #include "../Widget/Fade.h"

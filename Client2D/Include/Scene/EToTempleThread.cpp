@@ -1,7 +1,6 @@
 #include "EToTempleThread.h"
 #include "MainScene.h"
 #include "Scene/SceneManager.h"
-#include "Seolhuiuibang.h"
 #include "EntranceToTemple.h"
 
 CEToTempleThread::CEToTempleThread()

@@ -31,14 +31,8 @@
     <Filter Include="02. Object\03. TileMap">
       <UniqueIdentifier>{bfa289fa-2189-41d3-baab-1ca9fc121342}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. SceneMode\LoadThread">
-      <UniqueIdentifier>{e14096cc-09d4-4936-abda-ace6d6e615db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Object\01. Player\Skill">
       <UniqueIdentifier>{d951eb82-260c-4308-9a76-dda6eae414cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. SceneMode\LoadScene">
-      <UniqueIdentifier>{38950b54-744c-4174-b79f-ad2a8462a4ca}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. Object\02. Monster\01. ShadowDualBlade">
       <UniqueIdentifier>{4227ad6e-0c0d-453a-b6cc-53e22f473493}</UniqueIdentifier>
@@ -60,6 +54,18 @@
     </Filter>
     <Filter Include="02. Object\04. NPC">
       <UniqueIdentifier>{bce685c3-fa95-4771-b8f8-557f7fe85ee5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. SceneMode\01. LoadScene">
+      <UniqueIdentifier>{38950b54-744c-4174-b79f-ad2a8462a4ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. SceneMode\02. LoadThread">
+      <UniqueIdentifier>{e14096cc-09d4-4936-abda-ace6d6e615db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\04. NPC\02. HongA">
+      <UniqueIdentifier>{beb4a2a9-3f8c-455d-90b0-32fee9b8edb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\04. NPC\01. SeolHui">
+      <UniqueIdentifier>{244ee23a-36e4-4f92-a6c5-b781f9b8ae9d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,7 +115,7 @@
       <Filter>03. UI</Filter>
     </ClInclude>
     <ClInclude Include="Scene\LoadingThread.h">
-      <Filter>01. SceneMode\LoadThread</Filter>
+      <Filter>01. SceneMode\02. LoadThread</Filter>
     </ClInclude>
     <ClInclude Include="Object\PhantomBlow.h">
       <Filter>02. Object\01. Player\Skill</Filter>
@@ -123,22 +129,10 @@
     <ClInclude Include="Object\Potal.h">
       <Filter>02. Object</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\Seolhuiuibang.h">
-      <Filter>01. SceneMode</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\LoadingScene.h">
-      <Filter>01. SceneMode\LoadScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\SeolhuiuiThread.h">
-      <Filter>01. SceneMode\LoadThread</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\LoadingSeolhuiui.h">
-      <Filter>01. SceneMode\LoadScene</Filter>
+      <Filter>01. SceneMode\01. LoadScene</Filter>
     </ClInclude>
     <ClInclude Include="Object\NPCManager.h">
-      <Filter>02. Object\04. NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Seolhuiui.h">
       <Filter>02. Object\04. NPC</Filter>
     </ClInclude>
     <ClInclude Include="Widget\TalkWidget.h">
@@ -154,19 +148,19 @@
       <Filter>01. SceneMode</Filter>
     </ClInclude>
     <ClInclude Include="Scene\LoadingEToTemple.h">
-      <Filter>01. SceneMode\LoadScene</Filter>
+      <Filter>01. SceneMode\01. LoadScene</Filter>
     </ClInclude>
     <ClInclude Include="Scene\EToTempleThread.h">
-      <Filter>01. SceneMode\LoadThread</Filter>
+      <Filter>01. SceneMode\02. LoadThread</Filter>
     </ClInclude>
     <ClInclude Include="Scene\AnotherDoor.h">
       <Filter>01. SceneMode</Filter>
     </ClInclude>
     <ClInclude Include="Scene\AnotherDoorThread.h">
-      <Filter>01. SceneMode\LoadThread</Filter>
+      <Filter>01. SceneMode\02. LoadThread</Filter>
     </ClInclude>
     <ClInclude Include="Scene\LoadingAnotherDoor.h">
-      <Filter>01. SceneMode\LoadScene</Filter>
+      <Filter>01. SceneMode\01. LoadScene</Filter>
     </ClInclude>
     <ClInclude Include="Widget\DamageWidget.h">
       <Filter>03. UI</Filter>
@@ -214,10 +208,25 @@
       <Filter>01. SceneMode</Filter>
     </ClInclude>
     <ClInclude Include="Scene\BalrogGateThread.h">
-      <Filter>01. SceneMode\LoadThread</Filter>
+      <Filter>01. SceneMode\02. LoadThread</Filter>
     </ClInclude>
     <ClInclude Include="Scene\LoadingBalrogGate.h">
-      <Filter>01. SceneMode\LoadScene</Filter>
+      <Filter>01. SceneMode\01. LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\SeolHui.h">
+      <Filter>02. Object\04. NPC\01. SeolHui</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SeolHuibang.h">
+      <Filter>01. SceneMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\LoadingSeolHui.h">
+      <Filter>01. SceneMode\01. LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SeolHuiThread.h">
+      <Filter>01. SceneMode\02. LoadThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\HongA.h">
+      <Filter>02. Object\04. NPC\02. HongA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -268,7 +277,7 @@
       <Filter>03. UI</Filter>
     </ClCompile>
     <ClCompile Include="Scene\LoadingThread.cpp">
-      <Filter>01. SceneMode\LoadThread</Filter>
+      <Filter>01. SceneMode\02. LoadThread</Filter>
     </ClCompile>
     <ClCompile Include="Object\PhantomBlow.cpp">
       <Filter>02. Object\01. Player\Skill</Filter>
@@ -282,22 +291,10 @@
     <ClCompile Include="Object\Potal.cpp">
       <Filter>02. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\Seolhuiuibang.cpp">
-      <Filter>01. SceneMode</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\LoadingScene.cpp">
-      <Filter>01. SceneMode\LoadScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\SeolhuiuiThread.cpp">
-      <Filter>01. SceneMode\LoadThread</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\LoadingSeolhuiui.cpp">
-      <Filter>01. SceneMode\LoadScene</Filter>
+      <Filter>01. SceneMode\01. LoadScene</Filter>
     </ClCompile>
     <ClCompile Include="Object\NPCManager.cpp">
-      <Filter>02. Object\04. NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Seolhuiui.cpp">
       <Filter>02. Object\04. NPC</Filter>
     </ClCompile>
     <ClCompile Include="Widget\TalkWidget.cpp">
@@ -313,19 +310,19 @@
       <Filter>01. SceneMode</Filter>
     </ClCompile>
     <ClCompile Include="Scene\LoadingEToTemple.cpp">
-      <Filter>01. SceneMode\LoadScene</Filter>
+      <Filter>01. SceneMode\01. LoadScene</Filter>
     </ClCompile>
     <ClCompile Include="Scene\EToTempleThread.cpp">
-      <Filter>01. SceneMode\LoadThread</Filter>
+      <Filter>01. SceneMode\02. LoadThread</Filter>
     </ClCompile>
     <ClCompile Include="Scene\AnotherDoor.cpp">
       <Filter>01. SceneMode</Filter>
     </ClCompile>
     <ClCompile Include="Scene\AnotherDoorThread.cpp">
-      <Filter>01. SceneMode\LoadThread</Filter>
+      <Filter>01. SceneMode\02. LoadThread</Filter>
     </ClCompile>
     <ClCompile Include="Scene\LoadingAnotherDoor.cpp">
-      <Filter>01. SceneMode\LoadScene</Filter>
+      <Filter>01. SceneMode\01. LoadScene</Filter>
     </ClCompile>
     <ClCompile Include="Object\DamageFont.cpp">
       <Filter>02. Object</Filter>
@@ -376,10 +373,25 @@
       <Filter>01. SceneMode</Filter>
     </ClCompile>
     <ClCompile Include="Scene\BalrogGateThread.cpp">
-      <Filter>01. SceneMode\LoadThread</Filter>
+      <Filter>01. SceneMode\02. LoadThread</Filter>
     </ClCompile>
     <ClCompile Include="Scene\LoadingBalrogGate.cpp">
-      <Filter>01. SceneMode\LoadScene</Filter>
+      <Filter>01. SceneMode\01. LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\SeolHui.cpp">
+      <Filter>02. Object\04. NPC\01. SeolHui</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SeolHuibang.cpp">
+      <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\LoadingSeolHui.cpp">
+      <Filter>01. SceneMode\01. LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SeolHuiThread.cpp">
+      <Filter>01. SceneMode\02. LoadThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\HongA.cpp">
+      <Filter>02. Object\04. NPC\02. HongA</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
