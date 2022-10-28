@@ -56,7 +56,9 @@ bool CDevice::Init(HWND hWnd, unsigned int Width, unsigned int Height, bool Wind
 	D3D_FEATURE_LEVEL FLevel = D3D_FEATURE_LEVEL_11_0;
 	D3D_FEATURE_LEVEL FLevel1 = D3D_FEATURE_LEVEL_11_0;
 
-	if (FAILED(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, 0, Flag, &FLevel, 1, D3D11_SDK_VERSION, &m_Device, &FLevel1, &m_Context)))
+	D3D_FEATURE_LEVEL FLevelResult;
+
+	if (FAILED(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, 0, Flag, &FLevel, 1, D3D11_SDK_VERSION, &m_Device, &FLevelResult, &m_Context)))
 	{
 		return false;
 	}

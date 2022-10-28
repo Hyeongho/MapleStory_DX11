@@ -131,6 +131,8 @@ void CTalkWidget::SetTalk(int ID, const TCHAR* Name)
 
 	if (m_vecTalk[0] == L"")
 	{
+		SetVisibility(false);
+
 		return;
 	}
 

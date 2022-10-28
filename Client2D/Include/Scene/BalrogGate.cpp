@@ -24,7 +24,7 @@ void CBalrogGate::Start()
 {
 	CClientManager::GetInst()->SetFadeState(EFade_State::FadeIn_Start);
 	CClientManager::GetInst()->SetFade(false);
-	CPlayerManager::GetInst()->SetCurrentScene("BalogGate");
+	CPlayerManager::GetInst()->SetCurrentScene("BalrogGate");
 
 	CPlayerManager::GetInst()->SetTagPotal(false);
 }

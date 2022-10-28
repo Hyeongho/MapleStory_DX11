@@ -53,7 +53,7 @@ bool CSeolHui::Init()
 	m_Sprite->SetRelativeScale(56.f, 80.f, 1.f);
 	m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
 
-	Anim->AddAnimation(TEXT("NPC/SeolHui/SeolHui.sqc"), ANIMATION_PATH, "Idle", true);
+	Anim->AddAnimation(TEXT("NPC/SeolHui/SeolHuiIdle.sqc"), ANIMATION_PATH, "Idle", true);
 
 	m_Body->SetInfo(TEXT("0800.png"));
 

@@ -228,6 +228,15 @@
     <ClInclude Include="Object\HongA.h">
       <Filter>02. Object\04. NPC\02. HongA</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\BalrogAltar.h">
+      <Filter>01. SceneMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\BalrogAltarThread.h">
+      <Filter>01. SceneMode\02. LoadThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\LoadingBalrogAltar.h">
+      <Filter>01. SceneMode\01. LoadScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client2D.rc">
@@ -392,6 +401,15 @@
     </ClCompile>
     <ClCompile Include="Object\HongA.cpp">
       <Filter>02. Object\04. NPC\02. HongA</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\BalrogAltar.cpp">
+      <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\BalrogAltarThread.cpp">
+      <Filter>01. SceneMode\02. LoadThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\LoadingBalrogAltar.cpp">
+      <Filter>01. SceneMode\01. LoadScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
