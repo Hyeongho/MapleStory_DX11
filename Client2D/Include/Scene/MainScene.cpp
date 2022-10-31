@@ -85,8 +85,6 @@ bool CMainScene::Init()
 		m_LoadingFunction(false, 0.8f);
 	}
 
-	//CBalrog* Barlrog = m_Scene->CreateGameObject<CBalrog>("Balrog");
-
 	CShadowDualBlade* ShadowDualBlade1 = m_Scene->CreateGameObject<CShadowDualBlade>("ShadowDualBlade1");
 
 	ShadowDualBlade1->SetWorldPos(500.f, 180.5f, 0.f);

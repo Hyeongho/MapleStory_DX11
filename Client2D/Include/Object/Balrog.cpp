@@ -45,15 +45,11 @@ bool CBalrog::Init()
 	m_LeftMuzzle->SetWorldPos(-330.f, -170.f, 0.f);
 	m_RightMuzzle->SetWorldPos(220.f, -170.f, 0.f);
 
-	//std::vector<TCHAR*> m_vecFileName;
-	//std::vector<std::wstring> vecBalrogBodyFileName;
-
-	//m_Sprite->GetMaterial()->GetTextureHeight();
-
 	m_Sprite->SetPivot(0.5f, 0.5f, 0.5f);
 
 	m_Sprite->SetWorldScale(1500.f, 1500.f, 1.f);
-	m_Sprite->SetWorldPos(500.f, 500.f, 0.f);
+
+	m_Sprite->SetWorldPos(700.f, 400.f, 0.f);
 
 	m_Sprite->SetTransparency(true);
 
@@ -76,7 +72,10 @@ bool CBalrog::Init()
 	m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
 	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());
 
-	CInput::GetInst()->SetKeyCallback<CBalrog>("BalrogAnim", KeyState_Down, this, &CBalrog::ChangeAnim);
+	//m_BalrogLeft->SetWorldPos(0.f, 0.f, 0.f);
+	//m_BalrogRight->SetWorldPos(0.f, 0.f, 0.f);
+
+	//CInput::GetInst()->SetKeyCallback<CBalrog>("BalrogAnim", KeyState_Down, this, &CBalrog::ChangeAnim);
 
 	return true;
 }

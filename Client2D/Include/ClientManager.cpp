@@ -286,5 +286,5 @@ void CClientManager::LoadAnimation()
 
 void CClientManager::CreateLayer()
 {
-	CRenderManager::GetInst()->CreateLayer("BalrogHand", 5);
+	CRenderManager::GetInst()->CreateLayer("BalrogHand", 4);
 }

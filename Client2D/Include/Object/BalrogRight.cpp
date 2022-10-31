@@ -44,7 +44,7 @@ bool CBalrogRight::Init()
 
 	m_Sprite->SetPivot(0.5f, 0.5f, 0.5f);
 
-	m_Sprite->SetWorldPos(0.f, 0.f, 0.f);
+	m_Sprite->SetWorldPos(187.f, 0.f, 0.f);
 
 	m_Sprite->SetTransparency(true);
 

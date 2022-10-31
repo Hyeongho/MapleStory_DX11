@@ -181,8 +181,25 @@ void CTalkWidget::OKClick()
 		Destroy();
 	}
 
+	else if (CurrentScene == "BalrogGate")
+	{
+		SetVisibility(false);
+
+		//CClientManager::GetInst()->SetFade(true);
+
+		CFade* Fade = (CFade*)GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
+
+		Fade->SetVisibility(true);
+
+		CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
+
+		Destroy();
+	}
+
 	else
 	{
+		SetVisibility(false);
+
 		return;
 	}
 }

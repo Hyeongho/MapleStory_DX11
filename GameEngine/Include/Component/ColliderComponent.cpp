@@ -14,6 +14,8 @@ CColliderComponent::CColliderComponent()
 	m_Profile = nullptr;
 	m_MouseCollision = false;
 	m_CBuffer = nullptr;
+
+	SetLayerName("Collider");
 }
 
 CColliderComponent::CColliderComponent(const CColliderComponent& com) : CSceneComponent(com)

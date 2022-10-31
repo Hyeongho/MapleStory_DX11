@@ -44,7 +44,10 @@ bool CBalrogLeft::Init()
 
 	m_Sprite->SetWorldScale(1000.f, 1000.f, 1.f);
 
-	m_Sprite->SetWorldPos(0.f, 0.f, 0.f);
+	m_Sprite->GetWorldPos();
+	m_Sprite->GetWorldScale();
+
+	//m_Sprite->SetWorldPos(0.f, 0.f, 0.f);
 
 	m_Sprite->SetTransparency(true);
 

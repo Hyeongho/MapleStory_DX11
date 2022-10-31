@@ -3,6 +3,7 @@
 #include "Animation/AnimationSequence2DInstance.h"
 #include "Scene/SceneManager.h"
 #include "../Scene/LoadingAnotherDoor.h"
+#include "../Scene/LoadingBalrogAltar.h"
 #include "Input.h"
 
 CHongA::CHongA()
@@ -78,7 +79,7 @@ void CHongA::PostUpdate(float DeltaTime)
 	if (CClientManager::GetInst()->GetFadeState() == EFade_State::FadeOut_End)
 	{
 		CSceneManager::GetInst()->CreateNextScene();
-		CSceneManager::GetInst()->CreateSceneMode<CLoadingAnotherDoor>(false);
+		CSceneManager::GetInst()->CreateSceneMode<CLoadingBalrogAltar>(false);
 	}
 }
 

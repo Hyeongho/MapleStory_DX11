@@ -125,32 +125,50 @@ bool CRenderManager::Init()
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
-	Layer->Name = "Player";
-	Layer->LayerPriority = 3;
+	Layer->Name = "BalrogHand";
+	Layer->LayerPriority = 4;
 
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
-	Layer->Name = "Potal";
+	Layer->Name = "BalrogFloor";
 	Layer->LayerPriority = 5;
 
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
-	Layer->Name = "Particle";
+	Layer->Name = "Player";
 	Layer->LayerPriority = 6;
 
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
-	Layer->Name = "Effect";
+	Layer->Name = "Potal";
 	Layer->LayerPriority = 7;
 
 	m_RenderLayerList.push_back(Layer);
 
 	Layer = new RenderLayer;
-	Layer->Name = "ScreenWidgetComponent";
+	Layer->Name = "Particle";
 	Layer->LayerPriority = 8;
+
+	m_RenderLayerList.push_back(Layer);
+
+	Layer = new RenderLayer;
+	Layer->Name = "Effect";
+	Layer->LayerPriority = 9;
+
+	m_RenderLayerList.push_back(Layer);
+
+	Layer = new RenderLayer;
+	Layer->Name = "Collider";
+	Layer->LayerPriority = INT_MAX - 2;
+
+	m_RenderLayerList.push_back(Layer);
+
+	Layer = new RenderLayer;
+	Layer->Name = "ScreenWidgetComponent";
+	Layer->LayerPriority = INT_MAX - 1;
 
 	m_RenderLayerList.push_back(Layer);
 

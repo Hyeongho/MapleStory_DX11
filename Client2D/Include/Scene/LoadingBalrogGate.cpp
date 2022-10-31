@@ -45,7 +45,7 @@ void CLoadingBalrogGate::Update(float DeltaTime)
 void CLoadingBalrogGate::SceneChangeComplete()
 {
 	// 로딩 스레드 생성
-	m_LoadingThread = CThread::CreateThread<CBalrogGateThread>("AnotherDoorThread");
+	m_LoadingThread = CThread::CreateThread<CBalrogGateThread>("BalrogGateThread");
 
 	m_LoadingThread->Start();
 }

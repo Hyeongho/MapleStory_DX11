@@ -45,7 +45,7 @@ void CLoadingBalrogAltar::Update(float DeltaTime)
 void CLoadingBalrogAltar::SceneChangeComplete()
 {
 	// 로딩 스레드 생성
-	m_LoadingThread = CThread::CreateThread<CBalrogAltarThread>("AnotherDoorThread");
+	m_LoadingThread = CThread::CreateThread<CBalrogAltarThread>("BalrogAltarThread");
 
 	m_LoadingThread->Start();
 }
