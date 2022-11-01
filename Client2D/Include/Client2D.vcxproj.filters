@@ -67,6 +67,9 @@
     <Filter Include="02. Object\04. NPC\01. SeolHui">
       <UniqueIdentifier>{244ee23a-36e4-4f92-a6c5-b781f9b8ae9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\05. AI">
+      <UniqueIdentifier>{ad3be4f5-1acb-4b3c-9318-876e5cdf24c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -236,6 +239,18 @@
     </ClInclude>
     <ClInclude Include="Scene\LoadingBalrogAltar.h">
       <Filter>01. SceneMode\01. LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\AI\Node.h">
+      <Filter>02. Object\05. AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\AI\Sequence.h">
+      <Filter>02. Object\05. AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\AI\Selector.h">
+      <Filter>02. Object\05. AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\AI\CompositeNode.h">
+      <Filter>02. Object\05. AI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -410,6 +425,18 @@
     </ClCompile>
     <ClCompile Include="Scene\LoadingBalrogAltar.cpp">
       <Filter>01. SceneMode\01. LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\AI\Node.cpp">
+      <Filter>02. Object\05. AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\AI\Sequence.cpp">
+      <Filter>02. Object\05. AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\AI\Selector.cpp">
+      <Filter>02. Object\05. AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\AI\CompositeNode.cpp">
+      <Filter>02. Object\05. AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

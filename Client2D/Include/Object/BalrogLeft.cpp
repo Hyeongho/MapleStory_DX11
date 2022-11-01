@@ -55,14 +55,14 @@ bool CBalrogLeft::Init()
 
 	m_Anim = m_Sprite->GetAnimationInstance();
 
-	m_Anim->AddAnimation("BalrogLeftIdle", "BalrogLeftIdle", true, 1.2f);
+	m_Anim->AddAnimation("BalrogLeftIdle", "BalrogLeftIdle", true, 2.04f);
 	m_Anim->AddAnimation("BalrogLeftDie", "BalrogLeftDie", false, 2.8f);
-	m_Anim->AddAnimation("BalrogLeftDie", "BalrogLeftAttack1", false, 2.1f);
-	m_Anim->AddAnimation("BalrogLeftDie", "BalrogLeftAttack2", false, 2.9f);
+	m_Anim->AddAnimation("BalrogLeftAttack1", "BalrogLeftAttack1", false, 2.1f);
+	m_Anim->AddAnimation("BalrogLeftAttack2", "BalrogLeftAttack2", false, 2.9f);
 
 	m_Anim->SetCurrentAnimation("BalrogLeftIdle");
 
-	CInput::GetInst()->SetKeyCallback<CBalrogLeft>("BalrogLeftAnim", KeyState_Down, this, &CBalrogLeft::ChangeAnim);
+	m_Anim->SetEndFunction<CBalrogLeft>("BalrogLeftDie", this, &CBalrogLeft::ArmDie);
 
 	return true;
 }
@@ -70,11 +70,15 @@ bool CBalrogLeft::Init()
 void CBalrogLeft::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
+
+
 }
 
 void CBalrogLeft::PostUpdate(float DeltaTime)
 {
 	CObjectManager::PostUpdate(DeltaTime);
+
+
 }
 
 CBalrogLeft* CBalrogLeft::Clone()
@@ -189,4 +193,8 @@ void CBalrogLeft::ChangeAnim(float DeltaTime)
 	{
 		m_Anim->ChangeAnimation("BalrogLeftDie");
 	}
+}
+
+void CBalrogLeft::ArmDie()
+{
 }

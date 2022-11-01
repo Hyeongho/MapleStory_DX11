@@ -44,7 +44,7 @@ bool CBalrogRight::Init()
 
 	m_Sprite->SetPivot(0.5f, 0.5f, 0.5f);
 
-	m_Sprite->SetWorldPos(187.f, 0.f, 0.f);
+	m_Sprite->SetWorldPos(0.f, 0.f, 0.f);
 
 	m_Sprite->SetTransparency(true);
 
@@ -52,15 +52,15 @@ bool CBalrogRight::Init()
 
 	m_Anim = m_Sprite->GetAnimationInstance();
 
-	m_Anim->AddAnimation("BalrogRightIdle", "BalrogRightIdle", true);
+	m_Anim->AddAnimation("BalrogRightIdle", "BalrogRightIdle", true, 2.04f);
 	m_Anim->AddAnimation("BalrogRightDie", "BalrogRightDie", false, 2.8f);
-	m_Anim->AddAnimation("BalrogRightDie", "BalrogRightAttack1", false, 2.1f);
-	m_Anim->AddAnimation("BalrogRightDie", "BalrogRightAttack2", false, 2.4f);
-	m_Anim->AddAnimation("BalrogRightDie", "BalrogRightAttack3", false, 1.9f);
+	m_Anim->AddAnimation("BalrogRightAttack1", "BalrogRightAttack1", false, 2.1f);
+	m_Anim->AddAnimation("BalrogRightAttack2", "BalrogRightAttack2", false, 2.4f);
+	m_Anim->AddAnimation("BalrogRightAttack3", "BalrogRightAttack3", false, 1.9f);
 
 	m_Anim->SetCurrentAnimation("BalrogRightIdle");
 
-	CInput::GetInst()->SetKeyCallback<CBalrogRight>("BalrogRightAnim", KeyState_Down, this, &CBalrogRight::ChangeAnim);
+	m_Anim->SetEndFunction<CBalrogRight>("BalrogLeftDie", this, &CBalrogRight::ArmDie);
 
 	return true;
 }
@@ -211,4 +211,8 @@ void CBalrogRight::ChangeAnim(float DeltaTime)
 	{
 		m_Anim->ChangeAnimation("BalrogRightDie");
 	}
+}
+
+void CBalrogRight::ArmDie()
+{
 }

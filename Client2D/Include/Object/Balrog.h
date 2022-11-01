@@ -6,6 +6,7 @@
 #include "../ClientInfo.h"
 #include "BalrogLeft.h"
 #include "BalrogRight.h"
+#include "AI/Node.h"
 
 class CBalrog :
     public CMonsterManager

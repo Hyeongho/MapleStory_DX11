@@ -72,7 +72,7 @@ bool CBalrogAltar::Init()
 	}
 
 	CBalrog* Balrog = m_Scene->CreateGameObject<CBalrog>("Balrog");
-	//Balrog->SetWorldPos(700.f, 400.f, 0.f);
+	Balrog->SetWorldPos(700.f, 400.f, 0.f);
 
 	if (m_LoadingFunction)
 	{

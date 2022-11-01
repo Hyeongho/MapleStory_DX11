@@ -166,6 +166,10 @@
     <ClInclude Include="ClientInfo.h" />
     <ClInclude Include="ClientManager.h" />
     <ClInclude Include="ClientSceneManager.h" />
+    <ClInclude Include="Object\AI\CompositeNode.h" />
+    <ClInclude Include="Object\AI\Node.h" />
+    <ClInclude Include="Object\AI\Selector.h" />
+    <ClInclude Include="Object\AI\Sequence.h" />
     <ClInclude Include="Object\Balrog.h" />
     <ClInclude Include="Object\BalrogLeft.h" />
     <ClInclude Include="Object\BalrogRight.h" />
@@ -229,6 +233,10 @@
     <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="ClientSceneManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object\AI\CompositeNode.cpp" />
+    <ClCompile Include="Object\AI\Node.cpp" />
+    <ClCompile Include="Object\AI\Selector.cpp" />
+    <ClCompile Include="Object\AI\Sequence.cpp" />
     <ClCompile Include="Object\Balrog.cpp" />
     <ClCompile Include="Object\BalrogLeft.cpp" />
     <ClCompile Include="Object\BalrogRight.cpp" />

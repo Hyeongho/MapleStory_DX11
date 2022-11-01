@@ -35,5 +35,6 @@ private:
 	void InitAnimation();
 
 	void ChangeAnim(float DeltaTime);
+	void ArmDie();
 };
 

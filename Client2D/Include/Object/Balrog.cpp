@@ -36,8 +36,14 @@ bool CBalrog::Init()
 
 	SetRootComponent(m_Sprite);
 
+	m_BalrogLeft = m_Scene->CreateGameObject<CBalrogLeft>("BalrogLeft");
+	m_BalrogRight = m_Scene->CreateGameObject<CBalrogRight>("BalrogRight");
+
 	m_Sprite->AddChild(m_LeftMuzzle);
 	m_Sprite->AddChild(m_RightMuzzle);
+
+	m_LeftMuzzle->AddChild(m_BalrogLeft->GetRootComponent());
+	m_RightMuzzle->AddChild(m_BalrogRight->GetRootComponent());
 
 	m_LeftMuzzle->SetPivot(0.5f, 0.5f, 0.5f);
 	m_RightMuzzle->SetPivot(0.5f, 0.5f, 0.5f);
@@ -49,7 +55,7 @@ bool CBalrog::Init()
 
 	m_Sprite->SetWorldScale(1500.f, 1500.f, 1.f);
 
-	m_Sprite->SetWorldPos(700.f, 400.f, 0.f);
+	//m_Sprite->SetWorldPos(700.f, 400.f, 0.f);
 
 	m_Sprite->SetTransparency(true);
 
@@ -66,11 +72,8 @@ bool CBalrog::Init()
 
 	m_Anim->SetCurrentAnimation("BalrogBodyIdle");
 
-	m_BalrogLeft = m_Scene->CreateGameObject<CBalrogLeft>("BalrogLeft");
-	m_BalrogRight = m_Scene->CreateGameObject<CBalrogRight>("BalrogRight");
-
-	m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
-	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());
+	/*m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
+	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());*/
 
 	//m_BalrogLeft->SetWorldPos(0.f, 0.f, 0.f);
 	//m_BalrogRight->SetWorldPos(0.f, 0.f, 0.f);
