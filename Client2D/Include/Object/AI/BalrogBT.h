@@ -13,7 +13,6 @@ private:
 	class CSequence* m_Squence1;
 
 	class CSelector* m_Selector1;
-	class CSelector* m_Selector2;
 
 	class CCheckBalrogHandDie* m_CheckBalrogHandDie;
 	

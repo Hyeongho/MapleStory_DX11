@@ -10,7 +10,6 @@ CBalrogBT::CBalrogBT()
 	m_Squence1 = new CSequence;
 
 	m_Selector1 = new CSelector;
-	m_Selector2 = new CSelector;
 
 	m_CheckBalrogHandDie = new CCheckBalrogHandDie;
 
@@ -29,12 +28,11 @@ CBalrogBT::~CBalrogBT()
 void CBalrogBT::Start()
 {
 	m_Root->AddChild(m_Selector1);
-	m_Root->AddChild(m_Selector2);
 
-	m_Selector1->AddChild(m_CheckBalrogHandDie);
-	//m_Selector1->AddChild(m_Selector2);
+	m_Selector1->AddChild(m_Squence1);
 
-	m_Selector2->AddChild(m_BalrogPaseChange);
+	m_Squence1->AddChild(m_CheckBalrogHandDie);
+	m_Squence1->AddChild(m_BalrogPaseChange);
 }
 
 void CBalrogBT::Run()
