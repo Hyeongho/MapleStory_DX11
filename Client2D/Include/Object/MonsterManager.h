@@ -64,6 +64,9 @@ protected:
 	virtual void AIDeath(float DeltaTime);
 
 public:
+	bool CheckDie();
+
+public:
 	virtual void CollisionCallbackBegin(const CollisionResult& result);
 	//virtual void CollisionCallbackEnd(const CollisionResult& result);
 

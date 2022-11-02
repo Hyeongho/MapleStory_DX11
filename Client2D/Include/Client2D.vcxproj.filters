@@ -70,6 +70,9 @@
     <Filter Include="02. Object\05. AI">
       <UniqueIdentifier>{ad3be4f5-1acb-4b3c-9318-876e5cdf24c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog\01. BT">
+      <UniqueIdentifier>{2c781e91-557b-4d32-8310-c1ab52855ca7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -251,6 +254,15 @@
     </ClInclude>
     <ClInclude Include="Object\AI\CompositeNode.h">
       <Filter>02. Object\05. AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\AI\CheckBalrogHandDie.h">
+      <Filter>02. Object\02. Monster\06. Balrog\01. BT</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\AI\BalrogBT.h">
+      <Filter>02. Object\02. Monster\06. Balrog\01. BT</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\AI\BalrogPaseChange.h">
+      <Filter>02. Object\02. Monster\06. Balrog\01. BT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -437,6 +449,15 @@
     </ClCompile>
     <ClCompile Include="Object\AI\CompositeNode.cpp">
       <Filter>02. Object\05. AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\AI\CheckBalrogHandDie.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\01. BT</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\AI\BalrogBT.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\01. BT</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\AI\BalrogPaseChange.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\01. BT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

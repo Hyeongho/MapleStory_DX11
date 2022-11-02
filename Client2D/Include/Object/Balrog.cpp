@@ -5,6 +5,7 @@
 #include "Player2D.h"
 #include "Scene/SceneResource.h"
 #include "Input.h"
+#include "AI/BalrogBT.h"
 
 CBalrog::CBalrog()
 {
@@ -16,12 +17,15 @@ CBalrog::CBalrog(const CBalrog& obj)
 
 CBalrog::~CBalrog()
 {
-	
+	SAFE_DELETE(m_BT);
 }
 
 void CBalrog::Start()
 {
 	CMonsterManager::Start();
+
+	m_BT = new CBalrogBT;
+	m_BT->Start();
 }
 
 bool CBalrog::Init()
@@ -86,6 +90,8 @@ bool CBalrog::Init()
 void CBalrog::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
+
+	m_BT->Run();
 }
 
 void CBalrog::PostUpdate(float DeltaTime)

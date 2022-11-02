@@ -166,6 +166,9 @@
     <ClInclude Include="ClientInfo.h" />
     <ClInclude Include="ClientManager.h" />
     <ClInclude Include="ClientSceneManager.h" />
+    <ClInclude Include="Object\AI\BalrogBT.h" />
+    <ClInclude Include="Object\AI\BalrogPaseChange.h" />
+    <ClInclude Include="Object\AI\CheckBalrogHandDie.h" />
     <ClInclude Include="Object\AI\CompositeNode.h" />
     <ClInclude Include="Object\AI\Node.h" />
     <ClInclude Include="Object\AI\Selector.h" />
@@ -233,6 +236,9 @@
     <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="ClientSceneManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object\AI\BalrogBT.cpp" />
+    <ClCompile Include="Object\AI\BalrogPaseChange.cpp" />
+    <ClCompile Include="Object\AI\CheckBalrogHandDie.cpp" />
     <ClCompile Include="Object\AI\CompositeNode.cpp" />
     <ClCompile Include="Object\AI\Node.cpp" />
     <ClCompile Include="Object\AI\Selector.cpp" />

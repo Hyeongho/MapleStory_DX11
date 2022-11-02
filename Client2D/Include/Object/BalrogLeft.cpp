@@ -64,6 +64,8 @@ bool CBalrogLeft::Init()
 
 	m_Anim->SetEndFunction<CBalrogLeft>("BalrogLeftDie", this, &CBalrogLeft::ArmDie);
 
+	CInput::GetInst()->SetKeyCallback<CBalrogLeft>("BalrogLeftAnim", KeyState_Down, this, &CBalrogLeft::ChangeAnim);
+
 	return true;
 }
 
@@ -197,4 +199,5 @@ void CBalrogLeft::ChangeAnim(float DeltaTime)
 
 void CBalrogLeft::ArmDie()
 {
+	m_State = EMonster_State::Die;
 }

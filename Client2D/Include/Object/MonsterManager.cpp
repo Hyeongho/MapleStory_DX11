@@ -209,6 +209,16 @@ void CMonsterManager::AIDeath(float DeltaTime)
 {
 }
 
+bool CMonsterManager::CheckDie()
+{
+	if (m_State == EMonster_State::Die)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 void CMonsterManager::CollisionCallbackBegin(const CollisionResult& result)
 {
 	result.Src->GetCollisionProfile();

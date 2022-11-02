@@ -6,7 +6,6 @@
 #include "../ClientInfo.h"
 #include "BalrogLeft.h"
 #include "BalrogRight.h"
-#include "AI/Node.h"
 
 class CBalrog :
     public CMonsterManager
@@ -31,12 +30,25 @@ private:
 	CBalrogLeft* m_BalrogLeft;
 	CBalrogRight* m_BalrogRight;
 
+	class CBalrogBT* m_BT;
+
 public:
 	virtual void Start();
 	virtual bool Init();
 	virtual void Update(float DeltaTime);
 	virtual void PostUpdate(float DeltaTime);
 	virtual CBalrog* Clone();
+
+public:
+	CBalrogLeft* GetBalrogLeft() const
+	{
+		return m_BalrogLeft;
+	}
+
+	CBalrogRight* GetBalrogRight() const
+	{
+		return m_BalrogRight;
+	}
 
 private:
 	void InitAnimation();

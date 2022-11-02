@@ -5,5 +5,7 @@
 class CSequence :
     public CCompositeNode
 {
+public:
+    virtual bool Run();
 };
 
