@@ -27,18 +27,13 @@ bool CBalrogLeft::Init()
 {
 	CMonsterManager::Init();
 
-	InitAnimation();
+	//InitAnimation();
 
 	m_Sprite = CreateComponent<CSpriteComponent>("BalrogLeft");
 
 	SetRootComponent(m_Sprite);
 
 	m_Sprite->SetLayerName("BalrogHand");
-
-	//std::vector<TCHAR*> m_vecFileName;
-	//std::vector<std::wstring> vecBalrogBodyFileName;
-
-	//m_Sprite->GetMaterial()->GetTextureHeight();
 
 	m_Sprite->SetPivot(0.5f, 0.5f, 0.5f);
 
@@ -47,8 +42,6 @@ bool CBalrogLeft::Init()
 	m_Sprite->GetWorldPos();
 	m_Sprite->GetWorldScale();
 
-	//m_Sprite->SetWorldPos(0.f, 0.f, 0.f);
-
 	m_Sprite->SetTransparency(true);
 
 	m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();
@@ -56,15 +49,15 @@ bool CBalrogLeft::Init()
 	m_Anim = m_Sprite->GetAnimationInstance();
 
 	m_Anim->AddAnimation("BalrogLeftIdle", "BalrogLeftIdle", true, 2.04f);
-	m_Anim->AddAnimation("BalrogLeftDie", "BalrogLeftDie", false, 2.8f);
+	m_Anim->AddAnimation("BalrogLeftDie", "BalrogLeftDie", false, 3.36f);
 	m_Anim->AddAnimation("BalrogLeftAttack1", "BalrogLeftAttack1", false, 2.1f);
-	m_Anim->AddAnimation("BalrogLeftAttack2", "BalrogLeftAttack2", false, 2.9f);
+	m_Anim->AddAnimation("BalrogLeftAttack2", "BalrogLeftAttack2", false, 3.48f);
 
 	m_Anim->SetCurrentAnimation("BalrogLeftIdle");
 
+	m_Anim->SetEndFunction<CBalrogLeft>("BalrogLeftAttack1", this, &CBalrogLeft::AnimationFinish);
+	m_Anim->SetEndFunction<CBalrogLeft>("BalrogLeftAttack2", this, &CBalrogLeft::AnimationFinish);
 	m_Anim->SetEndFunction<CBalrogLeft>("BalrogLeftDie", this, &CBalrogLeft::ArmDie);
-
-	CInput::GetInst()->SetKeyCallback<CBalrogLeft>("BalrogLeftAnim", KeyState_Down, this, &CBalrogLeft::ChangeAnim);
 
 	return true;
 }
@@ -72,20 +65,79 @@ bool CBalrogLeft::Init()
 void CBalrogLeft::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
-
-
 }
 
 void CBalrogLeft::PostUpdate(float DeltaTime)
 {
 	CObjectManager::PostUpdate(DeltaTime);
 
+	switch (m_State)
+	{
+	case EMonster_State::Idle:
+		AIIdle(DeltaTime);
+		break;
 
+	case EMonster_State::Attack:
+		AIAttack(DeltaTime);
+		break;
+
+	case EMonster_State::Die:
+		AIDeath(DeltaTime);
+		break;
+	}
 }
 
 CBalrogLeft* CBalrogLeft::Clone()
 {
 	return new CBalrogLeft(*this);
+}
+
+void CBalrogLeft::AIIdle(float DeltaTime)
+{
+	m_ActiveTime += DeltaTime;
+
+	if (m_ActiveTime > m_RandActive)
+	{
+		m_ActiveTime = 0.f;
+
+		m_IsMove = rand() % 2;
+
+		if (m_IsMove)
+		{
+			m_State = EMonster_State::Attack;
+		}
+
+		else
+		{
+			m_State = EMonster_State::Idle;
+		}
+
+		m_RandActive = (float)(rand() % 2);
+	}
+}
+
+void CBalrogLeft::AIAttack(float DeltaTime)
+{
+	if (m_Anim->CheckCurrentAnimation("BalrogLeftAttack1") || m_Anim->CheckCurrentAnimation("BalrogLeftAttack2"))
+	{
+		return;
+	}
+
+	int num = (rand() % 2) + 1;
+
+	if (num == 1)
+	{
+		m_Anim->ChangeAnimation("BalrogLeftAttack1");
+	}
+
+	else
+	{
+		m_Anim->ChangeAnimation("BalrogLeftAttack2");
+	}
+}
+
+void CBalrogLeft::AIDeath(float DeltaTime)
+{
 }
 
 void CBalrogLeft::InitAnimation()
@@ -195,6 +247,18 @@ void CBalrogLeft::ChangeAnim(float DeltaTime)
 	{
 		m_Anim->ChangeAnimation("BalrogLeftDie");
 	}
+}
+
+void CBalrogLeft::AnimationFinish()
+{
+	//int num = (rand() % 2) + 1;
+
+	if (m_State == EMonster_State::Attack)
+	{
+		m_State = EMonster_State::Idle;
+
+		m_Anim->ChangeAnimation("BalrogLeftIdle");
+	}	
 }
 
 void CBalrogLeft::ArmDie()

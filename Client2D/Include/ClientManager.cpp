@@ -93,7 +93,7 @@ bool CClientManager::Init(HINSTANCE hInst)
 	LoadSound();
 	LoadData();
 	CreateLayer();
-	//LoadAnimation();
+	LoadAnimation();
 
 	return true;
 }
@@ -281,7 +281,409 @@ void CClientManager::LoadSound()
 
 void CClientManager::LoadAnimation()
 {
-	
+	// Balrog Body
+	std::vector<const TCHAR*> vecFileName;
+
+	for (int i = 1; i <= 12; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Body/stand/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogBodyIdle", "BalrogBodyIdle", vecFileName);
+
+	for (int i = 0; i < 12; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyIdle", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
+	}
+
+	for (int i = 0; i < 12; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 22; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Body/die/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[20]);
+	vecFileName.push_back(vecFileName[21]);
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogBodyDie", "BalrogBodyDie", vecFileName);
+
+	for (int i = 0; i < 59; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyDie", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
+	}
+
+	for (int i = 0; i < 22; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 24; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Body/attack1%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogBodyAttack1", "BalrogBodyAttack1", vecFileName);
+
+	for (int i = 0; i < 24; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyAttack1", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
+	}
+
+	for (int i = 0; i < 24; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 16; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Body/attack2/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogBodyAttack2", "BalrogBodyAttack2", vecFileName);
+
+	for (int i = 0; i < 16; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyAttack2", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
+	}
+
+	for (int i = 0; i < 16; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 19; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Body/attack3/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogBodyAttack3", "BalrogBodyAttack3", vecFileName);
+
+	for (int i = 0; i < 19; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyAttack3", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
+	}
+
+	for (int i = 0; i < 19; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 17; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Body/attack4/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogBodyAttack4", "BalrogBodyAttack4", vecFileName);
+
+	for (int i = 0; i < 17; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyAttack4", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
+	}
+
+	for (int i = 0; i < 17; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	// Balrog Left
+	for (int i = 1; i <= 12; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Left/stand/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogLeftIdle", "BalrogLeftIdle", vecFileName);
+
+	for (int i = 0; i < 12; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogLeftIdle", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
+	}
+
+	for (int i = 0; i < 12; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 28; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Left/die/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogLeftDie", "BalrogLeftDie", vecFileName);
+
+	for (int i = 0; i < 28; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogLeftDie", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
+	}
+
+	for (int i = 0; i < 28; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 21; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Left/attack1/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogLeftAttack1", "BalrogLeftAttack1", vecFileName);
+
+	for (int i = 0; i < 21; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogLeftAttack1", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
+	}
+
+	for (int i = 0; i < 21; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 29; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Left/attack2/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogLeftAttack2", "BalrogLeftAttack2", vecFileName);
+
+	for (int i = 0; i < 29; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogLeftAttack2", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
+	}
+
+	for (int i = 0; i < 29; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	// Balrog Right
+	for (int i = 1; i <= 12; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Right/stand/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogRightIdle", "BalrogRightIdle", vecFileName);
+
+	for (int i = 0; i < 12; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogRightIdle", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
+	}
+
+	for (int i = 0; i < 12; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 28; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Right/die/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogRightDie", "BalrogRightDie", vecFileName);
+
+	for (int i = 0; i < 28; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogRightDie", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
+	}
+
+	for (int i = 0; i < 28; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 21; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Right/attack1/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogRightAttack1", "BalrogRightAttack1", vecFileName);
+
+	for (int i = 0; i < 21; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogRightAttack1", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
+	}
+
+	for (int i = 0; i < 21; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 24; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Right/attack2/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogRightAttack2", "BalrogRightAttack2", vecFileName);
+
+	for (int i = 0; i < 24; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogRightAttack2", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
+	}
+
+	for (int i = 0; i < 24; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	for (int i = 1; i <= 19; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Right/attack3/%d.png"), i);
+
+		vecFileName.push_back(FileName);
+	}
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogRightAttack3", "BalrogRightAttack3", vecFileName);
+
+	for (int i = 0; i < 19; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogRightAttack3", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
+	}
+
+	for (int i = 0; i < 19; ++i)
+	{
+		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
 }
 
 void CClientManager::CreateLayer()

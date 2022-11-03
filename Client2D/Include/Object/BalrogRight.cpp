@@ -27,18 +27,13 @@ bool CBalrogRight::Init()
 {
 	CMonsterManager::Init();
 
-	InitAnimation();
+	//InitAnimation();
 
 	m_Sprite = CreateComponent<CSpriteComponent>("BalrogRight");
 
 	SetRootComponent(m_Sprite);
 
 	m_Sprite->SetLayerName("BalrogHand");
-
-	//std::vector<TCHAR*> m_vecFileName;
-	//std::vector<std::wstring> vecBalrogBodyFileName;
-
-	//m_Sprite->GetMaterial()->GetTextureHeight();
 
 	m_Sprite->SetWorldScale(1000.f, 1000.f, 1.f);
 
@@ -54,9 +49,9 @@ bool CBalrogRight::Init()
 
 	m_Anim->AddAnimation("BalrogRightIdle", "BalrogRightIdle", true, 2.04f);
 	m_Anim->AddAnimation("BalrogRightDie", "BalrogRightDie", false, 2.8f);
-	m_Anim->AddAnimation("BalrogRightAttack1", "BalrogRightAttack1", false, 2.1f);
-	m_Anim->AddAnimation("BalrogRightAttack2", "BalrogRightAttack2", false, 2.4f);
-	m_Anim->AddAnimation("BalrogRightAttack3", "BalrogRightAttack3", false, 1.9f);
+	m_Anim->AddAnimation("BalrogRightAttack1", "BalrogRightAttack1", false, 2.52f);
+	m_Anim->AddAnimation("BalrogRightAttack2", "BalrogRightAttack2", false, 3.6f);
+	m_Anim->AddAnimation("BalrogRightAttack3", "BalrogRightAttack3", false, 2.28f);
 
 	m_Anim->SetCurrentAnimation("BalrogRightIdle");
 
@@ -75,11 +70,39 @@ void CBalrogRight::Update(float DeltaTime)
 void CBalrogRight::PostUpdate(float DeltaTime)
 {
 	CObjectManager::PostUpdate(DeltaTime);
+
+	switch (m_State)
+	{
+	case EMonster_State::Idle:
+		AIIdle(DeltaTime);
+		break;
+
+	case EMonster_State::Attack:
+		AIAttack(DeltaTime);
+		break;
+
+	case EMonster_State::Die:
+		AIDeath(DeltaTime);
+		break;
+	}
 }
 
 CBalrogRight* CBalrogRight::Clone()
 {
 	return new CBalrogRight(*this);
+}
+
+void CBalrogRight::AIIdle(float DeltaTime)
+{
+}
+
+void CBalrogRight::AIAttack(float DeltaTime)
+{
+	
+}
+
+void CBalrogRight::AIDeath(float DeltaTime)
+{
 }
 
 void CBalrogRight::InitAnimation()

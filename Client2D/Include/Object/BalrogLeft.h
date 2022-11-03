@@ -31,10 +31,17 @@ public:
 	virtual void PostUpdate(float DeltaTime);
 	virtual CBalrogLeft* Clone();
 
+protected:
+	virtual void AIIdle(float DeltaTime);
+	virtual void AIAttack(float DeltaTime);
+	virtual void AIDeath(float DeltaTime);
+
 private:
 	void InitAnimation();
 
 	void ChangeAnim(float DeltaTime);
+
+	void AnimationFinish();
 	void ArmDie();
 };
 

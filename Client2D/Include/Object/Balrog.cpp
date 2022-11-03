@@ -24,6 +24,9 @@ void CBalrog::Start()
 {
 	CMonsterManager::Start();
 
+	m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
+	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());
+
 	m_BT = new CBalrogBT;
 	m_BT->Start();
 }
@@ -32,7 +35,7 @@ bool CBalrog::Init()
 {
 	CMonsterManager::Init();
 
-	InitAnimation();
+	//InitAnimation();
 
 	m_Sprite = CreateComponent<CSpriteComponent>("BalrogBody");
 	m_LeftMuzzle = CreateComponent<CSceneComponent>("LeftMuzzle");
@@ -46,8 +49,8 @@ bool CBalrog::Init()
 	m_Sprite->AddChild(m_LeftMuzzle);
 	m_Sprite->AddChild(m_RightMuzzle);
 
-	m_LeftMuzzle->AddChild(m_BalrogLeft->GetRootComponent());
-	m_RightMuzzle->AddChild(m_BalrogRight->GetRootComponent());
+	//m_LeftMuzzle->AddChild(m_BalrogLeft->GetRootComponent());
+	//m_RightMuzzle->AddChild(m_BalrogRight->GetRootComponent());
 
 	m_LeftMuzzle->SetPivot(0.5f, 0.5f, 0.5f);
 	m_RightMuzzle->SetPivot(0.5f, 0.5f, 0.5f);
@@ -76,8 +79,8 @@ bool CBalrog::Init()
 
 	m_Anim->SetCurrentAnimation("BalrogBodyIdle");
 
-	/*m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
-	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());*/
+	m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
+	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());
 
 	//m_BalrogLeft->SetWorldPos(0.f, 0.f, 0.f);
 	//m_BalrogRight->SetWorldPos(0.f, 0.f, 0.f);

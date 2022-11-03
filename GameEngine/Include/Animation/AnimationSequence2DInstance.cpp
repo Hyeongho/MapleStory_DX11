@@ -418,7 +418,7 @@ void CAnimationSequence2DInstance::SetShader()
 
 		EndUV = Vector2(1.f, 1.f);
 
-		m_CurrentAnimation->m_Sequence->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, Frame);
+		//m_CurrentAnimation->m_Sequence->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, Frame);
 
 		if (m_Owner)
 		{
@@ -428,7 +428,7 @@ void CAnimationSequence2DInstance::SetShader()
 
 		else
 		{
-			m_CurrentAnimation->m_Sequence->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, Frame);
+			m_CurrentAnimation->m_Sequence->GetTexture()->SetShader(0, (int)Buffer_Shader_Type::Pixel, m_CurrentAnimation->m_Frame);
 		}
 	}
 
