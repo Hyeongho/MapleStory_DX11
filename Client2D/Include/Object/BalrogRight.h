@@ -40,6 +40,8 @@ private:
 	void InitAnimation();
 
 	void ChangeAnim(float DeltaTime);
+
+	void AnimationFinish();
 	void ArmDie();
 };
 

@@ -251,14 +251,29 @@ void CBalrogLeft::ChangeAnim(float DeltaTime)
 
 void CBalrogLeft::AnimationFinish()
 {
-	//int num = (rand() % 2) + 1;
+	int num = rand() % 2;
 
-	if (m_State == EMonster_State::Attack)
+	if (num)
 	{
 		m_State = EMonster_State::Idle;
 
 		m_Anim->ChangeAnimation("BalrogLeftIdle");
-	}	
+	}
+
+	else
+	{
+		num = rand() % 2;
+
+		if (num)
+		{
+			m_Anim->ChangeAnimation("BalrogLeftAttack1");
+		}
+
+		else
+		{
+			m_Anim->ChangeAnimation("BalrogLeftAttack2");
+		}
+	}
 }
 
 void CBalrogLeft::ArmDie()

@@ -55,9 +55,12 @@ bool CBalrogRight::Init()
 
 	m_Anim->SetCurrentAnimation("BalrogRightIdle");
 
+	m_Anim->SetEndFunction<CBalrogRight>("BalrogRightAttack1", this, &CBalrogRight::AnimationFinish);
+	m_Anim->SetEndFunction<CBalrogRight>("BalrogRightAttack2", this, &CBalrogRight::AnimationFinish);
+	m_Anim->SetEndFunction<CBalrogRight>("BalrogRightAttack3", this, &CBalrogRight::AnimationFinish);
 	m_Anim->SetEndFunction<CBalrogRight>("BalrogRightDie", this, &CBalrogRight::ArmDie);
 
-	CInput::GetInst()->SetKeyCallback<CBalrogRight>("BalrogRightAnim", KeyState_Down, this, &CBalrogRight::ChangeAnim);
+	//CInput::GetInst()->SetKeyCallback<CBalrogRight>("BalrogRightAnim", KeyState_Down, this, &CBalrogRight::ChangeAnim);
 
 	return true;
 }
@@ -94,11 +97,49 @@ CBalrogRight* CBalrogRight::Clone()
 
 void CBalrogRight::AIIdle(float DeltaTime)
 {
+	m_ActiveTime += DeltaTime;
+
+	if (m_ActiveTime > m_RandActive)
+	{
+		m_ActiveTime = 0.f;
+
+		m_IsMove = rand() % 2;
+
+		if (m_IsMove)
+		{
+			m_State = EMonster_State::Attack;
+		}
+
+		else
+		{
+			m_State = EMonster_State::Idle;
+		}
+
+		m_RandActive = (float)(rand() % 2);
+	}
 }
 
 void CBalrogRight::AIAttack(float DeltaTime)
 {
-	
+	if (m_Anim->CheckCurrentAnimation("BalrogRightAttack1") || m_Anim->CheckCurrentAnimation("BalrogRightAttack2") || m_Anim->CheckCurrentAnimation("BalrogRightAttack3"))
+	{
+		return;
+	}
+
+	int num = rand() % 3;
+
+	switch (num)
+	{
+	case 0:
+		m_Anim->ChangeAnimation("BalrogRightAttack1");
+		break;
+	case 1:
+		m_Anim->ChangeAnimation("BalrogRightAttack2");
+		break;
+	case 2:
+		m_Anim->ChangeAnimation("BalrogRightAttack3");
+		break;
+	}
 }
 
 void CBalrogRight::AIDeath(float DeltaTime)
@@ -235,6 +276,36 @@ void CBalrogRight::ChangeAnim(float DeltaTime)
 	if (!m_Anim->CheckCurrentAnimation("BalrogRightDie"))
 	{
 		m_Anim->ChangeAnimation("BalrogRightDie");
+	}
+}
+
+void CBalrogRight::AnimationFinish()
+{
+	int num = rand() % 2;
+
+	if (num)
+	{
+		m_State = EMonster_State::Idle;
+
+		m_Anim->ChangeAnimation("BalrogRightIdle");
+	}
+
+	else
+	{
+		num = rand() % 3;
+
+		switch (num)
+		{
+		case 0:
+			m_Anim->ChangeAnimation("BalrogRightAttack1");
+			break;
+		case 1:
+			m_Anim->ChangeAnimation("BalrogRightAttack2");
+			break;
+		case 2:
+			m_Anim->ChangeAnimation("BalrogRightAttack3");
+			break;
+		}
 	}
 }
 
