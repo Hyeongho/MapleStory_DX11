@@ -376,7 +376,7 @@ void CClientManager::LoadAnimation()
 		TCHAR* FileName = new TCHAR[MAX_PATH];
 		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
 
-		wsprintf(FileName, TEXT("Monster/Balrog/Body/attack1%d.png"), i);
+		wsprintf(FileName, TEXT("Monster/Balrog/Body/attack1/%d.png"), i);
 
 		vecFileName.push_back(FileName);
 	}

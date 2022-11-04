@@ -1136,7 +1136,6 @@ void CTileMapComponent::Load(FILE* File)
 		m_BackMaterial = m_Scene->GetResource()->CreateMaterialEmpty<CMaterial>();
 
 		m_BackMaterial->Load(File);
-
 	}
 
 	MaterialEnable = false;

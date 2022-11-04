@@ -61,14 +61,6 @@ bool CPlayerStatus::Init()
 
     m_StausCover->SetZOrder(5);
 
-    m_StausBackGrond = CreateWidget<CImage>("StausBackGrond");
-    m_StausBackGrond->SetTexture("StausBackGrond", TEXT("UI/Satatus/mainBar.status.backgrnd.png"));
-    m_StausBackGrond->SetSize(198.f, 37.f);
-
-    m_StausBackGrond->SetPos(2.f, 12.f);
-
-    m_StausBackGrond->SetZOrder(1);
-
     m_HPBar = CreateWidget<CProgressBar>("HPBar");
     m_HPBar->SetTexture("HPBar", TEXT("UI/Satatus/mainBar.status.gauge.hp.layer0.png"));
     m_HPBar->SetSize(171.f, 13.f);
@@ -84,6 +76,14 @@ bool CPlayerStatus::Init()
     m_MPBar->SetPos(24.f, 14.f);
 
     m_MPBar->SetZOrder(2);
+
+    m_StausBackGrond = CreateWidget<CImage>("StausBackGrond");
+    m_StausBackGrond->SetTexture("StausBackGrond", TEXT("UI/Satatus/mainBar.status.backgrnd.png"));
+    m_StausBackGrond->SetSize(198.f, 37.f);
+
+    m_StausBackGrond->SetPos(2.f, 12.f);
+
+    m_StausBackGrond->SetZOrder(1);
 
     return true;
 }

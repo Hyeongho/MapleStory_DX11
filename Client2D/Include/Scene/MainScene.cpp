@@ -91,6 +91,9 @@ bool CMainScene::Init()
 
 	ShadowDualBlade1->SetRange(2000.f, 800.f, 0.f);
 
+	/*CBalrog* Balrog = m_Scene->CreateGameObject<CBalrog>("Balrog");
+	Balrog->SetWorldPos(700.f, 400.f, 0.f);*/
+
 	CPotal* Potal = m_Scene->CreateGameObject<CPotal>("Potal");
 
 	Potal->SetRelativePos(1800.f, 150, 0.f);

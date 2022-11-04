@@ -50,9 +50,15 @@ public:
 		return m_BalrogRight;
 	}
 
+protected:
+	virtual void AIIdle(float DeltaTime);
+	virtual void AIAttack(float DeltaTime);
+	virtual void AIDeath(float DeltaTime);
+
 private:
 	void InitAnimation();
 
+	void AnimationFinish();
 	void ChangeAnim(float DeltaTime);
 };
 

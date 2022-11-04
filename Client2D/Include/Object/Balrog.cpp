@@ -40,20 +40,25 @@ bool CBalrog::Init()
 	m_Sprite = CreateComponent<CSpriteComponent>("BalrogBody");
 	m_LeftMuzzle = CreateComponent<CSceneComponent>("LeftMuzzle");
 	m_RightMuzzle = CreateComponent<CSceneComponent>("RightMuzzle");
+	m_AttackBody = CreateComponent<CColliderBox2D>("AttackBody");
 
 	SetRootComponent(m_Sprite);
 
 	m_BalrogLeft = m_Scene->CreateGameObject<CBalrogLeft>("BalrogLeft");
 	m_BalrogRight = m_Scene->CreateGameObject<CBalrogRight>("BalrogRight");
 
+	m_AttackBody->SetCollisionProfile("MonsterAttack");
+
 	m_Sprite->AddChild(m_LeftMuzzle);
 	m_Sprite->AddChild(m_RightMuzzle);
+	m_Sprite->AddChild(m_AttackBody);
 
 	//m_LeftMuzzle->AddChild(m_BalrogLeft->GetRootComponent());
 	//m_RightMuzzle->AddChild(m_BalrogRight->GetRootComponent());
 
 	m_LeftMuzzle->SetPivot(0.5f, 0.5f, 0.5f);
 	m_RightMuzzle->SetPivot(0.5f, 0.5f, 0.5f);
+	m_AttackBody->SetPivot(0.5f, 0.5f, 0.5f);
 
 	m_LeftMuzzle->SetWorldPos(-330.f, -170.f, 0.f);
 	m_RightMuzzle->SetWorldPos(220.f, -170.f, 0.f);
@@ -79,6 +84,11 @@ bool CBalrog::Init()
 
 	m_Anim->SetCurrentAnimation("BalrogBodyIdle");
 
+	m_Anim->SetEndFunction<CBalrog>("BalrogBodyAttack1", this, &CBalrog::AnimationFinish);
+	m_Anim->SetEndFunction<CBalrog>("BalrogBodyAttack2", this, &CBalrog::AnimationFinish);
+	m_Anim->SetEndFunction<CBalrog>("BalrogBodyAttack3", this, &CBalrog::AnimationFinish);
+	m_Anim->SetEndFunction<CBalrog>("BalrogBodyAttack4", this, &CBalrog::AnimationFinish);
+
 	m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
 	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());
 
@@ -100,11 +110,86 @@ void CBalrog::Update(float DeltaTime)
 void CBalrog::PostUpdate(float DeltaTime)
 {
 	CObjectManager::PostUpdate(DeltaTime);
+
+	switch (m_State)
+	{
+	case EMonster_State::Idle:
+		AIIdle(DeltaTime);
+		break;
+
+	case EMonster_State::Attack:
+		AIAttack(DeltaTime);
+		break;
+
+	case EMonster_State::Die:
+		AIDeath(DeltaTime);
+		break;
+	}
 }
 
 CBalrog* CBalrog::Clone()
 {
 	return new CBalrog(*this);
+}
+
+void CBalrog::AIIdle(float DeltaTime)
+{
+	m_ActiveTime += DeltaTime;
+
+	if (m_ActiveTime > m_RandActive)
+	{
+		m_ActiveTime = 0.f;
+
+		m_IsMove = rand() % 2;
+
+		if (m_IsMove)
+		{
+			m_State = EMonster_State::Attack;
+		}
+
+		else
+		{
+			m_State = EMonster_State::Idle;
+		}
+
+		m_RandActive = (float)(rand() % 2);
+	}
+}
+
+void CBalrog::AIAttack(float DeltaTime)
+{
+	if (m_Attack)
+	{
+		return;
+	}
+
+	int num = (rand() % 4) + 1;
+
+	if (num == 1)
+	{
+		m_Anim->ChangeAnimation("BalrogBodyAttack1");
+	}
+
+	else if (num == 2)
+	{
+		m_Anim->ChangeAnimation("BalrogBodyAttack2");
+	}
+
+	else if (num == 3)
+	{
+		m_Anim->ChangeAnimation("BalrogBodyAttack3");
+	}
+
+	else if (num == 4)
+	{
+		m_Anim->ChangeAnimation("BalrogBodyAttack4");
+	}
+
+	m_Attack = true;
+}
+
+void CBalrog::AIDeath(float DeltaTime)
+{
 }
 
 void CBalrog::InitAnimation()
@@ -293,6 +378,25 @@ void CBalrog::InitAnimation()
 	}
 
 	vecFileName.clear();
+}
+
+void CBalrog::AnimationFinish()
+{
+	int num = rand() % 2;
+
+	if (num)
+	{
+		m_State = EMonster_State::Idle;
+
+		m_Anim->ChangeAnimation("BalrogBodyIdle");
+	}
+
+	else
+	{
+		m_State = EMonster_State::Attack;
+	}
+
+	m_Attack = false;
 }
 
 void CBalrog::ChangeAnim(float DeltaTime)
