@@ -35,7 +35,10 @@ void CBalrogBT::Start()
 	m_Squence1->AddChild(m_BalrogPaseChange);
 }
 
-void CBalrogBT::Run()
+void CBalrogBT::Run(bool IsRun)
 {
-	m_Root->Run();
+	if (IsRun)
+	{
+		m_Root->Run();
+	}
 }

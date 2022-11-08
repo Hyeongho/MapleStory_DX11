@@ -10,7 +10,7 @@
 
 CCheckBalrogHandDie::CCheckBalrogHandDie()
 {
-	m_Balrog = (CBalrog*)CSceneManager::GetInst()->GetScene()->FindObject("Balrog");
+	m_Balrog = dynamic_cast<CBalrog*>(CSceneManager::GetInst()->GetScene()->FindObject("Balrog"));
 }
 
 CCheckBalrogHandDie::~CCheckBalrogHandDie()

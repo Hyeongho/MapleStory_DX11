@@ -20,6 +20,6 @@ private:
 
 public:
 	void Start();
-	void Run();
+	void Run(bool IsRun = true);
 };
 

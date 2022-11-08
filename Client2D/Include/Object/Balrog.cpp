@@ -92,6 +92,8 @@ bool CBalrog::Init()
 	m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
 	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());
 
+	m_Anim->AddNotify<CBalrog>("BalrogBodyAttack1", "BalrogBodyAttack1", 2, this, &CBalrog::SetAttackRange);
+
 	//m_BalrogLeft->SetWorldPos(0.f, 0.f, 0.f);
 	//m_BalrogRight->SetWorldPos(0.f, 0.f, 0.f);
 
@@ -397,6 +399,14 @@ void CBalrog::AnimationFinish()
 	}
 
 	m_Attack = false;
+}
+
+void CBalrog::SetAttackRange()
+{
+}
+
+void CBalrog::Attack()
+{
 }
 
 void CBalrog::ChangeAnim(float DeltaTime)

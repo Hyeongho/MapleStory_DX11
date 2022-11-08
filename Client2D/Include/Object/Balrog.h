@@ -59,6 +59,9 @@ private:
 	void InitAnimation();
 
 	void AnimationFinish();
+	void SetAttackRange();
+	void Attack();
+
 	void ChangeAnim(float DeltaTime);
 };
 

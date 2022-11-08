@@ -1,11 +1,11 @@
 #pragma once
 
-#include "GameObject/GameObject.h"
+#include "SkillManager.h"
 #include "Component/SpriteComponent.h"
 #include "Component/ColliderBox2D.h"
 
 class CBladeFury :
-    public CGameObject
+    public CSkillManager
 {
     friend class CScene;
 

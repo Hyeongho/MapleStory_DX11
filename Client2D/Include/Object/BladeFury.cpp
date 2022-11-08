@@ -10,7 +10,7 @@ CBladeFury::CBladeFury()
 	SetTypeID<CBladeFury>();
 }
 
-CBladeFury::CBladeFury(const CBladeFury& obj) : CGameObject(obj)
+CBladeFury::CBladeFury(const CBladeFury& obj) : CSkillManager(obj)
 {
 }
 
@@ -24,7 +24,7 @@ void CBladeFury::SetCollisionProfile(const std::string& Name)
 
 bool CBladeFury::Init()
 {
-	CGameObject::Init();
+	CSkillManager::Init();
 
 	CPlayer2D* Player = (CPlayer2D*)m_Scene->GetPlayerObject();
 
@@ -76,12 +76,12 @@ bool CBladeFury::Init()
 
 void CBladeFury::Update(float DeltaTime)
 {
-	CGameObject::Update(DeltaTime);
+	CSkillManager::Update(DeltaTime);
 }
 
 void CBladeFury::PostUpdate(float DeltaTime)
 {
-	CGameObject::PostUpdate(DeltaTime);
+	CSkillManager::PostUpdate(DeltaTime);
 }
 
 CBladeFury* CBladeFury::Clone()

@@ -73,6 +73,18 @@
     <Filter Include="02. Object\02. Monster\06. Balrog\01. BT">
       <UniqueIdentifier>{2c781e91-557b-4d32-8310-c1ab52855ca7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog\02. AreaWarning">
+      <UniqueIdentifier>{942fc9d7-7b36-49f4-b0b6-a6f250059c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog\02. AreaWarning\01. Body">
+      <UniqueIdentifier>{cb889d1a-1158-4bf4-9350-f507140ea593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog\02. AreaWarning\02. Left">
+      <UniqueIdentifier>{af2dac57-045d-4c2e-bd89-f25d86dccf79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog\02. AreaWarning\03. Right">
+      <UniqueIdentifier>{6c69e3b1-68c3-4188-865c-e182b65d67fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -263,6 +275,9 @@
     </ClInclude>
     <ClInclude Include="Object\AI\BalrogPaseChange.h">
       <Filter>02. Object\02. Monster\06. Balrog\01. BT</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BodyAttack1AreaWarning.h">
+      <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\01. Body</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -458,6 +473,9 @@
     </ClCompile>
     <ClCompile Include="Object\AI\BalrogPaseChange.cpp">
       <Filter>02. Object\02. Monster\06. Balrog\01. BT</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BodyAttack1AreaWarning.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\01. Body</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
