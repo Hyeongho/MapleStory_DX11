@@ -178,6 +178,7 @@
     <ClInclude Include="Object\BalrogRight.h" />
     <ClInclude Include="Object\BladeFury.h" />
     <ClInclude Include="Object\BodyAttack1AreaWarning.h" />
+    <ClInclude Include="Object\BodyAttack3AreaWarning.h" />
     <ClInclude Include="Object\CrimsonBalrog.h" />
     <ClInclude Include="Object\DamageFont.h" />
     <ClInclude Include="Object\HongA.h" />
@@ -249,6 +250,7 @@
     <ClCompile Include="Object\BalrogRight.cpp" />
     <ClCompile Include="Object\BladeFury.cpp" />
     <ClCompile Include="Object\BodyAttack1AreaWarning.cpp" />
+    <ClCompile Include="Object\BodyAttack3AreaWarning.cpp" />
     <ClCompile Include="Object\CrimsonBalrog.cpp" />
     <ClCompile Include="Object\DamageFont.cpp" />
     <ClCompile Include="Object\HongA.cpp" />

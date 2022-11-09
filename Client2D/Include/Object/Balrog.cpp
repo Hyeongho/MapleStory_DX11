@@ -5,6 +5,8 @@
 #include "Player2D.h"
 #include "Scene/SceneResource.h"
 #include "Input.h"
+#include "BodyAttack1AreaWarning.h"
+#include "BodyAttack3AreaWarning.h"
 #include "AI/BalrogBT.h"
 
 CBalrog::CBalrog()
@@ -384,6 +386,39 @@ void CBalrog::InitAnimation()
 
 void CBalrog::AnimationFinish()
 {
+	if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack1"))
+	{
+		CBodyAttack1AreaWarning* BodyAttack1AreaWarning1 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning1");
+
+		BodyAttack1AreaWarning1->SetWorldPos(83.f, 118.f, 1.f);
+
+		CBodyAttack1AreaWarning* BodyAttack1AreaWarning2 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning2");
+
+		BodyAttack1AreaWarning2->SetWorldPos(1366.f - 83.f - 547.f, 118.f, 1.f);
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack2"))
+	{
+
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack3"))
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			int PosX = rand() % 1200 + 83;
+
+			CBodyAttack3AreaWarning* BodyAttack3AreaWarning = m_Scene->CreateGameObject<CBodyAttack3AreaWarning>("BodyAttack3AreaWarning1");
+
+			BodyAttack3AreaWarning->SetWorldPos((float)PosX, 118.f, 1.f);
+		}	
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack4"))
+	{
+
+	}
+
 	int num = rand() % 2;
 
 	if (num)

@@ -279,6 +279,9 @@
     <ClInclude Include="Object\BodyAttack1AreaWarning.h">
       <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\01. Body</Filter>
     </ClInclude>
+    <ClInclude Include="Object\BodyAttack3AreaWarning.h">
+      <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\01. Body</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client2D.rc">
@@ -475,6 +478,9 @@
       <Filter>02. Object\02. Monster\06. Balrog\01. BT</Filter>
     </ClCompile>
     <ClCompile Include="Object\BodyAttack1AreaWarning.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\01. Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BodyAttack3AreaWarning.cpp">
       <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\01. Body</Filter>
     </ClCompile>
   </ItemGroup>
