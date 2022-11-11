@@ -1,22 +1,28 @@
 #pragma once
 
 #include "../../ClientManager.h"
+#include "Selector.h"
+#include "Sequence.h"
+#include "BalrogPaseChange.h"
+#include "CheckBalrogHandDie.h"
+#include "Ref.h"
 
-class CBalrogBT
+class CBalrogBT : 
+	public CRef
 {
 public:
 	CBalrogBT();
-	~CBalrogBT();
+	virtual ~CBalrogBT();
 
 private:
-	class CSequence* m_Root;
-	class CSequence* m_Squence1;
+	CSharedPtr<CSequence> m_Root;
+	CSharedPtr<CSequence> m_Squence1;
 
-	class CSelector* m_Selector1;
+	CSharedPtr<CSelector> m_Selector1;
 
-	class CCheckBalrogHandDie* m_CheckBalrogHandDie;
+	CSharedPtr<CCheckBalrogHandDie> m_CheckBalrogHandDie;
 	
-	class CBalrogPaseChange* m_BalrogPaseChange;
+	CSharedPtr<CBalrogPaseChange> m_BalrogPaseChange;
 
 public:
 	void Start();

@@ -85,6 +85,9 @@
     <Filter Include="02. Object\02. Monster\06. Balrog\02. AreaWarning\03. Right">
       <UniqueIdentifier>{6c69e3b1-68c3-4188-865c-e182b65d67fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog\03. Effect">
+      <UniqueIdentifier>{b2b77343-08fc-4053-9ebe-2d19dfee78d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -281,6 +284,15 @@
     </ClInclude>
     <ClInclude Include="Object\BodyAttack3AreaWarning.h">
       <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\01. Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\RightAttack1AreaWarning.h">
+      <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\03. Right</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\LeftAttack1AreaWarning.h">
+      <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\02. Left</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BodyAttack2Effect.h">
+      <Filter>02. Object\02. Monster\06. Balrog\03. Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -482,6 +494,15 @@
     </ClCompile>
     <ClCompile Include="Object\BodyAttack3AreaWarning.cpp">
       <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\01. Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\RightAttack1AreaWarning.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\03. Right</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\LeftAttack1AreaWarning.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\02. AreaWarning\02. Left</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BodyAttack2Effect.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\03. Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

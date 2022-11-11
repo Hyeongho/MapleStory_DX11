@@ -6,6 +6,7 @@
 #include "../ClientInfo.h"
 #include "BalrogLeft.h"
 #include "BalrogRight.h"
+#include "AI/BalrogBT.h"
 
 class CBalrog :
     public CMonsterManager
@@ -30,7 +31,9 @@ private:
 	CBalrogLeft* m_BalrogLeft;
 	CBalrogRight* m_BalrogRight;
 
-	class CBalrogBT* m_BT;
+	CSharedPtr<CBalrogBT> m_BT;
+
+	std::vector<float> m_Attack3AreaWarningPosX;
 
 public:
 	virtual void Start();

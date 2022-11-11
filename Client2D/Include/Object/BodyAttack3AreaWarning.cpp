@@ -51,8 +51,6 @@ bool CBodyAttack3AreaWarning::Init()
 
 	m_Sprite->SetRelativeScale(160.f, 499.f, 1.f);
 
-	m_Sprite->SetPivot(0.5f, 0.f, 0.f);
-
 	return true;
 }
 

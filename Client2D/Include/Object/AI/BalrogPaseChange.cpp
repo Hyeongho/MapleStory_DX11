@@ -10,7 +10,7 @@
 
 CBalrogPaseChange::CBalrogPaseChange()
 {
-	m_Balrog = (CBalrog*)CSceneManager::GetInst()->GetScene()->FindObject("Balrog");
+	
 }
 
 CBalrogPaseChange::~CBalrogPaseChange()
@@ -19,6 +19,13 @@ CBalrogPaseChange::~CBalrogPaseChange()
 
 bool CBalrogPaseChange::Run()
 {
+	m_Balrog = (CBalrog*)CSceneManager::GetInst()->GetScene()->FindObject("Balrog");
+
+	if (!m_Balrog)
+	{
+		return false;
+	}
+
 	OutputDebugStringA("Change");
 
 	return true;

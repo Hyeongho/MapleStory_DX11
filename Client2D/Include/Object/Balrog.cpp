@@ -7,7 +7,6 @@
 #include "Input.h"
 #include "BodyAttack1AreaWarning.h"
 #include "BodyAttack3AreaWarning.h"
-#include "AI/BalrogBT.h"
 
 CBalrog::CBalrog()
 {
@@ -19,7 +18,7 @@ CBalrog::CBalrog(const CBalrog& obj)
 
 CBalrog::~CBalrog()
 {
-	SAFE_DELETE(m_BT);
+	
 }
 
 void CBalrog::Start()
@@ -29,7 +28,6 @@ void CBalrog::Start()
 	m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
 	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());
 
-	m_BT = new CBalrogBT;
 	m_BT->Start();
 }
 
@@ -100,6 +98,16 @@ bool CBalrog::Init()
 	//m_BalrogRight->SetWorldPos(0.f, 0.f, 0.f);
 
 	//CInput::GetInst()->SetKeyCallback<CBalrog>("BalrogAnim", KeyState_Down, this, &CBalrog::ChangeAnim);
+
+	m_Attack3AreaWarningPosX.push_back(83);
+	m_Attack3AreaWarningPosX.push_back(243);
+	m_Attack3AreaWarningPosX.push_back(403);
+	m_Attack3AreaWarningPosX.push_back(563);
+	m_Attack3AreaWarningPosX.push_back(723);
+	m_Attack3AreaWarningPosX.push_back(883);
+	m_Attack3AreaWarningPosX.push_back(1043);
+
+	m_BT = new CBalrogBT;
 
 	return true;
 }
@@ -404,13 +412,20 @@ void CBalrog::AnimationFinish()
 
 	else if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack3"))
 	{
+		std::vector<float> PosX = m_Attack3AreaWarningPosX;
+
+		size_t size = m_Attack3AreaWarningPosX.size();
+
 		for (int i = 0; i < 4; i++)
 		{
-			int PosX = rand() % 1200 + 83;
+			int Index = rand() % size;
 
 			CBodyAttack3AreaWarning* BodyAttack3AreaWarning = m_Scene->CreateGameObject<CBodyAttack3AreaWarning>("BodyAttack3AreaWarning1");
 
-			BodyAttack3AreaWarning->SetWorldPos((float)PosX, 118.f, 1.f);
+			BodyAttack3AreaWarning->SetWorldPos(PosX[Index], 98.f, 1.f);
+
+			PosX.erase(PosX.begin() + Index);
+			size--;
 		}	
 	}
 
