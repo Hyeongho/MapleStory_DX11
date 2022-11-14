@@ -35,6 +35,8 @@ private:
 
 	std::vector<float> m_Attack3AreaWarningPosX;
 
+	bool m_BTRun;
+
 public:
 	virtual void Start();
 	virtual bool Init();
@@ -51,6 +53,11 @@ public:
 	CBalrogRight* GetBalrogRight() const
 	{
 		return m_BalrogRight;
+	}
+
+	void SetBTRun(bool BTRun)
+	{
+		m_BTRun = BTRun;
 	}
 
 protected:

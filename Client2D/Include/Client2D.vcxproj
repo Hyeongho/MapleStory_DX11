@@ -31,6 +31,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -38,12 +39,14 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -51,6 +54,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -224,6 +228,7 @@
     <ClInclude Include="Scene\StartScene.h" />
     <ClInclude Include="Scene\TestScene.h" />
     <ClInclude Include="TalkManager.h" />
+    <ClInclude Include="Widget\BossStatus.h" />
     <ClInclude Include="Widget\DamageWidget.h" />
     <ClInclude Include="Widget\Fade.h" />
     <ClInclude Include="Widget\PlayerStatus.h" />
@@ -298,6 +303,7 @@
     <ClCompile Include="Scene\StartScene.cpp" />
     <ClCompile Include="Scene\TestScene.cpp" />
     <ClCompile Include="TalkManager.cpp" />
+    <ClCompile Include="Widget\BossStatus.cpp" />
     <ClCompile Include="Widget\DamageWidget.cpp" />
     <ClCompile Include="Widget\Fade.cpp" />
     <ClCompile Include="Widget\PlayerStatus.cpp" />

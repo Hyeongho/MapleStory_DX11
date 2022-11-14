@@ -8,7 +8,7 @@
 #include "Scene/SceneManager.h"
 #include "Input.h"
 
-CCheckBalrogHandDie::CCheckBalrogHandDie()
+CCheckBalrogHandDie::CCheckBalrogHandDie() : m_Balrog(nullptr)
 {
 	
 }

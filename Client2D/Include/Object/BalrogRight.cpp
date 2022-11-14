@@ -30,8 +30,11 @@ bool CBalrogRight::Init()
 	//InitAnimation();
 
 	m_Sprite = CreateComponent<CSpriteComponent>("BalrogRight");
+	m_Body = CreateComponent<CColliderBox2D>("Body");
 
 	SetRootComponent(m_Sprite);
+
+	m_Body->SetCollisionProfile("Monster");
 
 	m_Sprite->SetLayerName("BalrogHand");
 
@@ -62,6 +65,12 @@ bool CBalrogRight::Init()
 
 	//CInput::GetInst()->SetKeyCallback<CBalrogRight>("BalrogRightAnim", KeyState_Down, this, &CBalrogRight::ChangeAnim);
 
+	m_Sprite->AddChild(m_Body);
+
+	m_Body->SetExtent(137.5f, 98.5f);
+
+	SetCharacterInfo("BalrogRight");
+
 	return true;
 }
 
@@ -73,6 +82,18 @@ void CBalrogRight::Update(float DeltaTime)
 void CBalrogRight::PostUpdate(float DeltaTime)
 {
 	CObjectManager::PostUpdate(DeltaTime);
+
+	if (m_CharacterInfo.HP <= 0)
+	{
+		m_Anim->ChangeAnimation("BalrogRightDie");
+
+		if (m_Body)
+		{
+			m_Body->Destroy();
+		}
+
+		return;
+	}
 
 	switch (m_State)
 	{

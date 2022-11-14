@@ -294,6 +294,9 @@
     <ClInclude Include="Object\BodyAttack2Effect.h">
       <Filter>02. Object\02. Monster\06. Balrog\03. Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Widget\BossStatus.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client2D.rc">
@@ -503,6 +506,9 @@
     </ClCompile>
     <ClCompile Include="Object\BodyAttack2Effect.cpp">
       <Filter>02. Object\02. Monster\06. Balrog\03. Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\BossStatus.cpp">
+      <Filter>03. UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

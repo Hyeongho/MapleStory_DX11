@@ -1,2 +1,12 @@
-﻿  Balrog.cpp
+﻿  BalrogPaseChange.cpp
+  CheckBalrogHandDie.cpp
+  Balrog.cpp
+  BodyAttack1AreaWarning.cpp
+  BodyAttack2Effect.cpp
+  BodyAttack3AreaWarning.cpp
+  LeftAttack1AreaWarning.cpp
+  RightAttack1AreaWarning.cpp
+  BalrogAltar.cpp
+  MainScene.cpp
+  코드를 생성하고 있습니다...
   Client2D.vcxproj -> D:\C++_Client\MapleStory_DX11\Client2D\Bin\Client2D_Debug.exe

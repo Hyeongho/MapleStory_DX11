@@ -30,8 +30,11 @@ bool CBalrogLeft::Init()
 	//InitAnimation();
 
 	m_Sprite = CreateComponent<CSpriteComponent>("BalrogLeft");
+	m_Body = CreateComponent<CColliderBox2D>("Body");
 
 	SetRootComponent(m_Sprite);
+
+	m_Body->SetCollisionProfile("Monster");
 
 	m_Sprite->SetLayerName("BalrogHand");
 
@@ -59,6 +62,12 @@ bool CBalrogLeft::Init()
 	m_Anim->SetEndFunction<CBalrogLeft>("BalrogLeftAttack2", this, &CBalrogLeft::AnimationFinish);
 	m_Anim->SetEndFunction<CBalrogLeft>("BalrogLeftDie", this, &CBalrogLeft::ArmDie);
 
+	m_Sprite->AddChild(m_Body);
+
+	m_Body->SetExtent(137.5f, 98.5f);
+
+	SetCharacterInfo("BalrogLeft");
+
 	return true;
 }
 
@@ -70,6 +79,18 @@ void CBalrogLeft::Update(float DeltaTime)
 void CBalrogLeft::PostUpdate(float DeltaTime)
 {
 	CObjectManager::PostUpdate(DeltaTime);
+
+	if (m_CharacterInfo.HP <= 0)
+	{
+		m_Anim->ChangeAnimation("BalrogLeftDie");
+
+		if (m_Body)
+		{
+			m_Body->Destroy();
+		}
+
+		return;
+	}
 
 	switch (m_State)
 	{
@@ -94,6 +115,11 @@ CBalrogLeft* CBalrogLeft::Clone()
 
 void CBalrogLeft::AIIdle(float DeltaTime)
 {
+	if (m_Anim->CheckCurrentAnimation("BalrogLeftDie"))
+	{
+		return;
+	}
+
 	m_ActiveTime += DeltaTime;
 
 	if (m_ActiveTime > m_RandActive)
@@ -118,7 +144,7 @@ void CBalrogLeft::AIIdle(float DeltaTime)
 
 void CBalrogLeft::AIAttack(float DeltaTime)
 {
-	if (m_Anim->CheckCurrentAnimation("BalrogLeftAttack1") || m_Anim->CheckCurrentAnimation("BalrogLeftAttack2"))
+	if (m_Anim->CheckCurrentAnimation("BalrogLeftAttack1") || m_Anim->CheckCurrentAnimation("BalrogLeftAttack2") || m_Anim->CheckCurrentAnimation("BalrogLeftDie"))
 	{
 		return;
 	}
@@ -138,6 +164,7 @@ void CBalrogLeft::AIAttack(float DeltaTime)
 
 void CBalrogLeft::AIDeath(float DeltaTime)
 {
+	
 }
 
 void CBalrogLeft::InitAnimation()

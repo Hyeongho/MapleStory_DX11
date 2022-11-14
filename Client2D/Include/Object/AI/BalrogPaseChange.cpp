@@ -8,7 +8,7 @@
 #include "Scene/SceneManager.h"
 #include "Input.h"
 
-CBalrogPaseChange::CBalrogPaseChange()
+CBalrogPaseChange::CBalrogPaseChange() : m_Balrog(nullptr)
 {
 	
 }
@@ -19,14 +19,21 @@ CBalrogPaseChange::~CBalrogPaseChange()
 
 bool CBalrogPaseChange::Run()
 {
-	m_Balrog = (CBalrog*)CSceneManager::GetInst()->GetScene()->FindObject("Balrog");
+	m_Balrog = dynamic_cast<CBalrog*>(CSceneManager::GetInst()->GetScene()->FindObject("Balrog"));
 
 	if (!m_Balrog)
 	{
 		return false;
 	}
 
-	OutputDebugStringA("Change");
+	if (m_Balrog->GetBalrogLeft()->CheckDie() && m_Balrog->GetBalrogRight()->CheckDie())
+	{
+		OutputDebugStringA("Change");
+
+		m_Balrog->SetBTRun(false);
+
+		return true;
+	}
 
 	return true;
 }

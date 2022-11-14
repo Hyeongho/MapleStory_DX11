@@ -8,7 +8,7 @@
 #include "BodyAttack1AreaWarning.h"
 #include "BodyAttack3AreaWarning.h"
 
-CBalrog::CBalrog()
+CBalrog::CBalrog() : m_BTRun(true)
 {
 }
 
@@ -109,6 +109,8 @@ bool CBalrog::Init()
 
 	m_BT = new CBalrogBT;
 
+	SetCharacterInfo("Balrog");
+
 	return true;
 }
 
@@ -116,7 +118,7 @@ void CBalrog::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
 
-	m_BT->Run();
+	m_BT->Run(m_BTRun);
 }
 
 void CBalrog::PostUpdate(float DeltaTime)
