@@ -155,7 +155,10 @@ void CPhantomBlow::AnimationFinish()
 {
 	if (m_obj)
 	{
-		m_obj->SetDamage((float)m_Damage);
+		if (m_obj->GetCharacterInfo().HP <= 0)
+		{
+			m_obj->SetState(EMonster_State::Die);
+		}
 	}
 
 	Destroy();
@@ -167,7 +170,13 @@ void CPhantomBlow::Attack()
 
 	CDamageFont* DamageFont = m_Scene->CreateGameObject<CDamageFont>("DamagrFont");
 	DamageFont->SetWorldPos(m_TargetPos.x - 31.f, m_TargetPos.y + (m_TargetSize.y) + (Frame * 30), 1);
-	DamageFont->SetDamageNumber(10);
 
-	m_Damage += 10;
+	m_Damage = 10;
+
+	DamageFont->SetDamageNumber(m_Damage);
+
+	if (m_obj)
+	{
+		m_obj->SetDamage((float)m_Damage);
+	}
 }

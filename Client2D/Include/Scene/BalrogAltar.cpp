@@ -79,6 +79,8 @@ bool CBalrogAltar::Init()
 		m_LoadingFunction(false, 0.8f);
 	}
 
+	m_BossStatus = m_Scene->GetViewport()->CreateWidgetWindow<CBossStatus>("BossStatus");
+
 	m_PlayerStatus = m_Scene->GetViewport()->CreateWidgetWindow<CPlayerStatus>("PlayerStatus");
 	m_Fade = m_Scene->GetViewport()->CreateWidgetWindow<CFade>("FadeWidget");
 

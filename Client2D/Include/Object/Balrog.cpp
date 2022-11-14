@@ -29,6 +29,13 @@ void CBalrog::Start()
 	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());
 
 	m_BT->Start();
+
+	m_BossStatus = m_Scene->GetViewport()->FindWidgetWindow<CBossStatus>("BossStatus");
+
+	float HP = (float)m_CharacterInfo.HP + m_BalrogLeft->GetCharacterInfo().HP + m_BalrogRight->GetCharacterInfo().HP;
+	float MaxHP = (float)m_CharacterInfo.MaxHP + m_BalrogLeft->GetCharacterInfo().MaxHP + m_BalrogRight->GetCharacterInfo().MaxHP;
+
+	m_BossStatus->SetHPPercent(HP / MaxHP);
 }
 
 bool CBalrog::Init()
@@ -39,26 +46,26 @@ bool CBalrog::Init()
 
 	m_Sprite = CreateComponent<CSpriteComponent>("BalrogBody");
 	m_LeftMuzzle = CreateComponent<CSceneComponent>("LeftMuzzle");
-	m_RightMuzzle = CreateComponent<CSceneComponent>("RightMuzzle");
-	m_AttackBody = CreateComponent<CColliderBox2D>("AttackBody");
+	m_RightMuzzle = CreateComponent<CSceneComponent>("RightMuzzle"); 
+	m_Body = CreateComponent<CColliderBox2D>("Body");
 
 	SetRootComponent(m_Sprite);
 
 	m_BalrogLeft = m_Scene->CreateGameObject<CBalrogLeft>("BalrogLeft");
 	m_BalrogRight = m_Scene->CreateGameObject<CBalrogRight>("BalrogRight");
 
-	m_AttackBody->SetCollisionProfile("MonsterAttack");
+	m_Body->SetCollisionProfile("Monster");
 
 	m_Sprite->AddChild(m_LeftMuzzle);
 	m_Sprite->AddChild(m_RightMuzzle);
-	m_Sprite->AddChild(m_AttackBody);
+	m_Sprite->AddChild(m_Body);
 
 	//m_LeftMuzzle->AddChild(m_BalrogLeft->GetRootComponent());
 	//m_RightMuzzle->AddChild(m_BalrogRight->GetRootComponent());
 
 	m_LeftMuzzle->SetPivot(0.5f, 0.5f, 0.5f);
 	m_RightMuzzle->SetPivot(0.5f, 0.5f, 0.5f);
-	m_AttackBody->SetPivot(0.5f, 0.5f, 0.5f);
+	//m_AttackBody->SetPivot(0.5f, 0.5f, 0.5f);
 
 	m_LeftMuzzle->SetWorldPos(-330.f, -170.f, 0.f);
 	m_RightMuzzle->SetWorldPos(220.f, -170.f, 0.f);
@@ -107,6 +114,8 @@ bool CBalrog::Init()
 	m_Attack3AreaWarningPosX.push_back(883);
 	m_Attack3AreaWarningPosX.push_back(1043);
 
+	m_Body->SetExtent(0.f, 0.f);
+
 	m_BT = new CBalrogBT;
 
 	SetCharacterInfo("Balrog");
@@ -117,6 +126,11 @@ bool CBalrog::Init()
 void CBalrog::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
+
+	float HP = (float)m_CharacterInfo.HP + m_BalrogLeft->GetCharacterInfo().HP + m_BalrogRight->GetCharacterInfo().HP;
+	float MaxHP = (float)m_CharacterInfo.MaxHP + m_BalrogLeft->GetCharacterInfo().MaxHP + m_BalrogRight->GetCharacterInfo().MaxHP;
+
+	m_BossStatus->SetHPPercent(HP / MaxHP);
 
 	m_BT->Run(m_BTRun);
 }

@@ -78,7 +78,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>../Bin/</OutDir>
     <IntDir>../BinObj/</IntDir>
-    <TargetName>$(ProjectName)_Debug</TargetName>
+    <TargetName>MapleStory_Debug</TargetName>
     <IncludePath>../../Engine/Include/;$(IncludePath)</IncludePath>
     <LibraryPath>../Bin/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -88,12 +88,13 @@
     <IntDir>../BinObj/</IntDir>
     <IncludePath>../../Engine/Include/;$(IncludePath)</IncludePath>
     <LibraryPath>../Bin/;$(LibraryPath)</LibraryPath>
+    <TargetName>MapleStory</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>../Bin/</OutDir>
     <IntDir>../BinObj/</IntDir>
-    <TargetName>$(ProjectName)_Debug</TargetName>
+    <TargetName>MapleStory_Debug</TargetName>
     <IncludePath>../../Engine/Include/;$(IncludePath)</IncludePath>
     <LibraryPath>../Bin/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -103,6 +104,7 @@
     <IntDir>../BinObj/</IntDir>
     <IncludePath>../../Engine/Include/;$(IncludePath)</IncludePath>
     <LibraryPath>../Bin/;$(LibraryPath)</LibraryPath>
+    <TargetName>MapleStory</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

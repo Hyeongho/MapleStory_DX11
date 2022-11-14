@@ -49,6 +49,19 @@ bool CBossStatus::Init()
 
 	Resolution RS = CDevice::GetInst()->GetResolution();
 
+	SetPos(RS.Width / 2.f - 400.5f, RS.Height - 40.f);
+
+	SetSize(801.f, 40.f);
+
+	m_StausBackGrond = CreateWidget<CImage>("BossStausBackGrond");
+	m_StausBackGrond->SetTexture("BossStausBackGrond", TEXT("MobGage/boss_hp.backgrnd.png"));
+	m_StausBackGrond->SetSize(801.f, 40.f);
+
+	m_HPBar = CreateWidget<CProgressBar>("BossHPBar");
+	m_HPBar->SetTexture("BossHPBar", TEXT("MobGage/BossHP.png"));
+	m_HPBar->SetSize(758.f, 12.f);
+	m_HPBar->SetPos(39.f, 24.f);
+
 	return true;
 }
 

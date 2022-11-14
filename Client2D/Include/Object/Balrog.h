@@ -7,6 +7,7 @@
 #include "BalrogLeft.h"
 #include "BalrogRight.h"
 #include "AI/BalrogBT.h"
+#include "../Widget/BossStatus.h"
 
 class CBalrog :
     public CMonsterManager
@@ -30,6 +31,8 @@ private:
 
 	CBalrogLeft* m_BalrogLeft;
 	CBalrogRight* m_BalrogRight;
+
+	CBossStatus* m_BossStatus;
 
 	CSharedPtr<CBalrogBT> m_BT;
 
@@ -58,6 +61,8 @@ public:
 	void SetBTRun(bool BTRun)
 	{
 		m_BTRun = BTRun;
+
+		m_Body->SetExtent(414.f, 280.f);
 	}
 
 protected:

@@ -49,6 +49,11 @@ public:
 		return m_Size;
 	}
 
+	void SetState(EMonster_State State)
+	{
+		m_State = State;
+	}
+
 public:
 	virtual void Start();
 	virtual bool Init();

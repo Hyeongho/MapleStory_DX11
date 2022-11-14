@@ -42,7 +42,7 @@ void CMonsterManager::Update(float DeltaTime)
 
 	if (m_CharacterInfo.HP <= 0)
 	{
-		m_State = EMonster_State::Die;
+		m_Stop = true;
 	}
 
 	CPlayer2D* Player = (CPlayer2D*)m_Scene->GetPlayerObject();
@@ -149,6 +149,7 @@ void CMonsterManager::AIIdle(float DeltaTime)
 
 void CMonsterManager::AIMove(float DeltaTime)
 {
+
 }
 
 void CMonsterManager::AITrace(float DeltaTime)

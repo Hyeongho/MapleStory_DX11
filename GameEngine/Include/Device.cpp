@@ -2,8 +2,7 @@
 
 DEFINITION_SINGLE(CDevice)
 
-CDevice::CDevice()	: m_Device(nullptr), m_Context(nullptr), m_SwapChain(nullptr), m_TargetView(nullptr), m_DepthView(nullptr),
-	m_2DTarget(nullptr), m_2DTargetWorld(nullptr), m_2DFactory(nullptr)
+CDevice::CDevice() : m_Device(nullptr), m_Context(nullptr), m_SwapChain(nullptr), m_TargetView(nullptr), m_DepthView(nullptr), m_2DTarget(nullptr), m_2DTargetWorld(nullptr), m_2DFactory(nullptr)
 {
 }
 

@@ -68,10 +68,10 @@ bool CShadowDualBlade::Init()
 
 	m_Anim = m_Sprite->GetAnimationInstance();
 
-	m_Anim->AddAnimation(TEXT("Monster/Shadow Dual Blade/Idle.sqc"), ANIMATION_PATH, "Idle", true);
-	m_Anim->AddAnimation(TEXT("Monster/Shadow Dual Blade/Walk.sqc"), ANIMATION_PATH, "Walk", true);
-	m_Anim->AddAnimation(TEXT("Monster/Shadow Dual Blade/Attack.sqc"), ANIMATION_PATH, "Attack", true);
-	m_Anim->AddAnimation(TEXT("Monster/Shadow Dual Blade/Die.sqc"), ANIMATION_PATH, "Die", false);
+	m_Anim->AddAnimation(TEXT("Monster/Shadow Dual Blade/Idle.sqc"), ANIMATION_PATH, "Idle", true, 0.6f);
+	m_Anim->AddAnimation(TEXT("Monster/Shadow Dual Blade/Walk.sqc"), ANIMATION_PATH, "Walk", true, 0.72f);
+	m_Anim->AddAnimation(TEXT("Monster/Shadow Dual Blade/Attack.sqc"), ANIMATION_PATH, "Attack", true, 0.72f);
+	m_Anim->AddAnimation(TEXT("Monster/Shadow Dual Blade/Die.sqc"), ANIMATION_PATH, "Die", false, 2.1f);
 
 	m_Anim->AddNotify<CShadowDualBlade>("Attack", "Attack", 6, this, &CShadowDualBlade::AnimationFinish);
 	m_Anim->AddNotify<CShadowDualBlade>("Die", "Die", 14, this, &CShadowDualBlade::AnimationFinish);
