@@ -16,13 +16,13 @@ CTauromacis::CTauromacis()
 
 CTauromacis::CTauromacis(const CTauromacis& obj) : CMonsterManager(obj)
 {
-	m_Sprite = (CSpriteComponent*)FindComponent("Tauromacis");
+	m_Sprite = dynamic_cast<CSpriteComponent*>(FindComponent("Tauromacis"));
 
-	m_Body = (CColliderBox2D*)FindComponent("Body");
+	m_Body = dynamic_cast<CColliderBox2D*>(FindComponent("Body"));
 
-	m_Sensor = (CColliderBox2D*)FindComponent("Sensor");
+	m_Sensor = dynamic_cast<CColliderBox2D*>(FindComponent("Sensor"));
 
-	m_AttackBody = (CColliderBox2D*)FindComponent("AttackBody");
+	m_AttackBody = dynamic_cast<CColliderBox2D*>(FindComponent("AttackBody"));
 
 	m_Opacity = obj.m_Opacity;
 }

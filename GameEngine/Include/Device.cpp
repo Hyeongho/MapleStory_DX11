@@ -32,8 +32,8 @@ Vector2 CDevice::GetViewportAspectRatio()
 
 	GetClientRect(m_hWnd, &ClientRC);
 
-	float Width = (float)(ClientRC.right - ClientRC.left);
-	float Height = (float)(ClientRC.bottom - ClientRC.top);
+	float Width = static_cast<float>(ClientRC.right - ClientRC.left);
+	float Height = static_cast<float>(ClientRC.bottom - ClientRC.top);
 
 	return Vector2(m_RS.Width / Width, m_RS.Height / Height);
 }

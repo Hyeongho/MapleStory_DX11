@@ -22,15 +22,15 @@ CPlayer2D::CPlayer2D() : m_Flip(true)
 
 CPlayer2D::CPlayer2D(const CPlayer2D& obj) : CObjectManager(obj)
 {
-	m_Sprite = (CSpriteComponent*)FindComponent("PlayerSprite");
+	m_Sprite = dynamic_cast<CSpriteComponent*>(FindComponent("PlayerSprite"));
 
-	m_Body = (CColliderBox2D*)FindComponent("Body");
-	m_Bottom = (CColliderBox2D*)FindComponent("Bottom");
-	m_Muzzle = (CColliderBox2D*)FindComponent("Muzzle");
-	m_Camera = (CCameraComponent*)FindComponent("Camera");
+	m_Body = dynamic_cast<CColliderBox2D*>(FindComponent("Body"));
+	m_Bottom = dynamic_cast<CColliderBox2D*>(FindComponent("Bottom"));
+	m_Muzzle = dynamic_cast<CColliderBox2D*>(FindComponent("Muzzle"));
+	m_Camera = dynamic_cast<CCameraComponent*>(FindComponent("Camera"));
 
-	m_Gravity = (CGravity*)FindComponent("PlayerGravity");
-	m_RigidBody = (CRigidBody*)FindComponent("PlayerRigidBody");
+	m_Gravity = dynamic_cast<CGravity*>(FindComponent("PlayerGravity"));
+	m_RigidBody = dynamic_cast<CRigidBody*>(FindComponent("PlayerRigidBody"));
 
 	m_Opacity = obj.m_Opacity;
 }
@@ -471,6 +471,32 @@ void CPlayer2D::PhantomBlow(float DeltaTime)
 		return;
 	}
 
+	t1 = std::thread(&CPlayer2D::PlayPhantomBlow, this);
+
+	t1.join();
+}
+
+void CPlayer2D::BladeFury(float DeltaTime)
+{
+	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
+	{
+		return;
+	}
+
+	if (m_State == EPlayer_State::BladeFury || m_State == EPlayer_State::PhantomBlow)
+	{
+		return;
+	}
+
+	t1 = std::thread(&CPlayer2D::PlayBladeFury, this);
+
+	t1.join();
+}
+
+void CPlayer2D::PlayPhantomBlow()
+{
+	std::lock_guard<std::mutex> lock(m1);
+
 	CPlayerManager::GetInst()->SetPlayerAttack(Player_Attack::Attack_Start);
 
 	m_State = EPlayer_State::PhantomBlow;
@@ -486,17 +512,9 @@ void CPlayer2D::PhantomBlow(float DeltaTime)
 	PhantomBlow->SetWorldPos(m_Muzzle->GetWorldPos());
 }
 
-void CPlayer2D::BladeFury(float DeltaTime)
+void CPlayer2D::PlayBladeFury()
 {
-	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
-	{
-		return;
-	}
-
-	if (m_State == EPlayer_State::BladeFury || m_State == EPlayer_State::PhantomBlow)
-	{
-		return;
-	}
+	std::lock_guard<std::mutex> lock(m1);
 
 	CPlayerManager::GetInst()->SetPlayerAttack(Player_Attack::Attack_Start);
 

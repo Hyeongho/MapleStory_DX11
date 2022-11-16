@@ -14,11 +14,11 @@ CPhantomBlow::CPhantomBlow()
 
 CPhantomBlow::CPhantomBlow(const CPhantomBlow& obj) : CSkillManager(obj)
 {
-	m_Muzzle = (CSceneComponent*)FindComponent("Muzzle");
+	m_Muzzle = dynamic_cast<CSceneComponent*>(FindComponent("Muzzle"));
 
-	m_Sprite1 = (CSpriteComponent*)FindComponent("PhantomBlow1");
-	m_Sprite2 = (CSpriteComponent*)FindComponent("PhantomBlow2");
-	m_Body = (CColliderBox2D*)FindComponent("Body");
+	m_Sprite1 = dynamic_cast<CSpriteComponent*>(FindComponent("PhantomBlow1"));
+	m_Sprite2 = dynamic_cast<CSpriteComponent*>(FindComponent("PhantomBlow2"));
+	m_Body = dynamic_cast<CColliderBox2D*>(FindComponent("Body"));
 }
 
 CPhantomBlow::~CPhantomBlow()
@@ -30,11 +30,16 @@ void CPhantomBlow::SetCollisionProfile(const std::string& Name)
 {
 }
 
+void CPhantomBlow::Start()
+{
+	CSkillManager::Start();
+}
+
 bool CPhantomBlow::Init()
 {
 	CSkillManager::Init();
 
-	CPlayer2D* Player = (CPlayer2D*)m_Scene->GetPlayerObject();
+	CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
 
 	if (!Player)
 	{
@@ -65,11 +70,15 @@ bool CPhantomBlow::Init()
 	m_Anim1 = m_Sprite1->GetAnimationInstance();
 	m_Anim1->AddAnimation(TEXT("Skill/PhantomBlow/PhantomBlow.sqc"), ANIMATION_PATH, "PhantomBlow1", false);
 
+	//m_Anim1->AddAnimation("PhantomBlow1", "PhantomBlow1", false);
+	
 	m_Anim1->AddNotify<CPhantomBlow>("PhantomBlow1", "Destroy", 10, this, &CPhantomBlow::AnimationFinish);
 
 	m_Sprite2->CreateAnimationInstance<CAnimationSequence2DInstance>();
 	m_Anim2 = m_Sprite2->GetAnimationInstance();
 	m_Anim2->AddAnimation(TEXT("Skill/PhantomBlow/PhantomBlow0.sqc"), ANIMATION_PATH, "PhantomBlow2", false);
+
+	//m_Anim2->AddAnimation("PhantomBlow2", "PhantomBlow2", false);
 
 	m_Muzzle->SetPivot(0.5f, 0.5f, 0.f);
 
@@ -157,7 +166,7 @@ void CPhantomBlow::AnimationFinish()
 	{
 		if (m_obj->GetCharacterInfo().HP <= 0)
 		{
-			m_obj->SetState(EMonster_State::Die);
+			m_obj->SetDie(true);
 		}
 	}
 

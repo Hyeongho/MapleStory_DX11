@@ -13,13 +13,13 @@ CShadowDualBlade::CShadowDualBlade()
 
 CShadowDualBlade::CShadowDualBlade(const CShadowDualBlade& obj) : CMonsterManager(obj)
 {
-	m_Sprite = (CSpriteComponent*)FindComponent("ShadowDualBlade");
+	m_Sprite = dynamic_cast<CSpriteComponent*>(FindComponent("ShadowDualBlade"));
 
-	m_Body = (CColliderBox2D*)FindComponent("Body");
+	m_Body = dynamic_cast<CColliderBox2D*>(FindComponent("Body"));
 
-	m_Sensor = (CColliderBox2D*)FindComponent("Sensor");
+	m_Sensor = dynamic_cast<CColliderBox2D*>(FindComponent("Sensor"));
 
-	m_AttackBody = (CColliderBox2D*)FindComponent("AttackBody");
+	m_AttackBody = dynamic_cast<CColliderBox2D*>(FindComponent("AttackBody"));
 
 	m_Opacity = obj.m_Opacity;
 }
@@ -206,8 +206,6 @@ void CShadowDualBlade::AIDeath(float DeltaTime)
 	m_AttackRange->Destroy();
 
 	m_Anim->ChangeAnimation("Die");
-
-	//Destroy();
 }
 
 void CShadowDualBlade::CreateAttackRange()

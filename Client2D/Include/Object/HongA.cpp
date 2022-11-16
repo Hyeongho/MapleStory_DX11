@@ -16,7 +16,7 @@ CHongA::CHongA()
 
 CHongA::CHongA(const CHongA& obj)
 {
-	m_Body = (CColliderPixel*)FindComponent("Body");
+	m_Body = dynamic_cast<CColliderPixel*>(FindComponent("Body"));
 }
 
 CHongA::~CHongA()
@@ -53,6 +53,8 @@ bool CHongA::Init()
 
 	m_Sprite->SetRelativeScale(64.f, 82.f, 1.f);
 	m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
+
+	m_Sprite->SetTexture(0, 0, (int)Buffer_Shader_Type::Pixel, "HongA", TEXT("NPC/HongA/stand.0.png"));
 
 	m_Body->SetInfo(TEXT("NPC/HongA/stand.0.png"));
 

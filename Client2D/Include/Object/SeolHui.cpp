@@ -15,7 +15,7 @@ CSeolHui::CSeolHui()
 
 CSeolHui::CSeolHui(const CSeolHui& obj) : CNPCManager(obj)
 {
-	m_Body = (CColliderPixel*)FindComponent("Body");
+	m_Body = dynamic_cast<CColliderPixel*>(FindComponent("Body"));
 }
 
 CSeolHui::~CSeolHui()

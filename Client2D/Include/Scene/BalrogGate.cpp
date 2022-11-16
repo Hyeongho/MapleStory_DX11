@@ -56,7 +56,7 @@ bool CBalrogGate::Init()
 	//Player->SetRange(1400.f, 750.f, 0.f);
 	Player->SetRange(Vector3(0.f, 0.f, 0.f), Vector3(2144.f, 750.f, 0.f));
 
-	CCameraComponent* Camera = (CCameraComponent*)Player->FindComponent("Camera");
+	CCameraComponent* Camera = dynamic_cast<CCameraComponent*>(Player->FindComponent("Camera"));
 
 	Camera->SetTarget(Player);
 	Camera->SetTargetPivot(0.5f, 0.5f, 0.f);

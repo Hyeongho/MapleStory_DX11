@@ -19,6 +19,7 @@ protected:
 	bool m_Trace;
 	bool m_Stop;
 	bool m_Attack;
+	bool m_Die;
 
 	float m_TraceTime;
 	float m_ActiveTime;
@@ -52,6 +53,11 @@ public:
 	void SetState(EMonster_State State)
 	{
 		m_State = State;
+	}
+
+	void SetDie(bool Die)
+	{
+		m_Die = Die;
 	}
 
 public:

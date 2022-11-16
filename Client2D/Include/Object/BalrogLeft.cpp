@@ -10,7 +10,7 @@ CBalrogLeft::CBalrogLeft()
 {
 }
 
-CBalrogLeft::CBalrogLeft(const CBalrogLeft& obj)
+CBalrogLeft::CBalrogLeft(const CBalrogLeft& obj) : CMonsterManager(obj)
 {
 }
 

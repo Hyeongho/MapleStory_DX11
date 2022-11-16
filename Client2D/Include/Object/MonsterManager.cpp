@@ -40,6 +40,11 @@ void CMonsterManager::Update(float DeltaTime)
 
 	CObjectManager::Update(DeltaTime);
 
+	if (m_Die)
+	{
+		m_State = EMonster_State::Die;
+	}
+
 	if (m_CharacterInfo.HP <= 0)
 	{
 		m_Stop = true;

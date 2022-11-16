@@ -202,15 +202,15 @@ bool CResourceManager::SaveSequence2D(const std::string& Name, const char* FileN
 	return m_AnimationManager->SaveSequence(Name, FileName, PathName);
 }
 
+bool CResourceManager::LoadSequence2D(std::string& resultName, const char* FileName, const std::string& PathName, CScene* Scene)
+{
+	return m_AnimationManager->LoadSequence(resultName, FileName, PathName, Scene);
+}
+
 bool CResourceManager::LoadSequence2D(const char* FileName, const std::string& PathName, CScene* Scene)
 {
 	std::string	Name;
 	return m_AnimationManager->LoadSequence(Name, FileName, PathName, Scene);
-}
-
-bool CResourceManager::LoadSequence2D(std::string& resultName, const char* FileName, const std::string& PathName, CScene* Scene)
-{
-	return m_AnimationManager->LoadSequence(resultName, FileName, PathName, Scene);
 }
 
 CAnimationSequence2D* CResourceManager::FindAnimationSequence2D(const std::string& Name)

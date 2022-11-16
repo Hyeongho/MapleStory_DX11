@@ -68,7 +68,7 @@ void CBodyAttack2Effect::PostUpdate(float DeltaTime)
 
 CBodyAttack2Effect* CBodyAttack2Effect::Clone()
 {
-	return  new CBodyAttack2Effect(*this);
+	return new CBodyAttack2Effect(*this);
 }
 
 void CBodyAttack2Effect::OnCollisionBegin(const CollisionResult& result)

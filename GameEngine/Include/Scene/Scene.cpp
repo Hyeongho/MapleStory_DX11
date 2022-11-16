@@ -294,3 +294,15 @@ void CScene::SceneChangeComplete()
 {
 	m_Mode->SceneChangeComplete();
 }
+
+CGameObject* CScene::FindPrototype(const std::string& Name)
+{
+	auto iter = m_mapPrototype.find(Name);
+
+	if (iter == m_mapPrototype.end())
+	{
+		return nullptr;
+	}
+
+	return iter->second;
+}

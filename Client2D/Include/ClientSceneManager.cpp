@@ -31,7 +31,7 @@ void CClientSceneManager::ChangeScene()
 		return;
 	}
 
-	CFade* Fade = (CFade*)CSceneManager::GetInst()->GetScene()->GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
+	CFade* Fade = CSceneManager::GetInst()->GetScene()->GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
 
 	if (Fade)
 	{

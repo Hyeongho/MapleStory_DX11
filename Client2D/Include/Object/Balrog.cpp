@@ -12,7 +12,7 @@ CBalrog::CBalrog() : m_BTRun(true)
 {
 }
 
-CBalrog::CBalrog(const CBalrog& obj)
+CBalrog::CBalrog(const CBalrog& obj) : CMonsterManager(obj)
 {
 }
 
@@ -412,13 +412,9 @@ void CBalrog::AnimationFinish()
 {
 	if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack1"))
 	{
-		CBodyAttack1AreaWarning* BodyAttack1AreaWarning1 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning1");
+		t1 = std::thread(&CBalrog::PlayBodyAttack1AreaWarning, this);
 
-		BodyAttack1AreaWarning1->SetWorldPos(83.f, 118.f, 1.f);
-
-		CBodyAttack1AreaWarning* BodyAttack1AreaWarning2 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning2");
-
-		BodyAttack1AreaWarning2->SetWorldPos(1366.f - 83.f - 547.f, 118.f, 1.f);
+		t1.join();
 	}
 
 	else if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack2"))
@@ -428,21 +424,9 @@ void CBalrog::AnimationFinish()
 
 	else if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack3"))
 	{
-		std::vector<float> PosX = m_Attack3AreaWarningPosX;
+		t2 = std::thread(&CBalrog::PlayBodyAttack3AreaWarning, this);
 
-		size_t size = m_Attack3AreaWarningPosX.size();
-
-		for (int i = 0; i < 4; i++)
-		{
-			int Index = rand() % size;
-
-			CBodyAttack3AreaWarning* BodyAttack3AreaWarning = m_Scene->CreateGameObject<CBodyAttack3AreaWarning>("BodyAttack3AreaWarning1");
-
-			BodyAttack3AreaWarning->SetWorldPos(PosX[Index], 98.f, 1.f);
-
-			PosX.erase(PosX.begin() + Index);
-			size--;
-		}	
+		t2.join();
 	}
 
 	else if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack4"))
@@ -485,5 +469,41 @@ void CBalrog::ChangeAnim(float DeltaTime)
 
 		m_BalrogLeft->Destroy();
 		m_BalrogRight->Destroy();
+	}
+}
+
+void CBalrog::PlayBodyAttack1AreaWarning()
+{
+	std::lock_guard<std::mutex> lock(m1);
+
+	CBodyAttack1AreaWarning* BodyAttack1AreaWarning1 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning1");
+
+	BodyAttack1AreaWarning1->SetWorldPos(83.f, 118.f, 1.f);
+
+	CBodyAttack1AreaWarning* BodyAttack1AreaWarning2 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning2");
+
+	BodyAttack1AreaWarning2->SetWorldPos(1366.f - 83.f - 547.f, 118.f, 1.f);
+}
+
+void CBalrog::PlayBodyAttack3AreaWarning()
+{
+	std::lock_guard<std::mutex> lock(m2);
+
+	srand((unsigned int)time(0));
+
+	std::vector<float> PosX = m_Attack3AreaWarningPosX;
+
+	size_t size = m_Attack3AreaWarningPosX.size();
+
+	for (int i = 0; i < 4; i++)
+	{
+		int Index = rand() % size;
+
+		CBodyAttack3AreaWarning* BodyAttack3AreaWarning = m_Scene->CreateGameObject<CBodyAttack3AreaWarning>("BodyAttack3AreaWarning1");
+
+		BodyAttack3AreaWarning->SetWorldPos(PosX[Index], 98.f, 1.f);
+
+		PosX.erase(PosX.begin() + Index);
+		size--;
 	}
 }

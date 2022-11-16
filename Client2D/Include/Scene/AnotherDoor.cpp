@@ -59,12 +59,15 @@ bool CAnotherDoor::Init()
 
 	Player->SetRange(Vector3(158.f, 0.f, 0.f), Vector3(1366.f - 158.f, 768.f, 0.f));
 
-	CCameraComponent* Camera = (CCameraComponent*)Player->FindComponent("Camera");
+	CCameraComponent* Camera = dynamic_cast<CCameraComponent*>(Player->FindComponent("Camera"));
 
-	Camera->SetTarget(Player);
-	Camera->SetTargetPivot(0.5f, 0.5f, 0.f);
+	if (Camera)
+	{
+		Camera->SetTarget(Player);
+		Camera->SetTargetPivot(0.5f, 0.5f, 0.f);
 
-	Camera->SetWorldResolution(1366.f, 768.f);
+		Camera->SetWorldResolution(1366.f, 768.f);
+	}
 
 	if (m_LoadingFunction)
 	{

@@ -11,7 +11,7 @@ CTileMap::CTileMap()
 
 CTileMap::CTileMap(const CTileMap& obj) : CGameObject(obj)
 {
-	m_TileMap = (CTileMapComponent*)FindComponent("TileMap");
+	m_TileMap = dynamic_cast<CTileMapComponent*>(FindComponent("TileMap"));
 }
 
 CTileMap::~CTileMap()

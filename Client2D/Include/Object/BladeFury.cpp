@@ -22,11 +22,16 @@ void CBladeFury::SetCollisionProfile(const std::string& Name)
 {
 }
 
+void CBladeFury::Start()
+{
+	CSkillManager::Start();
+}
+
 bool CBladeFury::Init()
 {
 	CSkillManager::Init();
 
-	CPlayer2D* Player = (CPlayer2D*)m_Scene->GetPlayerObject();
+	CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
 
 	if (!Player)
 	{

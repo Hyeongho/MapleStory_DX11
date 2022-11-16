@@ -18,6 +18,12 @@ public:
 	virtual ~CBalrog();
 
 private:
+	std::thread t1;
+	std::mutex m1;
+
+	std::thread t2;
+	std::mutex m2;
+
 	CSharedPtr<CSpriteComponent> m_Sprite;
 	CSharedPtr<CColliderBox2D> m_Body;
 	CSharedPtr<CColliderBox2D> m_AttackBody;
@@ -78,5 +84,8 @@ private:
 	void Attack();
 
 	void ChangeAnim(float DeltaTime);
+
+	void PlayBodyAttack1AreaWarning();
+	void PlayBodyAttack3AreaWarning();
 };
 

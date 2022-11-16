@@ -26,7 +26,7 @@ bool CPlayerManager::Init()
 
 void CPlayerManager::SceneChange()
 {
-	CFade* Fade = (CFade*)m_Scene->GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
+	CFade* Fade = dynamic_cast<CFade*>(m_Scene->GetViewport()->FindWidgetWindow<CFade>("FadeWidget"));
 
 	Fade->SetVisibility(true);
 

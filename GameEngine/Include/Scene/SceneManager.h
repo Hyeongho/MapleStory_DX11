@@ -9,7 +9,7 @@ private:
 	CScene* m_Scene;
 	CScene* m_NextScene;
 	std::function<void(CScene*, size_t)> m_CreateSceneModeCallback;
-	std::function<CGameObject* (CScene*, size_t)>	m_CreateObjectCallback;
+	std::function<CGameObject* (CScene*, size_t)> m_CreateObjectCallback;
 	std::function<class CComponent* (CGameObject* Obj, size_t Type)> m_CreateComponentCallback;
 	std::function<void(class CSpriteComponent* Sprite, size_t Type)> m_CreateAnimInstanceCallback;
 	std::function<void(class CEffectComponent* Sprite, size_t Type)> m_CreateAnimInstanceEffectCallback;
@@ -20,7 +20,7 @@ public:
 		m_Scene->SetProjectType(ProjectType);
 	}
 
-	CScene* GetScene()	const
+	CScene* GetScene() const
 	{
 		return m_Scene;
 	}

@@ -23,7 +23,7 @@ bool CPlayerAnimation2D::Init()
 		return false;
 	}
 
-	m_Player = (CPlayer2D*)m_Scene->GetPlayerObject();
+	m_Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
 
 	/*m_Player->m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();
 

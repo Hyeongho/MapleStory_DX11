@@ -1,13 +1,7 @@
 ﻿  ClientManager.cpp
   ClientSceneManager.cpp
-  main.cpp
-  BalrogBT.cpp
   BalrogPaseChange.cpp
   CheckBalrogHandDie.cpp
-  CompositeNode.cpp
-  Node.cpp
-  Selector.cpp
-  Sequence.cpp
   Balrog.cpp
   BalrogLeft.cpp
   BalrogRight.cpp
@@ -15,12 +9,8 @@
   BodyAttack1AreaWarning.cpp
   BodyAttack2Effect.cpp
   BodyAttack3AreaWarning.cpp
-  CrimsonBalrog.cpp
   DamageFont.cpp
   HongA.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
-  Jr_Balrog.cpp
   LeftAttack1AreaWarning.cpp
   MonsterManager.cpp
   NPCManager.cpp
@@ -28,46 +18,40 @@
   PhantomBlow.cpp
   Player2D.cpp
   PlayerAnimation2D.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
   PlayerManager.cpp
   Potal.cpp
   RightAttack1AreaWarning.cpp
   SeolHui.cpp
-  ShadowDualBlade.cpp
-  SkillManager.cpp
   Tauromacis.cpp
   TauromacisHitEffect.cpp
   Taurospear.cpp
   TestMonster.cpp
   TileMap.cpp
   AnotherDoor.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
   AnotherDoorThread.cpp
   BalrogAltar.cpp
   BalrogAltarThread.cpp
   BalrogGate.cpp
   BalrogGateThread.cpp
-  EntranceToTemple.cpp
   EToTempleThread.cpp
+  EntranceToTemple.cpp
   LoadingAnotherDoor.cpp
   LoadingBalrogAltar.cpp
   LoadingBalrogGate.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
   LoadingEToTemple.cpp
   LoadingScene.cpp
   LoadingSeolHui.cpp
   LoadingThread.cpp
   MainScene.cpp
-  SeolHuibang.cpp
   SeolHuiThread.cpp
+  SeolHuibang.cpp
   StartScene.cpp
   TestScene.cpp
-  TalkManager.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
-  BossStatus.cpp
-  DamageWidget.cpp
   Fade.cpp
-  PlayerStatus.cpp
   StartWidget.cpp
   TalkWidget.cpp
   TestWidget.cpp

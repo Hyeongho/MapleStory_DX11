@@ -73,7 +73,7 @@ bool CMainScene::Init()
 	//Player->SetRange(2000.f, 800.f, 0.f);
 	Player->SetRange(Vector3(0.f, 0.f, 0.f), Vector3(2000.f, 800.f, 0.f));
 
-	CCameraComponent* Camera = (CCameraComponent*)Player->FindComponent("Camera");
+	CCameraComponent* Camera = dynamic_cast<CCameraComponent*>(Player->FindComponent("Camera"));
 
 	Camera->SetTarget(Player);
 	Camera->SetTargetPivot(0.5f, 0.5f, 0.f);
@@ -142,9 +142,11 @@ void CMainScene::CreateMap()
 
 	Floor1->GetRootComponent()->AddChild(Box);
 
-	Box->SetOffset(2000.f, 150.f, 0.f);
+	Box->SetPivot(0.f, 1.0f, 0.f);
 
-	Box->SetExtent(2000.f, 1.f);
+	Box->SetOffset(2000.f, 140.f, 0.f);
+
+	Box->SetExtent(2000.f, 10.f);
 
 	Box->SetCollisionProfile("Floor");
 

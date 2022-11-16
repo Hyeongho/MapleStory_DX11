@@ -25,7 +25,10 @@ private:
 	CViewport* m_Viewport;
 	CNavigationManager* m_NavManager;
 	std::list<CSharedPtr<CGameObject>> m_ObjList;
+
+	std::unordered_map<std::string, CSharedPtr<CGameObject>> m_mapPrototype;
 	std::list<CSharedPtr<CGameObject>> m_PrototypeList;
+
 	bool m_Start;
 	bool m_Change;
 
@@ -114,6 +117,9 @@ public:
 	void LoadFullPath(const char* FullPath);
 	void SceneChangeComplete();
 
+private:
+	CGameObject* FindPrototype(const std::string& Name);
+
 public:
 	template <typename T>
 	bool CreateSceneMode()
@@ -188,6 +194,47 @@ public:
 		{
 			Obj->Start();
 		}
+
+		return Obj;
+	}
+
+	template <typename T>
+	T* CreatePrototype(const std::string& Name)
+	{
+		T* Obj = new T;
+
+		Obj->SetScene(this);
+		Obj->SetName(Name);
+
+		if (!Obj->Init())
+		{
+			SAFE_DELETE(Obj);
+			return nullptr;
+		}
+
+		m_mapPrototype.insert(std::make_pair(Name, Obj));
+
+		return Obj;
+	}
+
+	template <typename T>
+	T* CreateGameObject(const std::string Name, const std::string& PrototypeName, const Vector2& Pos = Vector2(0.f, 0.f), const Vector2 Size = Vector2(100.f, 100.f))
+	{
+		CGameObject* Prototype = FindPrototype(PrototypeName);
+
+		if (!Prototype)
+		{
+			return nullptr;
+		}
+
+		T* Obj = dynamic_cast<T*>(Prototype->Clone());
+
+		Obj->SetScene(this);
+		Obj->SetPos(Pos);
+		Obj->SetSize(Size);
+		Obj->SetName(Name);
+
+		m_PrototypeList.push_back(Obj);
 
 		return Obj;
 	}

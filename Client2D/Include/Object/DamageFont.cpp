@@ -5,7 +5,7 @@ CDamageFont::CDamageFont() : m_Opacity(1.0f)
 {
 }
 
-CDamageFont::CDamageFont(const CDamageFont& obj)
+CDamageFont::CDamageFont(const CDamageFont& obj) : CGameObject(obj)
 {
 }
 

@@ -24,6 +24,9 @@ protected:
     virtual ~CPlayer2D();
 
 private:
+    std::thread t1; // 스킬 이펙트 스레드
+    std::mutex m1;
+
     CSharedPtr<CSpriteComponent> m_Sprite;
     CSharedPtr<CRigidBody> m_RigidBody;
     CSharedPtr<CGravity> m_Gravity;
@@ -78,6 +81,9 @@ private:
     void StabD1(float DeltaTime);
     void PhantomBlow(float DeltaTime);
     void BladeFury(float DeltaTime);
+
+    void PlayPhantomBlow();
+    void PlayBladeFury();
 
 private:
     void CollisionCallback(const CollisionResult& result);

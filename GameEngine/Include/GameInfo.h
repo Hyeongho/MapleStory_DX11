@@ -24,6 +24,7 @@
 #include <WinUser.h>
 #include <array>
 #include <thread>
+#include <mutex>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxguid.lib")
