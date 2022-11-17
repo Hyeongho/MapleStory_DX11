@@ -36,6 +36,7 @@ public:
     virtual void Update(float DeltaTime);
     virtual void PostUpdate(float DeltaTime);
     virtual CPhantomBlow* Clone();
+    virtual void SetEnable();
 
 private:
     void OnCollisionBegin(const CollisionResult& result);

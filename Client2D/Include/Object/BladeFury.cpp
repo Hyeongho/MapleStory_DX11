@@ -25,6 +25,10 @@ void CBladeFury::SetCollisionProfile(const std::string& Name)
 void CBladeFury::Start()
 {
 	CSkillManager::Start();
+
+	m_Body->Enable(false);
+
+	Enable(false);
 }
 
 bool CBladeFury::Init()
@@ -53,15 +57,17 @@ bool CBladeFury::Init()
 	m_Sprite->SetTransparency(true);
 
 	m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();
-	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
-	Anim->AddAnimation(TEXT("Skill/BladeFury.sqc"), ANIMATION_PATH, "BladeFuryEffect", false, 1.0f);
+	m_Anim = m_Sprite->GetAnimationInstance();
+	m_Anim->AddAnimation(TEXT("Skill/BladeFury.sqc"), ANIMATION_PATH, "BladeFuryEffect", false, 1.0f);
 
-	Anim->AddNotify<CBladeFury>("BladeFuryEffect", "Destroy", 14, this, &CBladeFury::AnimationFinish);
+	m_Anim->SetEndFunction<CBladeFury>("BladeFuryEffect", this, &CBladeFury::AnimationFinish);
 
 	m_Muzzle->SetPivot(0.5f, 0.5f, 0.f);
 
-	if (!Player->GetFlip())
+	/*if (!Player->GetFlip())
 	{
+		Anim->SetAnimFlip(false);
+
 		m_Sprite->SetRelativeScale(712.f, 586.f, 2.f);
 		m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
 		m_Sprite->SetRelativePos(-23.5f, 112.f, 11.f);
@@ -74,7 +80,7 @@ bool CBladeFury::Init()
 		m_Sprite->SetRelativeScale(712.f, 586.f, 2.f);
 		m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
 		m_Sprite->SetRelativePos(23.5f, 112.f, 11.f);
-	}
+	}*/
 
 	return true;
 }
@@ -94,6 +100,42 @@ CBladeFury* CBladeFury::Clone()
 	return new CBladeFury(*this);
 }
 
+void CBladeFury::SetEnable()
+{
+	CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+	if (!Player)
+	{
+		m_Body->Enable(false);
+		Enable(false);
+
+		return;
+	}
+
+	if (!Player->GetFlip())
+	{
+		m_Anim->SetAnimFlip(false);
+
+		m_Sprite->SetRelativeScale(712.f, 586.f, 2.f);
+		m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
+		m_Sprite->SetRelativePos(23.5f, 112.f, 11.f);
+	}
+
+	else
+	{
+		m_Anim->SetAnimFlip(true);
+
+		m_Sprite->SetRelativeScale(712.f, 586.f, 2.f);
+		m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
+		m_Sprite->SetRelativePos(-23.5f, 112.f, 11.f);
+	}
+
+	m_Body->Enable(true);
+	Enable(true);
+
+	m_Anim->AnimationReStart();
+}
+
 void CBladeFury::OnCollisionBegin(const CollisionResult& result)
 {
 }
@@ -102,5 +144,9 @@ void CBladeFury::AnimationFinish()
 {
 	CPlayerManager::GetInst()->SetPlayerAttack(Player_Attack::Attack_End);
 
-	Destroy();
+	m_Body->Enable(false);
+
+	//Destroy();
+
+	Enable(false);
 }

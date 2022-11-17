@@ -128,7 +128,12 @@ bool CGameObject::Init()
 
 void CGameObject::Update(float DeltaTime)
 {
-	size_t	Size = m_vecObjectComponent.size();
+	if (!IsEnable())
+	{
+		return;
+	}
+
+	size_t Size = m_vecObjectComponent.size();
 
 	for (size_t i = 0; i < Size; ++i)
 	{
@@ -143,6 +148,11 @@ void CGameObject::Update(float DeltaTime)
 
 void CGameObject::PostUpdate(float DeltaTime)
 {
+	if (!IsEnable())
+	{
+		return;
+	}
+
 	size_t Size = m_vecObjectComponent.size();
 
 	for (size_t i = 0; i < Size; ++i)
@@ -166,6 +176,11 @@ void CGameObject::AddCollision()
 
 void CGameObject::PrevRender()
 {
+	if (!IsEnable())
+	{
+		return;
+	}
+
 	size_t Size = m_vecObjectComponent.size();
 
 	for (size_t i = 0; i < Size; ++i)
@@ -181,6 +196,11 @@ void CGameObject::PrevRender()
 
 void CGameObject::Render()
 {
+	if (!IsEnable())
+	{
+		return;
+	}
+
 	size_t Size = m_vecObjectComponent.size();
 
 	for (size_t i = 0; i < Size; ++i)
@@ -196,6 +216,11 @@ void CGameObject::Render()
 
 void CGameObject::PostRender()
 {
+	if (!IsEnable())
+	{
+		return;
+	}
+
 	size_t	Size = m_vecObjectComponent.size();
 
 	for (size_t i = 0; i < Size; ++i)

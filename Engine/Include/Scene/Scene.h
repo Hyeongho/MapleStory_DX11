@@ -229,14 +229,16 @@ public:
 
 		T* Obj = dynamic_cast<T*>(Prototype->Clone());
 
+		if (m_Start)
+		{
+			Obj->Start();
+		}
+
 		Obj->SetScene(this);
-		Obj->SetPos(Pos);
-		Obj->SetSize(Size);
 		Obj->SetName(Name);
 
-		m_PrototypeList.push_back(Obj);
+		m_ObjList.push_back(Obj);
 
 		return Obj;
 	}
 };
-

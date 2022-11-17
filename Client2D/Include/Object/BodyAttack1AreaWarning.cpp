@@ -24,6 +24,9 @@ void CBodyAttack1AreaWarning::SetCollisionProfile(const std::string& Name)
 void CBodyAttack1AreaWarning::Start()
 {
 	CGameObject::Start();
+
+	m_Body->Enable(false);
+	Enable(false);
 }
 
 bool CBodyAttack1AreaWarning::Init()
@@ -44,10 +47,10 @@ bool CBodyAttack1AreaWarning::Init()
 
 	m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();
 
-	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
+	m_Anim = m_Sprite->GetAnimationInstance();
 
-	Anim->AddAnimation(TEXT("Monster/Balrog/Body/Attack1AreaWarning.sqc"), ANIMATION_PATH, "Attack1AreaWarning", false, 1.68f);
-	Anim->SetEndFunction("Attack1AreaWarning", this, &CBodyAttack1AreaWarning::AnimationFinish);
+	m_Anim->AddAnimation(TEXT("Monster/Balrog/Body/Attack1AreaWarning.sqc"), ANIMATION_PATH, "Attack1AreaWarning", false, 1.68f);
+	m_Anim->SetEndFunction("Attack1AreaWarning", this, &CBodyAttack1AreaWarning::AnimationFinish);
 
 	m_Sprite->SetRelativeScale(547.f, 647.f, 1.f);
 
@@ -71,11 +74,22 @@ CBodyAttack1AreaWarning* CBodyAttack1AreaWarning::Clone()
 	return  new CBodyAttack1AreaWarning(*this);
 }
 
+void CBodyAttack1AreaWarning::SetEnable()
+{
+	m_Body->Enable(true);
+	Enable(true);
+
+	m_Anim->AnimationReStart();
+}
+
 void CBodyAttack1AreaWarning::OnCollisionBegin(const CollisionResult& result)
 {
 }
 
 void CBodyAttack1AreaWarning::AnimationFinish()
 {
-	Destroy();
+	m_Body->Enable(false);
+	Enable(false);
+
+	//Destroy();
 }

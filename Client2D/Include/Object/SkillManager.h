@@ -21,5 +21,6 @@ public:
 	virtual void Update(float DeltaTime);
 	virtual void PostUpdate(float DeltaTime);
 	virtual CSkillManager* Clone();
+	virtual void SetEnable(bool Enable);
 };
 

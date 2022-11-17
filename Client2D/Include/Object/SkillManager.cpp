@@ -38,3 +38,7 @@ CSkillManager* CSkillManager::Clone()
 {
 	return new CSkillManager(*this);;
 }
+
+void CSkillManager::SetEnable(bool Enable)
+{
+}

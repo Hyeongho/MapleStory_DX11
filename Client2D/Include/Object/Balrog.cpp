@@ -36,6 +36,21 @@ void CBalrog::Start()
 	float MaxHP = (float)m_CharacterInfo.MaxHP + m_BalrogLeft->GetCharacterInfo().MaxHP + m_BalrogRight->GetCharacterInfo().MaxHP;
 
 	m_BossStatus->SetHPPercent(HP / MaxHP);
+
+	CBodyAttack1AreaWarning* BodyAttack1AreaWarning1 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning1");
+
+	BodyAttack1AreaWarning1->SetWorldPos(83.f, 118.f, 1.f);
+
+	CBodyAttack1AreaWarning* BodyAttack1AreaWarning2 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning2");
+
+	BodyAttack1AreaWarning2->SetWorldPos(1366.f - 83.f - 547.f, 118.f, 1.f);
+
+	for (int i = 0; i < 4; i++)
+	{
+		std::string name = "BodyAttack3AreaWarning1" + std::to_string(i);
+
+		CBodyAttack3AreaWarning* BodyAttack3AreaWarning = m_Scene->CreateGameObject<CBodyAttack3AreaWarning>(name);
+	}
 }
 
 bool CBalrog::Init()
@@ -476,11 +491,15 @@ void CBalrog::PlayBodyAttack1AreaWarning()
 {
 	std::lock_guard<std::mutex> lock(m1);
 
-	CBodyAttack1AreaWarning* BodyAttack1AreaWarning1 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning1");
+	CBodyAttack1AreaWarning* BodyAttack1AreaWarning1 = dynamic_cast<CBodyAttack1AreaWarning*>(m_Scene->FindObject("BodyAttack1AreaWarning1"));
+
+	BodyAttack1AreaWarning1->SetEnable();
 
 	BodyAttack1AreaWarning1->SetWorldPos(83.f, 118.f, 1.f);
 
-	CBodyAttack1AreaWarning* BodyAttack1AreaWarning2 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning2");
+	CBodyAttack1AreaWarning* BodyAttack1AreaWarning2 = dynamic_cast<CBodyAttack1AreaWarning*>(m_Scene->FindObject("BodyAttack1AreaWarning2"));
+
+	BodyAttack1AreaWarning2->SetEnable();
 
 	BodyAttack1AreaWarning2->SetWorldPos(1366.f - 83.f - 547.f, 118.f, 1.f);
 }
@@ -499,7 +518,11 @@ void CBalrog::PlayBodyAttack3AreaWarning()
 	{
 		int Index = rand() % size;
 
-		CBodyAttack3AreaWarning* BodyAttack3AreaWarning = m_Scene->CreateGameObject<CBodyAttack3AreaWarning>("BodyAttack3AreaWarning1");
+		std::string name = "BodyAttack3AreaWarning1" + std::to_string(i);
+
+		CBodyAttack3AreaWarning* BodyAttack3AreaWarning = dynamic_cast<CBodyAttack3AreaWarning*>(m_Scene->FindObject(name));
+
+		BodyAttack3AreaWarning->SetEnable();
 
 		BodyAttack3AreaWarning->SetWorldPos(PosX[Index], 98.f, 1.f);
 

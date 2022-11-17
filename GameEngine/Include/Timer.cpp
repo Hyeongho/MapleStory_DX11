@@ -1,4 +1,5 @@
 #include "Timer.h"
+#include "Engine.h"
 
 CTimer::CTimer() : m_FPS(0.f), m_FPSTime(0.f), m_Tick(0)
 {
@@ -31,6 +32,13 @@ float CTimer::Update()
 		m_FPSTime = 0.f;
 		m_Tick = 0;
 	}
+
+	/*if (CEngine::GetInst()->GetWindowHandle())
+	{
+		wchar_t buff[101] = {};
+		swprintf_s(buff, L"FPS: %f, DT: %.101f", m_FPS, m_DeltaTime);
+		SetWindowText(CEngine::GetInst()->GetWindowHandle(), buff);
+	}*/
 
 	return m_DeltaTime;
 }

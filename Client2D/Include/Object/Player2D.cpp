@@ -42,6 +42,9 @@ CPlayer2D::~CPlayer2D()
 void CPlayer2D::Start()
 {
 	CObjectManager::Start();
+	
+	CPhantomBlow* PhantomBlow = m_Scene->CreateGameObject<CPhantomBlow>("PhantomBlowEffect");
+	CBladeFury* BladeFury = m_Scene->CreateGameObject<CBladeFury>("BladeFury");
 
 	m_PlayerStatus = m_Scene->GetViewport()->FindWidgetWindow<CPlayerStatus>("PlayerStatus");
 
@@ -159,7 +162,7 @@ bool CPlayer2D::Init()
 
 	m_State = EPlayer_State::Idle;
 
-	SetCharacterInfo("DuelBlade");
+	SetCharacterInfo("DuelBlade");	
 
 	return true;
 }
@@ -396,19 +399,6 @@ void CPlayer2D::MoveUp(float DeltaTime)
 
 		return;
 	}
-
-	/*if (!m_Body->CheckPrevCollisionGameObjectType(typeid(CPortal).hash_code()))
-	{
-		if (m_State != EPlayer_State::Idle)
-		{
-			m_State = EPlayer_State::Idle;
-		}
-
-		CClientManager::GetInst()->SetFade(true);
-		CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
-
-		return;
-	}*/
 }
 
 void CPlayer2D::Stop(float DeltaTime)
@@ -471,6 +461,8 @@ void CPlayer2D::PhantomBlow(float DeltaTime)
 		return;
 	}
 
+	//PlayPhantomBlow();
+
 	t1 = std::thread(&CPlayer2D::PlayPhantomBlow, this);
 
 	t1.join();
@@ -487,6 +479,8 @@ void CPlayer2D::BladeFury(float DeltaTime)
 	{
 		return;
 	}
+
+	//PlayBladeFury();
 
 	t1 = std::thread(&CPlayer2D::PlayBladeFury, this);
 
@@ -505,7 +499,16 @@ void CPlayer2D::PlayPhantomBlow()
 
 	Anim->ChangeAnimation("PhantomBlow");
 
-	CPhantomBlow* PhantomBlow = m_Scene->CreateGameObject<CPhantomBlow>("PhantomBlowEffect");
+	//CPhantomBlow* PhantomBlow = m_Scene->CreateGameObject<CPhantomBlow>("PhantomBlowEffect");
+	
+	CPhantomBlow* PhantomBlow = dynamic_cast<CPhantomBlow*>(m_Scene->FindObject("PhantomBlowEffect"));
+
+	if (!PhantomBlow)
+	{
+		return;
+	}
+
+	PhantomBlow->SetEnable();
 
 	CResourceManager::GetInst()->SoundPlay("PhantomBlow");
 
@@ -524,7 +527,16 @@ void CPlayer2D::PlayBladeFury()
 
 	Anim->ChangeAnimation("BladeFury");
 
-	CBladeFury* BladeFury = m_Scene->CreateGameObject<CBladeFury>("BladeFury");
+	//CBladeFury* BladeFury = m_Scene->CreateGameObject<CBladeFury>("BladeFury");
+
+	CBladeFury* BladeFury = dynamic_cast<CBladeFury*>(m_Scene->FindObject("BladeFury"));
+
+	if (!BladeFury)
+	{
+		return;
+	}
+
+	BladeFury->SetEnable();
 
 	CResourceManager::GetInst()->SoundPlay("BladeFury");
 

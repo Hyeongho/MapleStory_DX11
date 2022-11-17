@@ -38,6 +38,7 @@ CScene::~CScene()
 	SAFE_DELETE(m_Resource);
 
 	m_ObjList.clear();
+	m_mapPrototype.clear();
 }
 
 void CScene::Start()
@@ -114,7 +115,7 @@ void CScene::Update(float DeltaTime)
 				continue;
 			}
 
-			else if (!(*iter)->IsEnable())
+			if (!(*iter)->IsEnable())
 			{
 				iter++;
 				continue;
@@ -124,6 +125,31 @@ void CScene::Update(float DeltaTime)
 			iter++;
 		}
 	}	
+
+	{
+		auto iter = m_PrototypeList.begin();
+		auto iterEnd = m_PrototypeList.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!(*iter)->IsActive())
+			{
+				iter = m_PrototypeList.erase(iter);
+				iterEnd = m_PrototypeList.end();
+				continue;
+			}
+
+			if (!(*iter)->IsEnable())
+			{
+				iter++;
+				continue;
+			}
+
+			(*iter)->Update(DeltaTime);
+
+			iter++;
+		}
+	}
 
 	m_CameraManager->Update(DeltaTime);
 
@@ -147,13 +173,38 @@ void CScene::PostUpdate(float DeltaTime)
 				continue;
 			}
 
-			else if (!(*iter)->IsEnable())
+			if (!(*iter)->IsEnable())
 			{
 				iter++;
 				continue;
 			}
 
 			(*iter)->PostUpdate(DeltaTime);
+			iter++;
+		}
+	}
+
+	{
+		auto iter = m_PrototypeList.begin();
+		auto iterEnd = m_PrototypeList.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!(*iter)->IsActive())
+			{
+				iter = m_PrototypeList.erase(iter);
+				iterEnd = m_PrototypeList.end();
+				continue;
+			}
+
+			if (!(*iter)->IsEnable())
+			{
+				iter++;
+				continue;
+			}
+
+			(*iter)->PostUpdate(DeltaTime);
+
 			iter++;
 		}
 	}

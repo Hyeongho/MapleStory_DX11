@@ -95,8 +95,10 @@ public:
 	void SetReverse(const std::string& Name, bool Reverse);
 	void SetLoop(const std::string& Name, bool Loop);
 	void SetCurrentAnimation(const std::string& Name);
+	void SetCurrent(CAnimationSequence2DData* CurrentAnimation);
 	void ChangeAnimation(const std::string& Name);
 	bool CheckCurrentAnimation(const std::string& Name);
+	void AnimationReStart();
 
 public:
 	virtual void Start();

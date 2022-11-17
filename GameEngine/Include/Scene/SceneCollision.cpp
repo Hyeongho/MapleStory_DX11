@@ -63,6 +63,12 @@ void CSceneCollision::Collision(float DeltaTime)
 			continue;
 		}
 
+		if (!(*iter)->IsEnable())
+		{
+			iter++;
+			continue;
+		}
+
 		iter++;
 	}
 
@@ -75,6 +81,11 @@ void CSceneCollision::Collision(float DeltaTime)
 
 	for (; iter != iterEnd; iter++)
 	{
+		if (!(*iter)->IsEnable())
+		{
+			continue;
+		}
+
 		if ((*iter)->GetCurrentSectionCheck())
 		{
 			continue;
@@ -104,6 +115,11 @@ void CSceneCollision::Collision(float DeltaTime)
 
 	for (; iter != iterEnd; iter++)
 	{
+		if (!(*iter)->IsEnable())
+		{
+			continue;
+		}
+
 		(*iter)->ClearFrame();
 	}
 }
@@ -343,6 +359,11 @@ void CSceneCollision::CheckColliderSection()
 	for (; iter != iterEnd; iter++)
 	{
 		CColliderComponent* Collider = *iter;
+
+		if (!Collider->IsEnable())
+		{
+			continue;
+		}
 		
 		Vector3	Min = Collider->GetMin();
 		Vector3	Max = Collider->GetMax();

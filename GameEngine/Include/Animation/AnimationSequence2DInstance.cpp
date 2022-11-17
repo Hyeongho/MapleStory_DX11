@@ -234,6 +234,11 @@ void CAnimationSequence2DInstance::SetCurrentAnimation(const std::string& Name)
 	}
 }
 
+void CAnimationSequence2DInstance::SetCurrent(CAnimationSequence2DData* CurrentAnimation)
+{
+	m_CurrentAnimation = CurrentAnimation;
+}
+
 void CAnimationSequence2DInstance::ChangeAnimation(const std::string& Name)
 {
 	if (m_CurrentAnimation->m_Name == Name)
@@ -265,6 +270,12 @@ void CAnimationSequence2DInstance::ChangeAnimation(const std::string& Name)
 bool CAnimationSequence2DInstance::CheckCurrentAnimation(const std::string& Name)
 {
 	return m_CurrentAnimation->m_Name == Name;
+}
+
+void CAnimationSequence2DInstance::AnimationReStart()
+{
+	m_CurrentAnimation->m_Frame = 0;
+	m_CurrentAnimation->m_Time = 0.f;
 }
 
 void CAnimationSequence2DInstance::Start()

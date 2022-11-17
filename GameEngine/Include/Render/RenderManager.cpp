@@ -199,6 +199,11 @@ void CRenderManager::Render()
 
 		for (; iter != iterEnd; iter++)
 		{
+			if (!(*iter)->IsEnable())
+			{
+				continue;
+			}
+
 			(*iter)->PrevRender();
 		}
 	}
@@ -209,6 +214,7 @@ void CRenderManager::Render()
 
 		for (; iter != iterEnd; iter++)
 		{
+
 			for (int i = 0; i < (*iter)->RenderCount; i++)
 			{
 				(*iter)->RenderList[i]->Render();
