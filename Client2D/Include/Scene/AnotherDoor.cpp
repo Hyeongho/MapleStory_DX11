@@ -129,11 +129,13 @@ void CAnotherDoor::CreateMap()
 
 	Back->GetRootComponent()->AddChild(Box);
 
-	Box->SetOffset(528.5f, 265.5f, 0.f);
+	Box->SetOffset(528.5f, 245.5f, 0.f);
 
-	Box->SetExtent(1049.f, 1.f);
+	Box->SetExtent(1049.f, 20.f);
 
 	Box->SetCollisionProfile("Floor");
+
+	Box->AddCollisionCallback<CAnotherDoor>(Collision_State::Begin, this, &CAnotherDoor::CollisionBeginCallback);
 
 	//Back->SetWorldPos(0.f, 180.f, 0.f);
 }
@@ -143,4 +145,40 @@ void CAnotherDoor::LoadSound()
 	m_Scene->GetResource()->SoundStop("secretFlower");
 
 	m_Scene->GetResource()->SoundPlay("EvilEyes");
+}
+
+void CAnotherDoor::CollisionBeginCallback(const CollisionResult& Result)
+{
+	if (Result.Dest->GetCollisionProfile()->Channel == Collision_Channel::PlayerBottom)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(Result.Dest->GetGameObject());
+
+		if (!Player)
+		{
+			return;
+		}
+
+		Player->SetGround(true);
+
+		Vector3 DestPos = Result.Dest->GetWorldPos() + Result.Dest->GetOffset();
+		Vector3 DestScale = Result.Dest->GetWorldScale();
+
+		Vector3 SrcOffSet = Result.Src->GetOffset();
+		Vector3 DestOffSet = Result.Dest->GetOffset();
+
+		Vector3 SrcPos = Result.Src->GetWorldPos() + Result.Src->GetOffset();
+		Vector3 SrcScale = Result.Src->GetWorldScale();
+
+		float Len = abs(DestPos.y - SrcPos.y);
+		float Value = (DestScale.y / 2.f + SrcScale.y / 2.f) - Len;
+
+		DestPos = Player->GetWorldPos();
+		DestPos.y += Value;
+
+		Player->SetWorldPos(DestPos);
+	}
+}
+
+void CAnotherDoor::CollisionEndCallback(const CollisionResult& Result)
+{
 }

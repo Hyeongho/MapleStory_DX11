@@ -30,7 +30,7 @@ CGameObject::CGameObject(const CGameObject& obj)
 
 	m_vecObjectComponent.clear();
 
-	size_t	Size = obj.m_vecObjectComponent.size();
+	size_t Size = obj.m_vecObjectComponent.size();
 
 	for (size_t i = 0; i < Size; ++i)
 	{

@@ -222,6 +222,12 @@ void CPhantomBlow::Attack()
 	int Frame = m_Anim1->GetFrame();
 
 	CDamageFont* DamageFont = m_Scene->CreateGameObject<CDamageFont>("DamagrFont");
+
+	if (!DamageFont)
+	{
+		return;
+	}
+
 	DamageFont->SetWorldPos(m_TargetPos.x - 31.f, m_TargetPos.y + (m_TargetSize.y) + (Frame * 30), 1);
 
 	m_Damage = 10;

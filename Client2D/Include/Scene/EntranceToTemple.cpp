@@ -152,11 +152,13 @@ void CEntranceToTemple::CreateMap()
 
 	Back->GetRootComponent()->AddChild(Box);
 
-	Box->SetOffset(1072.f, 190.f, 0.f);
+	Box->SetOffset(1072.f, 170.f, 0.f);
 
-	Box->SetExtent(1072.f, 1.f);
+	Box->SetExtent(1072.f, 20.f);
 
 	Box->SetCollisionProfile("Floor");
+
+	Box->AddCollisionCallback<CEntranceToTemple>(Collision_State::Begin, this, &CEntranceToTemple::CollisionBeginCallback);
 }
 
 void CEntranceToTemple::LoadSound()
@@ -164,5 +166,41 @@ void CEntranceToTemple::LoadSound()
 }
 
 void CEntranceToTemple::CreatePotal()
+{
+}
+
+void CEntranceToTemple::CollisionBeginCallback(const CollisionResult& Result)
+{
+	if (Result.Dest->GetCollisionProfile()->Channel == Collision_Channel::PlayerBottom)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(Result.Dest->GetGameObject());
+
+		if (!Player)
+		{
+			return;
+		}
+
+		Player->SetGround(true);
+
+		Vector3 DestPos = Result.Dest->GetWorldPos() + Result.Dest->GetOffset();
+		Vector3 DestScale = Result.Dest->GetWorldScale();
+
+		Vector3 SrcOffSet = Result.Src->GetOffset();
+		Vector3 DestOffSet = Result.Dest->GetOffset();
+
+		Vector3 SrcPos = Result.Src->GetWorldPos() + Result.Src->GetOffset();
+		Vector3 SrcScale = Result.Src->GetWorldScale();
+
+		float Len = abs(DestPos.y - SrcPos.y);
+		float Value = (DestScale.y / 2.f + SrcScale.y / 2.f) - Len;
+
+		DestPos = Player->GetWorldPos();
+		DestPos.y += Value;
+
+		Player->SetWorldPos(DestPos);
+	}
+}
+
+void CEntranceToTemple::CollisionEndCallback(const CollisionResult& Result)
 {
 }

@@ -4,8 +4,9 @@ CDamageWidget::CDamageWidget() : m_Opacity(1.0f)
 {
 }
 
-CDamageWidget::CDamageWidget(const CDamageWidget& window)
+CDamageWidget::CDamageWidget(const CDamageWidget& window) : CWidgetWindow(window)
 {
+	m_Number = window.m_Number;
 }
 
 CDamageWidget::~CDamageWidget()
@@ -26,6 +27,7 @@ void CDamageWidget::SetNumber(float Damage)
 
 void CDamageWidget::Start()
 {
+	CWidgetWindow::Start();
 }
 
 bool CDamageWidget::Init()

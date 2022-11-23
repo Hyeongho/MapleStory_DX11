@@ -63,6 +63,11 @@ public:
         return m_Flip;
     }
 
+    void SetGround(bool Ground)
+    {
+        m_Gravity->SetGround(Ground);
+    }
+
 public:
     virtual void Start();
     virtual bool Init();

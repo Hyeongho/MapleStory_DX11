@@ -7,6 +7,7 @@ CDamageFont::CDamageFont() : m_Opacity(1.0f)
 
 CDamageFont::CDamageFont(const CDamageFont& obj) : CGameObject(obj)
 {
+
 }
 
 CDamageFont::~CDamageFont()
@@ -15,6 +16,7 @@ CDamageFont::~CDamageFont()
 
 void CDamageFont::Start()
 {
+	CGameObject::Start();
 }
 
 bool CDamageFont::Init()
@@ -24,9 +26,11 @@ bool CDamageFont::Init()
 		return false;
 	}
 
-	CWidgetComponent* Widget = CreateComponent<CWidgetComponent>("DamageFont");
+	m_Widget = CreateComponent<CWidgetComponent>("DamageFont");
 
-	m_Number = Widget->CreateWidgetWindow<CDamageWidget>("DamageFont");
+	m_Number = m_Widget->CreateWidgetWindow<CDamageWidget>("DamageFont");
+
+	m_Widget->SetLayerName("Effect");
 
 	return true;
 }
@@ -41,7 +45,7 @@ void CDamageFont::Update(float DeltaTime)
 	{
 		m_Number->Destroy();
 	}
-
+	
 	m_Number->SetOpacity(m_Opacity);
 }
 

@@ -1,5 +1,3 @@
-﻿  Balrog.cpp
-  BodyAttack1AreaWarning.cpp
-  BodyAttack3AreaWarning.cpp
-  코드를 생성하고 있습니다...
+﻿  ClientManager.cpp
+DirectXTex_Debug.lib(DirectXTexMipMaps.obj) : warning LNK4204: ''에 참조 모듈에 대한 디버깅 정보가 없습니다. 디버깅 정보가 없는 것처럼 개체를 링크합니다.
   Client2D.vcxproj -> D:\C++_Client\MapleStory_DX11\Client2D\Bin\MapleStory_Debug.exe

@@ -54,6 +54,7 @@ private:
 	void LoadSound();
 	void LoadAnimation();
 	void CreateLayer();
+	void CreateProtypeObject();
 
 	DECLARE_SINGLE(CClientManager)
 };

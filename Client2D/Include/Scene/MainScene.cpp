@@ -13,7 +13,7 @@
 #include "../ClientManager.h"
 #include "../Object/PlayerManager.h"
 #include "../Object/DamageFont.h"
-#include "../Object/Balrog.h"
+#include "../Object/Jr_Balrog.h"
 
 CMainScene::CMainScene()
 {
@@ -85,7 +85,8 @@ bool CMainScene::Init()
 		m_LoadingFunction(false, 0.8f);
 	}
 
-	CShadowDualBlade* ShadowDualBlade1 = m_Scene->CreateGameObject<CShadowDualBlade>("ShadowDualBlade1");
+	CJr_Balrog* ShadowDualBlade1 = m_Scene->CreateGameObject<CJr_Balrog>("ShadowDualBlade1");
+	//CShadowDualBlade* ShadowDualBlade1 = m_Scene->CreateGameObject<CShadowDualBlade>("ShadowDualBlade1");
 
 	ShadowDualBlade1->SetWorldPos(500.f, 180.5f, 0.f);
 
@@ -105,6 +106,8 @@ bool CMainScene::Init()
 	{
 		m_LoadingFunction(false, 0.9f);
 	}
+
+	//CDamageFont* DamageFont = m_Scene->CreatePrototype<CDamageFont>("DamagrFont");
 
 	return true;
 }
@@ -144,11 +147,13 @@ void CMainScene::CreateMap()
 
 	Box->SetPivot(0.f, 1.0f, 0.f);
 
-	Box->SetOffset(2000.f, 140.f, 0.f);
+	Box->SetOffset(2000.f, 130.f, 0.f);
 
-	Box->SetExtent(2000.f, 10.f);
+	Box->SetExtent(2000.f, 20.f);
 
 	Box->SetCollisionProfile("Floor");
+
+	Box->AddCollisionCallback<CMainScene>(Collision_State::Begin, this, &CMainScene::CollisionBeginCallback);
 
 	Floor1->SetWorldPos(0.f, 0.f, 0.f);
 
@@ -165,3 +170,40 @@ void CMainScene::CreateMap()
 void CMainScene::LoadSound()
 {
 }
+
+void CMainScene::CollisionBeginCallback(const CollisionResult& Result)
+{
+	if (Result.Dest->GetCollisionProfile()->Channel == Collision_Channel::PlayerBottom)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(Result.Dest->GetGameObject());
+
+		if (!Player)
+		{
+			return;
+		}
+
+		Player->SetGround(true);
+
+		Vector3 DestPos = Result.Dest->GetWorldPos() + Result.Dest->GetOffset();
+		Vector3 DestScale = Result.Dest->GetWorldScale();
+
+		Vector3 SrcOffSet = Result.Src->GetOffset();
+		Vector3 DestOffSet = Result.Dest->GetOffset();
+
+		Vector3 SrcPos = Result.Src->GetWorldPos() + Result.Src->GetOffset();
+		Vector3 SrcScale = Result.Src->GetWorldScale();
+
+		float Len = abs(DestPos.y - SrcPos.y);
+		float Value = (DestScale.y / 2.f + SrcScale.y / 2.f) - Len;
+
+		DestPos = Player->GetWorldPos();
+		DestPos.y += Value;
+
+		Player->SetWorldPos(DestPos);
+	}	
+}
+
+void CMainScene::CollisionEndCallback(const CollisionResult& Result)
+{
+}
+

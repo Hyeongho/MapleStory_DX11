@@ -218,7 +218,7 @@ public:
 	}
 
 	template <typename T>
-	T* CreateGameObject(const std::string Name, const std::string& PrototypeName, const Vector2& Pos = Vector2(0.f, 0.f), const Vector2 Size = Vector2(100.f, 100.f))
+	T* CreateGameObject(const std::string Name, const std::string& PrototypeName, const Vector3& Pos = Vector3(0.f, 0.f, 0.f), const Vector3 Size = Vector3(100.f, 100.f, 100.f))
 	{
 		CGameObject* Prototype = FindPrototype(PrototypeName);
 
@@ -236,6 +236,8 @@ public:
 
 		Obj->SetScene(this);
 		Obj->SetName(Name);
+		Obj->SetWorldPos(Pos);
+		Obj->SetWorldScale(Size);
 
 		m_ObjList.push_back(Obj);
 

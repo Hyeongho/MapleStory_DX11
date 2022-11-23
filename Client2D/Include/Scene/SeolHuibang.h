@@ -30,6 +30,10 @@ private:
     void LoadSound();
 
 public:
+    void CollisionBeginCallback(const CollisionResult& Result);
+    void CollisionEndCallback(const CollisionResult& Result);
+
+public:
     template <typename T>
     void SetLoadingFunction(T* Obj, void(T::* Func)(bool, float))
     {

@@ -104,6 +104,8 @@ bool CTauromacis::Init()
 
 	SetCharacterInfo("Tauromacis");
 
+	CTauromacisHitEffect* TauromacisHitEffect = m_Scene->CreatePrototype<CTauromacisHitEffect>("TauromacisHitEffect");
+
 	return true;
 }
 
@@ -234,7 +236,7 @@ void CTauromacis::Attack1Damage()
 	{
 		m_Player->SetDamage(10);
 
-		CTauromacisHitEffect* TauromacisHitEffect = m_Scene->CreateGameObject<CTauromacisHitEffect>("TauromacisHitEffect");
+		CTauromacisHitEffect* TauromacisHitEffect = m_Scene->CreateGameObject<CTauromacisHitEffect>("TauromacisHitEffect", "TauromacisHitEffect", m_Player->GetWorldPos(), Vector3(250.f, 250.f, 1.f));
 		TauromacisHitEffect->SetWorldPos(m_Player->GetWorldPos());
 	}
 }

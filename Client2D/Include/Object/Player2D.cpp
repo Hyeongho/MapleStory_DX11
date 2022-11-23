@@ -147,7 +147,7 @@ bool CPlayer2D::Init()
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("PhantomBlow", KeyState_Down, this, &CPlayer2D::PhantomBlow);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("BladeFury", KeyState_Down, this, &CPlayer2D::BladeFury);
 
-	m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::Begin, this, &CPlayer2D::CollisionCallback);
+	//m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::Begin, this, &CPlayer2D::CollisionCallback);
 	//m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::End, this, &CPlayer2D::CollisionExit);
 
 	m_Gravity->SetGround(false);
@@ -433,7 +433,11 @@ void CPlayer2D::Jump(float DeltaTime)
 	m_RigidBody->AddVelocity(Vector3(0.f, 800.f, 0.f));
 	//m_RigidBody->AddForce(Vector3(0.f, 1600.f, 0.f));
 
-	m_Gravity->SetGround(false);
+	if (m_Gravity->GetGround())
+	{
+		m_Gravity->SetGround(false);
+	}
+
 	//m_Jump = true;
 }
 
@@ -560,11 +564,11 @@ void CPlayer2D::CollisionExit(const CollisionResult& result)
 {
 	result.Src->GetCollisionProfile();
 
-	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Floor)
+	/*if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Floor)
 	{
 		m_Gravity->SetGround(false);
 		m_Jump = false;
-	}
+	}*/
 }
 
 void CPlayer2D::AnimationFinish()

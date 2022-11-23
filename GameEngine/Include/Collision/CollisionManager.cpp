@@ -65,7 +65,7 @@ bool CCollisionManager::Init()
 	SetCollisionState("Floor", Collision_Channel::Potal, Collision_Interaction::Ignore);
 	SetCollisionState("Floor", Collision_Channel::MonsterAttack, Collision_Interaction::Ignore);
 	SetCollisionState("Floor", Collision_Channel::Monster, Collision_Interaction::Ignore);
-	SetCollisionState("Floor", Collision_Channel::Player, Collision_Interaction::Ignore);
+	//SetCollisionState("Floor", Collision_Channel::Player, Collision_Interaction::Ignore);
 
 	return true;
 }

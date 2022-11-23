@@ -94,6 +94,7 @@ bool CClientManager::Init(HINSTANCE hInst)
 	LoadData();
 	CreateLayer();
 	LoadAnimation();
+	CreateProtypeObject();
 
 	return true;
 }
@@ -301,7 +302,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyIdle", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
 	}
 
-	for (int i = 0; i < 12; ++i)
+	for (int i = 0; i < 12; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -364,7 +365,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyDie", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
 	}
 
-	for (int i = 0; i < 22; ++i)
+	for (int i = 0; i < 22; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -388,7 +389,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyAttack1", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
 	}
 
-	for (int i = 0; i < 24; ++i)
+	for (int i = 0; i < 24; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -412,7 +413,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyAttack2", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
 	}
 
-	for (int i = 0; i < 16; ++i)
+	for (int i = 0; i < 16; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -436,7 +437,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyAttack3", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
 	}
 
-	for (int i = 0; i < 19; ++i)
+	for (int i = 0; i < 19; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -460,7 +461,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyAttack4", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
 	}
 
-	for (int i = 0; i < 17; ++i)
+	for (int i = 0; i < 17; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -485,7 +486,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogLeftIdle", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
 	}
 
-	for (int i = 0; i < 12; ++i)
+	for (int i = 0; i < 12; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -509,7 +510,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogLeftDie", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
 	}
 
-	for (int i = 0; i < 28; ++i)
+	for (int i = 0; i < 28; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -533,7 +534,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogLeftAttack1", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
 	}
 
-	for (int i = 0; i < 21; ++i)
+	for (int i = 0; i < 21; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -557,7 +558,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogLeftAttack2", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
 	}
 
-	for (int i = 0; i < 29; ++i)
+	for (int i = 0; i < 29; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -582,7 +583,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogRightIdle", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
 	}
 
-	for (int i = 0; i < 12; ++i)
+	for (int i = 0; i < 12; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -606,7 +607,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogRightDie", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
 	}
 
-	for (int i = 0; i < 28; ++i)
+	for (int i = 0; i < 28; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -630,7 +631,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogRightAttack1", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
 	}
 
-	for (int i = 0; i < 21; ++i)
+	for (int i = 0; i < 21; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -654,7 +655,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogRightAttack2", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
 	}
 
-	for (int i = 0; i < 24; ++i)
+	for (int i = 0; i < 24; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
@@ -678,9 +679,49 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogRightAttack3", Vector2(0.f, 0.f), Vector2(1000.f, 1000.f));
 	}
 
-	for (int i = 0; i < 19; ++i)
+	for (int i = 0; i < 19; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
+	}
+
+	vecFileName.clear();
+
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/2.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/3.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/3.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/3.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/3.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/4.png"));
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("Jr_BalrogAttack2", "Jr_BalrogAttack2", vecFileName);
+
+	for (int i = 0; i < 10; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("Jr_BalrogAttack2", Vector2(0.f, 0.f), Vector2(700.f, 700.f));
+	}
+
+	vecFileName.clear();
+
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/1.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/2.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/3.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/3.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/3.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/4.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/4.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/4.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/4.png"));
+	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/4.png"));
+
+	CResourceManager::GetInst()->CreateAnimationSequence2D("Jr_BalrogAttack3", "Jr_BalrogAttack3", vecFileName);
+
+	for (int i = 0; i < 10; i++)
+	{
+		CResourceManager::GetInst()->AddAnimationSequence2DFrame("Jr_BalrogAttack3", Vector2(0.f, 0.f), Vector2(700.f, 700.f));
 	}
 
 	vecFileName.clear();
@@ -689,4 +730,9 @@ void CClientManager::LoadAnimation()
 void CClientManager::CreateLayer()
 {
 	CRenderManager::GetInst()->CreateLayer("BalrogHand", 4);
+}
+
+void CClientManager::CreateProtypeObject()
+{
+	
 }

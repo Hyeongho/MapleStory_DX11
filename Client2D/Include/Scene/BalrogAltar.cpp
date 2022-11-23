@@ -128,11 +128,13 @@ void CBalrogAltar::CreateMap()
 
 	Floor->GetRootComponent()->SetLayerName("BalrogFloor");
 
-	Box->SetOffset(683.f, 118.f, 0.f);
+	Box->SetOffset(683.f, 98.f, 0.f);
 
-	Box->SetExtent(600.f, 1.f);
+	Box->SetExtent(600.f, 20.f);
 
 	Box->SetCollisionProfile("Floor");
+
+	Box->AddCollisionCallback<CBalrogAltar>(Collision_State::Begin, this, &CBalrogAltar::CollisionBeginCallback);
 }
 
 void CBalrogAltar::LoadSound()
@@ -140,5 +142,41 @@ void CBalrogAltar::LoadSound()
 }
 
 void CBalrogAltar::CreatePotal()
+{
+}
+
+void CBalrogAltar::CollisionBeginCallback(const CollisionResult& Result)
+{
+	if (Result.Dest->GetCollisionProfile()->Channel == Collision_Channel::PlayerBottom)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(Result.Dest->GetGameObject());
+
+		if (!Player)
+		{
+			return;
+		}
+
+		Player->SetGround(true);
+
+		Vector3 DestPos = Result.Dest->GetWorldPos() + Result.Dest->GetOffset();
+		Vector3 DestScale = Result.Dest->GetWorldScale();
+
+		Vector3 SrcOffSet = Result.Src->GetOffset();
+		Vector3 DestOffSet = Result.Dest->GetOffset();
+
+		Vector3 SrcPos = Result.Src->GetWorldPos() + Result.Src->GetOffset();
+		Vector3 SrcScale = Result.Src->GetWorldScale();
+
+		float Len = abs(DestPos.y - SrcPos.y);
+		float Value = (DestScale.y / 2.f + SrcScale.y / 2.f) - Len;
+
+		DestPos = Player->GetWorldPos();
+		DestPos.y += Value;
+
+		Player->SetWorldPos(DestPos);
+	}
+}
+
+void CBalrogAltar::CollisionEndCallback(const CollisionResult& Result)
 {
 }
