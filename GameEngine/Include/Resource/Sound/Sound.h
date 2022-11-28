@@ -16,16 +16,16 @@ private:
     FMOD::Sound* m_Sound;
     FMOD::ChannelGroup* m_Group;
     FMOD::Channel* m_Channel;
-    bool        m_Play;
-    bool        m_Loop;
+    bool m_Play;
+    bool m_Loop;
 
 public:
-    bool IsPlay()   const
+    bool IsPlay() const
     {
         return m_Play;
     }
 
-    bool IsLoop()   const
+    bool IsLoop() const
     {
         return m_Loop;
     }

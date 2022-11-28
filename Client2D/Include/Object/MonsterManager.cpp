@@ -3,8 +3,7 @@
 #include "Scene/Scene.h"
 #include "Resource/Material/Material.h"
 
-CMonsterManager::CMonsterManager() : m_State(EMonster_State::Idle), m_Flip(true), m_Trace(false), m_TraceTime(0.f), m_Speed(0.f), m_Stop(false), m_ActiveTime(0.f), m_RandActive(0.f), m_Attack(false), 
-	m_Hurt(false)
+CMonsterManager::CMonsterManager() : m_State(EMonster_State::Idle), m_Flip(true), m_Trace(false), m_TraceTime(0.f), m_Speed(0.f), m_Stop(false), m_ActiveTime(0.f), m_RandActive(0.f), m_Attack(false)
 {
 	SetTypeID<CMonsterManager>();
 }
@@ -56,7 +55,7 @@ void CMonsterManager::Update(float DeltaTime)
 
 	Vector3 Pos = GetRelativePos();
 
-	CColliderBox2D* Body = (CColliderBox2D*)FindComponent("Body");
+	CColliderBox2D* Body = dynamic_cast<CColliderBox2D*>(FindComponent("Body"));
 
 	if (Body)
 	{
@@ -254,8 +253,6 @@ void CMonsterManager::AttackBegin(const CollisionResult& result)
 	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Player)
 	{
 		m_State = EMonster_State::Attack;
-
-		m_Hurt = true;
 
 		m_Attack = true;
 	}

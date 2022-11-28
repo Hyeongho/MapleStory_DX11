@@ -3,8 +3,6 @@
 #include "Input.h"
 #include "Resource/Material/Material.h"
 #include "PlayerAnimation2D.h"
-#include "PhantomBlow.h"
-#include "BladeFury.h"
 #include "Animation/AnimationSequence2DInstance.h"
 #include "PlayerManager.h"
 #include "../Widget/Fade.h"
@@ -43,8 +41,8 @@ void CPlayer2D::Start()
 {
 	CObjectManager::Start();
 	
-	CPhantomBlow* PhantomBlow = m_Scene->CreateGameObject<CPhantomBlow>("PhantomBlowEffect");
-	CBladeFury* BladeFury = m_Scene->CreateGameObject<CBladeFury>("BladeFury");
+	m_PhantomBlow = m_Scene->CreateGameObject<CPhantomBlow>("PhantomBlowEffect");
+	m_BladeFury = m_Scene->CreateGameObject<CBladeFury>("BladeFury");
 
 	m_PlayerStatus = m_Scene->GetViewport()->FindWidgetWindow<CPlayerStatus>("PlayerStatus");
 
@@ -503,20 +501,11 @@ void CPlayer2D::PlayPhantomBlow()
 
 	Anim->ChangeAnimation("PhantomBlow");
 
-	//CPhantomBlow* PhantomBlow = m_Scene->CreateGameObject<CPhantomBlow>("PhantomBlowEffect");
-	
-	CPhantomBlow* PhantomBlow = dynamic_cast<CPhantomBlow*>(m_Scene->FindObject("PhantomBlowEffect"));
-
-	if (!PhantomBlow)
-	{
-		return;
-	}
-
-	PhantomBlow->SetEnable();
+	m_PhantomBlow->SetEnable();
 
 	CResourceManager::GetInst()->SoundPlay("PhantomBlow");
 
-	PhantomBlow->SetWorldPos(m_Muzzle->GetWorldPos());
+	m_PhantomBlow->SetWorldPos(m_Muzzle->GetWorldPos());
 }
 
 void CPlayer2D::PlayBladeFury()
@@ -531,20 +520,11 @@ void CPlayer2D::PlayBladeFury()
 
 	Anim->ChangeAnimation("BladeFury");
 
-	//CBladeFury* BladeFury = m_Scene->CreateGameObject<CBladeFury>("BladeFury");
-
-	CBladeFury* BladeFury = dynamic_cast<CBladeFury*>(m_Scene->FindObject("BladeFury"));
-
-	if (!BladeFury)
-	{
-		return;
-	}
-
-	BladeFury->SetEnable();
+	m_BladeFury->SetEnable();
 
 	CResourceManager::GetInst()->SoundPlay("BladeFury");
 
-	BladeFury->SetWorldPos(m_Muzzle->GetWorldPos());
+	m_BladeFury->SetWorldPos(m_Muzzle->GetWorldPos());
 }
 
 void CPlayer2D::CollisionCallback(const CollisionResult& result)

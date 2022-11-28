@@ -228,8 +228,7 @@ CAnimation2DConstantBuffer* CResourceManager::GetAnimation2DCBuffer() const
 	return m_AnimationManager->GetAnimation2DCBuffer();
 }
 
-bool CResourceManager::LoadSound(const std::string& ChannelGroupName, bool Loop, const std::string& Name,
-	const char* FileName, const std::string& PathName)
+bool CResourceManager::LoadSound(const std::string& ChannelGroupName, bool Loop, const std::string& Name, const char* FileName, const std::string& PathName)
 {
 	return m_SoundManager->LoadSound(ChannelGroupName, Loop, Name, FileName, PathName);
 }

@@ -275,7 +275,43 @@ void CClientManager::LoadSound()
 	CResourceManager::GetInst()->LoadSound("Player", false, "Jump", "Jump.mp3");
 
 	// Effect
-	
+	CResourceManager::GetInst()->LoadSound("Effect", false, "TaurmoacisAttack1", "Tauromacis/Attack1.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "TaurmoacisDie", "Tauromacis/Die.mp3");
+
+	CResourceManager::GetInst()->LoadSound("Effect", false, "TaurospearAttack1", "Taurospear/Attack1.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "TaurospearAttack2", "Taurospear/Attack2.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "TaurospearDie", "Taurospear/Die.mp3");
+
+	CResourceManager::GetInst()->LoadSound("Effect", false, "Jr_BalrogAttack1", "Jr_Balrog/Attack1.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "Jr_BalrogAttack2", "Jr_Balrog/Attack2.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "Jr_BalrogAttack3", "Jr_Balrog/Attack3.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "Jr_BalrogCharDam1", "Jr_Balrog/CharDam1.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "Jr_BalrogCharDam2", "Jr_Balrog/CharDam2.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "Jr_BalrogCharDam3", "Jr_Balrog/CharDam3.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "Jr_BalrogDie", "Jr_Balrog/Die.mp3");
+
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogBodyAttack1", "Balrog/Body/Attack1.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogBodyAttack2", "Balrog/Body/Attack2.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogBodyAttack3", "Balrog/Body/Attack3.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogBodyAttack4", "Balrog/Body/Attack4.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogBodyCharDam1", "Balrog/Body/CharDam1.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogBodyCharDam2", "Balrog/Body/CharDam2.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogBodyCharDam3", "Balrog/Body/CharDam3.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogBodyDie", "Balrog/Body/Die.mp3");
+
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogLeftAttack1", "Balrog/Left/Attack1.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogLeftAttack2", "Balrog/Left/Attack2.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogLeftCharDam1", "Balrog/Left/CharDam1.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogLeftCharDam2", "Balrog/Left/CharDam2.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogLeftDamage", "Balrog/Left/Damage.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogLeftDie", "Balrog/Left/Die.mp3");
+
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogRightAttack1", "Balrog/Right/Attack1.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogRightAttack2", "Balrog/Right/Attack2.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogRightAttack3", "Balrog/Right/Attack3.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogRightCharDam1", "Balrog/Right/CharDam1.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogRightCharDam2", "Balrog/Right/CharDam2.mp3");
+	CResourceManager::GetInst()->LoadSound("Effect", false, "BalrogRightCharDam3", "Balrog/Right/CharDam3.mp3");
 
 	// UI
 }
@@ -686,7 +722,7 @@ void CClientManager::LoadAnimation()
 
 	vecFileName.clear();
 
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
+	/*vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
 	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
 	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
 	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
@@ -724,7 +760,7 @@ void CClientManager::LoadAnimation()
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("Jr_BalrogAttack3", Vector2(0.f, 0.f), Vector2(700.f, 700.f));
 	}
 
-	vecFileName.clear();
+	vecFileName.clear();*/
 }
 
 void CClientManager::CreateLayer()

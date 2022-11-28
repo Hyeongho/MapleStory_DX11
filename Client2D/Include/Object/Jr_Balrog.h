@@ -20,9 +20,17 @@ private:
 	CSharedPtr<CColliderBox2D> m_Sensor;
 	CSharedPtr<CColliderBox2D> m_AttackRange;
 
-	CSharedPtr<CSceneComponent> m_Muzzle;
+	CSharedPtr<CSceneComponent> m_Muzzle1;
+	CSharedPtr<CSceneComponent> m_Muzzle2;
+	CSharedPtr<CSceneComponent> m_Muzzle3;
+
+	CSharedPtr<class CJr_BalrogAttack1Effect> m_Jr_BalrogAttack1Effect;
+	CSharedPtr<class CJr_BalrogAttack2Effect> m_Jr_BalrogAttack2Effect;
+	CSharedPtr<class CJr_BalrogAttack3Effect> m_Jr_BalrogAttack3Effect;
 
 	CAnimationSequence2DInstance* m_Anim;
+
+	bool m_Hurt;
 
 public:
 	virtual void Start();
@@ -46,5 +54,11 @@ protected:
 	void AttackEnd(const CollisionResult& result);
 
 	virtual void AnimationFinish();
+
+	void Attack1Effect();
+	void Attack2Effect();
+	void Attack3Effect();
+
+	void PlayAttackSound();
 };
 

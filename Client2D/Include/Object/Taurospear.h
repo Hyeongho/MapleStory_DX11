@@ -16,7 +16,8 @@ public:
 private:
 	CSharedPtr<CSpriteComponent> m_Sprite;
 	CSharedPtr<CColliderBox2D> m_Body;
-	CSharedPtr<CColliderBox2D> m_AttackBody;
+	CSharedPtr<CColliderBox2D> m_Attack1Body;
+	CSharedPtr<CColliderBox2D> m_Attack2Body;
 	CSharedPtr<CColliderBox2D> m_Sensor;
 	CSharedPtr<CColliderBox2D> m_AttackRange;
 
@@ -27,6 +28,9 @@ private:
 	bool m_SolW;
 	float m_WDistance;
 	float m_Opacity;
+
+	bool m_Hurt1;
+	bool m_Hurt2;
 
 public:
 	virtual void Start();
@@ -43,12 +47,19 @@ protected:
 	virtual void AIDeath(float DeltaTime);
 
 protected:
-	virtual void CollisionCallbackBegin(const CollisionResult& result);
+	void CollisionCallbackBegin(const CollisionResult& result);
 	void CollisionCallbackEnd(const CollisionResult& result);
 
-	virtual void AttackBegin(const CollisionResult& result);
-	void AttackEnd(const CollisionResult& result);
+	void Attack1Begin(const CollisionResult& result);
+	void Attack1End(const CollisionResult& result);
 
+	void Attack2Begin(const CollisionResult& result);
+	void Attack2End(const CollisionResult& result);
+
+	void Attack1();
+	void Attack2();
+
+	void PlayAttackSound();
 	virtual void AnimationFinish();
 };
 

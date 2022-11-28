@@ -10,6 +10,8 @@
 #include "../Widget/PlayerStatus.h"
 #include "Data/Data.h"
 #include "../ClientInfo.h"
+#include "PhantomBlow.h"
+#include "BladeFury.h"
 
 class CPlayer2D :
     public CObjectManager
@@ -34,6 +36,8 @@ private:
     CSharedPtr<CColliderBox2D> m_Bottom;
     CSharedPtr<CCameraComponent> m_Camera;
     CSharedPtr<CSceneComponent> m_Muzzle;
+    CSharedPtr<CPhantomBlow> m_PhantomBlow;
+    CSharedPtr<CBladeFury> m_BladeFury;
 
     CPlayerStatus* m_PlayerStatus;
 

@@ -28,6 +28,8 @@ private:
 	float m_WDistance;
 	float m_Opacity;
 
+	bool m_Hurt;
+
 public:
 	virtual void Start();
 	virtual bool Init();
@@ -49,6 +51,8 @@ protected:
 private:
 	void AttackBegin(const CollisionResult& result);
 	void AttackEnd(const CollisionResult& result);
+
+	void PlayAttackSound();
 
 	virtual void Attack1Damage();
 	virtual void AnimationFinish();

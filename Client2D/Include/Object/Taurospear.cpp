@@ -28,7 +28,8 @@ bool CTaurospear::Init()
 	m_Sprite = CreateComponent<CSpriteComponent>("Taurospear");
 	m_Body = CreateComponent<CColliderBox2D>("Body");
 	//m_Sensor = CreateComponent<CColliderBox2D>("Sensor");
-	m_AttackBody = CreateComponent<CColliderBox2D>("AttackBody");
+	m_Attack1Body = CreateComponent<CColliderBox2D>("Attack1Body");
+	m_Attack2Body = CreateComponent<CColliderBox2D>("Attack2Body");
 	m_AttackRange = CreateComponent<CColliderBox2D>("AttackRange");
 	m_Muzzle = CreateComponent<CSceneComponent>("TauromacisMuzzle");
 
@@ -36,18 +37,23 @@ bool CTaurospear::Init()
 
 	m_Body->SetCollisionProfile("Monster");
 	//m_Sensor->SetCollisionProfile("Monster");
-	m_AttackBody->SetCollisionProfile("MonsterAttack");
+	m_Attack1Body->SetCollisionProfile("MonsterAttack");
+	m_Attack2Body->SetCollisionProfile("MonsterAttack");
 	m_AttackRange->SetCollisionProfile("MonsterAttack");
 
 	/*m_Sensor->AddCollisionCallback<CTaurospear>(Collision_State::Begin, this, &CMonsterManager::CollisionCallbackBegin);
 	m_Sensor->AddCollisionCallback<CTaurospear>(Collision_State::End, this, &CTaurospear::CollisionCallbackEnd);*/
 
-	m_AttackBody->AddCollisionCallback<CTaurospear>(Collision_State::Begin, this, &CMonsterManager::AttackBegin);
-	m_AttackBody->AddCollisionCallback<CTaurospear>(Collision_State::End, this, &CTaurospear::AttackEnd);
+	m_Attack1Body->AddCollisionCallback<CTaurospear>(Collision_State::Begin, this, &CTaurospear::Attack1Begin);
+	m_Attack1Body->AddCollisionCallback<CTaurospear>(Collision_State::End, this, &CTaurospear::Attack1End);
+
+	m_Attack2Body->AddCollisionCallback<CTaurospear>(Collision_State::Begin, this, &CTaurospear::Attack2Begin);
+	m_Attack2Body->AddCollisionCallback<CTaurospear>(Collision_State::End, this, &CTaurospear::Attack2End);
 
 	m_Sprite->AddChild(m_Body);
 	//m_Sprite->AddChild(m_Sensor);
-	m_Sprite->AddChild(m_AttackBody);
+	m_Sprite->AddChild(m_Attack1Body);
+	m_Sprite->AddChild(m_Attack2Body);
 	m_Sprite->AddChild(m_AttackRange);
 	m_Sprite->AddChild(m_Muzzle);
 
@@ -60,8 +66,14 @@ bool CTaurospear::Init()
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearIdle.sqc"), ANIMATION_PATH, "Idle", true);
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearMove.sqc"), ANIMATION_PATH, "Walk", true);
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearAttack1.sqc"), ANIMATION_PATH, "Attack1", true);
-	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearAttack2.sqc"), ANIMATION_PATH, "Attack2", true);
+	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearAttack2.sqc"), ANIMATION_PATH, "Attack2", true, 1.91f);
 	m_Anim->AddAnimation(TEXT("Monster/Taurospear/TaurospearDie.sqc"), ANIMATION_PATH, "Die", false);
+
+	m_Anim->AddNotify("Attack1", "Attack1", 5, this, &CTaurospear::Attack1);
+	m_Anim->AddNotify("Attack2", "Attack2", 3, this, &CTaurospear::Attack2);
+
+	m_Anim->AddNotify<CTaurospear>("Attack1", "Attack1PlaySound", 0, this, &CTaurospear::PlayAttackSound);
+	m_Anim->AddNotify<CTaurospear>("Attack2", "Attack2PlaySound", 0, this, &CTaurospear::PlayAttackSound);
 
 	m_Anim->SetEndFunction<CTaurospear>("Attack1", this, &CTaurospear::AnimationFinish);
 	m_Anim->SetEndFunction<CTaurospear>("Attack2", this, &CTaurospear::AnimationFinish);
@@ -72,7 +84,8 @@ bool CTaurospear::Init()
 
 	m_Body->SetExtent(93.f, 61.f);
 
-	m_AttackBody->SetExtent(404.f, 240.f);
+	m_Attack1Body->SetExtent(209.f, 225.f);
+	m_Attack2Body->SetExtent(250.f, 60.f);
 
 	//m_Sensor->SetExtent(150.f, 30.5f);
 
@@ -202,7 +215,8 @@ void CTaurospear::AIDeath(float DeltaTime)
 
 	m_Body->Destroy();
 	//m_Sensor->Destroy();
-	m_AttackBody->Destroy();
+	m_Attack1Body->Destroy();
+	m_Attack2Body->Destroy();
 	m_AttackRange->Destroy();
 
 	m_Anim->ChangeAnimation("Die");
@@ -217,17 +231,75 @@ void CTaurospear::CollisionCallbackEnd(const CollisionResult& result)
 {
 }
 
-void CTaurospear::AttackBegin(const CollisionResult& result)
+void CTaurospear::Attack1Begin(const CollisionResult& result)
 {
 	CMonsterManager::AttackBegin(result);
 
 	m_Attack = true;
-	m_Hurt = true;
+	m_Hurt1 = true;
 }
 
-void CTaurospear::AttackEnd(const CollisionResult& result)
+void CTaurospear::Attack1End(const CollisionResult& result)
 {
+	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Player)
+	{
+		if (m_Hurt1)
+		{
+			m_Hurt1 = false;
+		}
+	}
+
 	m_Attack = false;
+}
+
+void CTaurospear::Attack2Begin(const CollisionResult& result)
+{
+	CMonsterManager::AttackBegin(result);
+
+	m_Attack = true;
+	m_Hurt2 = true;
+}
+
+void CTaurospear::Attack2End(const CollisionResult& result)
+{
+	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Player)
+	{
+		if (m_Hurt2)
+		{
+			m_Hurt2 = false;
+		}
+	}
+
+	m_Attack = false;
+}
+
+void CTaurospear::Attack1()
+{
+	if (m_Hurt1)
+	{
+		m_Player->SetDamage(10);
+	}
+}
+
+void CTaurospear::Attack2()
+{
+	if (m_Hurt2)
+	{
+		m_Player->SetDamage(10);
+	}
+}
+
+void CTaurospear::PlayAttackSound()
+{
+	if (m_Anim->CheckCurrentAnimation("Attack1"))
+	{
+		CResourceManager::GetInst()->SoundPlay("TaurospearAttack1");
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("Attack2"))
+	{
+		CResourceManager::GetInst()->SoundPlay("TaurospearAttack2");
+	}
 }
 
 void CTaurospear::AnimationFinish()

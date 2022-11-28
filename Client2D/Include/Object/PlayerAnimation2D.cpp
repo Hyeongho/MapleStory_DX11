@@ -25,11 +25,6 @@ bool CPlayerAnimation2D::Init()
 
 	m_Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
 
-	/*m_Player->m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();
-
-	AddAnimation(TEXT("PlayerIdleM.sqc"), ANIMATION_PATH, "Idle", true);
-	AddAnimation(TEXT("PlayerWalkM.sqc"), ANIMATION_PATH, "Walk", true);*/
-
 	return true;
 }
 

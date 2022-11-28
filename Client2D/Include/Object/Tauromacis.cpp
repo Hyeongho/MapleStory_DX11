@@ -77,8 +77,10 @@ bool CTauromacis::Init()
 	m_Anim->AddAnimation(TEXT("Monster/Tauromacis/TauromacisAttack.sqc"), ANIMATION_PATH, "Attack", true);
 	m_Anim->AddAnimation(TEXT("Monster/Tauromacis/TauromacisDie.sqc"), ANIMATION_PATH, "Die", false);
 
+	m_Anim->AddNotify<CTauromacis>("Attack", "PlaySound", 0, this, &CTauromacis::PlayAttackSound);
 	m_Anim->AddNotify<CTauromacis>("Attack", "PlayerHit", 4, this, &CTauromacis::Attack1Damage);
-	m_Anim->AddNotify<CTauromacis>("Attack", "Attack", 6, this, &CTauromacis::AnimationFinish);
+	//m_Anim->AddNotify<CTauromacis>("Attack", "Attack", 6, this, &CTauromacis::AnimationFinish);
+	m_Anim->SetEndFunction<CTauromacis>("Attack", this, &CTauromacis::AnimationFinish);
 	m_Anim->AddNotify<CTauromacis>("Die", "Die", 14, this, &CTauromacis::AnimationFinish);
 
 	m_Sprite->SetRelativeScale(500.f, 500.f, 1.f);
@@ -193,6 +195,11 @@ void CTauromacis::AIAttack(float DeltaTime)
 {
 	CMonsterManager::AIAttack(DeltaTime);
 
+	if (m_Anim->CheckCurrentAnimation("Attack"))
+	{
+		return;
+	}
+
 	m_Anim->ChangeAnimation("Attack");
 }
 
@@ -228,6 +235,11 @@ void CTauromacis::AttackBegin(const CollisionResult& result)
 void CTauromacis::AttackEnd(const CollisionResult& result)
 {
 	m_Attack = false;
+}
+
+void CTauromacis::PlayAttackSound()
+{
+	CResourceManager::GetInst()->SoundPlay("TaurmoacisAttack1");
 }
 
 void CTauromacis::Attack1Damage()

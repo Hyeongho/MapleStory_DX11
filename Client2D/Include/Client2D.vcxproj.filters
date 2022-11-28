@@ -88,6 +88,9 @@
     <Filter Include="02. Object\02. Monster\06. Balrog\03. Effect">
       <UniqueIdentifier>{b2b77343-08fc-4053-9ebe-2d19dfee78d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\02. Monster\04. Jr_Balrog\01. Effect">
+      <UniqueIdentifier>{4b4c7112-fdaa-40ef-a5e1-2fd31bbb0d6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -296,6 +299,15 @@
     </ClInclude>
     <ClInclude Include="Widget\BossStatus.h">
       <Filter>03. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Jr_BalrogAttack3Effect.h">
+      <Filter>02. Object\02. Monster\04. Jr_Balrog\01. Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Jr_BalrogAttack2Effect.h">
+      <Filter>02. Object\02. Monster\04. Jr_Balrog\01. Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Jr_BalrogAttack1Effect.h">
+      <Filter>02. Object\02. Monster\04. Jr_Balrog\01. Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -509,6 +521,15 @@
     </ClCompile>
     <ClCompile Include="Widget\BossStatus.cpp">
       <Filter>03. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Jr_BalrogAttack3Effect.cpp">
+      <Filter>02. Object\02. Monster\04. Jr_Balrog\01. Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Jr_BalrogAttack1Effect.cpp">
+      <Filter>02. Object\02. Monster\04. Jr_Balrog\01. Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Jr_BalrogAttack2Effect.cpp">
+      <Filter>02. Object\02. Monster\04. Jr_Balrog\01. Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

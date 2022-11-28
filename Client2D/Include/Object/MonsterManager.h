@@ -31,8 +31,6 @@ protected:
 	Vector2 m_Size;
 	class CPlayer2D* m_Player;
 
-	bool m_Hurt;
-
 public:
 	void SetSize(float x, float y)
 	{
@@ -58,6 +56,11 @@ public:
 	void SetDie(bool Die)
 	{
 		m_Die = Die;
+	}
+
+	bool GetFlip() const
+	{
+		return m_Flip;
 	}
 
 public:
