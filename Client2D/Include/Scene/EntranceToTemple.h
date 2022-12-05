@@ -18,7 +18,10 @@ private:
     CSharedPtr<CFade> m_Fade;
     std::function<void(bool, float)> m_LoadingFunction;
 
-    std::list<CGameObject*> m_MonsterList;
+    std::list<class CMonsterManager*> m_MonsterList;
+
+    int m_MobCount;
+    int m_TotalMobCount;
 
 public:
     virtual void Start();

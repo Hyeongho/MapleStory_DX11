@@ -237,6 +237,7 @@
     <ClInclude Include="Widget\DamageWidget.h" />
     <ClInclude Include="Widget\Fade.h" />
     <ClInclude Include="Widget\PlayerStatus.h" />
+    <ClInclude Include="Widget\QuesetWidget.h" />
     <ClInclude Include="Widget\StartWidget.h" />
     <ClInclude Include="Widget\TalkWidget.h" />
     <ClInclude Include="Widget\TestWidget.h" />
@@ -315,6 +316,7 @@
     <ClCompile Include="Widget\DamageWidget.cpp" />
     <ClCompile Include="Widget\Fade.cpp" />
     <ClCompile Include="Widget\PlayerStatus.cpp" />
+    <ClCompile Include="Widget\QuesetWidget.cpp" />
     <ClCompile Include="Widget\StartWidget.cpp" />
     <ClCompile Include="Widget\TalkWidget.cpp" />
     <ClCompile Include="Widget\TestWidget.cpp" />

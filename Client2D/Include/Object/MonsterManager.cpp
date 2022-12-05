@@ -4,6 +4,7 @@
 #include "Resource/Material/Material.h"
 
 CMonsterManager::CMonsterManager() : m_State(EMonster_State::Idle), m_Flip(true), m_Trace(false), m_TraceTime(0.f), m_Speed(0.f), m_Stop(false), m_ActiveTime(0.f), m_RandActive(0.f), m_Attack(false)
+, m_Opacity(1.f), m_IsHide(false)
 {
 	SetTypeID<CMonsterManager>();
 }
@@ -25,7 +26,7 @@ bool CMonsterManager::Init()
 {
 	CObjectManager::Init();
 
-	m_Player = (CPlayer2D*)m_Scene->GetPlayerObject();
+	m_Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
 
 	return true;
 }
@@ -145,6 +146,11 @@ void CMonsterManager::PostUpdate(float DeltaTime)
 CMonsterManager* CMonsterManager::Clone()
 {
 	return new CMonsterManager(*this);
+}
+
+float CMonsterManager::GetOpacity() const
+{
+	return 1.f;
 }
 
 void CMonsterManager::AIIdle(float DeltaTime)

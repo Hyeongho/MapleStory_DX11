@@ -43,6 +43,12 @@ public:
     void AddOpacity(float Opacity);
 
 public:
+    float GetOpacity() const
+    {
+        return m_Material->GetOpacity();
+    }
+
+public:
     void AddTexture(int Register, int ShaderType, const std::string& Name, class CTexture* Texture);
     void AddTexture(int Register, int ShaderType, const std::string& Name, const TCHAR* FileName, const std::string& PathName = TEXTURE_PATH);
     void AddTextureFullPath(int Register, int ShaderType, const std::string& Name, const TCHAR* FullPath);

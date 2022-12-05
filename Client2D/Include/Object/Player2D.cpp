@@ -8,7 +8,7 @@
 #include "../Widget/Fade.h"
 #include "../ClientManager.h"
 
-CPlayer2D::CPlayer2D() : m_Flip(true)
+CPlayer2D::CPlayer2D() : m_Flip(true), m_Hurt(false), m_HurtTime(0.f)
 {
 	SetTypeID<CPlayer2D>();
 
@@ -232,6 +232,8 @@ void CPlayer2D::PostUpdate(float DeltaTime)
 		return;
 	}
 
+	OnHit(DeltaTime);
+
 	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
 
 	switch (m_State)
@@ -435,8 +437,6 @@ void CPlayer2D::Jump(float DeltaTime)
 	{
 		m_Gravity->SetGround(false);
 	}
-
-	//m_Jump = true;
 }
 
 void CPlayer2D::SwingD1(float DeltaTime)
@@ -463,8 +463,6 @@ void CPlayer2D::PhantomBlow(float DeltaTime)
 		return;
 	}
 
-	//PlayPhantomBlow();
-
 	t1 = std::thread(&CPlayer2D::PlayPhantomBlow, this);
 
 	t1.join();
@@ -482,11 +480,49 @@ void CPlayer2D::BladeFury(float DeltaTime)
 		return;
 	}
 
-	//PlayBladeFury();
-
 	t1 = std::thread(&CPlayer2D::PlayBladeFury, this);
 
 	t1.join();
+}
+
+void CPlayer2D::OnHit(float DeltaTime)
+{
+	if (m_State == EPlayer_State::Die)
+	{
+		m_Sprite->SetBaseColor(1.f, 1.f, 1.f, 1.f);
+		m_Hurt = false;
+		m_HurtTime = 0.f;
+		return;
+	}
+
+	if (m_Hurt)
+	{
+		m_HurtTime += DeltaTime;
+
+		if (m_HurtTime >= 3.f)
+		{
+			m_Hurt = false;
+			m_HurtTime = 0.f;
+			//m_Sprite->SetOpacity(1.f);
+			m_Sprite->SetBaseColor(1.f, 1.f, 1.f, 1.f);
+
+			return;
+		}
+
+		int HitTime = static_cast<int>(m_HurtTime * 10) % 10;
+
+		if (HitTime % 2 == 0)
+		{
+			m_Sprite->SetBaseColor(0.5f, 0.5f, 0.5f, 1.f);
+		}
+
+		else
+		{
+			m_Sprite->SetBaseColor(1.f, 1.f, 1.f, 1.f);
+
+			//m_Sprite->SetOpacity(1.f);
+		}
+	}
 }
 
 void CPlayer2D::PlayPhantomBlow()

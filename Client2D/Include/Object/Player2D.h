@@ -51,6 +51,9 @@ private:
     float m_WDistance;
     float m_Opacity;
     bool m_Flip;
+    bool m_Hurt;
+
+    float m_HurtTime;
 
 public:
     bool m_IsMove;
@@ -72,6 +75,16 @@ public:
         m_Gravity->SetGround(Ground);
     }
 
+    void SetHurt(bool Hurt)
+    {
+        m_Hurt = Hurt;
+    }
+
+    bool GetHurt() const
+    {
+        return m_Hurt;
+    }
+
 public:
     virtual void Start();
     virtual bool Init();
@@ -90,6 +103,8 @@ private:
     void StabD1(float DeltaTime);
     void PhantomBlow(float DeltaTime);
     void BladeFury(float DeltaTime);
+
+    void OnHit(float DeltaTime);
 
     void PlayPhantomBlow();
     void PlayBladeFury();

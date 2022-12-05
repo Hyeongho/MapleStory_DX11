@@ -26,7 +26,6 @@ private:
 
 	bool m_SolW;
 	float m_WDistance;
-	float m_Opacity;
 
 	bool m_Hurt;
 
@@ -43,6 +42,17 @@ protected:
 	virtual void AITrace(float DeltaTime);
 	virtual void AIAttack(float DeltaTime);
 	virtual void AIDeath(float DeltaTime);
+
+public:
+	virtual float GetOpacity() const
+	{
+		if (!m_Sprite)
+		{
+			return 1.f;
+		}
+
+		return m_Sprite->GetOpacity();
+	}
 
 protected:
 	virtual void CollisionCallbackBegin(const CollisionResult& result);

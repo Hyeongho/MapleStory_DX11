@@ -24,6 +24,10 @@ protected:
 	float m_TraceTime;
 	float m_ActiveTime;
 	float m_RandActive;
+
+	bool m_IsHide;
+	float m_Opacity;
+
 	int m_IsMove;	
 
 	float m_Speed;
@@ -53,6 +57,11 @@ public:
 		m_State = State;
 	}
 
+	EMonster_State GetState() const
+	{
+		return m_State;
+	}
+
 	void SetDie(bool Die)
 	{
 		m_Die = Die;
@@ -69,6 +78,9 @@ public:
 	virtual void Update(float DeltaTime);
 	virtual void PostUpdate(float DeltaTime);
 	virtual CMonsterManager* Clone();
+
+public:
+	virtual float GetOpacity() const;
 
 protected:
 	virtual void AIIdle(float DeltaTime);

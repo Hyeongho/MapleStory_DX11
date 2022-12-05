@@ -77,6 +77,7 @@ bool CTaurospear::Init()
 
 	m_Anim->SetEndFunction<CTaurospear>("Attack1", this, &CTaurospear::AnimationFinish);
 	m_Anim->SetEndFunction<CTaurospear>("Attack2", this, &CTaurospear::AnimationFinish);
+	m_Anim->SetEndFunction<CTaurospear>("Die", this, &CTaurospear::AnimationFinish);
 
 	m_Sprite->SetRelativeScale(500.f, 500.f, 1.f);
 	m_Sprite->SetRelativePos(500.f, 150, 0.f);
@@ -112,6 +113,19 @@ void CTaurospear::Update(float DeltaTime)
 	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
+	}
+
+	if (m_IsHide)
+	{
+		m_Opacity -= DeltaTime / 1.f;
+
+		if (m_Opacity < 0.f)
+		{
+			Destroy();
+			return;
+		}
+
+		m_Sprite->SetOpacity(m_Opacity);
 	}
 }
 
@@ -277,7 +291,12 @@ void CTaurospear::Attack1()
 {
 	if (m_Hurt1)
 	{
-		m_Player->SetDamage(10);
+		if (!m_Player->GetHurt())
+		{
+			m_Player->SetDamage(10);
+
+			m_Player->SetHurt(true);
+		}
 	}
 }
 
@@ -285,7 +304,12 @@ void CTaurospear::Attack2()
 {
 	if (m_Hurt2)
 	{
-		m_Player->SetDamage(10);
+		if (!m_Player->GetHurt())
+		{
+			m_Player->SetDamage(10);
+
+			m_Player->SetHurt(true);
+		}
 	}
 }
 
@@ -322,6 +346,12 @@ void CTaurospear::AnimationFinish()
 	else
 	{
 		CMonsterManager::AnimationFinish();
+	}
+
+	if (m_Anim->CheckCurrentAnimation("Die"))
+	{
+		m_IsHide = true;
+		return;
 	}
 
 	m_Anim->SetAnimFlip(m_Flip);

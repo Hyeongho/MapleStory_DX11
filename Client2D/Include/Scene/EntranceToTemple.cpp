@@ -1,7 +1,7 @@
 #include "EntranceToTemple.h"
 #include "Scene/Scene.h"
 #include "../Object/Player2D.h"
-#include "../Object/TestMonster.h"
+#include "../Object/MonsterManager.h"
 #include "../Object/Tauromacis.h"
 #include "../Object/Taurospear.h"
 #include "../Object/Potal.h"
@@ -14,7 +14,7 @@
 #include "../ClientManager.h"
 #include "../Object/PlayerManager.h"
 
-CEntranceToTemple::CEntranceToTemple()
+CEntranceToTemple::CEntranceToTemple() : m_MobCount(0), m_TotalMobCount(30)
 {
 	SetTypeID<CEntranceToTemple>();
 }
@@ -118,16 +118,29 @@ void CEntranceToTemple::PostUpdate(float DeltaTime)
 
 	for ( ; iter != iterEnd; )
 	{
-		if (!(*iter)->IsActive())
+		if ((*iter)->GetState() == EMonster_State::Die)
 		{
 			iter = m_MonsterList.erase(iter);
 			iterEnd = m_MonsterList.end();
+
+			m_MobCount++;
+
 			continue;
 		}
 
 		else
 		{
 			iter++;
+		}
+	}
+
+	if (m_MobCount >= 30)
+	{
+		if (!m_Scene->FindObject("Potal"))
+		{
+			CPotal* Potal = m_Scene->CreateGameObject<CPotal>("Potal");
+
+			Potal->SetRelativePos(2000.f, 190.f, 0.f);
 		}
 	}
 }

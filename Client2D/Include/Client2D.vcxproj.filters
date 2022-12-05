@@ -309,6 +309,9 @@
     <ClInclude Include="Object\Jr_BalrogAttack1Effect.h">
       <Filter>02. Object\02. Monster\04. Jr_Balrog\01. Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Widget\QuesetWidget.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client2D.rc">
@@ -530,6 +533,9 @@
     </ClCompile>
     <ClCompile Include="Object\Jr_BalrogAttack2Effect.cpp">
       <Filter>02. Object\02. Monster\04. Jr_Balrog\01. Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\QuesetWidget.cpp">
+      <Filter>03. UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

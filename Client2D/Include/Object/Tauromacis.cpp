@@ -11,7 +11,6 @@ CTauromacis::CTauromacis()
 
 	m_SolW = false;
 	m_WDistance = 0.f;
-	m_Opacity = 1.f;
 }
 
 CTauromacis::CTauromacis(const CTauromacis& obj) : CMonsterManager(obj)
@@ -81,7 +80,7 @@ bool CTauromacis::Init()
 	m_Anim->AddNotify<CTauromacis>("Attack", "PlayerHit", 4, this, &CTauromacis::Attack1Damage);
 	//m_Anim->AddNotify<CTauromacis>("Attack", "Attack", 6, this, &CTauromacis::AnimationFinish);
 	m_Anim->SetEndFunction<CTauromacis>("Attack", this, &CTauromacis::AnimationFinish);
-	m_Anim->AddNotify<CTauromacis>("Die", "Die", 14, this, &CTauromacis::AnimationFinish);
+	m_Anim->SetEndFunction<CTauromacis>("Die", this, &CTauromacis::AnimationFinish);
 
 	m_Sprite->SetRelativeScale(500.f, 500.f, 1.f);
 	m_Sprite->SetRelativePos(500.f, 150, 0.f);
@@ -118,6 +117,19 @@ void CTauromacis::Update(float DeltaTime)
 	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
 	{
 		return;
+	}
+
+	if (m_IsHide)
+	{
+		m_Opacity -= DeltaTime / 1.f;
+
+		if (m_Opacity < 0.f)
+		{
+			Destroy();
+			return;
+		}
+
+		m_Sprite->SetOpacity(m_Opacity);
 	}
 }
 
@@ -246,10 +258,15 @@ void CTauromacis::Attack1Damage()
 {
 	if (m_Hurt)
 	{
-		m_Player->SetDamage(10);
+		if (!m_Player->GetHurt())
+		{
+			CTauromacisHitEffect* TauromacisHitEffect = m_Scene->CreateGameObject<CTauromacisHitEffect>("TauromacisHitEffect", "TauromacisHitEffect", m_Player->GetWorldPos(), Vector3(250.f, 250.f, 1.f));
+			TauromacisHitEffect->SetWorldPos(m_Player->GetWorldPos());
 
-		CTauromacisHitEffect* TauromacisHitEffect = m_Scene->CreateGameObject<CTauromacisHitEffect>("TauromacisHitEffect", "TauromacisHitEffect", m_Player->GetWorldPos(), Vector3(250.f, 250.f, 1.f));
-		TauromacisHitEffect->SetWorldPos(m_Player->GetWorldPos());
+			m_Player->SetDamage(10);
+
+			m_Player->SetHurt(true);
+		}
 	}
 }
 
@@ -259,7 +276,7 @@ void CTauromacis::AnimationFinish()
 
 	if (m_Anim->CheckCurrentAnimation("Die"))
 	{
-		Destroy();
+		m_IsHide = true;
 		return;
 	}
 

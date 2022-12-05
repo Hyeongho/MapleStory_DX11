@@ -27,7 +27,6 @@ private:
 
 	bool m_SolW;
 	float m_WDistance;
-	float m_Opacity;
 
 	bool m_Hurt1;
 	bool m_Hurt2;
@@ -38,6 +37,17 @@ public:
 	virtual void Update(float DeltaTime);
 	virtual void PostUpdate(float DeltaTime);
 	virtual CTaurospear* Clone();
+
+public:
+	virtual float GetOpacity() const
+	{
+		if (!m_Sprite)
+		{
+			return 1.f;
+		}
+
+		return m_Sprite->GetOpacity();
+	}
 
 protected:
 	virtual void AIIdle(float DeltaTime);

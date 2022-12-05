@@ -335,7 +335,7 @@ void CAnimationSequence2DInstance::Update(float DeltaTime)
 	}
 
 	// 호출해야 하는 Notify가 있는지 판단한다.
-	size_t	Size = m_CurrentAnimation->m_vecNotify.size();
+	size_t Size = m_CurrentAnimation->m_vecNotify.size();
 
 	for (size_t i = 0; i < Size; i++)
 	{
