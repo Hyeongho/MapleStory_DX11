@@ -4,6 +4,7 @@
 #include "Animation/AnimationSequence2DInstance.h"
 #include "Scene/Scene.h"
 #include "Player2D.h"
+#include "Resource/Sound/SoundManager.h"
 
 CTauromacis::CTauromacis()
 {
@@ -77,6 +78,7 @@ bool CTauromacis::Init()
 	m_Anim->AddAnimation(TEXT("Monster/Tauromacis/TauromacisDie.sqc"), ANIMATION_PATH, "Die", false);
 
 	m_Anim->AddNotify<CTauromacis>("Attack", "PlaySound", 0, this, &CTauromacis::PlayAttackSound);
+	m_Anim->AddNotify<CTauromacis>("Die", "PlaySound", 0, this, &CTauromacis::PlayDieSound);
 	m_Anim->AddNotify<CTauromacis>("Attack", "PlayerHit", 4, this, &CTauromacis::Attack1Damage);
 	//m_Anim->AddNotify<CTauromacis>("Attack", "Attack", 6, this, &CTauromacis::AnimationFinish);
 	m_Anim->SetEndFunction<CTauromacis>("Attack", this, &CTauromacis::AnimationFinish);
@@ -104,8 +106,6 @@ bool CTauromacis::Init()
 	SetSize(m_Body->GetInfo().Length);
 
 	SetCharacterInfo("Tauromacis");
-
-	CTauromacisHitEffect* TauromacisHitEffect = m_Scene->CreatePrototype<CTauromacisHitEffect>("TauromacisHitEffect");
 
 	return true;
 }
@@ -227,6 +227,11 @@ void CTauromacis::AIDeath(float DeltaTime)
 	m_Anim->ChangeAnimation("Die");
 }
 
+void CTauromacis::LoadSound()
+{
+	
+}
+
 void CTauromacis::CollisionCallbackBegin(const CollisionResult& result)
 {
 	CMonsterManager::CollisionCallbackBegin(result);
@@ -252,6 +257,11 @@ void CTauromacis::AttackEnd(const CollisionResult& result)
 void CTauromacis::PlayAttackSound()
 {
 	CResourceManager::GetInst()->SoundPlay("TaurmoacisAttack1");
+}
+
+void CTauromacis::PlayDieSound()
+{
+	CResourceManager::GetInst()->SoundPlay("TaurmoacisDie");
 }
 
 void CTauromacis::Attack1Damage()

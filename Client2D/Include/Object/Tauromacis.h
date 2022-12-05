@@ -23,7 +23,7 @@ private:
 	CSharedPtr<CSceneComponent> m_Muzzle;
 
 	CAnimationSequence2DInstance* m_Anim;
-
+	
 	bool m_SolW;
 	float m_WDistance;
 
@@ -42,6 +42,9 @@ protected:
 	virtual void AITrace(float DeltaTime);
 	virtual void AIAttack(float DeltaTime);
 	virtual void AIDeath(float DeltaTime);
+
+protected:
+	virtual void LoadSound();
 
 public:
 	virtual float GetOpacity() const
@@ -63,6 +66,7 @@ private:
 	void AttackEnd(const CollisionResult& result);
 
 	void PlayAttackSound();
+	void PlayDieSound();
 
 	virtual void Attack1Damage();
 	virtual void AnimationFinish();

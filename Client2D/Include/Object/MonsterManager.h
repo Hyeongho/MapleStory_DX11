@@ -89,6 +89,9 @@ protected:
 	virtual void AIAttack(float DeltaTime);
 	virtual void AIDeath(float DeltaTime);
 
+protected:
+	virtual void LoadSound();
+
 public:
 	bool CheckDie();
 

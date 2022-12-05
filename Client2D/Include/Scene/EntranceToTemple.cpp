@@ -13,14 +13,16 @@
 #include "Device.h"
 #include "../ClientManager.h"
 #include "../Object/PlayerManager.h"
+#include "../Object/TauromacisHitEffect.h"
 
-CEntranceToTemple::CEntranceToTemple() : m_MobCount(0), m_TotalMobCount(30)
+CEntranceToTemple::CEntranceToTemple() : m_MobCount(0), m_TotalMobCount(30), m_SpawnTime(4.f)
 {
 	SetTypeID<CEntranceToTemple>();
 }
 
 CEntranceToTemple::~CEntranceToTemple()
 {
+	
 }
 
 void CEntranceToTemple::Start()
@@ -71,6 +73,8 @@ bool CEntranceToTemple::Init()
 		m_LoadingFunction(false, 0.6f);
 	}
 
+	CTauromacisHitEffect* TauromacisHitEffect = m_Scene->CreatePrototype<CTauromacisHitEffect>("TauromacisHitEffect");
+
 	CTauromacis* Tauromacis = m_Scene->CreateGameObject<CTauromacis>("Tauromacis");
 
 	Tauromacis->SetWorldPos(600.f, 250.f, 1.f);
@@ -102,6 +106,7 @@ bool CEntranceToTemple::Init()
 
 	m_PlayerStatus = m_Scene->GetViewport()->CreateWidgetWindow<CPlayerStatus>("PlayerStatus");
 	m_Fade = m_Scene->GetViewport()->CreateWidgetWindow<CFade>("FadeWidget");
+	m_Quset = m_Scene->GetViewport()->CreateWidgetWindow<CQuesetWidget>("QuesetWidget");
 
 	if (m_LoadingFunction)
 	{
@@ -113,6 +118,8 @@ bool CEntranceToTemple::Init()
 
 void CEntranceToTemple::PostUpdate(float DeltaTime)
 {
+	MonsterSpawn(DeltaTime);
+
 	auto iter = m_MonsterList.begin();
 	auto iterEnd = m_MonsterList.end();
 
@@ -123,7 +130,14 @@ void CEntranceToTemple::PostUpdate(float DeltaTime)
 			iter = m_MonsterList.erase(iter);
 			iterEnd = m_MonsterList.end();
 
-			m_MobCount++;
+			m_MobCount++;			
+
+			if (m_Quset)
+			{
+				std::string str = std::to_string(m_MobCount) + " / " + std::to_string(m_TotalMobCount);
+
+				m_Quset->SetText(str);
+			}
 
 			continue;
 		}
@@ -136,6 +150,19 @@ void CEntranceToTemple::PostUpdate(float DeltaTime)
 
 	if (m_MobCount >= 30)
 	{
+		if (!m_MonsterList.empty())
+		{
+			for (; iter != iterEnd; iter++)
+			{
+				if (!(*iter)->IsActive())
+				{
+					(*iter)->Destroy();
+				}
+			}
+
+			m_MonsterList.clear();
+		}
+
 		if (!m_Scene->FindObject("Potal"))
 		{
 			CPotal* Potal = m_Scene->CreateGameObject<CPotal>("Potal");
@@ -180,6 +207,59 @@ void CEntranceToTemple::LoadSound()
 
 void CEntranceToTemple::CreatePotal()
 {
+}
+
+void CEntranceToTemple::MonsterSpawn(float DeltaTime)
+{
+	if (m_MonsterList.size() <= 16)
+	{
+		m_SpawnTime -= DeltaTime;
+
+		if (m_SpawnTime < 0)
+		{
+			float PosX = static_cast<float>(rand() % 2144);
+
+			CTauromacis* Tauromacis = m_Scene->CreateGameObject<CTauromacis>("Tauromacis");
+
+			Tauromacis->SetWorldPos(PosX, 250.f, 1.f);
+
+			Tauromacis->SetRange(2144.f, 750.f, 0.f);
+
+			m_MonsterList.push_back(Tauromacis);
+
+			PosX = static_cast<float>(rand() % 2144);
+
+			Tauromacis = m_Scene->CreateGameObject<CTauromacis>("Tauromacis");
+
+			Tauromacis->SetWorldPos(PosX, 250.f, 1.f);
+
+			Tauromacis->SetRange(2144.f, 750.f, 0.f);
+
+			m_MonsterList.push_back(Tauromacis);
+
+			PosX = static_cast<float>(rand() % 2144);
+
+			CTaurospear* Taurospear = m_Scene->CreateGameObject<CTaurospear>("Taurospear");
+
+			Taurospear->SetWorldPos(PosX, 250.f, 1.f);
+
+			Taurospear->SetRange(2144.f, 750.f, 0.f);
+
+			m_MonsterList.push_back(Taurospear);
+
+			PosX = static_cast<float>(rand() % 2144);
+
+			Taurospear = m_Scene->CreateGameObject<CTaurospear>("Taurospear");
+
+			Taurospear->SetWorldPos(PosX, 250.f, 1.f);
+
+			Taurospear->SetRange(2144.f, 750.f, 0.f);
+
+			m_MonsterList.push_back(Taurospear);
+
+			m_SpawnTime = 4.f;
+		}
+	}
 }
 
 void CEntranceToTemple::CollisionBeginCallback(const CollisionResult& Result)

@@ -212,7 +212,7 @@ bool CText::CreateTextLayout()
 
 	m_Layout = CResourceManager::GetInst()->CreateTextLayout(m_Text, m_Font, m_Size.x, m_Size.y);
 
-	DWRITE_TEXT_RANGE	Range = {};
+	DWRITE_TEXT_RANGE Range = {};
 	Range.startPosition = 0;
 	Range.length = lstrlen(m_Text);
 
@@ -294,15 +294,15 @@ void CText::Render()
 {
 	m_2DTarget->BeginDraw();
 
-	Resolution	RS = CDevice::GetInst()->GetResolution();
+	Resolution RS = CDevice::GetInst()->GetResolution();
 
-	D2D1_POINT_2F	Point;
+	D2D1_POINT_2F Point;
 	Point.x = m_RenderPos.x;
 	Point.y = RS.Height - m_RenderPos.y - m_Size.y;
 
 	if (m_ShadowEnable)
 	{
-		D2D1_POINT_2F	ShadowPoint = Point;
+		D2D1_POINT_2F ShadowPoint = Point;
 		ShadowPoint.x += m_ShadowOffset.x;
 		ShadowPoint.y += m_ShadowOffset.y;
 

@@ -4,6 +4,7 @@
 #include "../Widget/PlayerStatus.h"
 #include "../Widget/TalkWidget.h"
 #include "../Widget/Fade.h"
+#include "../Widget/QuesetWidget.h"
 
 class CEntranceToTemple :
     public CSceneMode
@@ -16,12 +17,15 @@ private:
     CSharedPtr<CPlayerStatus> m_PlayerStatus;
     CSharedPtr<CTalkWidget> m_TalkWidget;
     CSharedPtr<CFade> m_Fade;
+    CSharedPtr<CQuesetWidget> m_Quset;
     std::function<void(bool, float)> m_LoadingFunction;
 
     std::list<class CMonsterManager*> m_MonsterList;
 
     int m_MobCount;
     int m_TotalMobCount;
+
+    float m_SpawnTime;
 
 public:
     virtual void Start();
@@ -35,6 +39,8 @@ private:
     void LoadSound();
 
     void CreatePotal();
+
+    void MonsterSpawn(float DeltaTime);
 
 public:
     void CollisionBeginCallback(const CollisionResult& Result);

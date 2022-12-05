@@ -1,15 +1,1 @@
-﻿  EditorManager.cpp
-  CameraObject.cpp
-  DragObject.cpp
-  SpriteEditObject.cpp
-  DefaultScene.cpp
-  ColliderBox2DWindow.cpp
-  DetailWindow.cpp
-  DragObjWindow.cpp
-  EditorMenu.cpp
-  ObjectHierarchy.cpp
-  SpriteWindow.cpp
-  TileMapWindow.cpp
-  코드를 생성하고 있습니다...
-  Player2D.cpp
-  Editor.vcxproj -> D:\C++_Client\MapleStory_DX11\Editor\Bin\Editor_Debug.exe
+﻿  Editor.vcxproj -> D:\C++_Client\MapleStory_DX11\Editor\Bin\Editor_Debug.exe

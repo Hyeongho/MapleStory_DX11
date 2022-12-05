@@ -220,6 +220,10 @@ void CMonsterManager::AIDeath(float DeltaTime)
 {
 }
 
+void CMonsterManager::LoadSound()
+{
+}
+
 bool CMonsterManager::CheckDie()
 {
 	if (m_State == EMonster_State::Die)
