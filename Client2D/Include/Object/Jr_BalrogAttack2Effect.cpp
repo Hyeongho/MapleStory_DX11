@@ -3,6 +3,8 @@
 #include "Resource/Material/Material.h"
 #include "Animation/AnimationSequence2DInstance.h"
 #include "Jr_Balrog.h"
+#include "Jr_BalrogAttack2Ball.h"
+#include "Player2D.h"
 
 CJr_BalrogAttack2Effect::CJr_BalrogAttack2Effect()
 {
@@ -47,6 +49,8 @@ bool CJr_BalrogAttack2Effect::Init()
 	m_Anim->AddAnimation(TEXT("Monster/jr_Balrog/Jr_BalrogAttack2Effect.sqc"), ANIMATION_PATH, "Jr_BalrogAttack2Effect", false, 0.7f);
 	m_Anim->SetEndFunction("Jr_BalrogAttack2Effect", this, &CJr_BalrogAttack2Effect::AnimationFinish);
 
+	m_Anim->AddNotify<CJr_BalrogAttack2Effect>("Jr_BalrogAttack2Effect", "BallSpawn", 3, this, &CJr_BalrogAttack2Effect::BallSpawn);
+
 	m_Sprite->SetLayerName("Effect");
 
 	return true;
@@ -76,6 +80,8 @@ void CJr_BalrogAttack2Effect::SetEnable(CJr_Balrog* Balrog)
 
 		return;
 	}
+
+	m_Balrog = Balrog;
 
 	if (!Balrog->GetFlip())
 	{
@@ -109,4 +115,20 @@ void CJr_BalrogAttack2Effect::AnimationFinish()
 {
 	m_Body->Enable(false);
 	Enable(false);
+}
+
+void CJr_BalrogAttack2Effect::BallSpawn()
+{
+	if (true)
+	{
+		if (!m_Balrog->GetFlip())
+		{
+			
+		}
+
+		else
+		{
+			
+		}
+	}
 }

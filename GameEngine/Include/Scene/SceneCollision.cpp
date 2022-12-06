@@ -66,6 +66,7 @@ void CSceneCollision::Collision(float DeltaTime)
 		if (!(*iter)->IsEnable())
 		{
 			iter++;
+			//(*iter)->CheckPrevColliderSection();
 			continue;
 		}
 
@@ -102,7 +103,7 @@ void CSceneCollision::Collision(float DeltaTime)
 
 	// 충돌체끼리 체크한다.
 	// 전체 Section을 반복하며 충돌을 진행한다.
-	size_t	Size = m_Section->vecSection.size();
+	size_t Size = m_Section->vecSection.size();
 
 	for (size_t i = 0; i < Size; i++)
 	{
@@ -115,10 +116,10 @@ void CSceneCollision::Collision(float DeltaTime)
 
 	for (; iter != iterEnd; iter++)
 	{
-		if (!(*iter)->IsEnable())
+		/*if (!(*iter)->IsEnable())
 		{
 			continue;
-		}
+		}*/
 
 		(*iter)->ClearFrame();
 	}

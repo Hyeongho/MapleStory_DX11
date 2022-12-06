@@ -191,8 +191,12 @@
     <ClInclude Include="Object\HongA.h" />
     <ClInclude Include="Object\Jr_Balrog.h" />
     <ClInclude Include="Object\Jr_BalrogAttack1Effect.h" />
+    <ClInclude Include="Object\Jr_BalrogAttack1Hit.h" />
+    <ClInclude Include="Object\Jr_BalrogAttack2Ball.h" />
     <ClInclude Include="Object\Jr_BalrogAttack2Effect.h" />
+    <ClInclude Include="Object\Jr_BalrogAttack2Hit.h" />
     <ClInclude Include="Object\Jr_BalrogAttack3Effect.h" />
+    <ClInclude Include="Object\Jr_BalrogAttack3Hit.h" />
     <ClInclude Include="Object\LeftAttack1AreaWarning.h" />
     <ClInclude Include="Object\MonsterManager.h" />
     <ClInclude Include="Object\NPCManager.h" />
@@ -271,8 +275,12 @@
     <ClCompile Include="Object\HongA.cpp" />
     <ClCompile Include="Object\Jr_Balrog.cpp" />
     <ClCompile Include="Object\Jr_BalrogAttack1Effect.cpp" />
+    <ClCompile Include="Object\Jr_BalrogAttack1Hit.cpp" />
+    <ClCompile Include="Object\Jr_BalrogAttack2Ball.cpp" />
     <ClCompile Include="Object\Jr_BalrogAttack2Effect.cpp" />
+    <ClCompile Include="Object\Jr_BalrogAttack2Hit.cpp" />
     <ClCompile Include="Object\Jr_BalrogAttack3Effect.cpp" />
+    <ClCompile Include="Object\Jr_BalrogAttack3Hit.cpp" />
     <ClCompile Include="Object\LeftAttack1AreaWarning.cpp" />
     <ClCompile Include="Object\MonsterManager.cpp" />
     <ClCompile Include="Object\NPCManager.cpp" />

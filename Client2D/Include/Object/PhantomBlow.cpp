@@ -44,6 +44,9 @@ void CPhantomBlow::Start()
 {
 	CSkillManager::Start();
 
+	m_Anim1->AddNotify<CPhantomBlow>("PhantomBlow1", "OnCollision", 0, this, &CPhantomBlow::OnCollision);
+	m_Anim1->AddNotify<CPhantomBlow>("PhantomBlow1", "OffCollision", 1, this, &CPhantomBlow::OffCollision);
+
 	m_Body->Enable(false);
 
 	Enable(false);
@@ -101,6 +104,8 @@ bool CPhantomBlow::Init()
 void CPhantomBlow::Update(float DeltaTime)
 {
 	CSkillManager::Update(DeltaTime);
+
+	int Frame = m_Anim1->GetFrame();
 }
 
 void CPhantomBlow::PostUpdate(float DeltaTime)
@@ -170,7 +175,12 @@ void CPhantomBlow::SetEnable()
 
 void CPhantomBlow::OnCollisionBegin(const CollisionResult& result)
 {
-	m_obj = (CMonsterManager*)result.Dest->GetGameObject();
+	m_obj = dynamic_cast<CMonsterManager*>(result.Dest->GetGameObject());
+
+	if (!m_obj)
+	{
+		return;
+	}
 
 	if (!m_Anim1->GetCurrentAnimation())
 	{
@@ -193,6 +203,8 @@ void CPhantomBlow::OnCollisionBegin(const CollisionResult& result)
 			m_Anim1->AddNotify<CPhantomBlow>("PhantomBlow1", "PhantomBlow1", i, this, &CPhantomBlow::Attack);
 		}
 	}
+
+	m_Body->Enable(false);
 }
 
 void CPhantomBlow::AnimationFinish()
@@ -203,6 +215,11 @@ void CPhantomBlow::AnimationFinish()
 		{
 			m_obj->SetDie(true);
 		}
+
+		else
+		{
+			m_obj = nullptr;
+		}
 	}
 
 	m_Body->Enable(false);
@@ -212,6 +229,16 @@ void CPhantomBlow::AnimationFinish()
 	Enable(false);
 }
 
+void CPhantomBlow::OnCollision()
+{
+	m_Body->Enable(true);
+}
+
+void CPhantomBlow::OffCollision()
+{
+	m_Body->Enable(false);
+}
+
 void CPhantomBlow::Attack()
 {
 	if (!m_Anim1->GetCurrentAnimation())
@@ -219,23 +246,23 @@ void CPhantomBlow::Attack()
 		return;
 	}
 
-	int Frame = m_Anim1->GetFrame();
-
-	CDamageFont* DamageFont = m_Scene->CreateGameObject<CDamageFont>("DamagrFont");
-
-	if (!DamageFont)
-	{
-		return;
-	}
-
-	DamageFont->SetWorldPos(m_TargetPos.x - 31.f, m_TargetPos.y + (m_TargetSize.y) + (Frame * 30), 1);
-
-	m_Damage = 10;
-
-	DamageFont->SetDamageNumber(m_Damage);
-
 	if (m_obj)
 	{
+		int Frame = m_Anim1->GetFrame();
+
+		CDamageFont* DamageFont = m_Scene->CreateGameObject<CDamageFont>("DamagrFont");
+
+		if (!DamageFont)
+		{
+			return;
+		}
+
+		DamageFont->SetWorldPos(m_TargetPos.x - 31.f, m_TargetPos.y + (m_TargetSize.y) + (Frame * 30), 1);
+
+		m_Damage = 10;
+
+		DamageFont->SetDamageNumber(m_Damage);
+
 		m_obj->SetDamage((float)m_Damage);
 	}
 }

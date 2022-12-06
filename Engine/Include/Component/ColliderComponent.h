@@ -90,6 +90,7 @@ public:
 
     void SetCollisionProfile(const std::string& Name);
     void CheckPrevColliderSection();
+    void SendPrevCollisionEnd();
     void AddPrevCollision(CColliderComponent* Collider);
     void DeletePrevCollision(CColliderComponent* Collider);
     bool EmptyPrevCollision();

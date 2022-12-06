@@ -152,11 +152,15 @@ void CEntranceToTemple::PostUpdate(float DeltaTime)
 	{
 		if (!m_MonsterList.empty())
 		{
+			iter = m_MonsterList.begin();
+			iterEnd = m_MonsterList.end();
+
 			for (; iter != iterEnd; iter++)
 			{
-				if (!(*iter)->IsActive())
+				if ((*iter)->GetState() != EMonster_State::Die)
 				{
-					(*iter)->Destroy();
+					(*iter)->SetDie(true);
+					//(*iter)->SetState(EMonster_State::Die);
 				}
 			}
 
@@ -211,6 +215,11 @@ void CEntranceToTemple::CreatePotal()
 
 void CEntranceToTemple::MonsterSpawn(float DeltaTime)
 {
+	if (m_MobCount >= 30)
+	{
+		return;
+	}
+
 	if (m_MonsterList.size() <= 16)
 	{
 		m_SpawnTime -= DeltaTime;

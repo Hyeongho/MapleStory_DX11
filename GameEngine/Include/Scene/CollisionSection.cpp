@@ -49,6 +49,11 @@ void CCollisionSection::Collision(float DeltaTime)
 	{
 		CColliderComponent* Src = m_vecCollider[i];
 
+		if (!Src->IsEnable())
+		{
+			return;
+		}
+
 		for (size_t j = i + 1; j < Count; ++j)
 		{
 			CColliderComponent* Dest = m_vecCollider[j];

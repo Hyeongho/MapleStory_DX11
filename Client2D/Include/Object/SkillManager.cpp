@@ -1,6 +1,6 @@
 #include "SkillManager.h"
 
-CSkillManager::CSkillManager()
+CSkillManager::CSkillManager() : m_obj(nullptr)
 {
 }
 

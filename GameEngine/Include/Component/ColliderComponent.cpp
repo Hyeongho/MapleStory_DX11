@@ -101,6 +101,32 @@ void CColliderComponent::CheckPrevColliderSection()
 	}
 }
 
+void CColliderComponent::SendPrevCollisionEnd()
+{
+	if (m_PrevCollisionList.empty())
+	{
+		return;
+	}
+
+	auto iter = m_PrevCollisionList.begin();
+	auto iterEnd = m_PrevCollisionList.end();
+
+	for ( ; iter != iterEnd; iter++)
+	{
+		(*iter)->DeletePrevCollision(this);
+
+		(*iter)->m_Result.Src = *iter;
+		(*iter)->m_Result.Dest = this;
+		(*iter)->CallCollisionCallback(Collision_State::End);
+
+		m_Result.Src = this;
+		m_Result.Dest = *iter;
+		CallCollisionCallback(Collision_State::End);
+	}
+
+	m_PrevCollisionList.clear();
+}
+
 void CColliderComponent::AddPrevCollision(CColliderComponent* Collider)
 {
 	m_PrevCollisionList.push_back(Collider);

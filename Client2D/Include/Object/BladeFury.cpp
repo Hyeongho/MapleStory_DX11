@@ -138,6 +138,39 @@ void CBladeFury::SetEnable()
 
 void CBladeFury::OnCollisionBegin(const CollisionResult& result)
 {
+	for (int i = 0; i < 6; i++)
+	{
+		m_obj = dynamic_cast<CMonsterManager*>(result.Dest->GetGameObject());
+
+		if (!m_obj)
+		{
+			return;
+		}
+
+		if (!m_Anim->GetCurrentAnimation())
+		{
+			return;
+		}
+
+		int Frame = m_Anim->GetFrame();
+
+		if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Monster)
+		{
+			for (int i = 1; i <= 9; i++)
+			{
+				//result.Dest->GetGameObject()->SetDamage(10);
+
+				m_TargetPos = m_obj->GetWorldPos();
+				m_TargetSize = m_obj->GetSize();
+
+				//m_obj->SetDamage(10);
+
+				m_Anim->AddNotify<CBladeFury>("BladeFuryEffect", "BladeFuryEffect", i, this, &CBladeFury::Attack);
+			}
+		}
+	}
+
+	m_Body->Enable(false);
 }
 
 void CBladeFury::AnimationFinish()
@@ -149,4 +182,8 @@ void CBladeFury::AnimationFinish()
 	//Destroy();
 
 	Enable(false);
+}
+
+void CBladeFury::Attack()
+{
 }

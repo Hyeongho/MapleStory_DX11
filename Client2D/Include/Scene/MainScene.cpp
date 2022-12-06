@@ -14,6 +14,10 @@
 #include "../Object/PlayerManager.h"
 #include "../Object/DamageFont.h"
 #include "../Object/Jr_Balrog.h"
+#include "../Object/Jr_BalrogAttack1Hit.h"
+#include "../Object/Jr_BalrogAttack2Hit.h"
+#include "../Object/Jr_BalrogAttack3Hit.h"
+#include "../Object/Jr_BalrogAttack2Ball.h"
 
 CMainScene::CMainScene()
 {

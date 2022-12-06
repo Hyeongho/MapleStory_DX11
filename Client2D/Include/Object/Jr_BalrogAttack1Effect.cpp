@@ -3,6 +3,7 @@
 #include "Resource/Material/Material.h"
 #include "Animation/AnimationSequence2DInstance.h"
 #include "Jr_Balrog.h"
+#include "Player2D.h"
 
 CJr_BalrogAttack1Effect::CJr_BalrogAttack1Effect()
 {
@@ -32,7 +33,7 @@ bool CJr_BalrogAttack1Effect::Init()
 {
 	CGameObject::Init();
 
-	m_Sprite = CreateComponent<CSpriteComponent>("CJr_BalrogAttack1Effect");
+	m_Sprite = CreateComponent<CSpriteComponent>("Jr_BalrogAttack1Effect");
 
 	m_Body = CreateComponent<CColliderBox2D>("Body");
 
@@ -48,6 +49,8 @@ bool CJr_BalrogAttack1Effect::Init()
 	m_Anim->SetEndFunction("Jr_BalrogAttack1Effect", this, &CJr_BalrogAttack1Effect::AnimationFinish);
 
 	m_Sprite->SetRelativeScale(114.f, 111.f, 1.f);
+
+	m_Body->SetExtent(125.f, 250.f);
 
 	m_Sprite->SetLayerName("Effect");
 
@@ -97,6 +100,22 @@ void CJr_BalrogAttack1Effect::SetEnable(CJr_Balrog* Balrog)
 
 void CJr_BalrogAttack1Effect::OnCollisionBegin(const CollisionResult& result)
 {
+	if (!result.Dest->GetCollisionProfile())
+	{
+		return;
+	}
+
+	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Player)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+		if (!Player)
+		{
+			return;
+		}
+
+		Player->SetDamage(10.f);
+	}
 }
 
 void CJr_BalrogAttack1Effect::AnimationFinish()

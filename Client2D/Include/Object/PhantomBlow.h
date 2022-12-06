@@ -43,6 +43,9 @@ private:
     void AnimationFinish();
 
 public:
+    void OnCollision();
+    void OffCollision();
+
     void Attack();
 };
 

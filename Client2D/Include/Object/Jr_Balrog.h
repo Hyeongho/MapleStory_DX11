@@ -16,7 +16,9 @@ public:
 private:
 	CSharedPtr<CSpriteComponent> m_Sprite;
 	CSharedPtr<CColliderBox2D> m_Body;
-	CSharedPtr<CColliderBox2D> m_AttackBody;
+	CSharedPtr<CColliderBox2D> m_AttackBody1;
+	CSharedPtr<CColliderBox2D> m_AttackBody2;
+	CSharedPtr<CColliderBox2D> m_AttackBody3;
 	CSharedPtr<CColliderBox2D> m_Sensor;
 	CSharedPtr<CColliderBox2D> m_AttackRange;
 
