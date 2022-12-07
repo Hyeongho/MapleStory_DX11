@@ -18,12 +18,22 @@ private:
 
 	CAnimationSequence2DInstance* m_Anim;
 
+	float m_Distance;
+	float m_Direction;
+
 public:
 	virtual void Start();
 	virtual bool Init();
 	virtual void Update(float DeltaTime);
 	virtual void PostUpdate(float DeltaTime);
 	virtual CJr_BalrogAttack2Ball* Clone();
+
+public:
+	void SetFlip(bool Flip);
+	void SetDirection(float Direction)
+	{
+		m_Direction = Direction;
+	}
 
 protected:
 	virtual void AnimationFinish();

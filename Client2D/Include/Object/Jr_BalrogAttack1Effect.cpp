@@ -3,9 +3,10 @@
 #include "Resource/Material/Material.h"
 #include "Animation/AnimationSequence2DInstance.h"
 #include "Jr_Balrog.h"
+#include "Jr_BalrogAttack1Hit.h"
 #include "Player2D.h"
 
-CJr_BalrogAttack1Effect::CJr_BalrogAttack1Effect()
+CJr_BalrogAttack1Effect::CJr_BalrogAttack1Effect() : m_Target(false)
 {
 }
 
@@ -39,6 +40,10 @@ bool CJr_BalrogAttack1Effect::Init()
 
 	SetRootComponent(m_Sprite);
 
+	m_Sprite->AddChild(m_Body);
+
+	m_Body->SetCollisionProfile("MonsterAttack");
+
 	m_Sprite->SetTransparency(true);
 
 	m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();
@@ -48,9 +53,12 @@ bool CJr_BalrogAttack1Effect::Init()
 	m_Anim->AddAnimation(TEXT("Monster/jr_Balrog/Jr_BalrogAttack1Effect.sqc"), ANIMATION_PATH, "Jr_BalrogAttack1Effect", false, 0.635f);
 	m_Anim->SetEndFunction("Jr_BalrogAttack1Effect", this, &CJr_BalrogAttack1Effect::AnimationFinish);
 
+	m_Body->AddCollisionCallback<CJr_BalrogAttack1Effect>(Collision_State::Begin, this, &CJr_BalrogAttack1Effect::OnCollisionBegin);
+	m_Body->AddCollisionCallback<CJr_BalrogAttack1Effect>(Collision_State::End, this, &CJr_BalrogAttack1Effect::OnCollisionEnd);
+
 	m_Sprite->SetRelativeScale(114.f, 111.f, 1.f);
 
-	m_Body->SetExtent(125.f, 250.f);
+	m_Body->SetExtent(250.f, 250.f);
 
 	m_Sprite->SetLayerName("Effect");
 
@@ -114,12 +122,43 @@ void CJr_BalrogAttack1Effect::OnCollisionBegin(const CollisionResult& result)
 			return;
 		}
 
-		Player->SetDamage(10.f);
+		m_Target = true;
 	}
+}
+
+void CJr_BalrogAttack1Effect::OnCollisionEnd(const CollisionResult& result)
+{
+	m_Target = false;
 }
 
 void CJr_BalrogAttack1Effect::AnimationFinish()
 {
+	if (m_Target)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+		if (Player)
+		{
+			CJr_BalrogAttack1Hit* Jr_BalrogAttack1Hit = m_Scene->CreateGameObject<CJr_BalrogAttack1Hit>("Jr_BalrogAttack1Hit", "Jr_BalrogAttack1Hit", Player->GetWorldPos());
+
+			float Dis = Player->GetWorldPos().x - GetWorldPos().x;
+
+			if (Dis >= 0)
+			{
+				Jr_BalrogAttack1Hit->SetFlip(true);
+			}
+
+			else
+			{
+				Jr_BalrogAttack1Hit->SetFlip(false);
+			}
+
+			Player->SetDamage(10.f);
+
+			Player->SetHurt(true);
+		}
+	}
+
 	m_Body->Enable(false);
 	Enable(false);
 }

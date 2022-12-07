@@ -96,8 +96,14 @@ bool CMainScene::Init()
 
 	ShadowDualBlade1->SetRange(2000.f, 800.f, 0.f);
 
-	/*CBalrog* Balrog = m_Scene->CreateGameObject<CBalrog>("Balrog");
-	Balrog->SetWorldPos(700.f, 400.f, 0.f);*/
+	/*CJr_BalrogAttack1Hit* Jr_BalrogAttack1Hit = m_Scene->CreatePrototype<CJr_BalrogAttack1Hit>("Jr_BalrogAttack1Hit");
+	CJr_BalrogAttack2Hit* Jr_BalrogAttack2Hit = m_Scene->CreatePrototype<CJr_BalrogAttack2Hit>("Jr_BalrogAttack2Hit");
+	CJr_BalrogAttack3Hit* Jr_BalrogAttack3Hit = m_Scene->CreatePrototype<CJr_BalrogAttack3Hit>("Jr_BalrogAttack3Hit");
+	CJr_BalrogAttack2Ball* Jr_BalrogAttack2Ball = m_Scene->CreatePrototype<CJr_BalrogAttack2Ball>("Jr_BalrogAttack2Ball");
+
+	CJr_Balrog* Balrog = m_Scene->CreateGameObject<CJr_Balrog>("Balrog");
+	Balrog->SetWorldPos(700.f, 250.f, 0.f);
+	Balrog->SetRange(2000.f, 800.f, 0.f);*/
 
 	CPotal* Potal = m_Scene->CreateGameObject<CPotal>("Potal");
 

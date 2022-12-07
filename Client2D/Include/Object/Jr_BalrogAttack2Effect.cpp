@@ -26,6 +26,8 @@ void CJr_BalrogAttack2Effect::Start()
 {
 	CGameObject::Start();
 
+	m_Anim->AddNotify<CJr_BalrogAttack2Effect>("Jr_BalrogAttack2Effect", "BallSpawn", 2, this, &CJr_BalrogAttack2Effect::BallSpawn);
+
 	m_Body->Enable(false);
 	Enable(false);
 }
@@ -40,16 +42,23 @@ bool CJr_BalrogAttack2Effect::Init()
 
 	SetRootComponent(m_Sprite);
 
+	m_Sprite->AddChild(m_Body);
+
+	m_Body->SetCollisionProfile("MonsterAttack");
+
 	m_Sprite->SetTransparency(true);
 
 	m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();
 
 	m_Anim = m_Sprite->GetAnimationInstance();
 
-	m_Anim->AddAnimation(TEXT("Monster/jr_Balrog/Jr_BalrogAttack2Effect.sqc"), ANIMATION_PATH, "Jr_BalrogAttack2Effect", false, 0.7f);
+	m_Anim->AddAnimation(TEXT("Monster/jr_Balrog/Jr_BalrogAttack2Effect.sqc"), ANIMATION_PATH, "Jr_BalrogAttack2Effect", true, 0.7f);
 	m_Anim->SetEndFunction("Jr_BalrogAttack2Effect", this, &CJr_BalrogAttack2Effect::AnimationFinish);
 
-	m_Anim->AddNotify<CJr_BalrogAttack2Effect>("Jr_BalrogAttack2Effect", "BallSpawn", 3, this, &CJr_BalrogAttack2Effect::BallSpawn);
+	m_Body->AddCollisionCallback<CJr_BalrogAttack2Effect>(Collision_State::Begin, this, &CJr_BalrogAttack2Effect::OnCollisionBegin);
+	m_Body->AddCollisionCallback<CJr_BalrogAttack2Effect>(Collision_State::End, this, &CJr_BalrogAttack2Effect::OnCollisionEnd);
+
+	m_Body->SetExtent(250.f, 250.f);
 
 	m_Sprite->SetLayerName("Effect");
 
@@ -109,6 +118,27 @@ void CJr_BalrogAttack2Effect::SetEnable(CJr_Balrog* Balrog)
 
 void CJr_BalrogAttack2Effect::OnCollisionBegin(const CollisionResult& result)
 {
+	if (!result.Dest->GetCollisionProfile())
+	{
+		return;
+	}
+
+	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Player)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+		if (!Player)
+		{
+			return;
+		}
+
+		m_Target = true;
+	}
+}
+
+void CJr_BalrogAttack2Effect::OnCollisionEnd(const CollisionResult& result)
+{
+	m_Target = false;
 }
 
 void CJr_BalrogAttack2Effect::AnimationFinish()
@@ -119,16 +149,38 @@ void CJr_BalrogAttack2Effect::AnimationFinish()
 
 void CJr_BalrogAttack2Effect::BallSpawn()
 {
-	if (true)
+	CJr_BalrogAttack2Ball* Jr_BalrogAttack2Ball = m_Scene->CreateGameObject<CJr_BalrogAttack2Ball>("Jr_BalrogAttack2Ball", "Jr_BalrogAttack2Ball", GetWorldPos(), Vector3(68.f, 34.f, 1.f));
+
+	if (m_Target)
 	{
-		if (!m_Balrog->GetFlip())
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+		Vector3 PlayerPos = Player->GetWorldPos();
+		Vector3 BalrogPos = Jr_BalrogAttack2Ball->GetWorldPos();
+
+		float Radian = atan((PlayerPos.y - BalrogPos.y) / (PlayerPos.x - BalrogPos.x));
+		float Degree = RadianToDegree(Radian);
+
+		if (Degree >= 90 || Degree <= -90)
 		{
-			
+			Jr_BalrogAttack2Ball->SetWorldRotation(0.f, 0.f, 0.f);
 		}
 
 		else
 		{
-			
-		}
+			Jr_BalrogAttack2Ball->SetWorldRotation(0.f, 0.f, Degree);
+		}		
+	}
+
+	if (!m_Balrog->GetFlip())
+	{
+		Jr_BalrogAttack2Ball->SetFlip(false);
+		Jr_BalrogAttack2Ball->SetDirection(-300.f);
+	}
+
+	else
+	{
+		Jr_BalrogAttack2Ball->SetFlip(true);
+		Jr_BalrogAttack2Ball->SetDirection(300.f);
 	}
 }

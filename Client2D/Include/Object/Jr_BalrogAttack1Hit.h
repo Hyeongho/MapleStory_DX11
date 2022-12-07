@@ -21,6 +21,9 @@ public:
 	virtual void PostUpdate(float DeltaTime);
 	virtual CJr_BalrogAttack1Hit* Clone();
 
+public:
+	void SetFlip(bool Flip);
+
 protected:
 	virtual void AnimationFinish();
 };

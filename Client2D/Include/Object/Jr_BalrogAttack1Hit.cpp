@@ -28,9 +28,15 @@ void CJr_BalrogAttack1Hit::Start()
 
 	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
 
-	Anim->AddAnimation(TEXT("Monster/Jr_Balrog/Jr_BalrogAttack1Hit.sqc"), ANIMATION_PATH, "Jr_BalrogAttack1Hit", true, 0.78f);
+	Anim->AddAnimation(TEXT("Monster/Jr_Balrog/Jr_BalrogAttack1Hit.sqc"), ANIMATION_PATH, "Jr_BalrogAttack1Hit", false, 0.78f);
 
 	Anim->SetEndFunction<CJr_BalrogAttack1Hit>("Jr_BalrogAttack1Hit", this, &CJr_BalrogAttack1Hit::AnimationFinish);
+
+	m_Sprite->SetPivot(0.5f, 0.5f, 0.5f);
+
+	m_Sprite->SetWorldScale(224.f, 215.f, 1.f);
+
+	m_Sprite->SetLayerName("Effect");
 }
 
 bool CJr_BalrogAttack1Hit::Init()
@@ -55,6 +61,21 @@ CJr_BalrogAttack1Hit* CJr_BalrogAttack1Hit::Clone()
 	return new CJr_BalrogAttack1Hit(*this);
 }
 
+void CJr_BalrogAttack1Hit::SetFlip(bool Flip)
+{
+	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
+
+	if (!Anim)
+	{
+		return;
+	}
+
+	Anim->SetAnimFlip(Flip);
+
+	//m_Sprite->SetFlip(Flip);
+}
+
 void CJr_BalrogAttack1Hit::AnimationFinish()
 {
+	Destroy();
 }

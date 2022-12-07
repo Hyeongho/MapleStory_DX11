@@ -36,9 +36,7 @@ bool CJr_Balrog::Init()
 	m_Body = CreateComponent<CColliderBox2D>("Body");
 	//m_Sensor = CreateComponent<CColliderBox2D>("Sensor");
 	m_AttackBody1 = CreateComponent<CColliderBox2D>("AttackBody1");
-	m_AttackBody2 = CreateComponent<CColliderBox2D>("AttackBody2");
-	m_AttackBody3 = CreateComponent<CColliderBox2D>("AttackBody3");
-	m_AttackRange = CreateComponent<CColliderBox2D>("AttackRange");
+
 	m_Muzzle1 = CreateComponent<CSceneComponent>("Jr_BalrogMuzzle1");
 	m_Muzzle2 = CreateComponent<CSceneComponent>("Jr_BalrogMuzzle2");
 	m_Muzzle3 = CreateComponent<CSceneComponent>("Jr_BalrogMuzzle3");
@@ -48,16 +46,10 @@ bool CJr_Balrog::Init()
 	m_Body->SetCollisionProfile("Monster");
 	//m_Sensor->SetCollisionProfile("Monster");
 	m_AttackBody1->SetCollisionProfile("MonsterAttack");
-	m_AttackBody2->SetCollisionProfile("MonsterAttack");
-	m_AttackBody3->SetCollisionProfile("MonsterAttack");
-	m_AttackRange->SetCollisionProfile("MonsterAttack");
+	//m_AttackRange->SetCollisionProfile("MonsterAttack");
 
 	m_AttackBody1->AddCollisionCallback<CJr_Balrog>(Collision_State::Begin, this, &CMonsterManager::AttackBegin);
-	m_AttackBody2->AddCollisionCallback<CJr_Balrog>(Collision_State::Begin, this, &CMonsterManager::AttackBegin);
-	m_AttackBody3->AddCollisionCallback<CJr_Balrog>(Collision_State::Begin, this, &CMonsterManager::AttackBegin);
 	m_AttackBody1->AddCollisionCallback<CJr_Balrog>(Collision_State::End, this, &CJr_Balrog::AttackEnd);
-	m_AttackBody2->AddCollisionCallback<CJr_Balrog>(Collision_State::End, this, &CJr_Balrog::AttackEnd);
-	m_AttackBody3->AddCollisionCallback<CJr_Balrog>(Collision_State::End, this, &CJr_Balrog::AttackEnd);
 
 	m_Sprite->SetRelativeScale(700.f, 700.f, 1.f);
 	m_Sprite->SetRelativePos(500.f, 150, 0.f);
@@ -69,9 +61,7 @@ bool CJr_Balrog::Init()
 	m_Sprite->AddChild(m_Body);
 	//m_Sprite->AddChild(m_Sensor);
 	m_Sprite->AddChild(m_AttackBody1);
-	m_Sprite->AddChild(m_AttackBody2);
-	m_Sprite->AddChild(m_AttackBody3);
-	m_Sprite->AddChild(m_AttackRange);
+
 	m_Sprite->AddChild(m_Muzzle1);
 	m_Sprite->AddChild(m_Muzzle2);
 	m_Sprite->AddChild(m_Muzzle3);
@@ -105,9 +95,7 @@ bool CJr_Balrog::Init()
 
 	m_Body->SetExtent(93.f, 61.f);
 
-	//m_AttackBody1->SetExtent(125.f, 250.f);
-	//m_AttackBody2->SetExtent(125.f, 250.f);
-	//m_AttackBody3->SetExtent(217.5f, 160.f);
+	m_AttackBody1->SetExtent(217.5f, 160.f);
 
 	//m_Sensor->SetExtent(150.f, 30.5f);
 
@@ -246,9 +234,6 @@ void CJr_Balrog::AIDeath(float DeltaTime)
 
 	m_Body->Destroy();
 	m_AttackBody1->Destroy();
-	m_AttackBody2->Destroy();
-	m_AttackBody3->Destroy();
-	m_AttackRange->Destroy();
 
 	m_Anim->ChangeAnimation("Die");
 }
@@ -272,21 +257,24 @@ void CJr_Balrog::AttackBegin(const CollisionResult& result)
 
 void CJr_Balrog::AttackEnd(const CollisionResult& result)
 {
-	m_Attack = false;
+	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Player)
+	{
+		m_Attack = false;
+	}
 }
 
 void CJr_Balrog::AnimationFinish()
 {
 	if (m_Attack)
 	{
-		int num = (rand() % 3) + 1;
+		int num = rand() % 3;
 
-		if (num == 1)
+		if (num == 0)
 		{
 			m_Anim->ChangeAnimation("Attack1");
 		}
 
-		else if (num == 2)
+		else if (num == 1)
 		{
 			m_Anim->ChangeAnimation("Attack2");		
 		}

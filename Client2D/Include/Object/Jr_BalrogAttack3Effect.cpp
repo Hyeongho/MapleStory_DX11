@@ -3,6 +3,7 @@
 #include "Resource/Material/Material.h"
 #include "Animation/AnimationSequence2DInstance.h"
 #include "Jr_Balrog.h"
+#include "Jr_BalrogAttack3Hit.h"
 #include "Player2D.h"
 
 CJr_BalrogAttack3Effect::CJr_BalrogAttack3Effect()
@@ -42,6 +43,9 @@ bool CJr_BalrogAttack3Effect::Init()
 	SetRootComponent(m_Muzzle);
 
 	m_Muzzle->AddChild(m_Sprite);
+	m_Muzzle->AddChild(m_Body);
+
+	m_Body->SetCollisionProfile("MonsterAttack");
 
 	m_Sprite->SetTransparency(true);
 
@@ -51,6 +55,9 @@ bool CJr_BalrogAttack3Effect::Init()
 
 	m_Anim->AddAnimation(TEXT("Monster/jr_Balrog/Jr_BalrogAttack3Effect.sqc"), ANIMATION_PATH, "Jr_BalrogAttack3Effect", false, 0.4f);
 	m_Anim->SetEndFunction("Jr_BalrogAttack3Effect", this, &CJr_BalrogAttack3Effect::AnimationFinish);
+
+	m_Body->AddCollisionCallback<CJr_BalrogAttack3Effect>(Collision_State::Begin, this, &CJr_BalrogAttack3Effect::OnCollisionBegin);
+	m_Body->AddCollisionCallback<CJr_BalrogAttack3Effect>(Collision_State::End, this, &CJr_BalrogAttack3Effect::OnCollisionEnd);
 
 	m_Sprite->SetRelativeScale(243.f, 112.f, 1.f);
 	m_Sprite->SetPivot(0.5f, 0.5f, 0.5);
@@ -119,12 +126,32 @@ void CJr_BalrogAttack3Effect::OnCollisionBegin(const CollisionResult& result)
 			return;
 		}
 
+		m_Target = true;
+
 		Player->SetDamage(10.f);
 	}
 }
 
+void CJr_BalrogAttack3Effect::OnCollisionEnd(const CollisionResult& result)
+{
+	m_Target = false;
+}
+
 void CJr_BalrogAttack3Effect::AnimationFinish()
 {
+	if (m_Target)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+		if (Player)
+		{
+			CJr_BalrogAttack3Hit* Jr_BalrogAttack3Hit = m_Scene->CreateGameObject<CJr_BalrogAttack3Hit>("Jr_BalrogAttack3Hit", "Jr_BalrogAttack3Hit", Player->GetWorldPos());
+
+			Player->SetDamage(10.f);
+			Player->SetHurt(true);
+		}
+	}
+
 	m_Body->Enable(false);
 	Enable(false);
 }

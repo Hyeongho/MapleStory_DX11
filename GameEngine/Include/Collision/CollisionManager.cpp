@@ -35,11 +35,13 @@ bool CCollisionManager::Init()
 	SetCollisionState("PlayerBottom", Collision_Channel::Player, Collision_Interaction::Ignore);
 	SetCollisionState("PlayerBottom", Collision_Channel::PlayerAttack, Collision_Interaction::Ignore);
 	SetCollisionState("PlayerBottom", Collision_Channel::PlayerAttack, Collision_Interaction::Ignore);
+	SetCollisionState("PlayerBottom", Collision_Channel::PlayerBottom, Collision_Interaction::Ignore);
 
 	SetCollisionState("Monster", Collision_Channel::Monster, Collision_Interaction::Ignore);
 	SetCollisionState("Monster", Collision_Channel::MonsterAttack, Collision_Interaction::Ignore);
 	SetCollisionState("Monster", Collision_Channel::PlayerBottom, Collision_Interaction::Ignore);
 	SetCollisionState("Monster", Collision_Channel::Potal, Collision_Interaction::Ignore);
+	SetCollisionState("Monster", Collision_Channel::Floor, Collision_Interaction::Ignore);
 
 	SetCollisionState("PlayerAttack", Collision_Channel::Player, Collision_Interaction::Ignore);
 	SetCollisionState("PlayerAttack", Collision_Channel::PlayerAttack, Collision_Interaction::Ignore);
