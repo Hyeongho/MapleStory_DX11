@@ -153,6 +153,8 @@ void CJr_BalrogAttack1Effect::AnimationFinish()
 				Jr_BalrogAttack1Hit->SetFlip(false);
 			}
 
+			CResourceManager::GetInst()->SoundPlay("Jr_BalrogCharDam1");
+
 			Player->SetDamage(10.f);
 
 			Player->SetHurt(true);

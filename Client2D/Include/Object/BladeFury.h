@@ -3,6 +3,7 @@
 #include "SkillManager.h"
 #include "Component/SpriteComponent.h"
 #include "Component/ColliderBox2D.h"
+#include "MonsterManager.h"
 
 class CBladeFury :
     public CSkillManager
@@ -21,8 +22,13 @@ private:
 
     CAnimationSequence2DInstance* m_Anim;
 
+    std::vector<CMonsterManager*> m_Monster;
+
     Vector3 m_TargetPos;
     Vector2 m_TargetSize;
+
+    std::thread t1;
+    std::mutex m1;
 
 public:
     void SetCollisionProfile(const std::string& Name);
@@ -40,5 +46,8 @@ public:
     void AnimationFinish();
 
     void Attack();
+
+private:
+    void PrintDamage();
 };
 

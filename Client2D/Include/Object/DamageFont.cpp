@@ -43,7 +43,7 @@ void CDamageFont::Update(float DeltaTime)
 
 	if (m_Opacity < 0.f)
 	{
-		m_Number->Destroy();
+		Destroy();
 	}
 	
 	m_Number->SetOpacity(m_Opacity);

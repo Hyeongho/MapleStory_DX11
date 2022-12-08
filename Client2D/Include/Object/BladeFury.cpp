@@ -4,6 +4,7 @@
 #include "Animation/AnimationSequence2DInstance.h"
 #include "Player2D.h"
 #include "PlayerManager.h"
+#include "DamageFont.h"
 
 CBladeFury::CBladeFury()
 {
@@ -53,14 +54,27 @@ bool CBladeFury::Init()
 	SetRootComponent(m_Muzzle);
 
 	m_Muzzle->AddChild(m_Sprite);
+	m_Sprite->AddChild(m_Body);
 
 	m_Sprite->SetTransparency(true);
 
 	m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();
 	m_Anim = m_Sprite->GetAnimationInstance();
-	m_Anim->AddAnimation(TEXT("Skill/BladeFury.sqc"), ANIMATION_PATH, "BladeFuryEffect", false, 1.0f);
+	m_Anim->AddAnimation(TEXT("Skill/BladeFury.sqc"), ANIMATION_PATH, "BladeFuryEffect", true, 1.0f);
+
+	for (int i = 1; i <= 9; i++)
+	{
+		//result.Dest->GetGameObject()->SetDamage(10);
+
+		//m_obj->SetDamage(10);
+
+		m_Anim->AddNotify<CBladeFury>("BladeFuryEffect", "BladeFuryEffect", i, this, &CBladeFury::Attack);
+	}
 
 	m_Anim->SetEndFunction<CBladeFury>("BladeFuryEffect", this, &CBladeFury::AnimationFinish);
+
+	m_Body->AddCollisionCallback<CBladeFury>(Collision_State::Begin, this, &CBladeFury::OnCollisionBegin);
+	m_Body->SetCollisionProfile("PlayerAttack");
 
 	m_Muzzle->SetPivot(0.5f, 0.5f, 0.f);
 
@@ -119,6 +133,9 @@ void CBladeFury::SetEnable()
 		m_Sprite->SetRelativeScale(712.f, 586.f, 2.f);
 		m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
 		m_Sprite->SetRelativePos(23.5f, 112.f, 11.f);
+
+		m_Body->SetExtent(260.f, 120.f);
+		m_Body->SetOffset(0.f, -25.f, 0.f);
 	}
 
 	else
@@ -128,6 +145,9 @@ void CBladeFury::SetEnable()
 		m_Sprite->SetRelativeScale(712.f, 586.f, 2.f);
 		m_Sprite->SetPivot(0.5f, 0.5f, 0.f);
 		m_Sprite->SetRelativePos(-23.5f, 112.f, 11.f);
+
+		m_Body->SetExtent(260.f, 120.f);
+		m_Body->SetOffset(0.f, -25.f, 0.f);
 	}
 
 	m_Body->Enable(true);
@@ -156,17 +176,7 @@ void CBladeFury::OnCollisionBegin(const CollisionResult& result)
 
 		if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Monster)
 		{
-			for (int i = 1; i <= 9; i++)
-			{
-				//result.Dest->GetGameObject()->SetDamage(10);
-
-				m_TargetPos = m_obj->GetWorldPos();
-				m_TargetSize = m_obj->GetSize();
-
-				//m_obj->SetDamage(10);
-
-				m_Anim->AddNotify<CBladeFury>("BladeFuryEffect", "BladeFuryEffect", i, this, &CBladeFury::Attack);
-			}
+			m_Monster.push_back(m_obj);
 		}
 	}
 
@@ -177,6 +187,27 @@ void CBladeFury::AnimationFinish()
 {
 	CPlayerManager::GetInst()->SetPlayerAttack(Player_Attack::Attack_End);
 
+	if (!m_Monster.empty())
+	{
+		auto iter = m_Monster.begin();
+		auto iterEnd = m_Monster.end();
+
+		for (iter; iter != iterEnd; iter++)
+		{
+			if ((*iter)->GetCharacterInfo().HP <= 0)
+			{
+				(*iter)->SetDie(true);
+			}
+
+			else
+			{
+				(*iter) = nullptr;
+			}
+		}
+
+		m_Monster.clear();
+	}
+
 	m_Body->Enable(false);
 
 	//Destroy();
@@ -186,4 +217,46 @@ void CBladeFury::AnimationFinish()
 
 void CBladeFury::Attack()
 {
+	if (!m_Anim->GetCurrentAnimation())
+	{
+		return;
+	}
+
+	if (!m_Monster.empty())
+	{
+		t1 = std::thread(&CBladeFury::PrintDamage, this);
+
+		t1.join();
+	}
+}
+
+void CBladeFury::PrintDamage()
+{
+	std::lock_guard<std::mutex> lock(m1);
+
+	auto iter = m_Monster.begin();
+	auto iterEnd = m_Monster.end();
+
+	for (iter; iter != iterEnd; iter++)
+	{
+		int Frame = m_Anim->GetFrame();
+
+		CDamageFont* DamageFont = m_Scene->CreateGameObject<CDamageFont>("DamagrFont");
+
+		if (!DamageFont)
+		{
+			return;
+		}
+
+		m_TargetPos = (*iter)->GetWorldPos();
+		m_TargetSize = (*iter)->GetSize();
+
+		DamageFont->SetWorldPos(m_TargetPos.x - 31.f, m_TargetPos.y + (m_TargetSize.y) + (Frame * 30), 1);
+
+		m_Damage = 10;
+
+		DamageFont->SetDamageNumber(m_Damage);
+
+		(*iter)->SetDamage((float)m_Damage);
+	}
 }

@@ -14,6 +14,11 @@
 #include "../ClientManager.h"
 #include "../Object/PlayerManager.h"
 #include "../Object/TauromacisHitEffect.h"
+#include "../Object/Jr_Balrog.h"
+#include "../Object/Jr_BalrogAttack1Hit.h"
+#include "../Object/Jr_BalrogAttack2Hit.h"
+#include "../Object/Jr_BalrogAttack3Hit.h"
+#include "../Object/Jr_BalrogAttack2Ball.h"
 
 CEntranceToTemple::CEntranceToTemple() : m_MobCount(0), m_TotalMobCount(30), m_SpawnTime(4.f)
 {
@@ -108,6 +113,11 @@ bool CEntranceToTemple::Init()
 	m_Fade = m_Scene->GetViewport()->CreateWidgetWindow<CFade>("FadeWidget");
 	m_Quset = m_Scene->GetViewport()->CreateWidgetWindow<CQuesetWidget>("QuesetWidget");
 
+	CJr_BalrogAttack1Hit* Jr_BalrogAttack1Hit = m_Scene->CreatePrototype<CJr_BalrogAttack1Hit>("Jr_BalrogAttack1Hit");
+	CJr_BalrogAttack2Hit* Jr_BalrogAttack2Hit = m_Scene->CreatePrototype<CJr_BalrogAttack2Hit>("Jr_BalrogAttack2Hit");
+	CJr_BalrogAttack3Hit* Jr_BalrogAttack3Hit = m_Scene->CreatePrototype<CJr_BalrogAttack3Hit>("Jr_BalrogAttack3Hit");
+	CJr_BalrogAttack2Ball* Jr_BalrogAttack2Ball = m_Scene->CreatePrototype<CJr_BalrogAttack2Ball>("Jr_BalrogAttack2Ball");
+
 	if (m_LoadingFunction)
 	{
 		m_LoadingFunction(false, 0.9f);
@@ -172,6 +182,11 @@ void CEntranceToTemple::PostUpdate(float DeltaTime)
 			CPotal* Potal = m_Scene->CreateGameObject<CPotal>("Potal");
 
 			Potal->SetRelativePos(2000.f, 190.f, 0.f);
+		}
+
+		if (!m_Scene->FindObject("Jr_Balrog"))
+		{
+			CJr_Balrog* Jr_Balrog = m_Scene->CreateGameObject<CJr_Balrog>("Jr_Balrog");
 		}
 	}
 }

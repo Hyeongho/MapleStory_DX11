@@ -33,7 +33,7 @@ private:
     CSharedPtr<CRigidBody> m_RigidBody;
     CSharedPtr<CGravity> m_Gravity;
     CSharedPtr<CColliderBox2D> m_Body;
-    CSharedPtr<CColliderBox2D> m_Bottom;
+    CSharedPtr<CColliderBox2D> m_Bottom;   
     CSharedPtr<CCameraComponent> m_Camera;
     CSharedPtr<CSceneComponent> m_Muzzle;
     CSharedPtr<CPhantomBlow> m_PhantomBlow;

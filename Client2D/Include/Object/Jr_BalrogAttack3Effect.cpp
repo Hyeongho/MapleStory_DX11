@@ -127,8 +127,6 @@ void CJr_BalrogAttack3Effect::OnCollisionBegin(const CollisionResult& result)
 		}
 
 		m_Target = true;
-
-		Player->SetDamage(10.f);
 	}
 }
 
@@ -146,6 +144,8 @@ void CJr_BalrogAttack3Effect::AnimationFinish()
 		if (Player)
 		{
 			CJr_BalrogAttack3Hit* Jr_BalrogAttack3Hit = m_Scene->CreateGameObject<CJr_BalrogAttack3Hit>("Jr_BalrogAttack3Hit", "Jr_BalrogAttack3Hit", Player->GetWorldPos());
+
+			CResourceManager::GetInst()->SoundPlay("Jr_BalrogCharDam3");
 
 			Player->SetDamage(10.f);
 			Player->SetHurt(true);
