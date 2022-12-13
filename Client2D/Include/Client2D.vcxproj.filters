@@ -97,6 +97,18 @@
     <Filter Include="02. Object\02. Monster\04. Jr_Balrog\03. HitEffect">
       <UniqueIdentifier>{54d82d1b-f8fb-4bdb-bebb-49fcec07d95d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog\04. HIt">
+      <UniqueIdentifier>{d72f330e-e496-427d-878f-6a07e2c1e55a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog\04. HIt\01. Body">
+      <UniqueIdentifier>{ff8e0fe1-2f26-448a-8b8e-7c9796cf9ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog\04. HIt\02. Left">
+      <UniqueIdentifier>{45544056-bcf0-40f9-8b3d-a0cdf868386b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Monster\06. Balrog\04. HIt\03. Right">
+      <UniqueIdentifier>{0eb6b230-672c-4cf0-8cce-b24d06791bef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -329,6 +341,36 @@
     </ClInclude>
     <ClInclude Include="Object\Jr_BalrogAttack1Hit.h">
       <Filter>02. Object\02. Monster\04. Jr_Balrog\03. HitEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ClearScene.h">
+      <Filter>01. SceneMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BodyAttack1Hit.h">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\01. Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BodyAttack2Hit.h">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\01. Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BodyAttack3Hit.h">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\01. Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BodyAttack4Hit.h">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\01. Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\RightAttack3Hit.h">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\03. Right</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\RightAttack2Hit.h">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\03. Right</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\RightAttack1Hit.h">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\03. Right</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\LeftAttack2Hit.h">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\02. Left</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\LeftAttack1Hit.h">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\02. Left</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -566,6 +608,36 @@
     </ClCompile>
     <ClCompile Include="Object\Jr_BalrogAttack1Hit.cpp">
       <Filter>02. Object\02. Monster\04. Jr_Balrog\03. HitEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ClearScene.cpp">
+      <Filter>01. SceneMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BodyAttack1Hit.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\01. Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BodyAttack2Hit.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\01. Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BodyAttack3Hit.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\01. Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BodyAttack4Hit.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\01. Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\RightAttack3Hit.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\03. Right</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\RightAttack2Hit.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\03. Right</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\RightAttack1Hit.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\03. Right</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\LeftAttack1Hit.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\02. Left</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\LeftAttack2Hit.cpp">
+      <Filter>02. Object\02. Monster\06. Balrog\04. HIt\02. Left</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

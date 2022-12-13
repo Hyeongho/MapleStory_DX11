@@ -187,6 +187,10 @@ void CEntranceToTemple::PostUpdate(float DeltaTime)
 		if (!m_Scene->FindObject("Jr_Balrog"))
 		{
 			CJr_Balrog* Jr_Balrog = m_Scene->CreateGameObject<CJr_Balrog>("Jr_Balrog");
+
+			Jr_Balrog->SetRelativePos(1072.f, 268.f, 0.f);
+
+			Jr_Balrog->SetRange(2144.f, 750.f, 0.f);
 		}
 	}
 }

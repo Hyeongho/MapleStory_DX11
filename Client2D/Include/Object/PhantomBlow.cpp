@@ -259,7 +259,7 @@ void CPhantomBlow::Attack()
 
 		DamageFont->SetWorldPos(m_TargetPos.x - 31.f, m_TargetPos.y + (m_TargetSize.y) + (Frame * 30), 1);
 
-		m_Damage = 10;
+		m_Damage = 30;
 
 		DamageFont->SetDamageNumber(m_Damage);
 

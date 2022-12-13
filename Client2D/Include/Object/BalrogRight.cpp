@@ -5,6 +5,7 @@
 #include "Player2D.h"
 #include "Scene/SceneResource.h"
 #include "Input.h"
+#include "RightAttack1AreaWarning.h"
 
 CBalrogRight::CBalrogRight()
 {
@@ -21,6 +22,13 @@ CBalrogRight::~CBalrogRight()
 void CBalrogRight::Start()
 {
 	CMonsterManager::Start();
+
+	for (int i = 0; i < 4; i++)
+	{
+		std::string name = "RightAttack1AreaWarning" + std::to_string(i);
+
+		CRightAttack1AreaWarning* RightAttack1AreaWarning = m_Scene->CreateGameObject<CRightAttack1AreaWarning>(name);
+	}
 }
 
 bool CBalrogRight::Init()
@@ -58,6 +66,11 @@ bool CBalrogRight::Init()
 
 	m_Anim->SetCurrentAnimation("BalrogRightIdle");
 
+	m_Anim->AddNotify<CBalrogRight>("BalrogRightAttack1", "BalrogRightAttack1", 0, this, &CBalrogRight::PlayBalrogSound);
+	m_Anim->AddNotify<CBalrogRight>("BalrogRightAttack2", "BalrogRightAttack2", 0, this, &CBalrogRight::PlayBalrogSound);
+	m_Anim->AddNotify<CBalrogRight>("BalrogRightAttack3", "BalrogRightAttack3", 0, this, &CBalrogRight::PlayBalrogSound);
+	m_Anim->AddNotify<CBalrogRight>("BalrogRightDie", "BalrogRightDie", 0, this, &CBalrogRight::PlayBalrogSound);
+
 	m_Anim->SetEndFunction<CBalrogRight>("BalrogRightAttack1", this, &CBalrogRight::AnimationFinish);
 	m_Anim->SetEndFunction<CBalrogRight>("BalrogRightAttack2", this, &CBalrogRight::AnimationFinish);
 	m_Anim->SetEndFunction<CBalrogRight>("BalrogRightAttack3", this, &CBalrogRight::AnimationFinish);
@@ -71,12 +84,26 @@ bool CBalrogRight::Init()
 
 	SetCharacterInfo("BalrogRight");
 
+	m_Attack1AreaWarningPosX.push_back(83.f);
+	m_Attack1AreaWarningPosX.push_back(225.f);
+	m_Attack1AreaWarningPosX.push_back(367.f);
+	m_Attack1AreaWarningPosX.push_back(509.f);
+	m_Attack1AreaWarningPosX.push_back(651.f);
+	m_Attack1AreaWarningPosX.push_back(793.f);
+	m_Attack1AreaWarningPosX.push_back(935.f);
+	m_Attack1AreaWarningPosX.push_back(1077.f);
+
 	return true;
 }
 
 void CBalrogRight::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
+
+	if (m_CharacterInfo.HP <= 0)
+	{
+		m_CharacterInfo.HP = 0;
+	}
 }
 
 void CBalrogRight::PostUpdate(float DeltaTime)
@@ -302,6 +329,13 @@ void CBalrogRight::ChangeAnim(float DeltaTime)
 
 void CBalrogRight::AnimationFinish()
 {
+	if (m_Anim->CheckCurrentAnimation("BalrogRightAttack1"))
+	{
+		t1 = std::thread(&CBalrogRight::PlayRightAttack1AreaWarning, this);
+
+		t1.join();
+	}
+
 	int num = rand() % 2;
 
 	if (num)
@@ -333,4 +367,59 @@ void CBalrogRight::AnimationFinish()
 void CBalrogRight::ArmDie()
 {
 	m_State = EMonster_State::Die;
+}
+
+void CBalrogRight::PlayRightAttack1AreaWarning()
+{
+	std::lock_guard<std::mutex> lock(m1);
+
+	srand((unsigned int)time(0));
+
+	std::vector<float> PosX = m_Attack1AreaWarningPosX;
+
+	size_t size = m_Attack1AreaWarningPosX.size();
+
+	for (int i = 0; i < 4; i++)
+	{
+		int Index = rand() % size;
+
+		std::string name = "RightAttack1AreaWarning" + std::to_string(i);
+
+		CRightAttack1AreaWarning* RightAttack1AreaWarning = dynamic_cast<CRightAttack1AreaWarning*>(m_Scene->FindObject(name));
+
+		if (!RightAttack1AreaWarning)
+		{
+			return;
+		}
+
+		RightAttack1AreaWarning->SetEnable();
+
+		RightAttack1AreaWarning->SetWorldPos(PosX[Index], 105.f, 1.f);
+
+		PosX.erase(PosX.begin() + Index);
+		size--;
+	}
+}
+
+void CBalrogRight::PlayBalrogSound()
+{
+	if (m_Anim->CheckCurrentAnimation("BalrogRightAttack1"))
+	{
+		CResourceManager::GetInst()->SoundPlay("BalrogRightAttack1");
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("BalrogRightAttack2"))
+	{
+		CResourceManager::GetInst()->SoundPlay("BalrogRightAttack2");
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("BalrogRightAttack3"))
+	{
+		CResourceManager::GetInst()->SoundPlay("BalrogRightAttack3");
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("BalrogRightDie"))
+	{
+		CResourceManager::GetInst()->SoundPlay("BalrogLeftDie");
+	}
 }

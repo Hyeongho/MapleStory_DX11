@@ -3,6 +3,8 @@
 #include "Resource/Material/Material.h"
 #include "Animation/AnimationSequence2DInstance.h"
 #include "Balrog.h"
+#include "Player2D.h"
+#include "BodyAttack3Hit.h"
 
 CBodyAttack3AreaWarning::CBodyAttack3AreaWarning()
 {
@@ -45,12 +47,25 @@ bool CBodyAttack3AreaWarning::Init()
 
 	m_Sprite->SetTransparency(true);
 
+	m_Sprite->AddChild(m_Body);
+
 	m_Sprite->CreateAnimationInstance<CAnimationSequence2DInstance>();
 	m_Anim = m_Sprite->GetAnimationInstance();
-	m_Anim->AddAnimation(TEXT("Monster/Balrog/Body/Attack3AreaWarning.sqc"), ANIMATION_PATH, "Attack3AreaWarning", false, 2.52f);
+	m_Anim->AddAnimation(TEXT("Monster/Balrog/Body/Attack3AreaWarning.sqc"), ANIMATION_PATH, "Attack3AreaWarning", true, 2.52f);
 	//Anim->AddAnimation("Attack3AreaWarning", "Attack3AreaWarning", false, 2.52f);
 
 	m_Anim->SetEndFunction("Attack3AreaWarning", this, &CBodyAttack3AreaWarning::AnimationFinish);
+
+	m_Anim->AddNotify("Attack3AreaWarning", "Attack3AreaWarning", 17, this, &CBodyAttack3AreaWarning::Attack);
+
+	m_Body->SetCollisionProfile("MonsterAttack");
+
+	m_Body->AddCollisionCallback<CBodyAttack3AreaWarning>(Collision_State::Begin, this, &CBodyAttack3AreaWarning::OnCollisionBegin);
+	m_Body->AddCollisionCallback<CBodyAttack3AreaWarning>(Collision_State::End, this, &CBodyAttack3AreaWarning::OnCollisionEnd);
+
+	m_Body->SetExtent(76.f, 61.f);
+
+	m_Body->SetOffset(76.f, 61.f, 1.f);
 
 	m_Sprite->SetRelativeScale(160.f, 499.f, 1.f);
 
@@ -82,6 +97,45 @@ void CBodyAttack3AreaWarning::SetEnable()
 
 void CBodyAttack3AreaWarning::OnCollisionBegin(const CollisionResult& result)
 {
+	if (!result.Dest->GetCollisionProfile())
+	{
+		return;
+	}
+
+	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Player)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+		if (!Player)
+		{
+			return;
+		}
+
+		m_Target = true;
+	}
+}
+
+void CBodyAttack3AreaWarning::OnCollisionEnd(const CollisionResult& result)
+{
+	m_Target = false;
+}
+
+void CBodyAttack3AreaWarning::Attack()
+{
+	if (m_Target)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+		if (Player)
+		{
+			CBodyAttack3Hit* BodyAttack3Hit = m_Scene->CreateGameObject<CBodyAttack3Hit>("BodyAttack3Hit", "BodyAttack3Hit", Player->GetWorldPos());
+
+			CResourceManager::GetInst()->SoundPlay("BalrogBodyCharDam3");
+
+			Player->SetDamage(10.f);
+			Player->SetHurt(true);
+		}
+	}
 }
 
 void CBodyAttack3AreaWarning::AnimationFinish()

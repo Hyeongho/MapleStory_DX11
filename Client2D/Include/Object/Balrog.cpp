@@ -39,11 +39,13 @@ void CBalrog::Start()
 
 	CBodyAttack1AreaWarning* BodyAttack1AreaWarning1 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning1");
 
-	BodyAttack1AreaWarning1->SetWorldPos(83.f, 118.f, 1.f);
+	//BodyAttack1AreaWarning1->SetWorldPos(83.f, 118.f, 1.f);
+	BodyAttack1AreaWarning1->SetRelativePos(83.f, 118.f, 1.f);
 
 	CBodyAttack1AreaWarning* BodyAttack1AreaWarning2 = m_Scene->CreateGameObject<CBodyAttack1AreaWarning>("BodyAttack1AreaWarning2");
 
-	BodyAttack1AreaWarning2->SetWorldPos(1366.f - 83.f - 547.f, 118.f, 1.f);
+	//BodyAttack1AreaWarning2->SetWorldPos(1366.f - 83.f - 547.f, 118.f, 1.f);
+	BodyAttack1AreaWarning2->SetRelativePos(1366.f - 83.f - 547.f, 118.f, 1.f);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -99,10 +101,10 @@ bool CBalrog::Init()
 
 	m_Anim->AddAnimation("BalrogBodyIdle", "BalrogBodyIdle", true);
 	m_Anim->AddAnimation("BalrogBodyDie", "BalrogBodyDie", false, 5.9f);
-	m_Anim->AddAnimation("BalrogBodyAttack1", "BalrogBodyAttack1", false, 2.4f);
-	m_Anim->AddAnimation("BalrogBodyAttack2", "BalrogBodyAttack2", false, 1.6f);
-	m_Anim->AddAnimation("BalrogBodyAttack3", "BalrogBodyAttack3", false, 1.9f);
-	m_Anim->AddAnimation("BalrogBodyAttack4", "BalrogBodyAttack4", false, 1.7f);
+	m_Anim->AddAnimation("BalrogBodyAttack1", "BalrogBodyAttack1", false, 3.96f);
+	m_Anim->AddAnimation("BalrogBodyAttack2", "BalrogBodyAttack2", false, 3.21f);
+	m_Anim->AddAnimation("BalrogBodyAttack3", "BalrogBodyAttack3", false, 2.76f);
+	m_Anim->AddAnimation("BalrogBodyAttack4", "BalrogBodyAttack4", false, 2.04f);
 
 	m_Anim->SetCurrentAnimation("BalrogBodyIdle");
 
@@ -113,6 +115,12 @@ bool CBalrog::Init()
 
 	m_BalrogLeft->SetWorldPos(m_LeftMuzzle->GetWorldPos());
 	m_BalrogRight->SetWorldPos(m_RightMuzzle->GetWorldPos());
+
+	m_Anim->AddNotify<CBalrog>("BalrogBodyAttack1", "BalrogBodyAttack1", 0, this, &CBalrog::PlayBalrogSound);
+	m_Anim->AddNotify<CBalrog>("BalrogBodyAttack2", "BalrogBodyAttack2", 0, this, &CBalrog::PlayBalrogSound);
+	m_Anim->AddNotify<CBalrog>("BalrogBodyAttack3", "BalrogBodyAttack3", 0, this, &CBalrog::PlayBalrogSound);
+	m_Anim->AddNotify<CBalrog>("BalrogBodyAttack4", "BalrogBodyAttack4", 0, this, &CBalrog::PlayBalrogSound);
+	m_Anim->AddNotify<CBalrog>("BalrogBodyDie", "BalrogBodyDie", 0, this, &CBalrog::PlayBalrogSound);
 
 	m_Anim->AddNotify<CBalrog>("BalrogBodyAttack1", "BalrogBodyAttack1", 2, this, &CBalrog::SetAttackRange);
 
@@ -142,12 +150,19 @@ void CBalrog::Update(float DeltaTime)
 {
 	CObjectManager::Update(DeltaTime);
 
-	float HP = (float)m_CharacterInfo.HP + m_BalrogLeft->GetCharacterInfo().HP + m_BalrogRight->GetCharacterInfo().HP;
-	float MaxHP = (float)m_CharacterInfo.MaxHP + m_BalrogLeft->GetCharacterInfo().MaxHP + m_BalrogRight->GetCharacterInfo().MaxHP;
+	float HP = static_cast<float>(m_CharacterInfo.HP) + m_BalrogLeft->GetCharacterInfo().HP + m_BalrogRight->GetCharacterInfo().HP;
+	float MaxHP = static_cast<float>(m_CharacterInfo.MaxHP) + m_BalrogLeft->GetCharacterInfo().MaxHP + m_BalrogRight->GetCharacterInfo().MaxHP;
 
 	m_BossStatus->SetHPPercent(HP / MaxHP);
 
 	m_BT->Run(m_BTRun);
+
+	if (HP <= 0.f)
+	{
+		m_State = EMonster_State::Die;
+
+		m_BossStatus->SetHPPercent(0.f);
+	}
 }
 
 void CBalrog::PostUpdate(float DeltaTime)
@@ -233,6 +248,15 @@ void CBalrog::AIAttack(float DeltaTime)
 
 void CBalrog::AIDeath(float DeltaTime)
 {
+	if (!m_Anim->CheckCurrentAnimation("BalrogBodyDie"))
+	{
+		m_Anim->ChangeAnimation("BalrogBodyDie");
+
+		m_BalrogLeft->Destroy();
+		m_BalrogRight->Destroy();
+
+		m_Body->Destroy();
+	}
 }
 
 void CBalrog::InitAnimation()
@@ -495,13 +519,9 @@ void CBalrog::PlayBodyAttack1AreaWarning()
 
 	BodyAttack1AreaWarning1->SetEnable();
 
-	BodyAttack1AreaWarning1->SetWorldPos(83.f, 118.f, 1.f);
-
 	CBodyAttack1AreaWarning* BodyAttack1AreaWarning2 = dynamic_cast<CBodyAttack1AreaWarning*>(m_Scene->FindObject("BodyAttack1AreaWarning2"));
 
 	BodyAttack1AreaWarning2->SetEnable();
-
-	BodyAttack1AreaWarning2->SetWorldPos(1366.f - 83.f - 547.f, 118.f, 1.f);
 }
 
 void CBalrog::PlayBodyAttack3AreaWarning()
@@ -528,5 +548,33 @@ void CBalrog::PlayBodyAttack3AreaWarning()
 
 		PosX.erase(PosX.begin() + Index);
 		size--;
+	}
+}
+
+void CBalrog::PlayBalrogSound()
+{
+	if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack1"))
+	{
+		CResourceManager::GetInst()->SoundPlay("BalrogBodyAttack1");
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack2"))
+	{
+		CResourceManager::GetInst()->SoundPlay("BalrogBodyAttack2");
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack3"))
+	{
+		CResourceManager::GetInst()->SoundPlay("BalrogBodyAttack3");
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack4"))
+	{
+		CResourceManager::GetInst()->SoundPlay("BalrogBodyAttack4");
+	}
+
+	else if (m_Anim->CheckCurrentAnimation("BalrogBodyDie"))
+	{
+		CResourceManager::GetInst()->SoundPlay("BalrogBodyDie");
 	}
 }

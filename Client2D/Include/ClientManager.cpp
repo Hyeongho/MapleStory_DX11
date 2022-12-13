@@ -408,7 +408,17 @@ void CClientManager::LoadAnimation()
 
 	vecFileName.clear();
 
-	for (int i = 1; i <= 24; i++)
+	for (int i = 0; i < 10; i++)
+	{
+		TCHAR* FileName = new TCHAR[MAX_PATH];
+		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
+
+		wsprintf(FileName, TEXT("Monster/Balrog/Body/attack1/%d.png"), 1);
+
+		vecFileName.push_back(FileName);
+	}
+
+	for (int i = 2; i <= 24; i++)
 	{
 		TCHAR* FileName = new TCHAR[MAX_PATH];
 		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
@@ -420,19 +430,19 @@ void CClientManager::LoadAnimation()
 
 	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogBodyAttack1", "BalrogBodyAttack1", vecFileName);
 
-	for (int i = 0; i < 24; i++)
+	for (int i = 0; i < vecFileName.size(); i++)
 	{
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyAttack1", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
 	}
 
-	for (int i = 0; i < 24; i++)
+	for (int i = 0; i < vecFileName.size(); i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
 	}
 
 	vecFileName.clear();
 
-	for (int i = 1; i <= 16; i++)
+	/*for (int i = 1; i <= 16; i++)
 	{
 		TCHAR* FileName = new TCHAR[MAX_PATH];
 		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
@@ -440,19 +450,148 @@ void CClientManager::LoadAnimation()
 		wsprintf(FileName, TEXT("Monster/Balrog/Body/attack2/%d.png"), i);
 
 		vecFileName.push_back(FileName);
-	}
+	}*/
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/1.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/1.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/1.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/1.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/1.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/1.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/1.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/2.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/2.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/2.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/3.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/3.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/3.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/4.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/4.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/4.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/5.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/5.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/5.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/6.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/6.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/6.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/7.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/7.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/7.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/8.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/8.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/8.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/9.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/9.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/9.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/10.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/10.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/10.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/11.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/11.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/11.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/12.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/12.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/12.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/13.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/13.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/13.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/14.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/14.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/14.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/15.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/15.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/15.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/2.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/2.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/2.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/3.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/3.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/3.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/3.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/3.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/4.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/4.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/4.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/4.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/4.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/5.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/5.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/5.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/5.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/5.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/6.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/6.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/6.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/6.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/6.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/7.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/7.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/7.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/7.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/7.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/8.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/8.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/8.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/8.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/8.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/9.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/9.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/9.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/9.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/9.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/10.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/10.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/10.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/10.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/10.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/11.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/11.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/11.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/11.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/11.png"));
+
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/12.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/12.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/12.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/12.png"));
+	vecFileName.push_back(TEXT("Monster/Balrog/Body/stand/12.png"));
+
 
 	CResourceManager::GetInst()->CreateAnimationSequence2D("BalrogBodyAttack2", "BalrogBodyAttack2", vecFileName);
 
-	for (int i = 0; i < 16; i++)
+	for (int i = 0; i < vecFileName.size(); i++)
 	{
 		CResourceManager::GetInst()->AddAnimationSequence2DFrame("BalrogBodyAttack2", Vector2(0.f, 0.f), Vector2(1500.f, 1500.f));
 	}
 
-	for (int i = 0; i < 16; i++)
+	/*for (int i = 0; i < 16; i++)
 	{
 		SAFE_DELETE_ARRAY(vecFileName[i]);
-	}
+	}*/
 
 	vecFileName.clear();
 
@@ -721,46 +860,6 @@ void CClientManager::LoadAnimation()
 	}
 
 	vecFileName.clear();
-
-	/*vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/1.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/2.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/3.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/3.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/3.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/3.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack2/4.png"));
-
-	CResourceManager::GetInst()->CreateAnimationSequence2D("Jr_BalrogAttack2", "Jr_BalrogAttack2", vecFileName);
-
-	for (int i = 0; i < 10; i++)
-	{
-		CResourceManager::GetInst()->AddAnimationSequence2DFrame("Jr_BalrogAttack2", Vector2(0.f, 0.f), Vector2(700.f, 700.f));
-	}
-
-	vecFileName.clear();
-
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/1.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/2.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/3.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/3.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/3.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/4.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/4.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/4.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/4.png"));
-	vecFileName.push_back(TEXT("Monster/Jr_Balrog/attack3/4.png"));
-
-	CResourceManager::GetInst()->CreateAnimationSequence2D("Jr_BalrogAttack3", "Jr_BalrogAttack3", vecFileName);
-
-	for (int i = 0; i < 10; i++)
-	{
-		CResourceManager::GetInst()->AddAnimationSequence2DFrame("Jr_BalrogAttack3", Vector2(0.f, 0.f), Vector2(700.f, 700.f));
-	}
-
-	vecFileName.clear();*/
 }
 
 void CClientManager::CreateLayer()

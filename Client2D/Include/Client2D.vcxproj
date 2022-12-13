@@ -184,8 +184,12 @@
     <ClInclude Include="Object\BalrogRight.h" />
     <ClInclude Include="Object\BladeFury.h" />
     <ClInclude Include="Object\BodyAttack1AreaWarning.h" />
+    <ClInclude Include="Object\BodyAttack1Hit.h" />
     <ClInclude Include="Object\BodyAttack2Effect.h" />
+    <ClInclude Include="Object\BodyAttack2Hit.h" />
     <ClInclude Include="Object\BodyAttack3AreaWarning.h" />
+    <ClInclude Include="Object\BodyAttack3Hit.h" />
+    <ClInclude Include="Object\BodyAttack4Hit.h" />
     <ClInclude Include="Object\CrimsonBalrog.h" />
     <ClInclude Include="Object\DamageFont.h" />
     <ClInclude Include="Object\HongA.h" />
@@ -198,6 +202,8 @@
     <ClInclude Include="Object\Jr_BalrogAttack3Effect.h" />
     <ClInclude Include="Object\Jr_BalrogAttack3Hit.h" />
     <ClInclude Include="Object\LeftAttack1AreaWarning.h" />
+    <ClInclude Include="Object\LeftAttack1Hit.h" />
+    <ClInclude Include="Object\LeftAttack2Hit.h" />
     <ClInclude Include="Object\MonsterManager.h" />
     <ClInclude Include="Object\NPCManager.h" />
     <ClInclude Include="Object\ObjectManager.h" />
@@ -207,6 +213,9 @@
     <ClInclude Include="Object\PlayerManager.h" />
     <ClInclude Include="Object\Potal.h" />
     <ClInclude Include="Object\RightAttack1AreaWarning.h" />
+    <ClInclude Include="Object\RightAttack1Hit.h" />
+    <ClInclude Include="Object\RightAttack2Hit.h" />
+    <ClInclude Include="Object\RightAttack3Hit.h" />
     <ClInclude Include="Object\SeolHui.h" />
     <ClInclude Include="Object\ShadowDualBlade.h" />
     <ClInclude Include="Object\SkillManager.h" />
@@ -222,6 +231,7 @@
     <ClInclude Include="Scene\BalrogAltarThread.h" />
     <ClInclude Include="Scene\BalrogGate.h" />
     <ClInclude Include="Scene\BalrogGateThread.h" />
+    <ClInclude Include="Scene\ClearScene.h" />
     <ClInclude Include="Scene\EntranceToTemple.h" />
     <ClInclude Include="Scene\EToTempleThread.h" />
     <ClInclude Include="Scene\LoadingAnotherDoor.h" />
@@ -268,8 +278,12 @@
     <ClCompile Include="Object\BalrogRight.cpp" />
     <ClCompile Include="Object\BladeFury.cpp" />
     <ClCompile Include="Object\BodyAttack1AreaWarning.cpp" />
+    <ClCompile Include="Object\BodyAttack1Hit.cpp" />
     <ClCompile Include="Object\BodyAttack2Effect.cpp" />
+    <ClCompile Include="Object\BodyAttack2Hit.cpp" />
     <ClCompile Include="Object\BodyAttack3AreaWarning.cpp" />
+    <ClCompile Include="Object\BodyAttack3Hit.cpp" />
+    <ClCompile Include="Object\BodyAttack4Hit.cpp" />
     <ClCompile Include="Object\CrimsonBalrog.cpp" />
     <ClCompile Include="Object\DamageFont.cpp" />
     <ClCompile Include="Object\HongA.cpp" />
@@ -282,6 +296,8 @@
     <ClCompile Include="Object\Jr_BalrogAttack3Effect.cpp" />
     <ClCompile Include="Object\Jr_BalrogAttack3Hit.cpp" />
     <ClCompile Include="Object\LeftAttack1AreaWarning.cpp" />
+    <ClCompile Include="Object\LeftAttack1Hit.cpp" />
+    <ClCompile Include="Object\LeftAttack2Hit.cpp" />
     <ClCompile Include="Object\MonsterManager.cpp" />
     <ClCompile Include="Object\NPCManager.cpp" />
     <ClCompile Include="Object\ObjectManager.cpp" />
@@ -291,6 +307,9 @@
     <ClCompile Include="Object\PlayerManager.cpp" />
     <ClCompile Include="Object\Potal.cpp" />
     <ClCompile Include="Object\RightAttack1AreaWarning.cpp" />
+    <ClCompile Include="Object\RightAttack1Hit.cpp" />
+    <ClCompile Include="Object\RightAttack2Hit.cpp" />
+    <ClCompile Include="Object\RightAttack3Hit.cpp" />
     <ClCompile Include="Object\SeolHui.cpp" />
     <ClCompile Include="Object\ShadowDualBlade.cpp" />
     <ClCompile Include="Object\SkillManager.cpp" />
@@ -305,6 +324,7 @@
     <ClCompile Include="Scene\BalrogAltarThread.cpp" />
     <ClCompile Include="Scene\BalrogGate.cpp" />
     <ClCompile Include="Scene\BalrogGateThread.cpp" />
+    <ClCompile Include="Scene\ClearScene.cpp" />
     <ClCompile Include="Scene\EntranceToTemple.cpp" />
     <ClCompile Include="Scene\EToTempleThread.cpp" />
     <ClCompile Include="Scene\LoadingAnotherDoor.cpp" />

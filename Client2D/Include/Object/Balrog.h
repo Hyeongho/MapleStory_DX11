@@ -87,5 +87,7 @@ private:
 
 	void PlayBodyAttack1AreaWarning();
 	void PlayBodyAttack3AreaWarning();
+
+	void PlayBalrogSound();
 };
 

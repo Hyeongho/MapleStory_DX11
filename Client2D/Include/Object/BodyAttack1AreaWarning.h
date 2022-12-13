@@ -21,6 +21,8 @@ private:
 
     CAnimationSequence2DInstance* m_Anim;
 
+    bool m_Target;
+
     Vector3 m_TargetPos;
     Vector2 m_TargetSize;
 
@@ -38,6 +40,10 @@ public:
     void SetEnable();
 
     void OnCollisionBegin(const CollisionResult& result);
+    void OnCollisionEnd(const CollisionResult& result);
+
+    void Attack();
+
     void AnimationFinish();
 };
 

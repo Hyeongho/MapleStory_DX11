@@ -24,6 +24,14 @@ private:
 
 	CAnimationSequence2DInstance* m_Anim;
 
+private:
+	std::thread t1;
+	std::mutex m1;
+
+	std::vector<float> m_Attack1AreaWarningPosX;
+
+	bool m_Target;
+
 public:
 	virtual void Start();
 	virtual bool Init();
@@ -41,7 +49,16 @@ private:
 
 	void ChangeAnim(float DeltaTime);
 
+	void OnCollisionBegin(const CollisionResult& result);
+	void OnCollisionEnd(const CollisionResult& result);
+
+	void PlayLeftAttack1AreaWarning();
+
 	void AnimationFinish();
 	void ArmDie();
+
+	void Attack();
+
+	void PlayBalrogSound();
 };
 

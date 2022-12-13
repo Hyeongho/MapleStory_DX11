@@ -12,6 +12,15 @@
 #include "../ClientManager.h"
 #include "../Object/PlayerManager.h"
 #include "Scene/SceneManager.h"
+#include "../Object/BodyAttack1Hit.h"
+#include "../Object/BodyAttack2Hit.h"
+#include "../Object/BodyAttack3Hit.h"
+#include "../Object/BodyAttack4Hit.h"
+#include "../Object/LeftAttack1Hit.h"
+#include "../Object/LeftAttack2Hit.h"
+#include "../Object/RightAttack1Hit.h"
+#include "../Object/RightAttack2Hit.h"
+#include "../Object/RightAttack3Hit.h"
 
 CBalrogAltar::CBalrogAltar()
 {
@@ -83,6 +92,18 @@ bool CBalrogAltar::Init()
 
 	m_PlayerStatus = m_Scene->GetViewport()->CreateWidgetWindow<CPlayerStatus>("PlayerStatus");
 	m_Fade = m_Scene->GetViewport()->CreateWidgetWindow<CFade>("FadeWidget");
+
+	CBodyAttack1Hit* BodyAttack1Hit = m_Scene->CreatePrototype<CBodyAttack1Hit>("BodyAttack1Hit");
+	CBodyAttack2Hit* BodyAttack2Hit = m_Scene->CreatePrototype<CBodyAttack2Hit>("BodyAttack2Hit");
+	CBodyAttack3Hit* BodyAttack3Hit = m_Scene->CreatePrototype<CBodyAttack3Hit>("BodyAttack3Hit");
+	CBodyAttack4Hit* BodyAttack4Hit = m_Scene->CreatePrototype<CBodyAttack4Hit>("BodyAttack4Hit");
+
+	CLeftAttack1Hit* LeftAttack1Hit = m_Scene->CreatePrototype<CLeftAttack1Hit>("LeftAttack1Hit");
+	CLeftAttack2Hit* LeftAttack2Hit = m_Scene->CreatePrototype<CLeftAttack2Hit>("LeftAttack2Hit");
+
+	CRightAttack1Hit* RightAttack1Hit = m_Scene->CreatePrototype<CRightAttack1Hit>("RightAttack1Hit");
+	CRightAttack2Hit* RightAttack2Hit = m_Scene->CreatePrototype<CRightAttack2Hit>("RightAttack2Hit");
+	CRightAttack3Hit* RightAttack3Hit = m_Scene->CreatePrototype<CRightAttack3Hit>("RightAttack3Hit");
 
 	if (m_LoadingFunction)
 	{

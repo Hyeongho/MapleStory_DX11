@@ -49,7 +49,7 @@ bool CBodyAttack2Effect::Init()
 	Anim->AddAnimation(TEXT("Monster/Balrog/Body/BodyAttack2Effect.sqc"), ANIMATION_PATH, "BodyAttack2Effect", false, 1.68f);
 	Anim->SetEndFunction("BodyAttack2Effect", this, &CBodyAttack2Effect::AnimationFinish);
 
-	m_Sprite->SetRelativeScale(547.f, 647.f, 1.f);
+	m_Sprite->SetRelativeScale(139.f, 102.f, 1.f);
 
 	m_Sprite->SetLayerName("Effect");
 

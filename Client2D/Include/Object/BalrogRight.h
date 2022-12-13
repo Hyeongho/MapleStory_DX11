@@ -24,6 +24,14 @@ private:
 
 	CAnimationSequence2DInstance* m_Anim;
 
+private:
+	std::thread t1;
+	std::mutex m1;
+
+	std::vector<float> m_Attack1AreaWarningPosX;
+
+	bool m_Target;
+
 public:
 	virtual void Start();
 	virtual bool Init();
@@ -43,5 +51,9 @@ private:
 
 	void AnimationFinish();
 	void ArmDie();
+
+	void PlayRightAttack1AreaWarning();
+
+	void PlayBalrogSound();
 };
 

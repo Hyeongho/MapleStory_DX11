@@ -183,6 +183,13 @@ void CPlayer2D::Update(float DeltaTime)
 
 	Box2DInfo Info = m_Body->GetInfo();
 
+	if (Pos.y < 0.f)
+	{
+		Pos.y = 500.f;
+
+		m_Gravity->SetGround(false);
+	}
+
 	if (Pos.x - (Info.Length.x) < m_StartRange.x)
 	{
 		//Pos.x = (Info.Length.x);
