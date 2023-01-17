@@ -5,6 +5,7 @@
 #include "../Widget/TalkWidget.h"
 #include "../Widget/Fade.h"
 #include "../Widget/BossStatus.h"
+#include "../Widget/ClearFWidget.h"
 
 class CBalrogAltar :
     public CSceneMode
@@ -18,6 +19,7 @@ private:
     CSharedPtr<CTalkWidget> m_TalkWidget;
     CSharedPtr<CFade> m_Fade;
     CSharedPtr<CBossStatus> m_BossStatus;
+    CSharedPtr<CClearFWidget> m_Clear;
     std::function<void(bool, float)> m_LoadingFunction;
 
 public:

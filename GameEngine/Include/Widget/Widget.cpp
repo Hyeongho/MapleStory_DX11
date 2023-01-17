@@ -8,7 +8,7 @@
 #include "../Scene/SceneManager.h"
 
 CWidget::CWidget() : m_Owner(nullptr), m_ZOrder(0), m_Start(false), m_Angle(0.f), m_CBuffer(nullptr), m_Size(50.f, 50.f), m_MouseHovered(false),
-	m_CollisionMouseEnable(true), m_Tint(1.f, 1.f, 1.f, 1.f), m_Opacity(1.f), m_Visibility(true)
+m_CollisionMouseEnable(true), m_Tint(1.f, 1.f, 1.f, 1.f), m_Opacity(1.f), m_Visibility(true)
 {
 }
 

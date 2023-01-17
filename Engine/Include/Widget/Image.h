@@ -29,6 +29,16 @@ public:
 		SetUseTexture(true);
 	}
 
+	void SetFrame(int Frame)
+	{
+		m_Info.Frame = Frame;
+	}
+
+	int GetFrame() const
+	{
+		return m_Info.Frame;
+	}
+
 	bool SetTexture(const std::string& Name, const TCHAR* FileName, const std::string& PathName = TEXTURE_PATH);
 	bool SetTextureFullPath(const std::string& Name, const TCHAR* FullPath);
 	bool SetTexture(const std::string& Name, const std::vector<const TCHAR*>& vecFileName, const std::string& PathName = TEXTURE_PATH);

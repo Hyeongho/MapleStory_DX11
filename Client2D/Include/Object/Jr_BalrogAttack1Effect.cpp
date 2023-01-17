@@ -137,7 +137,7 @@ void CJr_BalrogAttack1Effect::AnimationFinish()
 	{
 		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
 
-		if (Player)
+		if (Player && !Player->GetHurt())
 		{
 			CJr_BalrogAttack1Hit* Jr_BalrogAttack1Hit = m_Scene->CreateGameObject<CJr_BalrogAttack1Hit>("Jr_BalrogAttack1Hit", "Jr_BalrogAttack1Hit", Player->GetWorldPos());
 

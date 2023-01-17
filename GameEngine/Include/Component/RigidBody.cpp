@@ -7,7 +7,8 @@
 #include "../GameObject/GameObject.h"
 #include "Gravity.h"
 
-CRigidBody::CRigidBody() : m_Mass(1.f), m_FricCoeffp(Vector3(100.f, 100.f, 100.f)), m_MaxVelocity(Vector3(100.f, 600.f, 0.f)), m_Velocity(Vector3(0.f, 0.f, 0.f))
+CRigidBody::CRigidBody() : m_Mass(1.f), m_FricCoeffp(Vector3(100.f, 100.f, 100.f)), m_MaxVelocity(Vector3(100.f, 600.f, 0.f)), 
+	m_Velocity(Vector3(0.f, 0.f, 0.f))
 {
 	SetTypeID<CRigidBody>();
 }
@@ -64,7 +65,7 @@ void CRigidBody::PostUpdate(float DeltaTime)
 		Vector3 FricDir = m_Velocity * -1.f;
 
 		FricDir.Normalize();
-
+		
 		Vector3 FricCoeffp = FricDir * m_FricCoeffp * DeltaTime;
 
 		if (FricCoeffp.Length() > m_Velocity.Length())

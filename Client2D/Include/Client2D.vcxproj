@@ -240,21 +240,24 @@
     <ClInclude Include="Scene\LoadingEToTemple.h" />
     <ClInclude Include="Scene\LoadingScene.h" />
     <ClInclude Include="Scene\LoadingSeolHui.h" />
+    <ClInclude Include="Scene\LoadingStartScene.h" />
     <ClInclude Include="Scene\LoadingThread.h" />
     <ClInclude Include="Scene\MainScene.h" />
     <ClInclude Include="Scene\SeolHuibang.h" />
     <ClInclude Include="Scene\SeolHuiThread.h" />
     <ClInclude Include="Scene\StartScene.h" />
-    <ClInclude Include="Scene\TestScene.h" />
+    <ClInclude Include="Scene\StartSceneThread.h" />
     <ClInclude Include="TalkManager.h" />
     <ClInclude Include="Widget\BossStatus.h" />
+    <ClInclude Include="Widget\ClearFWidget.h" />
+    <ClInclude Include="Widget\ClearWidget.h" />
     <ClInclude Include="Widget\DamageWidget.h" />
+    <ClInclude Include="Widget\DeathNotice.h" />
     <ClInclude Include="Widget\Fade.h" />
     <ClInclude Include="Widget\PlayerStatus.h" />
     <ClInclude Include="Widget\QuesetWidget.h" />
     <ClInclude Include="Widget\StartWidget.h" />
     <ClInclude Include="Widget\TalkWidget.h" />
-    <ClInclude Include="Widget\TestWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client2D.rc" />
@@ -333,21 +336,24 @@
     <ClCompile Include="Scene\LoadingEToTemple.cpp" />
     <ClCompile Include="Scene\LoadingScene.cpp" />
     <ClCompile Include="Scene\LoadingSeolHui.cpp" />
+    <ClCompile Include="Scene\LoadingStartScene.cpp" />
     <ClCompile Include="Scene\LoadingThread.cpp" />
     <ClCompile Include="Scene\MainScene.cpp" />
     <ClCompile Include="Scene\SeolHuibang.cpp" />
     <ClCompile Include="Scene\SeolHuiThread.cpp" />
     <ClCompile Include="Scene\StartScene.cpp" />
-    <ClCompile Include="Scene\TestScene.cpp" />
+    <ClCompile Include="Scene\StartSceneThread.cpp" />
     <ClCompile Include="TalkManager.cpp" />
     <ClCompile Include="Widget\BossStatus.cpp" />
+    <ClCompile Include="Widget\ClearFWidget.cpp" />
+    <ClCompile Include="Widget\ClearWidget.cpp" />
     <ClCompile Include="Widget\DamageWidget.cpp" />
+    <ClCompile Include="Widget\DeathNotice.cpp" />
     <ClCompile Include="Widget\Fade.cpp" />
     <ClCompile Include="Widget\PlayerStatus.cpp" />
     <ClCompile Include="Widget\QuesetWidget.cpp" />
     <ClCompile Include="Widget\StartWidget.cpp" />
     <ClCompile Include="Widget\TalkWidget.cpp" />
-    <ClCompile Include="Widget\TestWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

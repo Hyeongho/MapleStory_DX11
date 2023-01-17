@@ -3,6 +3,8 @@
 #include "Resource/Material/Material.h"
 #include "Animation/AnimationSequence2DInstance.h"
 #include "Balrog.h"
+#include "Player2D.h"
+#include "BodyAttack2Hit.h"
 
 CBodyAttack2Effect::CBodyAttack2Effect()
 {
@@ -46,7 +48,10 @@ bool CBodyAttack2Effect::Init()
 
 	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
 
-	Anim->AddAnimation(TEXT("Monster/Balrog/Body/BodyAttack2Effect.sqc"), ANIMATION_PATH, "BodyAttack2Effect", false, 1.68f);
+	Anim->AddAnimation(TEXT("Monster/Balrog/Body/BodyAttack2Effect.sqc"), ANIMATION_PATH, "BodyAttack2Effect", true, 1.68f);
+
+	Anim->AddNotify("BodyAttack2Effect", "BodyAttack2Effect", 0, this, &CBodyAttack2Effect::Attack);
+
 	Anim->SetEndFunction("BodyAttack2Effect", this, &CBodyAttack2Effect::AnimationFinish);
 
 	m_Sprite->SetRelativeScale(139.f, 102.f, 1.f);
@@ -73,6 +78,27 @@ CBodyAttack2Effect* CBodyAttack2Effect::Clone()
 
 void CBodyAttack2Effect::OnCollisionBegin(const CollisionResult& result)
 {
+}
+
+void CBodyAttack2Effect::Attack()
+{
+	CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+	if (!Player)
+	{
+		return;
+	}
+
+	if (!Player->GetHurt())
+	{
+		CBodyAttack2Hit* BodyAttack2Hit = m_Scene->CreateGameObject<CBodyAttack2Hit>("BodyAttack2Hit", "BodyAttack2Hit", Player->GetWorldPos());
+
+		CResourceManager::GetInst()->SoundPlay("BalrogBodyCharDam2");
+
+		Player->SetDamage(10.f);
+
+		Player->SetHurt(true);
+	}
 }
 
 void CBodyAttack2Effect::AnimationFinish()

@@ -1,7 +1,6 @@
 #include "LoadingThread.h"
 #include "MainScene.h"
 #include "Scene/SceneManager.h"
-#include "TestScene.h"
 
 CLoadingThread::CLoadingThread()
 {

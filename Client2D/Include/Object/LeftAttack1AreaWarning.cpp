@@ -128,7 +128,7 @@ void CLeftAttack1AreaWarning::Attack()
 	{
 		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
 
-		if (Player)
+		if (Player && !Player->GetHurt())
 		{
 			CLeftAttack1Hit* LeftAttack1Hit = m_Scene->CreateGameObject<CLeftAttack1Hit>("LeftAttack1Hit", "LeftAttack1Hit", Player->GetWorldPos());
 

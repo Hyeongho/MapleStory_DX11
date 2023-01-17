@@ -73,5 +73,7 @@ void CStartScene::CreateAnimationSequence()
 
 void CStartScene::LoadSound()
 {
+	m_Scene->GetResource()->SoundStop("EvilEyes");
+
 	m_Scene->GetResource()->SoundPlay("secretFlower");
 }

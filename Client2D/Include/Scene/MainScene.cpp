@@ -95,21 +95,14 @@ bool CMainScene::Init()
 
 	ShadowDualBlade1->SetRange(2000.f, 800.f, 0.f);
 
-	/*CJr_BalrogAttack1Hit* Jr_BalrogAttack1Hit = m_Scene->CreatePrototype<CJr_BalrogAttack1Hit>("Jr_BalrogAttack1Hit");
-	CJr_BalrogAttack2Hit* Jr_BalrogAttack2Hit = m_Scene->CreatePrototype<CJr_BalrogAttack2Hit>("Jr_BalrogAttack2Hit");
-	CJr_BalrogAttack3Hit* Jr_BalrogAttack3Hit = m_Scene->CreatePrototype<CJr_BalrogAttack3Hit>("Jr_BalrogAttack3Hit");
-	CJr_BalrogAttack2Ball* Jr_BalrogAttack2Ball = m_Scene->CreatePrototype<CJr_BalrogAttack2Ball>("Jr_BalrogAttack2Ball");
-
-	CJr_Balrog* Balrog = m_Scene->CreateGameObject<CJr_Balrog>("Balrog");
-	Balrog->SetWorldPos(700.f, 250.f, 0.f);
-	Balrog->SetRange(2000.f, 800.f, 0.f);*/
-
 	CPotal* Potal = m_Scene->CreateGameObject<CPotal>("Potal");
 
 	Potal->SetRelativePos(1800.f, 150, 0.f);
 
 	m_PlayerStatus = m_Scene->GetViewport()->CreateWidgetWindow<CPlayerStatus>("PlayerStatus");
 	m_Fade = m_Scene->GetViewport()->CreateWidgetWindow<CFade>("FadeWidget");
+
+	m_DeathNotice = m_Scene->GetViewport()->CreateWidgetWindow<CDeathNotice>("DeathNotice");
 
 	if (m_LoadingFunction)
 	{
@@ -123,7 +116,23 @@ bool CMainScene::Init()
 
 void CMainScene::PostUpdate(float DeltaTime)
 {
-	
+	CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+	if (!Player)
+	{
+		return;
+	}
+
+	if (m_DeathNotice)
+	{
+		if (Player->GetPlayerState() == EPlayer_State::Die)
+		{
+			if (!m_DeathNotice->GetVisibility())
+			{
+				m_DeathNotice->SetVisibility(true);
+			}
+		}
+	}
 }
 
 void CMainScene::CreateMaterial()

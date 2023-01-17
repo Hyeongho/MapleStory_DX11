@@ -55,6 +55,12 @@ private:
 
     float m_HurtTime;
 
+    bool m_Recovery;
+    bool m_HPRecovery;
+    bool m_MPRecovery;
+
+    float m_RecoveryTime;
+
 public:
     bool m_IsMove;
     static Gender m_Gender;
@@ -103,6 +109,8 @@ private:
     void StabD1(float DeltaTime);
     void PhantomBlow(float DeltaTime);
     void BladeFury(float DeltaTime);
+    void Recovery(float DeltaTime);
+    void HPRecovery(float DeltaTime);
 
     void OnHit(float DeltaTime);
 

@@ -115,6 +115,20 @@ bool CBalrogAltar::Init()
 
 void CBalrogAltar::PostUpdate(float DeltaTime)
 {
+	CBalrog* Balrog = dynamic_cast<CBalrog*>(m_Scene->FindObject("Balrog"));
+
+	if (!Balrog)
+	{
+		return;
+	}
+
+	if (Balrog->GetState() == EMonster_State::Die)
+	{
+		if (!m_Clear)
+		{
+			m_Clear = m_Scene->GetViewport()->CreateWidgetWindow<CClearFWidget>("ClearF");
+		}
+	}
 }
 
 void CBalrogAltar::CreateMaterial()

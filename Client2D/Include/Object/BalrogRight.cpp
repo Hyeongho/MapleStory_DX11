@@ -6,6 +6,8 @@
 #include "Scene/SceneResource.h"
 #include "Input.h"
 #include "RightAttack1AreaWarning.h"
+#include "RightAttack2Hit.h"
+#include "RightAttack3Hit.h"
 
 CBalrogRight::CBalrogRight()
 {
@@ -39,10 +41,12 @@ bool CBalrogRight::Init()
 
 	m_Sprite = CreateComponent<CSpriteComponent>("BalrogRight");
 	m_Body = CreateComponent<CColliderBox2D>("Body");
+	m_AttackBody = CreateComponent<CColliderBox2D>("AttackBody");
 
 	SetRootComponent(m_Sprite);
 
 	m_Body->SetCollisionProfile("Monster");
+	m_AttackBody->SetCollisionProfile("MonsterAttack");
 
 	m_Sprite->SetLayerName("BalrogHand");
 
@@ -71,6 +75,9 @@ bool CBalrogRight::Init()
 	m_Anim->AddNotify<CBalrogRight>("BalrogRightAttack3", "BalrogRightAttack3", 0, this, &CBalrogRight::PlayBalrogSound);
 	m_Anim->AddNotify<CBalrogRight>("BalrogRightDie", "BalrogRightDie", 0, this, &CBalrogRight::PlayBalrogSound);
 
+	m_Anim->AddNotify<CBalrogRight>("BalrogRightAttack2", "BalrogRightAttack2", 18, this, &CBalrogRight::Attack);
+	m_Anim->AddNotify<CBalrogRight>("BalrogRightAttack3", "BalrogRightAttack3", 13, this, &CBalrogRight::Attack);
+
 	m_Anim->SetEndFunction<CBalrogRight>("BalrogRightAttack1", this, &CBalrogRight::AnimationFinish);
 	m_Anim->SetEndFunction<CBalrogRight>("BalrogRightAttack2", this, &CBalrogRight::AnimationFinish);
 	m_Anim->SetEndFunction<CBalrogRight>("BalrogRightAttack3", this, &CBalrogRight::AnimationFinish);
@@ -79,8 +86,13 @@ bool CBalrogRight::Init()
 	//CInput::GetInst()->SetKeyCallback<CBalrogRight>("BalrogRightAnim", KeyState_Down, this, &CBalrogRight::ChangeAnim);
 
 	m_Sprite->AddChild(m_Body);
+	m_Sprite->AddChild(m_AttackBody);
 
 	m_Body->SetExtent(137.5f, 98.5f);
+	m_AttackBody->SetExtent(282.5f, 186.f);
+
+	m_AttackBody->AddCollisionCallback<CBalrogRight>(Collision_State::Begin, this, &CBalrogRight::OnCollisionBegin);
+	m_AttackBody->AddCollisionCallback<CBalrogRight>(Collision_State::End, this, &CBalrogRight::OnCollisionEnd);
 
 	SetCharacterInfo("BalrogRight");
 
@@ -327,6 +339,31 @@ void CBalrogRight::ChangeAnim(float DeltaTime)
 	}
 }
 
+void CBalrogRight::OnCollisionBegin(const CollisionResult& result)
+{
+	if (!result.Dest->GetCollisionProfile())
+	{
+		return;
+	}
+
+	if (result.Dest->GetCollisionProfile()->Channel == Collision_Channel::Player)
+	{
+		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+		if (!Player)
+		{
+			return;
+		}
+
+		m_Target = true;
+	}
+}
+
+void CBalrogRight::OnCollisionEnd(const CollisionResult& result)
+{
+	m_Target = false;
+}
+
 void CBalrogRight::AnimationFinish()
 {
 	if (m_Anim->CheckCurrentAnimation("BalrogRightAttack1"))
@@ -367,6 +404,43 @@ void CBalrogRight::AnimationFinish()
 void CBalrogRight::ArmDie()
 {
 	m_State = EMonster_State::Die;
+}
+
+void CBalrogRight::Attack()
+{
+	CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+	if (!Player || Player->GetHurt())
+	{
+		return;
+	}
+
+	if (m_Anim->CheckCurrentAnimation("BalrogRightAttack2"))
+	{
+		CRightAttack2Hit* RightAttack2Hit = m_Scene->CreateGameObject<CRightAttack2Hit>("RightAttack2Hit", "RightAttack2Hit", Player->GetWorldPos());
+
+		CResourceManager::GetInst()->SoundPlay("BalrogLeftCharDam2");
+
+		Player->SetDamage(10.f);
+
+		Player->SetHurt(true);
+
+		return;
+	}
+
+	if (m_Target)
+	{
+		if (m_Anim->CheckCurrentAnimation("BalrogRightAttack3"))
+		{
+			CRightAttack3Hit* RightAttack3Hit = m_Scene->CreateGameObject<CRightAttack3Hit>("RightAttack3Hit", "RightAttack3Hit", Player->GetWorldPos());
+
+			CResourceManager::GetInst()->SoundPlay("BalrogLeftCharDam3");
+
+			Player->SetDamage(10.f);
+
+			Player->SetHurt(true);
+		}
+	}
 }
 
 void CBalrogRight::PlayRightAttack1AreaWarning()

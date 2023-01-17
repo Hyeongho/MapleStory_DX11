@@ -4,6 +4,7 @@
 #include "../Widget/PlayerStatus.h"
 #include "../Widget/Fade.h"
 #include "../Widget/DamageWidget.h"
+#include "../Widget/DeathNotice.h"
 
 class CMainScene :
     public CSceneMode
@@ -16,6 +17,7 @@ private:
     CSharedPtr<CPlayerStatus> m_PlayerStatus;
     CSharedPtr<CFade> m_Fade;
     CSharedPtr<CDamageWidget> m_DamageWidget;
+    CSharedPtr<CDeathNotice> m_DeathNotice;
     std::function<void(bool, float)> m_LoadingFunction;
 
 public:

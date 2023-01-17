@@ -8,7 +8,7 @@
 #include "../Widget/Fade.h"
 #include "../ClientManager.h"
 
-CPlayer2D::CPlayer2D() : m_Flip(true), m_Hurt(false), m_HurtTime(0.f)
+CPlayer2D::CPlayer2D() : m_Flip(true), m_Hurt(false), m_HurtTime(0.f), m_Recovery(false), m_RecoveryTime(3.f)
 {
 	SetTypeID<CPlayer2D>();
 
@@ -144,6 +144,7 @@ bool CPlayer2D::Init()
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("StabD1", KeyState_Down, this, &CPlayer2D::StabD1);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("PhantomBlow", KeyState_Down, this, &CPlayer2D::PhantomBlow);
 	CInput::GetInst()->SetKeyCallback<CPlayer2D>("BladeFury", KeyState_Down, this, &CPlayer2D::BladeFury);
+	CInput::GetInst()->SetKeyCallback<CPlayer2D>("HPRecovery", KeyState_Down, this, &CPlayer2D::Recovery);
 
 	//m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::Begin, this, &CPlayer2D::CollisionCallback);
 	//m_Bottom->AddCollisionCallback<CPlayer2D>(Collision_State::End, this, &CPlayer2D::CollisionExit);
@@ -176,6 +177,17 @@ void CPlayer2D::Update(float DeltaTime)
 
 	m_PlayerStatus->SetHPPercent((float)m_CharacterInfo.HP / m_CharacterInfo.MaxHP);
 	m_PlayerStatus->SetMPPercent((float)m_CharacterInfo.MP / m_CharacterInfo.MaxMP);
+
+	CAnimationSequence2DInstance* Anim = m_Sprite->GetAnimationInstance();
+
+	if (m_CharacterInfo.HP <= 0)
+	{
+		m_CharacterInfo.HP = 0;
+
+		m_State = EPlayer_State::Die;
+
+		Anim->ChangeAnimation("Die");
+	}
 
 	Vector3 Range = GetRange();
 
@@ -316,6 +328,11 @@ void CPlayer2D::MoveLeft(float DeltaTime)
 		return;
 	}
 
+	if (m_State == EPlayer_State::Die)
+	{
+		return;
+	}
+
 	if (m_State == EPlayer_State::PhantomBlow || m_State == EPlayer_State::BladeFury)
 	{
 		return;
@@ -349,6 +366,11 @@ void CPlayer2D::MoveLeft(float DeltaTime)
 void CPlayer2D::MoveRight(float DeltaTime)
 {
 	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
+	{
+		return;
+	}
+
+	if (m_State == EPlayer_State::Die)
 	{
 		return;
 	}
@@ -389,6 +411,11 @@ void CPlayer2D::MoveUp(float DeltaTime)
 		return;
 	}
 
+	if (m_State == EPlayer_State::Die)
+	{
+		return;
+	}
+
 	if (m_State == EPlayer_State::PhantomBlow || m_State == EPlayer_State::BladeFury)
 	{
 		return;
@@ -416,6 +443,11 @@ void CPlayer2D::Stop(float DeltaTime)
 void CPlayer2D::Jump(float DeltaTime)
 {
 	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))
+	{
+		return;
+	}
+
+	if (m_State == EPlayer_State::Die)
 	{
 		return;
 	}
@@ -465,6 +497,11 @@ void CPlayer2D::PhantomBlow(float DeltaTime)
 		return;
 	}
 
+	if (m_State == EPlayer_State::Die)
+	{
+		return;
+	}
+
 	if (m_State == EPlayer_State::PhantomBlow || m_State == EPlayer_State::BladeFury)
 	{
 		return;
@@ -482,6 +519,11 @@ void CPlayer2D::BladeFury(float DeltaTime)
 		return;
 	}
 
+	if (m_State == EPlayer_State::Die)
+	{
+		return;
+	}
+
 	if (m_State == EPlayer_State::BladeFury || m_State == EPlayer_State::PhantomBlow)
 	{
 		return;
@@ -490,6 +532,28 @@ void CPlayer2D::BladeFury(float DeltaTime)
 	t1 = std::thread(&CPlayer2D::PlayBladeFury, this);
 
 	t1.join();
+}
+
+void CPlayer2D::Recovery(float DeltaTime)
+{
+	m_Recovery = true;
+
+	m_CharacterInfo.HP += static_cast<int>(m_CharacterInfo.MaxHP / 2.f);
+	m_CharacterInfo.MP += static_cast<int>(m_CharacterInfo.MaxMP / 2.f);
+
+	if (m_CharacterInfo.HP >= m_CharacterInfo.MaxHP)
+	{
+		m_CharacterInfo.HP = m_CharacterInfo.MaxHP;
+	}
+
+	if (m_CharacterInfo.MP >= m_CharacterInfo.MaxMP)
+	{
+		m_CharacterInfo.MP = m_CharacterInfo.MaxMP;
+	}
+}
+
+void CPlayer2D::HPRecovery(float DeltaTime)
+{
 }
 
 void CPlayer2D::OnHit(float DeltaTime)

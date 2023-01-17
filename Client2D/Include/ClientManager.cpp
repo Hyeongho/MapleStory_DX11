@@ -6,7 +6,6 @@
 #include "Scene/SceneManager.h"
 #include "Scene/StartScene.h"
 #include "Scene/MainScene.h"
-#include "Scene/TestScene.h"
 #include "Input.h"
 #include "Object/PlayerManager.h"
 #include "Object/Player2D.h"
@@ -75,6 +74,8 @@ bool CClientManager::Init(HINSTANCE hInst)
 	CInput::GetInst()->CreateKey("PhantomBlow", 'A');
 
 	CInput::GetInst()->CreateKey("BladeFury", 'S');
+
+	CInput::GetInst()->CreateKey("HPRecovery", 'Q');
 
 	CInput::GetInst()->CreateKey("BalrogAnim", 'D');
 	CInput::GetInst()->CreateKey("BalrogLeftAnim", 'F');
@@ -441,16 +442,6 @@ void CClientManager::LoadAnimation()
 	}
 
 	vecFileName.clear();
-
-	/*for (int i = 1; i <= 16; i++)
-	{
-		TCHAR* FileName = new TCHAR[MAX_PATH];
-		memset(FileName, 0, sizeof(TCHAR) * MAX_PATH);
-
-		wsprintf(FileName, TEXT("Monster/Balrog/Body/attack2/%d.png"), i);
-
-		vecFileName.push_back(FileName);
-	}*/
 
 	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/1.png"));
 	vecFileName.push_back(TEXT("Monster/Balrog/Body/attack2/1.png"));

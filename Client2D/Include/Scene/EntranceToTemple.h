@@ -5,6 +5,8 @@
 #include "../Widget/TalkWidget.h"
 #include "../Widget/Fade.h"
 #include "../Widget/QuesetWidget.h"
+#include "../Widget/ClearWidget.h"
+#include "../Widget/DeathNotice.h"
 
 class CEntranceToTemple :
     public CSceneMode
@@ -18,6 +20,8 @@ private:
     CSharedPtr<CTalkWidget> m_TalkWidget;
     CSharedPtr<CFade> m_Fade;
     CSharedPtr<CQuesetWidget> m_Quset;
+    CSharedPtr<CClearWidget> m_Clear;
+    CSharedPtr<CDeathNotice> m_DeathNotice;
     std::function<void(bool, float)> m_LoadingFunction;
 
     std::list<class CMonsterManager*> m_MonsterList;
@@ -41,6 +45,8 @@ private:
     void CreatePotal();
 
     void MonsterSpawn(float DeltaTime);
+
+    void Clear();
 
 public:
     void CollisionBeginCallback(const CollisionResult& Result);

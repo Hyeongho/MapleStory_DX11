@@ -49,8 +49,13 @@ private:
 
 	void ChangeAnim(float DeltaTime);
 
+	void OnCollisionBegin(const CollisionResult& result);
+	void OnCollisionEnd(const CollisionResult& result);
+
 	void AnimationFinish();
 	void ArmDie();
+
+	void Attack();
 
 	void PlayRightAttack1AreaWarning();
 

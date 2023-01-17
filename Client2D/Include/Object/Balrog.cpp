@@ -7,6 +7,8 @@
 #include "Input.h"
 #include "BodyAttack1AreaWarning.h"
 #include "BodyAttack3AreaWarning.h"
+#include "BodyAttack4Hit.h"
+#include "../Widget/Fade.h"
 
 CBalrog::CBalrog() : m_BTRun(true)
 {
@@ -122,7 +124,11 @@ bool CBalrog::Init()
 	m_Anim->AddNotify<CBalrog>("BalrogBodyAttack4", "BalrogBodyAttack4", 0, this, &CBalrog::PlayBalrogSound);
 	m_Anim->AddNotify<CBalrog>("BalrogBodyDie", "BalrogBodyDie", 0, this, &CBalrog::PlayBalrogSound);
 
+	m_Anim->AddNotify<CBalrog>("BalrogBodyAttack4", "BalrogBodyAttack4", 10, this, &CBalrog::Attack);
+
 	m_Anim->AddNotify<CBalrog>("BalrogBodyAttack1", "BalrogBodyAttack1", 2, this, &CBalrog::SetAttackRange);
+
+	m_Anim->SetEndFunction<CBalrog>("BalrogBodyDie", this, &CBalrog::SceneChange);
 
 	//m_BalrogLeft->SetWorldPos(0.f, 0.f, 0.f);
 	//m_BalrogRight->SetWorldPos(0.f, 0.f, 0.f);
@@ -496,6 +502,21 @@ void CBalrog::SetAttackRange()
 
 void CBalrog::Attack()
 {
+	CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+	if (Player && !Player->GetHurt())
+	{
+		if (m_Anim->CheckCurrentAnimation("BalrogBodyAttack4"))
+		{
+			CBodyAttack4Hit* BodyAttack4Hit = m_Scene->CreateGameObject<CBodyAttack4Hit>("BodyAttack4Hit", "BodyAttack4Hit", Player->GetWorldPos());
+
+			CResourceManager::GetInst()->SoundPlay("BalrogLeftCharDam3");
+
+			Player->SetDamage(10.f);
+
+			Player->SetHurt(true);
+		}
+	}
 }
 
 void CBalrog::ChangeAnim(float DeltaTime)
@@ -577,4 +598,13 @@ void CBalrog::PlayBalrogSound()
 	{
 		CResourceManager::GetInst()->SoundPlay("BalrogBodyDie");
 	}
+}
+
+void CBalrog::SceneChange()
+{
+	CFade* Fade = m_Scene->GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
+
+	Fade->SetVisibility(true);
+
+	CClientManager::GetInst()->SetFadeState(EFade_State::FadeOut_Start);
 }

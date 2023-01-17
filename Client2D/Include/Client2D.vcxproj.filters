@@ -123,13 +123,7 @@
     <ClInclude Include="ClientManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Widget\TestWidget.h">
-      <Filter>03. UI</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\MainScene.h">
-      <Filter>01. SceneMode</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\TestScene.h">
       <Filter>01. SceneMode</Filter>
     </ClInclude>
     <ClInclude Include="Object\TestMonster.h">
@@ -372,6 +366,21 @@
     <ClInclude Include="Object\LeftAttack1Hit.h">
       <Filter>02. Object\02. Monster\06. Balrog\04. HIt\02. Left</Filter>
     </ClInclude>
+    <ClInclude Include="Widget\ClearFWidget.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\ClearWidget.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\LoadingStartScene.h">
+      <Filter>01. SceneMode\01. LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\StartSceneThread.h">
+      <Filter>01. SceneMode\02. LoadThread</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\DeathNotice.h">
+      <Filter>03. UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client2D.rc">
@@ -390,9 +399,6 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\TestScene.cpp">
-      <Filter>01. SceneMode</Filter>
-    </ClCompile>
     <ClCompile Include="Object\ObjectManager.cpp">
       <Filter>02. Object</Filter>
     </ClCompile>
@@ -407,9 +413,6 @@
     </ClCompile>
     <ClCompile Include="Object\PlayerAnimation2D.cpp">
       <Filter>02. Object\01. Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Widget\TestWidget.cpp">
-      <Filter>03. UI</Filter>
     </ClCompile>
     <ClCompile Include="Object\TileMap.cpp">
       <Filter>02. Object\03. TileMap</Filter>
@@ -638,6 +641,21 @@
     </ClCompile>
     <ClCompile Include="Object\LeftAttack2Hit.cpp">
       <Filter>02. Object\02. Monster\06. Balrog\04. HIt\02. Left</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\ClearFWidget.cpp">
+      <Filter>03. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\ClearWidget.cpp">
+      <Filter>03. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\LoadingStartScene.cpp">
+      <Filter>01. SceneMode\01. LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\StartSceneThread.cpp">
+      <Filter>01. SceneMode\02. LoadThread</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\DeathNotice.cpp">
+      <Filter>03. UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -71,6 +71,8 @@ bool CStartWidget::Init()
 
     m_Female->SetClickCallback<CStartWidget>(this, &CStartWidget::FemaleClick);
 
+	CPlayerManager::GetInst()->SetGender(Gender::None);
+
 	return true;
 }
 
@@ -82,6 +84,11 @@ void CStartWidget::Update(float DeltaTime)
 void CStartWidget::PostUpdate(float DeltaTime)
 {
 	CWidgetWindow::PostUpdate(DeltaTime);
+
+	if (CPlayerManager::GetInst()->GetGender() == Gender::None)
+	{
+		return;
+	}
 
 	if (CClientManager::GetInst()->GetFadeState() == EFade_State::FadeOut_End)
 	{
@@ -106,7 +113,7 @@ void CStartWidget::MaleClick()
 {
 	CPlayerManager::GetInst()->SetGender(Gender::Male);
 
-	CFade* Fade = (CFade*)GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
+	CFade* Fade = GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
 
 	Fade->SetVisibility(true);
 
@@ -117,7 +124,7 @@ void CStartWidget::FemaleClick()
 {
 	CPlayerManager::GetInst()->SetGender(Gender::Female);
 
-	CFade* Fade = (CFade*)GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
+	CFade* Fade = GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
 
 	Fade->SetVisibility(true);
 

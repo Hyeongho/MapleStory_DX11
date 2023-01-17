@@ -128,7 +128,7 @@ void CBodyAttack1AreaWarning::Attack()
 	{
 		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
 
-		if (Player)
+		if (Player && !Player->GetHurt())
 		{
 			CBodyAttack1Hit* BodyAttack1Hit = m_Scene->CreateGameObject<CBodyAttack1Hit>("BodyAttack1Hit", "BodyAttack1Hit", Player->GetWorldPos());
 

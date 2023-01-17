@@ -411,7 +411,7 @@ void CBalrogLeft::Attack()
 	{
 		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
 
-		if (!Player)
+		if (!Player || Player->GetHurt())
 		{
 			return;
 		}

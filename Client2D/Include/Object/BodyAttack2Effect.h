@@ -34,5 +34,8 @@ public:
 
 public:
     void OnCollisionBegin(const CollisionResult& result);
+
+    void Attack();
+
     void AnimationFinish();
 };

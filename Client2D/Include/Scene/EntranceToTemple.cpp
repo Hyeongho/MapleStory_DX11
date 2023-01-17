@@ -101,9 +101,18 @@ bool CEntranceToTemple::Init()
 		m_LoadingFunction(false, 0.8f);
 	}
 
+#ifdef _DEBUG
+
 	CPotal* Potal = m_Scene->CreateGameObject<CPotal>("Potal");
 
 	Potal->SetRelativePos(2000.f, 190.f, 0.f);
+
+	//m_Clear = m_Scene->GetViewport()->CreateWidgetWindow<CClearWidget>("ClearWidget");
+
+#else
+
+#endif // _DEBUG
+
 
 	m_TalkWidget = m_Scene->GetViewport()->CreateWidgetWindow<CTalkWidget>("TalkWidget");
 
@@ -112,6 +121,8 @@ bool CEntranceToTemple::Init()
 	m_PlayerStatus = m_Scene->GetViewport()->CreateWidgetWindow<CPlayerStatus>("PlayerStatus");
 	m_Fade = m_Scene->GetViewport()->CreateWidgetWindow<CFade>("FadeWidget");
 	m_Quset = m_Scene->GetViewport()->CreateWidgetWindow<CQuesetWidget>("QuesetWidget");
+
+	m_DeathNotice = m_Scene->GetViewport()->CreateWidgetWindow<CDeathNotice>("DeathNotice");
 
 	CJr_BalrogAttack1Hit* Jr_BalrogAttack1Hit = m_Scene->CreatePrototype<CJr_BalrogAttack1Hit>("Jr_BalrogAttack1Hit");
 	CJr_BalrogAttack2Hit* Jr_BalrogAttack2Hit = m_Scene->CreatePrototype<CJr_BalrogAttack2Hit>("Jr_BalrogAttack2Hit");
@@ -128,6 +139,24 @@ bool CEntranceToTemple::Init()
 
 void CEntranceToTemple::PostUpdate(float DeltaTime)
 {
+	CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
+
+	if (!Player)
+	{
+		return;
+	}
+
+	if (m_DeathNotice)
+	{
+		if (Player->GetPlayerState() == EPlayer_State::Die)
+		{
+			if (!m_DeathNotice->GetVisibility())
+			{
+				m_DeathNotice->SetVisibility(true);
+			}
+		}
+	}
+
 	MonsterSpawn(DeltaTime);
 
 	auto iter = m_MonsterList.begin();
@@ -177,13 +206,6 @@ void CEntranceToTemple::PostUpdate(float DeltaTime)
 			m_MonsterList.clear();
 		}
 
-		if (!m_Scene->FindObject("Potal"))
-		{
-			CPotal* Potal = m_Scene->CreateGameObject<CPotal>("Potal");
-
-			Potal->SetRelativePos(2000.f, 190.f, 0.f);
-		}
-
 		if (!m_Scene->FindObject("Jr_Balrog"))
 		{
 			CJr_Balrog* Jr_Balrog = m_Scene->CreateGameObject<CJr_Balrog>("Jr_Balrog");
@@ -193,6 +215,8 @@ void CEntranceToTemple::PostUpdate(float DeltaTime)
 			Jr_Balrog->SetRange(2144.f, 750.f, 0.f);
 		}
 	}
+
+	Clear();
 }
 
 void CEntranceToTemple::CreateMaterial()
@@ -286,6 +310,31 @@ void CEntranceToTemple::MonsterSpawn(float DeltaTime)
 			m_MonsterList.push_back(Taurospear);
 
 			m_SpawnTime = 4.f;
+		}
+	}
+}
+
+void CEntranceToTemple::Clear()
+{
+	CJr_Balrog* Jr_Balrog = dynamic_cast<CJr_Balrog*>(m_Scene->FindObject("Jr_Balrog"));
+
+	if (!Jr_Balrog)
+	{
+		return;
+	}
+
+	if (Jr_Balrog->GetState() == EMonster_State::Die)
+	{
+		if (!m_Scene->FindObject("Potal"))
+		{
+			CPotal* Potal = m_Scene->CreateGameObject<CPotal>("Potal");
+
+			Potal->SetRelativePos(2000.f, 190.f, 0.f);
+		}
+
+		if (!m_Scene->GetViewport()->FindWidgetWindow<CClearWidget>("ClearWidget"))
+		{
+			m_Clear = m_Scene->GetViewport()->CreateWidgetWindow<CClearWidget>("ClearWidget");
 		}
 	}
 }

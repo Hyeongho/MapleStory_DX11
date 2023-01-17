@@ -126,7 +126,7 @@ void CRightAttack1AreaWarning::Attack()
 	{
 		CPlayer2D* Player = dynamic_cast<CPlayer2D*>(m_Scene->GetPlayerObject());
 
-		if (Player)
+		if (Player && !Player->GetHurt())
 		{
 			CRightAttack1Hit* RightAttack1Hit = m_Scene->CreateGameObject<CRightAttack1Hit>("RightAttack1Hit", "RightAttack1Hit", Player->GetWorldPos());
 

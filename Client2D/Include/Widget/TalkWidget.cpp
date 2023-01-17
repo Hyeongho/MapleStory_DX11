@@ -172,7 +172,7 @@ void CTalkWidget::OKClick()
 
 		//CClientManager::GetInst()->SetFade(true);
 
-		CFade* Fade = (CFade*)GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
+		CFade* Fade = GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
 
 		Fade->SetVisibility(true);
 
@@ -187,7 +187,7 @@ void CTalkWidget::OKClick()
 
 		//CClientManager::GetInst()->SetFade(true);
 
-		CFade* Fade = (CFade*)GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
+		CFade* Fade = GetViewport()->FindWidgetWindow<CFade>("FadeWidget");
 
 		Fade->SetVisibility(true);
 
