@@ -105,8 +105,8 @@ public:
 	//char 에서 wchar_t 로의 형변환 함수
 	wchar_t* ConverCtoWC(const char* str)
 	{
-		char* Text = new char[1024];
-		wchar_t* wText = new wchar_t[1024];
+		char Text[1024];
+		wchar_t wText[1024];
 
 		memset(wText, 0, sizeof(wchar_t) * 1024);
 		memset(Text, 0, sizeof(char) * 1024);
@@ -117,14 +117,7 @@ public:
 
 		MultiByteToWideChar(CP_ACP, 0, str, (int)strlen(str) + 1, wText, strSize);
 
-		static wchar_t wText1[1024];
-
-		wcscpy_s(wText1, strSize,  wText);
-
-		delete[] Text;
-		delete[] wText;
-
-		return wText1;
+		return wText;
 	}
 
 public:

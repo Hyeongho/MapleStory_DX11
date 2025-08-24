@@ -68,8 +68,8 @@ bool CClientManager::Init(HINSTANCE hInst)
 	CInput::GetInst()->CreateKey("MoveRight", VK_RIGHT);
 	CInput::GetInst()->CreateKey("MoveUp", VK_UP);
 	//CInput::GetInst()->CreateKey("Jump", 'A'); // AltÅ° ¸ØÃã ÇØ°á µÇ¸é Alt·Î º¯°æ 
-	CInput::GetInst()->CreateKey("Jump", 'C'); // AltÅ° ¸ØÃã ÇØ°á µÇ¸é Alt·Î º¯°æ 
-	//CInput::GetInst()->SetAltKey("Jump", true); // AltÅ° ¸ØÃã ÇØ°á µÇ¸é Alt·Î º¯°æ 
+	CInput::GetInst()->CreateKey("Jump", VK_LMENU); // AltÅ° ¸ØÃã ÇØ°á µÇ¸é Alt·Î º¯°æ 
+	CInput::GetInst()->SetAltKey("Jump", true); // AltÅ° ¸ØÃã ÇØ°á µÇ¸é Alt·Î º¯°æ 
 
 	CInput::GetInst()->CreateKey("PhantomBlow", 'A');
 

@@ -338,6 +338,14 @@ LRESULT CEngine::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		return 1;
 	}
 
+	if (message == WM_SYSCOMMAND)
+	{
+		if ((wParam & 0xFFF0) == SC_KEYMENU)
+		{
+			return 0;
+		}
+	}
+
 	switch (message)
 	{
 	case WM_PAINT:

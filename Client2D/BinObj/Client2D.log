@@ -1,7 +1,109 @@
-﻿  StartScene.cpp
+﻿  ClientManager.cpp
+  ClientSceneManager.cpp
+  main.cpp
+  BalrogBT.cpp
+  BalrogPaseChange.cpp
+  CheckBalrogHandDie.cpp
+  CompositeNode.cpp
+  Node.cpp
+  Selector.cpp
+  Sequence.cpp
+  Balrog.cpp
+  BalrogLeft.cpp
+  BalrogRight.cpp
+  BladeFury.cpp
+  BodyAttack1AreaWarning.cpp
+  BodyAttack1Hit.cpp
+  BodyAttack2Effect.cpp
+  BodyAttack2Hit.cpp
+  BodyAttack3AreaWarning.cpp
+  BodyAttack3Hit.cpp
+  컴파일하고 있습니다...
+  BodyAttack4Hit.cpp
+  CrimsonBalrog.cpp
+  DamageFont.cpp
+  HongA.cpp
+  Jr_Balrog.cpp
+  Jr_BalrogAttack1Effect.cpp
+  Jr_BalrogAttack1Hit.cpp
+  Jr_BalrogAttack2Ball.cpp
+  Jr_BalrogAttack2Effect.cpp
+  Jr_BalrogAttack2Hit.cpp
+  Jr_BalrogAttack3Effect.cpp
+  Jr_BalrogAttack3Hit.cpp
+  LeftAttack1AreaWarning.cpp
+  LeftAttack1Hit.cpp
+  LeftAttack2Hit.cpp
+  MonsterManager.cpp
+  NPCManager.cpp
+  ObjectManager.cpp
+  PhantomBlow.cpp
+  Player2D.cpp
+  컴파일하고 있습니다...
+  PlayerAnimation2D.cpp
+  PlayerManager.cpp
+  Potal.cpp
+  RightAttack1AreaWarning.cpp
+  RightAttack1Hit.cpp
+  RightAttack2Hit.cpp
+  RightAttack3Hit.cpp
+  SeolHui.cpp
+  ShadowDualBlade.cpp
+  SkillManager.cpp
+  Tauromacis.cpp
+  TauromacisHitEffect.cpp
+  Taurospear.cpp
+  TestMonster.cpp
+  TileMap.cpp
+  AnotherDoor.cpp
+  AnotherDoorThread.cpp
+  BalrogAltar.cpp
+  BalrogAltarThread.cpp
+  BalrogGate.cpp
+  컴파일하고 있습니다...
+  BalrogGateThread.cpp
+  ClearScene.cpp
+  EntranceToTemple.cpp
+  EToTempleThread.cpp
+  LoadingAnotherDoor.cpp
+  LoadingBalrogAltar.cpp
+  LoadingBalrogGate.cpp
+  LoadingEToTemple.cpp
+  LoadingScene.cpp
+  LoadingSeolHui.cpp
+  LoadingStartScene.cpp
+  LoadingThread.cpp
+  MainScene.cpp
+  SeolHuibang.cpp
+  SeolHuiThread.cpp
+  StartScene.cpp
+  StartSceneThread.cpp
+  TalkManager.cpp
+  BossStatus.cpp
+  ClearFWidget.cpp
+  컴파일하고 있습니다...
+  ClearWidget.cpp
+  DamageWidget.cpp
+  DeathNotice.cpp
+  Fade.cpp
+  PlayerStatus.cpp
+  QuesetWidget.cpp
+  StartWidget.cpp
+  TalkWidget.cpp
   코드를 생성하고 있습니다.
-  4 of 14629 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    24 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB not found, fall back to full compilation.
+  All 14630 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   코드를 생성했습니다.
-  Client2D.vcxproj -> H:\C++_Client\MapleStory_DX11\Client2D\Bin\MapleStory.exe
+DirectXTex.lib(DirectXTexD3D11.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexD3D11.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexDDS.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexDDS.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexTGA.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexTGA.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexWIC.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexWIC.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexImage.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexImage.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexUtil.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexUtil.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexConvert.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexConvert.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexMipMaps.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexMipMaps.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexCompress.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexCompress.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(BC.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(BC.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(BC4BC5.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(BC4BC5.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(BC6HBC7.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(BC6HBC7.obj)' 또는 'D:\MapleStory_DX11\Client2D\Bin\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+  Client2D.vcxproj -> D:\MapleStory_DX11\Client2D\Bin\MapleStory.exe

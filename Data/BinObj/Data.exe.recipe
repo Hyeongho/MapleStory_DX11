@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>H:\C++_Client\MapleStory_DX11\Data\Bin\Data.exe</FullPath>
+      <FullPath>D:\MapleStory_DX11\Data\Bin\Data.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
