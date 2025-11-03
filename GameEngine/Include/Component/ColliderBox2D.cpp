@@ -9,18 +9,20 @@
 #include "ColliderCircle.h"
 #include "ColliderPixel.h"
 
-CColliderBox2D::CColliderBox2D()
+CColliderBox2D::CColliderBox2D() : m_PrevInfo{}, m_HasPrevInfo(false)
 {
-	SetTypeID<CColliderBox2D>();
-	m_ComponentType = Component_Type::SceneComponent;
-	m_Render = true;
+        SetTypeID<CColliderBox2D>();
+        m_ComponentType = Component_Type::SceneComponent;
+        m_Render = true;
 
-	m_ColliderType = Collider_Type::Box2D;
+        m_ColliderType = Collider_Type::Box2D;
 }
 
 CColliderBox2D::CColliderBox2D(const CColliderBox2D& com) : CColliderComponent(com)
 {
-	m_Info = com.m_Info;
+        m_Info = com.m_Info;
+        m_PrevInfo = com.m_PrevInfo;
+        m_HasPrevInfo = com.m_HasPrevInfo;
 }
 
 CColliderBox2D::~CColliderBox2D()
@@ -60,10 +62,12 @@ void CColliderBox2D::Update(float DeltaTime)
 
 void CColliderBox2D::PostUpdate(float DeltaTime)
 {
-	CColliderComponent::PostUpdate(DeltaTime);
+        CColliderComponent::PostUpdate(DeltaTime);
 
-	m_Info.Center.x = GetWorldPos().x + m_Offset.x;
-	m_Info.Center.y = GetWorldPos().y + m_Offset.y;
+        Box2DInfo PrevInfo = m_Info;
+
+        m_Info.Center.x = GetWorldPos().x + m_Offset.x;
+        m_Info.Center.y = GetWorldPos().y + m_Offset.y;
 
 	m_Info.Axis[0].x = GetWorldAxis(AXIS_X).x;
 	m_Info.Axis[0].y = GetWorldAxis(AXIS_X).y;
@@ -107,11 +111,22 @@ void CColliderBox2D::PostUpdate(float DeltaTime)
 		}
 	}
 
-	m_Info.Min.x = m_Min.x;
-	m_Info.Min.y = m_Min.y;
+        m_Info.Min.x = m_Min.x;
+        m_Info.Min.y = m_Min.y;
 
-	m_Info.Max.x = m_Max.x;
-	m_Info.Max.y = m_Max.y;
+        m_Info.Max.x = m_Max.x;
+        m_Info.Max.y = m_Max.y;
+
+        if (!m_HasPrevInfo)
+        {
+                m_PrevInfo = m_Info;
+                m_HasPrevInfo = true;
+        }
+
+        else
+        {
+                m_PrevInfo = PrevInfo;
+        }
 }
 
 void CColliderBox2D::PrevRender()
@@ -178,16 +193,18 @@ CColliderBox2D* CColliderBox2D::Clone()
 
 void CColliderBox2D::Save(FILE* File)
 {
-	CColliderComponent::Save(File);
+        CColliderComponent::Save(File);
 
-	fwrite(&m_Info, sizeof(Box2DInfo), 1, File);
+        fwrite(&m_Info, sizeof(Box2DInfo), 1, File);
 }
 
 void CColliderBox2D::Load(FILE* File)
 {
-	CColliderComponent::Load(File);
+        CColliderComponent::Load(File);
 
-	fread(&m_Info, sizeof(Box2DInfo), 1, File);
+        fread(&m_Info, sizeof(Box2DInfo), 1, File);
+        m_PrevInfo = m_Info;
+        m_HasPrevInfo = true;
 }
 
 bool CColliderBox2D::Collision(CColliderComponent* Dest)

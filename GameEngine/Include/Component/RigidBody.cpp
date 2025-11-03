@@ -6,6 +6,8 @@
 #include "SceneComponent.h"
 #include "../GameObject/GameObject.h"
 #include "Gravity.h"
+#include <algorithm>
+#include <cmath>
 
 CRigidBody::CRigidBody() : m_Mass(1.f), m_FricCoeffp(Vector3(100.f, 100.f, 100.f)), m_MaxVelocity(Vector3(100.f, 600.f, 0.f)), 
 	m_Velocity(Vector3(0.f, 0.f, 0.f))
@@ -45,58 +47,105 @@ void CRigidBody::Update(float DeltaTime)
 
 void CRigidBody::PostUpdate(float DeltaTime)
 {
-	float Force = m_Force.Length();
+        float Force = m_Force.Length();
 
-	if (Force != 0.f)
-	{
-		m_Force.Normalize();
+        if (Force != 0.f)
+        {
+                m_Force.Normalize();
 
-		float Accel = Force / m_Mass;
+                float Accel = Force / m_Mass;
 
-		m_Accel = m_Force * Accel;
-	}
+                m_Accel = m_Force * Accel;
+        }
 
-	m_Accel += m_AccelAlpha;
+        Vector3 TotalAccel = m_Accel + m_AccelAlpha;
 
-	m_Velocity += m_Accel * DeltaTime;
+        constexpr float MaxStepDistance = 10.f;
+        constexpr float MinStepDelta = 1e-4f;
 
-	if (m_Velocity.Length() != 0.f)
-	{
-		Vector3 FricDir = m_Velocity * -1.f;
+        float RemainingTime = DeltaTime;
 
-		FricDir.Normalize();
-		
-		Vector3 FricCoeffp = FricDir * m_FricCoeffp * DeltaTime;
+        while (RemainingTime > 0.f)
+        {
+                float StepDelta = RemainingTime;
 
-		if (FricCoeffp.Length() > m_Velocity.Length())
-		{
-			m_Velocity = Vector3(0.f, 0.f, 0.f);
-		}
+                float CurrentSpeed = m_Velocity.Length();
+                float AccelMag = TotalAccel.Length();
 
-		else
-		{
-			m_Velocity.x += FricCoeffp.x;
-			m_Velocity.y += FricCoeffp.y;
-			m_Velocity.z += FricCoeffp.z;
-		}
-	}
+                if (CurrentSpeed > 0.f || AccelMag > 0.f)
+                {
+                        float EstimatedMove = CurrentSpeed * StepDelta + 0.5f * AccelMag * StepDelta * StepDelta;
 
-	if (abs(m_Velocity.x) > abs(m_MaxVelocity.x))
-	{
-		m_Velocity.x = (m_Velocity.x / abs(m_Velocity.x)) * m_MaxVelocity.x;
-	}
+                        if (EstimatedMove > MaxStepDistance)
+                        {
+                                float SafeStep = StepDelta;
 
-	if (abs(m_Velocity.y) > abs(m_MaxVelocity.y))
-	{
-		m_Velocity.y = (m_Velocity.y / abs(m_Velocity.y)) * m_MaxVelocity.y;
-	}
+                                if (AccelMag > 1e-6f)
+                                {
+                                        float Discriminant = CurrentSpeed * CurrentSpeed + 2.f * AccelMag * MaxStepDistance;
+                                        Discriminant = std::max(0.f, Discriminant);
+                                        SafeStep = (-CurrentSpeed + std::sqrt(Discriminant)) / AccelMag;
+                                }
 
-	Move(DeltaTime);
+                                else if (CurrentSpeed > 1e-6f)
+                                {
+                                        SafeStep = MaxStepDistance / CurrentSpeed;
+                                }
 
-	m_Force = Vector3(0.f, 0.f, 0.f);
+                                SafeStep = std::max(SafeStep, MinStepDelta);
+                                StepDelta = std::min(StepDelta, SafeStep);
+                        }
+                }
 
-	m_Accel = Vector3(0.f, 0.f, 0.f);
-	m_AccelAlpha = Vector3(0.f, 0.f, 0.f);
+                m_Velocity += TotalAccel * StepDelta;
+
+                if (m_Velocity.Length() != 0.f)
+                {
+                        Vector3 FricDir = m_Velocity * -1.f;
+
+                        FricDir.Normalize();
+
+                        Vector3 FricCoeffp = FricDir * m_FricCoeffp * StepDelta;
+
+                        if (FricCoeffp.Length() > m_Velocity.Length())
+                        {
+                                m_Velocity = Vector3(0.f, 0.f, 0.f);
+                        }
+
+                        else
+                        {
+                                m_Velocity.x += FricCoeffp.x;
+                                m_Velocity.y += FricCoeffp.y;
+                                m_Velocity.z += FricCoeffp.z;
+                        }
+                }
+
+                if (abs(m_Velocity.x) > abs(m_MaxVelocity.x))
+                {
+                        m_Velocity.x = (m_Velocity.x / abs(m_Velocity.x)) * m_MaxVelocity.x;
+                }
+
+                if (abs(m_Velocity.y) > abs(m_MaxVelocity.y))
+                {
+                        m_Velocity.y = (m_Velocity.y / abs(m_Velocity.y)) * m_MaxVelocity.y;
+                }
+
+                Move(StepDelta);
+
+                RemainingTime -= StepDelta;
+                RemainingTime = std::max(0.f, RemainingTime);
+
+                if (RemainingTime <= MinStepDelta)
+                {
+                        RemainingTime = 0.f;
+                        break;
+                }
+        }
+
+        m_Force = Vector3(0.f, 0.f, 0.f);
+
+        m_Accel = Vector3(0.f, 0.f, 0.f);
+        m_AccelAlpha = Vector3(0.f, 0.f, 0.f);
 }
 
 void CRigidBody::PrevRender()

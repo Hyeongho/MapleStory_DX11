@@ -26,7 +26,7 @@ protected:
     virtual ~CPlayer2D();
 
 private:
-    std::thread t1; // ½ºÅ³ ÀÌÆåÆ® ½º·¹µå
+    std::thread t1; // Â½ÂºÃ…Â³ Ã€ÃŒÃ†Ã¥Ã†Â® Â½ÂºÂ·Â¹ÂµÃ¥
     std::mutex m1;
 
     CSharedPtr<CSpriteComponent> m_Sprite;
@@ -97,6 +97,10 @@ public:
     virtual void Update(float DeltaTime);
     virtual void PostUpdate(float DeltaTime);
     virtual CPlayer2D* Clone();
+
+public:
+    void ResolveFloorContact(class CColliderBox2D* FloorCollider, class CColliderBox2D* BottomCollider);
+
 
 private:
     void MoveLeft(float DeltaTime);

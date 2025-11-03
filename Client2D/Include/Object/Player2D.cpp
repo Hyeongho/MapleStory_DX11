@@ -321,6 +321,41 @@ CPlayer2D* CPlayer2D::Clone()
 	return new CPlayer2D(*this);
 }
 
+void CPlayer2D::ResolveFloorContact(CColliderBox2D* FloorCollider, CColliderBox2D* BottomCollider)
+{
+	if (!FloorCollider || !BottomCollider)
+	{
+		return;
+	}
+
+	const Box2DInfo floorInfo = FloorCollider->GetInfo();
+	const Box2DInfo bottomInfo = BottomCollider->GetInfo();
+
+	float penetration = floorInfo.Max.y - bottomInfo.Min.y;
+
+	if (penetration < 0.f && BottomCollider->HasPrevInfo())
+	{
+		penetration = floorInfo.Max.y - BottomCollider->GetPrevInfo().Min.y;
+	}
+
+	if (penetration < 0.f && FloorCollider->HasPrevInfo())
+	{
+		penetration = FloorCollider->GetPrevInfo().Max.y - bottomInfo.Min.y;
+	}
+
+	if (penetration < 0.f)
+	{
+		penetration = 0.f;
+	}
+
+	if (penetration > 0.f)
+	{
+		Vector3 pos = GetWorldPos();
+		pos.y += penetration;
+		SetWorldPos(pos);
+	}
+}
+
 void CPlayer2D::MoveLeft(float DeltaTime)
 {
 	if ((CClientManager::GetInst()->GetFadeState() != EFade_State::Normal) || (CClientManager::GetInst()->GetFade()))

@@ -3,6 +3,51 @@
 #include "../Component/ColliderCircle.h"
 #include "../Component/ColliderPixel.h"
 
+namespace
+{
+	bool HasHorizontalOverlap(const Box2DInfo& srcPrev, const Box2DInfo& srcCurr, const Box2DInfo& destPrev, const Box2DInfo& destCurr)
+	{
+		auto overlap = [](const Box2DInfo& lhs, const Box2DInfo& rhs)
+		{
+			return !(lhs.Max.x < rhs.Min.x || rhs.Max.x < lhs.Min.x);
+		};
+
+		return overlap(srcCurr, destCurr) || overlap(srcPrev, destCurr) || overlap(srcCurr, destPrev) || overlap(srcPrev, destPrev);
+	}
+
+	bool ResolveFloorPlayerBottomContinuous(CColliderBox2D* Floor, CColliderBox2D* PlayerBottom, CollisionResult& floorResult, CollisionResult& playerResult)
+	{
+		if (!Floor->HasPrevInfo() || !PlayerBottom->HasPrevInfo())
+		{
+			return false;
+		}
+
+		const Box2DInfo& floorCurr = Floor->GetInfo();
+		const Box2DInfo& floorPrev = Floor->GetPrevInfo();
+		const Box2DInfo& playerCurr = PlayerBottom->GetInfo();
+		const Box2DInfo& playerPrev = PlayerBottom->GetPrevInfo();
+
+		const float prevGap = playerPrev.Min.y - floorPrev.Max.y;
+		const float currGap = playerCurr.Min.y - floorCurr.Max.y;
+
+		if (!(prevGap > 0.f && currGap <= 0.f))
+		{
+			return false;
+		}
+
+		if (!HasHorizontalOverlap(playerPrev, playerCurr, floorPrev, floorCurr))
+		{
+			return false;
+		}
+
+		playerResult.HitPoint = Vector3(playerCurr.Center.x, floorCurr.Max.y, 0.f);
+		floorResult.HitPoint = playerResult.HitPoint;
+
+		return true;
+	}
+}
+
+
 bool CCollision::CollisionBox2DToBox2D(CColliderBox2D* Src, CColliderBox2D* Dest)
 {
 	CollisionResult	srcResult, destResult;
@@ -19,6 +64,47 @@ bool CCollision::CollisionBox2DToBox2D(CColliderBox2D* Src, CColliderBox2D* Dest
 		Dest->m_Result = destResult;
 
 		return true;
+	}
+
+	CollisionProfile* srcProfile = Src->GetCollisionProfile();
+	CollisionProfile* destProfile = Dest->GetCollisionProfile();
+
+	bool floorSrc = srcProfile && srcProfile->Channel == Collision_Channel::Floor;
+	bool floorDest = destProfile && destProfile->Channel == Collision_Channel::Floor;
+	bool bottomSrc = srcProfile && srcProfile->Channel == Collision_Channel::PlayerBottom;
+	bool bottomDest = destProfile && destProfile->Channel == Collision_Channel::PlayerBottom;
+
+	if ((floorSrc && bottomDest) || (bottomSrc && floorDest))
+	{
+		CColliderBox2D* floorCollider = floorSrc ? Src : Dest;
+		CColliderBox2D* playerCollider = bottomSrc ? Src : Dest;
+
+		CollisionResult floorResult, playerResult;
+
+		if (ResolveFloorPlayerBottomContinuous(floorCollider, playerCollider, floorResult, playerResult))
+		{
+			if (floorSrc)
+			{
+				srcResult = floorResult;
+				destResult = playerResult;
+			}
+			else
+			{
+				srcResult = playerResult;
+				destResult = floorResult;
+			}
+
+			srcResult.Src = Src;
+			srcResult.Dest = Dest;
+
+			destResult.Src = Dest;
+			destResult.Dest = Src;
+
+			Src->m_Result = srcResult;
+			Dest->m_Result = destResult;
+
+			return true;
+		}
 	}
 
 	return false;
@@ -225,14 +311,14 @@ bool CCollision::CollisionBox2DToPixel(CollisionResult& SrcResult, CollisionResu
 		return false;
 	}
 
-	// ±³ÁıÇÕÀ» ±¸ÇÑ´Ù.
+	// êµì§‘í•©ì„ êµ¬í•œë‹¤.
 	float Left = Src.Min.x < Dest.Min.x ? Dest.Min.x : Src.Min.x;
 	float Right = Src.Max.x > Dest.Max.x ? Dest.Max.x : Src.Max.x;
 
 	float Bottom = Src.Min.y < Dest.Min.y ? Dest.Min.y : Src.Min.y;
 	float Top = Src.Max.y > Dest.Max.y ? Dest.Max.y : Src.Max.y;
 
-	// ¿ùµå °ø°£¿¡¼­ÀÇ ÁÂ ÇÏ´Ü ÁÂÇ¥¸¦ ±¸ÇÑ´Ù.
+	// ì›”ë“œ ê³µê°„ì—ì„œì˜ ì¢Œ í•˜ë‹¨ ì¢Œí‘œë¥¼ êµ¬í•œë‹¤.
 	Vector2	LB = Dest.Box.Center - Dest.Box.Length;
 
 	Left -= LB.x;
@@ -252,15 +338,15 @@ bool CCollision::CollisionBox2DToPixel(CollisionResult& SrcResult, CollisionResu
 
 	bool Collision = false;
 
-	// ±³ÁıÇÕ ±¸°£À» ¹İº¹ÇÑ´Ù.
+	// êµì§‘í•© êµ¬ê°„ì„ ë°˜ë³µí•œë‹¤.
 	for (int y = (int)Top; y < (int)Bottom; y++)
 	{
 		for (int x = (int)Left; x < (int)Right; x++)
 		{
 			int	Index = y * (int)Dest.Width * 4 + x * 4;
 
-			// ÇöÀç ÀÎµ¦½ºÀÇ ÇÈ¼¿ÀÌ »ó´ë¹æ ¹Ú½º ¾È¿¡ Á¸ÀçÇÏ´ÂÁö¸¦ ÆÇ´ÜÇÑ´Ù.
-			// ÇöÀç ÇÈ¼¿ÀÇ ¿ùµå°ø°£¿¡¼­ÀÇ À§Ä¡¸¦ ±¸ÇØÁØ´Ù.
+			// í˜„ì¬ ì¸ë±ìŠ¤ì˜ í”½ì…€ì´ ìƒëŒ€ë°© ë°•ìŠ¤ ì•ˆì— ì¡´ì¬í•˜ëŠ”ì§€ë¥¼ íŒë‹¨í•œë‹¤.
+			// í˜„ì¬ í”½ì…€ì˜ ì›”ë“œê³µê°„ì—ì„œì˜ ìœ„ì¹˜ë¥¼ êµ¬í•´ì¤€ë‹¤.
 			Vector2	PixelWorldPos = LB + Vector2((float)x, (float)Dest.Height - (float)y);
 			if (!CollisionBox2DToPoint(SrcResult, DestResult, Src, PixelWorldPos))
 			{
@@ -321,14 +407,14 @@ bool CCollision::CollisionCircleToPixel(CollisionResult& SrcResult, CollisionRes
 		return false;
 	}
 
-	// ±³ÁıÇÕÀ» ±¸ÇÑ´Ù.
+	// êµì§‘í•©ì„ êµ¬í•œë‹¤.
 	float Left = Src.Min.x < Dest.Min.x ? Dest.Min.x : Src.Min.x;
 	float Right = Src.Max.x > Dest.Max.x ? Dest.Max.x : Src.Max.x;
 
 	float	Bottom = Src.Min.y < Dest.Min.y ? Dest.Min.y : Src.Min.y;
 	float	Top = Src.Max.y > Dest.Max.y ? Dest.Max.y : Src.Max.y;
 
-	// ¿ùµå °ø°£¿¡¼­ÀÇ ÁÂ ÇÏ´Ü ÁÂÇ¥¸¦ ±¸ÇÑ´Ù.
+	// ì›”ë“œ ê³µê°„ì—ì„œì˜ ì¢Œ í•˜ë‹¨ ì¢Œí‘œë¥¼ êµ¬í•œë‹¤.
 	Vector2	LB = Dest.Box.Center - Dest.Box.Length;
 
 	Left -= LB.x;
@@ -348,15 +434,15 @@ bool CCollision::CollisionCircleToPixel(CollisionResult& SrcResult, CollisionRes
 
 	bool Collision = false;
 
-	// ±³ÁıÇÕ ±¸°£À» ¹İº¹ÇÑ´Ù.
+	// êµì§‘í•© êµ¬ê°„ì„ ë°˜ë³µí•œë‹¤.
 	for (int y = (int)Top; y < (int)Bottom; y++)
 	{
 		for (int x = (int)Left; x < (int)Right; x++)
 		{
 			int	Index = y * (int)Dest.Width * 4 + x * 4;
 
-			// ÇöÀç ÀÎµ¦½ºÀÇ ÇÈ¼¿ÀÌ »ó´ë¹æ ¹Ú½º ¾È¿¡ Á¸ÀçÇÏ´ÂÁö¸¦ ÆÇ´ÜÇÑ´Ù.
-			// ÇöÀç ÇÈ¼¿ÀÇ ¿ùµå°ø°£¿¡¼­ÀÇ À§Ä¡¸¦ ±¸ÇØÁØ´Ù.
+			// í˜„ì¬ ì¸ë±ìŠ¤ì˜ í”½ì…€ì´ ìƒëŒ€ë°© ë°•ìŠ¤ ì•ˆì— ì¡´ì¬í•˜ëŠ”ì§€ë¥¼ íŒë‹¨í•œë‹¤.
+			// í˜„ì¬ í”½ì…€ì˜ ì›”ë“œê³µê°„ì—ì„œì˜ ìœ„ì¹˜ë¥¼ êµ¬í•´ì¤€ë‹¤.
 			Vector2	PixelWorldPos = LB + Vector2((float)x, (float)Dest.Height - (float)y);
 			if (!CollisionCircleToPoint(SrcResult, DestResult, Src, PixelWorldPos))
 			{
@@ -412,7 +498,7 @@ bool CCollision::CollisionCircleToPixel(CollisionResult& SrcResult, CollisionRes
 
 bool CCollision::CollisionBox2DToPoint(CollisionResult& SrcResult, CollisionResult& DestResult, const Box2DInfo& BoxInfo, const Vector2& Point)
 {
-	// »óÀÚÀÇ x, y Ãà¿¡ Á¡À» Åõ¿µÇÏ¿© ±¸°£ÀÌ °ãÄ¡´ÂÁö ÆÇ´ÜÇÑ´Ù.
+	// ìƒìì˜ x, y ì¶•ì— ì ì„ íˆ¬ì˜í•˜ì—¬ êµ¬ê°„ì´ ê²¹ì¹˜ëŠ”ì§€ íŒë‹¨í•œë‹¤.
 	Vector2	CenterDir = BoxInfo.Center - Point;
 
 	Vector2	Axis = BoxInfo.Axis[0];

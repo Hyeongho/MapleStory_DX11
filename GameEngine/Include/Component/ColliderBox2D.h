@@ -14,11 +14,23 @@ protected:
 
 protected:
     Box2DInfo m_Info;
+    Box2DInfo m_PrevInfo;
+    bool m_HasPrevInfo;
 
 public:
     Box2DInfo GetInfo() const
     {
         return m_Info;
+    }
+
+    const Box2DInfo& GetPrevInfo() const
+    {
+        return m_PrevInfo;
+    }
+
+    bool HasPrevInfo() const
+    {
+        return m_HasPrevInfo;
     }
 
     void SetExtent(float Width, float Height)

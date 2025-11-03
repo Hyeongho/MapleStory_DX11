@@ -160,22 +160,10 @@ void CAnotherDoor::CollisionBeginCallback(const CollisionResult& Result)
 
 		Player->SetGround(true);
 
-		Vector3 DestPos = Result.Dest->GetWorldPos() + Result.Dest->GetOffset();
-		Vector3 DestScale = Result.Dest->GetWorldScale();
+		CColliderBox2D* FloorCollider = dynamic_cast<CColliderBox2D*>(Result.Src);
+		CColliderBox2D* BottomCollider = dynamic_cast<CColliderBox2D*>(Result.Dest);
 
-		Vector3 SrcOffSet = Result.Src->GetOffset();
-		Vector3 DestOffSet = Result.Dest->GetOffset();
-
-		Vector3 SrcPos = Result.Src->GetWorldPos() + Result.Src->GetOffset();
-		Vector3 SrcScale = Result.Src->GetWorldScale();
-
-		float Len = abs(DestPos.y - SrcPos.y);
-		float Value = (DestScale.y / 2.f + SrcScale.y / 2.f) - Len;
-
-		DestPos = Player->GetWorldPos();
-		DestPos.y += Value;
-
-		Player->SetWorldPos(DestPos);
+		Player->ResolveFloorContact(FloorCollider, BottomCollider);
 	}
 }
 
