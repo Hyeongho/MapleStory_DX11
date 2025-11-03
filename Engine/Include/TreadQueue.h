@@ -27,9 +27,14 @@ private:
 	T m_Queue[SIZE + 1];
 	int m_Capacity;
 	int m_Size;
-	int m_Head;	// 가장 처음 추가된 곳의 이전 인덱스
-	int m_Tail;	// 마지막으로 추가된 곳의 인덱스
-	CRITICAL_SECTION m_Crt;
+	int IncrementIndex(int index) const
+	{
+		return (index + 1) % m_Capacity;
+	}
+
+		int	Tail = IncrementIndex(m_Tail);
+		int	Head = IncrementIndex(m_Head);
+		m_Head = IncrementIndex(m_Head);
 
 public:
 	void push(const T& data)
